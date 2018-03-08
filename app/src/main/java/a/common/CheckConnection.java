@@ -21,21 +21,13 @@ public class CheckConnection {
         ConnectivityManager cm=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         //get all networks information
-        NetworkInfo networkInfo[]=cm.getAllNetworkInfo();
-
-        int i;
-
-        //checking internet connectivity
-        for(i=0;i<networkInfo.length;++i){
-            if(networkInfo[i].getState()==NetworkInfo.State.CONNECTED){
-                Toast.makeText(context,"Internet Connected",Toast.LENGTH_LONG).show();
-                return 1;
-            }
+        NetworkInfo networkInfo=cm.getActiveNetworkInfo();
+        if(networkInfo!=null)
+        {
+            Toast.makeText(context,"Internet Connected",Toast.LENGTH_LONG).show();
+            return 1;
         }
-
-        if(i==networkInfo.length){
-            Toast.makeText(context,"Internet Not Connected",Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(context,"Internet Not Connected",Toast.LENGTH_LONG).show();
         return 0;
     }
 }
