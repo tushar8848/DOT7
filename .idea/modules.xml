@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Dot6.iml" filepath="$PROJECT_DIR$/Dot6.iml" />
-      <module fileurl="file://C:\Users\HP\AndroidStudioProjects\Dot6\Dot7.iml" filepath="C:\Users\HP\AndroidStudioProjects\Dot6\Dot7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dot7.iml" filepath="$PROJECT_DIR$/Dot7.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\HP\AndroidStudioProjects\Dot6\app\app.iml" filepath="C:\Users\HP\AndroidStudioProjects\Dot6\app\app.iml" />
     </modules>
   </component>
 </project>
