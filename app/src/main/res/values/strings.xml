@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Dot7</string>
+    <string name="title_activity_check_connection">CheckConnection</string>
 </resources>
