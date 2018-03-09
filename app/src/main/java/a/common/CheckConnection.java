@@ -10,24 +10,35 @@ import android.widget.Toast;
  */
 
 public class CheckConnection {
-    Context context;
+   private Context context;
     public CheckConnection(Context context)
     {
         this.context=context;
     }
-    public int check()
+
+    public boolean getNetworkStatus()
     {
         //instantiate an object
-        ConnectivityManager cm=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager manager = (ConnectivityManager)context.getSystemService(Context.
+                CONNECTIVITY_SERVICE);
 
         //get all networks information
-        NetworkInfo networkInfo=cm.getActiveNetworkInfo();
-        if(networkInfo!=null)
+        NetworkInfo networkInfo = null;
+        try
+        {
+             networkInfo = manager.getActiveNetworkInfo();  //getActiveNetworkInfo may throw NullPointerException
+        }
+
+        catch (NullPointerException e)
+        {
+            Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+        }
+        if(networkInfo != null)
         {
             Toast.makeText(context,"Internet Connected",Toast.LENGTH_LONG).show();
-            return 1;
+            return true;
         }
         Toast.makeText(context,"Internet Not Connected",Toast.LENGTH_LONG).show();
-        return 0;
+        return false;
     }
 }

@@ -2,6 +2,7 @@ package a.dot7;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import a.common.*; //always import other packages here and not use it directly in code
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,14 +10,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        a.common.CheckConnection cc=new a.common.CheckConnection(this);
-        int connection=cc.check();
+        getNetworkState();
+
     }
 
-    private void TestFunction()
+    private void getNetworkState()
     {
-        int i=0;
+        CheckConnection connection = new CheckConnection(this);
+        Boolean State = connection.getNetworkStatus();
     }
+
    /*
    private void startactivity(View v)
     {
