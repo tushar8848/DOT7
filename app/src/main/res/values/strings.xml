@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Dot7</string>
     <string name="title_activity_check_connection">CheckConnection</string>
+    <string name="welcome_screen">Ready to order from top restaurants?</string>
+    <string name="already_have_an_account">Have an account? Login</string>
+    <string name="enter_email_id">Enter your Email-id</string>
 </resources>
