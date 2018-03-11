@@ -21,7 +21,7 @@ import a.common.GlobalMethods;
  */
 
 public class ValidateUserCredentials {
-
+    private int StatusFlag = 0;
     private GlobalMethods Obj = new GlobalMethods();
     static ValidateUserCredentials validateUserCredentials;
     private Context context;
@@ -34,6 +34,7 @@ public class ValidateUserCredentials {
     public boolean validateCredentials(final String UserName, final String Password)
     {
         try {
+
             String loginUrl = "http://192.168.43.62:3000/Login";
             StringRequest request = new StringRequest(Request.Method.POST, loginUrl, new Response.
                     Listener<String>() {
@@ -41,11 +42,16 @@ public class ValidateUserCredentials {
                 @Override
                 public void onResponse(String s) {
                     StatusCode = Obj.GetSubString(s);
+                    Log.d("HAR",StatusCode);
+                    if (StatusCode.contains("302")) {
+                        Toast.makeText(context,"Data Found",Toast.LENGTH_LONG).show();
+                        StatusFlag=1;
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-
+                    Log.d("HAR",volleyError.toString());
                     //Nitish and pooja, handle this error with a alert box or something
                 }
             }) {
@@ -58,18 +64,19 @@ public class ValidateUserCredentials {
                 }
             };
 
-            RequestQueue rQueue = Volley.newRequestQueue(context);
-            rQueue.add(request);
+            //RequestQueue rQueue = Volley.newRequestQueue(context);
+           // rQueue.add(request);
+            MySingleton.getInstance(context).addToRequestQueue(request);
 
-            if (StatusCode.contains("302")) {
-                Toast.makeText(context,"Data Found",Toast.LENGTH_LONG).show();
+            if(StatusFlag == 1)
+            {
                 return true;
             }
             else
             {
-                Toast.makeText(context,"No Data Found",Toast.LENGTH_LONG).show();
                 return false;
             }
+
 
         }
         catch (Exception ex)

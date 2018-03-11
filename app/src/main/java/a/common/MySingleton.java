@@ -41,7 +41,7 @@ public class MySingleton {
     }
     public void addToRequestQueue(StringRequest request)
     {
-        requestQueue.getCache().clear();
+
         requestQueue.add(request);
     }
 }
