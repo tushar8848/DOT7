@@ -10,6 +10,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import a.fragments.ScreenSlidePage_Fragment;
+import a.fragments.ScreenSlidePage_Fragment2;
+import a.fragments.ScreenSlidePage_Fragment3;
+
 public class ScreenSlideActivity extends FragmentActivity {
 
     private static int Min_Pages=3;
