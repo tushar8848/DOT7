@@ -16,11 +16,12 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getNetworkState();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
+                getNetworkState();
+                //startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
                 finish();
             }
         },SPLASH_TIME_OUT);
@@ -35,12 +36,13 @@ public class SplashActivity extends AppCompatActivity {
             ValidateUserCredentials.getInstance(this).validateCredentials("Tushar2897","12345");
 
             credentials = LoginCheck.getInstance(this).CheckUserCredentials();
-            if(credentials==null)  //if login file is missing or credentials were changed
+            if(credentials == null)  //if login file is missing or credentials were changed
             {
                 startActivity(new Intent(this,ScreenSlideActivity.class));
             }
             else
             {
+
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
             }
         }

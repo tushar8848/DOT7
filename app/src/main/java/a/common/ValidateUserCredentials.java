@@ -23,7 +23,7 @@ import a.common.GlobalMethods;
 public class ValidateUserCredentials {
     private int StatusFlag = 0;
     private GlobalMethods Obj = new GlobalMethods();
-    static ValidateUserCredentials validateUserCredentials;
+    private static ValidateUserCredentials validateUserCredentials;
     private Context context;
     private String StatusCode = null;
     ValidateUserCredentials(Context context)
@@ -31,7 +31,17 @@ public class ValidateUserCredentials {
         this.context = context;
     }
 
-    public boolean validateCredentials(final String UserName, final String Password)
+    public boolean Validate(final String UserName, final String Password)
+    {
+        boolean Status;
+        Status = ServiceCall(UserName,Password,null);
+        return Status;
+    }
+    public void Register(final String UserName, final String Password, final String Name)
+    {
+
+    }
+    public boolean ServiceCall(final String UserName, final String Password, final String Name)
     {
         try {
 
@@ -58,14 +68,13 @@ public class ValidateUserCredentials {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("LoginID", "9039216432");
-                    parameters.put("password", "hello");
+                    parameters.put("LoginID", UserName);
+                    parameters.put("password", Password);
+                    if(Name != null)
+                        parameters.put("Name",Name);
                     return parameters;
                 }
             };
-
-            //RequestQueue rQueue = Volley.newRequestQueue(context);
-           // rQueue.add(request);
             MySingleton.getInstance(context).addToRequestQueue(request);
 
             if(StatusFlag == 1)

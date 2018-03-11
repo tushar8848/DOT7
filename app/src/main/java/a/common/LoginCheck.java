@@ -26,7 +26,7 @@ public class LoginCheck
         UserName = sharedPreferences.getString("UserName",null);
         Password = sharedPreferences.getString("Password",null);
         if(UserName != null && Password != null &&
-                ValidateUserCredentials.getInstance(context).validateCredentials(UserName,Password))
+                ValidateUserCredentials.getInstance(context).Validate(UserName,Password))
             credentials = new UserCredentials(UserName,Password);
         return credentials;
     }

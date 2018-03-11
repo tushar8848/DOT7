@@ -46,7 +46,7 @@ public class Login extends Activity {
             editor.putString("UserName", userName);
             editor.putString("Password",password);
             editor.commit();
-            if(ValidateUserCredentials.getInstance(this).validateCredentials(userName,password))
+            if(ValidateUserCredentials.getInstance(this).Validate(userName,password))
             {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
             }
