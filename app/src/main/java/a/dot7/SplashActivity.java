@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
         Boolean State = CheckConnection.getInstance(this).getNetworkStatus();
         if(State)  //internet is connected
         {
-            ValidateUserCredentials.getInstance(this).validateCredentials("Tushar2897","12345");
+            ValidateUserCredentials.getInstance(this).Validate("Tushar2897","12345");
 
             credentials = LoginCheck.getInstance(this).CheckUserCredentials();
             if(credentials == null)  //if login file is missing or credentials were changed
