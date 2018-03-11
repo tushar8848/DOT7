@@ -1,5 +1,8 @@
 package a.common;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.android.volley.toolbox.StringRequest;
 
 /**
@@ -12,5 +15,9 @@ public class GlobalMethods {
     {
        return res.substring(13,16);
 
+    }
+    public static void print(Context context,String msg)
+    {
+        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
     }
 }

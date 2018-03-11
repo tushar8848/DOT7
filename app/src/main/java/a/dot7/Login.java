@@ -6,13 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import a.common.CheckConnection;
-import a.common.ValidateUserCredentials;
+import a.common.GlobalMethods;
+import a.common.UserCredentials;
 
 /**
  * Created by TUSHAR on 11-03-18.
@@ -37,7 +37,7 @@ public class Login extends Activity {
         password =  passwordText.getText().toString();
         if(!CheckConnection.getInstance(this).getNetworkStatus())
         {
-            Toast.makeText(this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+            GlobalMethods.print(this,"Check Internet Connection");
         }
         else {
             //internet is connected
@@ -46,7 +46,7 @@ public class Login extends Activity {
             editor.putString("UserName", userName);
             editor.putString("Password",password);
             editor.commit();
-            if(ValidateUserCredentials.getInstance(this).Validate(userName,password))
+            if(UserCredentials.getInstance(this).Validate(userName,password))
             {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
             }

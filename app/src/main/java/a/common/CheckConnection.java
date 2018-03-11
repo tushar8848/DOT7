@@ -5,6 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
+import javax.microedition.khronos.opengles.GL;
+
 /**
  * Created by TUSHAR on 09-03-18.
  */
@@ -32,14 +34,14 @@ public class CheckConnection {
 
         catch (NullPointerException e)
         {
-            Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+            GlobalMethods.print(context,e.toString());
         }
         if(networkInfo != null)
         {
-            Toast.makeText(context,"Internet Connected",Toast.LENGTH_LONG).show();
+            GlobalMethods.print(context,"Internet Connected");
             return true;
         }
-        Toast.makeText(context,"Internet Not Connected",Toast.LENGTH_LONG).show();
+        GlobalMethods.print(context,"Internet Not Connected");
         return false;
     }
     public static CheckConnection getInstance(Context context)

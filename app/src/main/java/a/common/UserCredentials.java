@@ -6,47 +6,53 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import java.util.HashMap;
 import java.util.Map;
-import a.common.GlobalMethods;
 
 /**
  * Created by TUSHAR and Harneet on 11-03-18.
  */
 
-public class ValidateUserCredentials {
+public class UserCredentials {
     private int StatusFlag = 0;
     private GlobalMethods Obj = new GlobalMethods();
-    private static ValidateUserCredentials validateUserCredentials;
+    static UserCredentials UserCredentials;
     private Context context;
     private String StatusCode = null;
-    ValidateUserCredentials(Context context)
+
+    UserCredentials(Context context)
     {
         this.context = context;
+    }
+    public static UserCredentials getInstance(Context context)
+    {
+        if(UserCredentials == null) {
+            UserCredentials = new UserCredentials(context);
+        }
+        return UserCredentials;
     }
 
     public boolean Validate(final String UserName, final String Password)
     {
         boolean Status;
-        Status = ServiceCall(UserName,Password,null);
+        String Url = "http://172.31.143.55:3000/Login";
+        Status = ServiceCall(UserName,Password,null,Url);
         return Status;
     }
-    public void Register(final String UserName, final String Password, final String Name)
+    public boolean Register(final String UserName, final String Password, final String Email)
     {
-
+        String url="http://172.31.143.55:3000/";          //harneet fill here url for registet
+        boolean Status=ServiceCall(UserName,Password,Email,url);
+        return Status;
     }
-    public boolean ServiceCall(final String UserName, final String Password, final String Name)
+    public boolean ServiceCall(final String UserName, final String Password, final String Email,String url)
     {
         try {
-
-            String loginUrl = "http://172.31.143.55:3000/Login";
-            StringRequest request = new StringRequest(Request.Method.POST, loginUrl, new Response.
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                     Listener<String>() {
 
                 @Override
@@ -54,7 +60,7 @@ public class ValidateUserCredentials {
                     StatusCode = Obj.GetSubString(s);
                     Log.d("HAR",StatusCode);
                     if (StatusCode.contains("302")) {
-                        Toast.makeText(context,"Data Found",Toast.LENGTH_LONG).show();
+                        GlobalMethods.print(context,"Data Found");
                         StatusFlag=1;
                     }
                 }
@@ -70,8 +76,8 @@ public class ValidateUserCredentials {
                     Map<String, String> parameters = new HashMap<>();
                     parameters.put("LoginID", UserName);
                     parameters.put("password", Password);
-                    if(Name != null)
-                        parameters.put("Name",Name);
+                    if(Email != null)
+                        parameters.put("Name",Email);
                     return parameters;
                 }
             };
@@ -94,13 +100,6 @@ public class ValidateUserCredentials {
         }
     }
 
-    public static ValidateUserCredentials getInstance(Context context)
-    {
-        if(validateUserCredentials == null) {
-            validateUserCredentials = new ValidateUserCredentials(context);
-        }
-        return validateUserCredentials;
-    }
 }
 
 
