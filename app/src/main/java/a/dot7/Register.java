@@ -1,9 +1,13 @@
 package a.dot7;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +22,7 @@ import a.common.GlobalMethods;
 import a.common.UserCredentials;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
+
 
     Button signup;
     EditText Username,Useremail,Userpassword;
@@ -57,10 +62,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
             else {
                 GlobalMethods.print(this, "Something went wrong! Try Again");
-                /* Nitish and pppooja create a dialog Box here
-                    and create only one button i.e. "Ok"
-                    and ONCLICK(OK) set texts of all fields as ""
-                   */
+                MyAlert mydialog=new MyAlert(this);
+                mydialog.show(getFragmentManager(),"mydialog");
             }
         }
     }
@@ -72,5 +75,30 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         editor.putString("Password",password);
         editor.commit();
     }
+
+    private class MyAlert extends DialogFragment{
+
+        Context context;
+        public MyAlert(Register register) {
+            this.context=register;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            android.app.AlertDialog.Builder builder=new android.app.AlertDialog.Builder(context);
+            builder.setMessage("Something went wrong! Try Again");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Useremail.setText("");
+                    Username.setText("");
+                    Userpassword.setText("");
+                }
+            });
+            Dialog dialog=builder.create();
+            return dialog;
+        }
+    }
+
 }
 
