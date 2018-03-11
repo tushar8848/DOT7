@@ -5,11 +5,12 @@ package a.getter_setter;
  */
 
 public class UserCredentials {
-    String getUsername,getPassword;
+    private String Username;
+    private String Password;
 
     public UserCredentials(String getUsername,String getPassword)
     {
-        this.getUsername=getUsername;
-        this.getPassword=getPassword;
+        this.Username=getUsername;
+        this.Password=getPassword;
     }
 }

@@ -13,7 +13,7 @@ public class LoginCheck
 {
     private Context context;
     private UserCredentials credentials=null;
-    private String userName,password;
+    private String UserName,Password;
     private static LoginCheck loginCheck;
     private LoginCheck(Context context)
     {
@@ -23,16 +23,16 @@ public class LoginCheck
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("logDetails",
                 Context.MODE_PRIVATE);
-        userName = sharedPreferences.getString("UserName",null);
-        password = sharedPreferences.getString("Password",null);
-        if(userName!=null && password!=null &&
-                ValidateUserCredentials.getInstance(context).validateCredentials(userName,password))
-            credentials = new UserCredentials(userName,password);
+        UserName = sharedPreferences.getString("UserName",null);
+        Password = sharedPreferences.getString("Password",null);
+        if(UserName != null && Password != null &&
+                ValidateUserCredentials.getInstance(context).validateCredentials(UserName,Password))
+            credentials = new UserCredentials(UserName,Password);
         return credentials;
     }
    public static LoginCheck getInstance(Context context)
    {
-       if(loginCheck==null)
+       if(loginCheck == null)
            loginCheck = new LoginCheck(context);
        return loginCheck;
    }

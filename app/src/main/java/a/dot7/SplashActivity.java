@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import a.common.CheckConnection;
 import a.common.LoginCheck;
+import a.common.ValidateUserCredentials;
 import a.getter_setter.UserCredentials;
 
 public class SplashActivity extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class SplashActivity extends AppCompatActivity {
         Boolean State = CheckConnection.getInstance(this).getNetworkStatus();
         if(State)  //internet is connected
         {
+            ValidateUserCredentials.getInstance(this).validateCredentials("Tushar2897","12345");
+
             credentials = LoginCheck.getInstance(this).CheckUserCredentials();
             if(credentials==null)  //if login file is missing or credentials were changed
             {
