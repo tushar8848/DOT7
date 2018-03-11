@@ -4,7 +4,7 @@
     android:background="#FF6666"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView
-        android:src="@drawable/delivery_boy1"
+        android:src="@drawable/delivery_boy3"
         android:layout_width="match_parent"
         android:scaleType="fitXY"
         android:layout_height="match_parent" />
