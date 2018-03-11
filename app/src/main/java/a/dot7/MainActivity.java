@@ -10,15 +10,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getNetworkState();
+
 
     }
 
-    private void getNetworkState()
-    {
-        CheckConnection connection = new CheckConnection(this);
-        Boolean State = connection.getNetworkStatus();
-    }
+
 
    /*
    private void startactivity(View v)

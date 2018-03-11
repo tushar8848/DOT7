@@ -30,7 +30,7 @@ public class activityB extends AppCompatActivity {
         String c=contact.getText().toString()+" ";
         String p=password.getText().toString();
         File file=getCacheDir();
-        File myfile=new File(file.getAbsolutePath(),"sample.txt");
+        File myfile=new File(file.getAbsolutePath(),"logdetails.txt");
         FileOutputStream outputStream;
         try {
             outputStream=new FileOutputStream(myfile);

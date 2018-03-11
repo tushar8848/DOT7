@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class CheckConnection {
    private Context context;
+   private static CheckConnection checkConnection=null;
     public CheckConnection(Context context)
     {
         this.context=context;
@@ -40,5 +41,11 @@ public class CheckConnection {
         }
         Toast.makeText(context,"Internet Not Connected",Toast.LENGTH_LONG).show();
         return false;
+    }
+    public static CheckConnection getInstance(Context context)
+    {
+        if(checkConnection==null)
+            checkConnection = new CheckConnection(context);
+        return checkConnection;
     }
 }
