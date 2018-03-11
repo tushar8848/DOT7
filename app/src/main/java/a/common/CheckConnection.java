@@ -10,9 +10,9 @@ import android.widget.Toast;
  */
 
 public class CheckConnection {
-   private Context context;
-   private static CheckConnection checkConnection=null;
-    public CheckConnection(Context context)
+    private Context context;
+    private static CheckConnection checkConnection=null;
+    private CheckConnection(Context context)
     {
         this.context=context;
     }
@@ -27,7 +27,7 @@ public class CheckConnection {
         NetworkInfo networkInfo = null;
         try
         {
-             networkInfo = manager.getActiveNetworkInfo();  //getActiveNetworkInfo may throw NullPointerException
+            networkInfo = manager.getActiveNetworkInfo();  //getActiveNetworkInfo may throw NullPointerException
         }
 
         catch (NullPointerException e)
