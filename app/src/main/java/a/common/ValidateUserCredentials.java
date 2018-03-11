@@ -35,7 +35,7 @@ public class ValidateUserCredentials {
     {
         try {
 
-            String loginUrl = "http://192.168.43.62:3000/Login";
+            String loginUrl = "http://172.31.143.55:3000/Login";
             StringRequest request = new StringRequest(Request.Method.POST, loginUrl, new Response.
                     Listener<String>() {
 
