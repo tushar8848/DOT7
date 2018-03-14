@@ -23,9 +23,14 @@ import android.content.IntentFilter;
 import a.common.GlobalMethods;
 import a.common.MyDialog;
 import a.common.MySingleton;
+import a.common.Permissions;
+import a.common.Services;
 
 import android.content.BroadcastReceiver;
 import android.widget.TextView;
+
+
+//Create button get otp type something and
 
 public class Otp_generate_read extends AppCompatActivity {
 
@@ -38,20 +43,21 @@ public class Otp_generate_read extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
-        boolean Code=Generate();
-        if (Code)
+        boolean code=Generate();
+        if (code)
         {
             read();
         }
         else
         {
             GlobalMethods.print(this,"Something went wrong! Try Again!");
+            // Pooja and Nitish Change to alert if ypu want
         }
     }
 
-    private BroadcastReceiver Receiver = new BroadcastReceiver() {
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
 
-        TextView tv = (TextView) findViewById(R.id.txtview);
+        TextView otp_message = (TextView) findViewById(R.id.txtview);
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -65,108 +71,48 @@ public class Otp_generate_read extends AppCompatActivity {
             }
             else
             {
-                tv.setText("Error Validating Phone No. \n Resend Code!");
+                //otp_message.setText("Error Validating Phone No. \n Resend Code!");
+                //pooja and nitish add alert or something
             }
         }
     };
 
     public void onResume() {
-        LocalBroadcastManager.getInstance(this).registerReceiver(Receiver, new IntentFilter("otp"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("otp"));
         super.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(Receiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
     private boolean Generate() {
-        Random generate = new Random();
-        int OTP = 0;
-        for (int i = 0; i < 4; i++)
+        Random generate=new Random();
+        char[] otp=new char[4];
+        for (int i=0;i<4;i++)
         {
-            int x = generate.nextInt(10);
-            OTP = OTP * 10 + x;
+            int x=generate.nextInt(10);
+            otp[i]=(char)(x+'0');
         }
+        String msg= String.valueOf(otp);
+        boolean code = Services.getInstance(this).otp_service_call(Message, URL,this);
+        return code;
 
-
-        Message = String.valueOf(OTP);
-        return ServiceCall(Message, URL);
-
-
-    }
-
-    private boolean ServiceCall(final String msg, String url) {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new
-                Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                String Code = GlobalMethods.GetSubString(response);
-                if (Code.contains("302")) {
-                    Status=1;
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                MyDialog myDialog=new MyDialog(Otp_generate_read.this,error.toString());
-                Status=0;
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> param=new HashMap<>();
-                param.put("otp",msg);
-                return param;
-            }
-        };
-
-        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
-        return Status == 1;
     }
 
     private void read() {
 
-        if (checkpermissions())
+        if (Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS))
         {
 
         }
         else
         {
-            MyDialog myDialog=new MyDialog(this,"Cannot access OTP without permissions." +
-                    "\nKindly grant Permissions!");
-            checkpermissions();
+            MyDialog myDialog=new MyDialog(this,"Cannot access OTP without permissions!","Grant Permissions");
+            Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS);
         }
     }
 
-
-    private boolean checkpermissions() {
-        int permissionSendMessage = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS);
-        int receiveSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.
-                RECEIVE_SMS);
-        int readSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS);
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.RECEIVE_MMS);
-        }
-
-        if (readSMS != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.READ_SMS);
-        }
-        if (permissionSendMessage != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.SEND_SMS);
-        }
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(this,
-                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
-                    REQUEST_ID_MULTIPLE_PERMISSIONS);
-            return false;
-        }
-        return true;
-    }
 }

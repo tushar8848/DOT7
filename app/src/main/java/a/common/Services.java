@@ -2,7 +2,6 @@ package a.common;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -13,24 +12,26 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import a.dot7.Otp_generate_read;
+
 /**
  * Created by TUSHAR and Harneet on 11-03-18.
  */
 
-public class UserCredentials {
+public class Services {
     private int StatusFlag = 0;
-    static UserCredentials UserCredentials;
+    static Services UserCredentials;
     private Context context;
     private String StatusCode = null;
 
-    UserCredentials(Context context)
+    Services(Context context)
     {
         this.context = context;
     }
-    public static UserCredentials getInstance(Context context)
+    public static Services getInstance(Context context)
     {
         if(UserCredentials == null) {
-            UserCredentials = new UserCredentials(context);
+            UserCredentials = new Services(context);
         }
         return UserCredentials;
     }
@@ -46,9 +47,14 @@ public class UserCredentials {
     {
         String url="http://172.31.143.55:3000/";          //harneet fill here url for registet
         boolean Status=ServiceCall(UserName,Password,Contact,url);
+
+        if (Status == true)
+        {
+            //intent to otp activity and start otp generation and reading
+        }
         return Status;
     }
-    public boolean ServiceCall(final String UserName, final String Password, final String Contact,String url)
+    public boolean ServiceCall(final String UserName  /* Contact */, final String Password, final String Name,String url)
     {
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
@@ -75,8 +81,8 @@ public class UserCredentials {
                     Map<String, String> parameters = new HashMap<>();
                     parameters.put("LoginID", UserName);
                     parameters.put("password", Password);
-                    if(Contact != null)
-                        parameters.put("Name",Contact);
+                    if(Name != null)
+                        parameters.put("Name",Name);
                     return parameters;
                 }
             };
@@ -98,6 +104,44 @@ public class UserCredentials {
             return false;
         }
     }
+
+    public boolean otp_service_call(final String msg, String url, final Context context) {
+
+        final boolean[] Status = new boolean[1];
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        String Code = GlobalMethods.GetSubString(response);
+                        if (Code.contains("302")) {
+                            Status[0] =true;
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                MyDialog myDialog=new MyDialog(context,error.toString(),"GOT IT");
+                Status[0] =false;
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> param=new HashMap<>();
+                param.put("otp",msg);
+                return param;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringRequest);
+        if (Status[0] ==true)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
 
 }
 

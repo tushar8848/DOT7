@@ -26,7 +26,7 @@ public class LoginCheck
         UserName = sharedPreferences.getString("UserName",null);
         Password = sharedPreferences.getString("Password",null);
         if(UserName != null && Password != null &&
-                UserCredentials.getInstance(context).Validate(UserName,Password))
+                Services.getInstance(context).Validate(UserName,Password))
             credentials = new LoginData(UserName,Password);
         return credentials;
     }

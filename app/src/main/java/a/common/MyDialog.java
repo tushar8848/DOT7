@@ -6,27 +6,29 @@ import android.content.DialogInterface;
 
 public class MyDialog {
 
-    String msg=null;
-    AlertDialog dialog;
-    Context context;
+    private String Msg=null;
+    private AlertDialog CustomDialog;
+    private Context context;
+    private String ButtonText;
 
-    public MyDialog(Context context, String msg)
+    public MyDialog(Context context, String msg,String text)
     {
         this.context=context;
-        this.msg=msg;
+        this.Msg=msg;
+        this.ButtonText = text;
         onCreateDialog();
     }
 
     public void onCreateDialog() {
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setMessage(msg);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setMessage(Msg);
+        builder.setPositiveButton(ButtonText, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
             }
         });
-        dialog=builder.create();
-        dialog.show();
+        CustomDialog=builder.create();
+        CustomDialog.show();
     }
 }
