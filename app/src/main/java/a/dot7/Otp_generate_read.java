@@ -54,11 +54,11 @@ public class Otp_generate_read extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.txtview);
         @Override
         public void onReceive(Context context, Intent intent) {
-            
+
             if (intent.getAction().equalsIgnoreCase("otp")) {
                 String message = intent.getStringExtra("message");
                 //message=message.substring()           specify index of code in the message
-                if(message == Message)
+                if(message.equals(Message))
                 {
                     // intent to restaurant view
                 }
