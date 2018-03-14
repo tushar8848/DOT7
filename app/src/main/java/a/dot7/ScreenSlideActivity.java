@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import a.fragments.ScreenSlidePage_Fragment;
 import a.fragments.ScreenSlidePage_Fragment2;
@@ -26,7 +27,6 @@ private PagerAdapter mpageradapter;
 LinearLayout sliderDotsPanel;
 private int dotsCount;
 private ImageView[] dots;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +74,11 @@ private ImageView[] dots;
         });
     }
     public void login(View view)
+
     {
-        startActivity(new Intent(this,MainActivity.class));
+        Toast.makeText(this,"Heyyyyy",Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(this,Login.class);
+        startActivity(intent);
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
@@ -87,7 +90,8 @@ private ImageView[] dots;
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            int index = position % 3;
+            switch (index){
                 case 0:  return new ScreenSlidePage_Fragment();
                 case 1: return  new ScreenSlidePage_Fragment2();
                 case 2: return new ScreenSlidePage_Fragment3();
