@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import a.common.GlobalMethods;
 import a.common.MyDialog;
+import a.common.MySingleton;
 
 import android.content.BroadcastReceiver;
 import android.widget.TextView;
@@ -29,14 +30,15 @@ import android.widget.TextView;
 public class Otp_generate_read extends AppCompatActivity {
 
     private int status=0;
-    private String url,msg;
+    private final String URL = "http://172.31.143.78:3000/OTP";
+    private String Message;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
-        boolean code=generate();
+        boolean code=Generate();
         if (code)
         {
             read();
@@ -52,10 +54,11 @@ public class Otp_generate_read extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.txtview);
         @Override
         public void onReceive(Context context, Intent intent) {
+            
             if (intent.getAction().equalsIgnoreCase("otp")) {
                 String message = intent.getStringExtra("message");
                 //message=message.substring()           specify index of code in the message
-                if(message==msg)
+                if(message == Message)
                 {
                     // intent to restaurant view
                 }
@@ -78,7 +81,7 @@ public class Otp_generate_read extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
-    private boolean generate() {
+    private boolean Generate() {
         Random generate=new Random();
         int otp=0;
         for (int i=0;i<4;i++)
@@ -87,21 +90,22 @@ public class Otp_generate_read extends AppCompatActivity {
             otp=otp*10+x;
         }
 
-        url="http://172.31.143.55:3000/";    //harneet write srvice name here
-        msg= String.valueOf(otp);
-        boolean code=servicecall(msg,url);
+        //harneet write srvice name here
+        Message = String.valueOf(otp);
+        boolean code = ServiceCall(Message, URL);
         return code;
 
     }
 
-    private boolean servicecall(final String msg, String url) {
+    private boolean ServiceCall(final String msg, String url) {
 
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new
+                Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                String code= GlobalMethods.GetSubString(response);
-                if (code.contains("302")) {
+                String Code = GlobalMethods.GetSubString(response);
+                if (Code.contains("302")) {
                     status=1;
                 }
             }
@@ -120,6 +124,7 @@ public class Otp_generate_read extends AppCompatActivity {
                 return param;
             }
         };
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
         if (status==1)
         {
             return true;
