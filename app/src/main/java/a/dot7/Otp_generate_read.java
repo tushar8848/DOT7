@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 public class Otp_generate_read extends AppCompatActivity {
 
-    private int status=0;
+    private int Status=0;
     private final String URL = "http://172.31.143.78:3000/OTP";
     private String Message;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
@@ -38,8 +38,8 @@ public class Otp_generate_read extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
-        boolean code=Generate();
-        if (code)
+        boolean Code=Generate();
+        if (Code)
         {
             read();
         }
@@ -49,7 +49,7 @@ public class Otp_generate_read extends AppCompatActivity {
         }
     }
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private BroadcastReceiver Receiver = new BroadcastReceiver() {
 
         TextView tv = (TextView) findViewById(R.id.txtview);
         @Override
@@ -71,29 +71,29 @@ public class Otp_generate_read extends AppCompatActivity {
     };
 
     public void onResume() {
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("otp"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(Receiver, new IntentFilter("otp"));
         super.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(Receiver);
     }
 
     private boolean Generate() {
-        Random generate=new Random();
-        int otp=0;
-        for (int i=0;i<4;i++)
+        Random generate = new Random();
+        int OTP = 0;
+        for (int i = 0; i < 4; i++)
         {
-            int x=generate.nextInt(10);
-            otp=otp*10+x;
+            int x = generate.nextInt(10);
+            OTP = OTP * 10 + x;
         }
 
-        //harneet write srvice name here
-        Message = String.valueOf(otp);
-        boolean code = ServiceCall(Message, URL);
-        return code;
+
+        Message = String.valueOf(OTP);
+        return ServiceCall(Message, URL);
+
 
     }
 
@@ -106,14 +106,14 @@ public class Otp_generate_read extends AppCompatActivity {
 
                 String Code = GlobalMethods.GetSubString(response);
                 if (Code.contains("302")) {
-                    status=1;
+                    Status=1;
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MyDialog myDialog=new MyDialog(Otp_generate_read.this,error.toString());
-                status=0;
+                Status=0;
             }
         })
         {
@@ -124,13 +124,9 @@ public class Otp_generate_read extends AppCompatActivity {
                 return param;
             }
         };
+
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
-        if (status==1)
-        {
-            return true;
-        }
-        else
-            return false;
+        return Status == 1;
     }
 
     private void read() {
@@ -141,7 +137,8 @@ public class Otp_generate_read extends AppCompatActivity {
         }
         else
         {
-            MyDialog myDialog=new MyDialog(this,"Cannot access OTP without permissions.\nKindly grant Permissions!");
+            MyDialog myDialog=new MyDialog(this,"Cannot access OTP without permissions." +
+                    "\nKindly grant Permissions!");
             checkpermissions();
         }
     }
@@ -150,7 +147,8 @@ public class Otp_generate_read extends AppCompatActivity {
     private boolean checkpermissions() {
         int permissionSendMessage = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS);
-        int receiveSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS);
+        int receiveSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.
+                RECEIVE_SMS);
         int readSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS);
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
