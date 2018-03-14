@@ -19,7 +19,6 @@ import java.util.Map;
 
 public class UserCredentials {
     private int StatusFlag = 0;
-    private GlobalMethods Obj = new GlobalMethods();
     static UserCredentials UserCredentials;
     private Context context;
     private String StatusCode = null;
@@ -43,13 +42,13 @@ public class UserCredentials {
         Status = ServiceCall(UserName,Password,null,Url);
         return Status;
     }
-    public boolean Register(final String UserName, final String Password, final String Email)
+    public boolean Register(final String UserName, final String Password, final String Contact)
     {
         String url="http://172.31.143.55:3000/";          //harneet fill here url for registet
-        boolean Status=ServiceCall(UserName,Password,Email,url);
+        boolean Status=ServiceCall(UserName,Password,Contact,url);
         return Status;
     }
-    public boolean ServiceCall(final String UserName, final String Password, final String Email,String url)
+    public boolean ServiceCall(final String UserName, final String Password, final String Contact,String url)
     {
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
@@ -57,7 +56,7 @@ public class UserCredentials {
 
                 @Override
                 public void onResponse(String s) {
-                    StatusCode = Obj.GetSubString(s);
+                    StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR",StatusCode);
                     if (StatusCode.contains("302")) {
                         GlobalMethods.print(context,"Data Found");
@@ -76,8 +75,8 @@ public class UserCredentials {
                     Map<String, String> parameters = new HashMap<>();
                     parameters.put("LoginID", UserName);
                     parameters.put("password", Password);
-                    if(Email != null)
-                        parameters.put("Name",Email);
+                    if(Contact != null)
+                        parameters.put("Name",Contact);
                     return parameters;
                 }
             };

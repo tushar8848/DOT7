@@ -19,14 +19,15 @@ import java.util.Set;
 
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
+import a.common.MyDialog;
 import a.common.UserCredentials;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
 
     Button signup;
-    EditText Username,Useremail,Userpassword;
-    String name,email,password;
+    EditText Username,Usercontact,Userpassword;
+    String name,contact,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +38,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     private void getDetails() {
         /*Username=findViewById();          // pooja and nitish fill here the ids.
-        Useremail=findViewById();
+        Usercontact=findViewById();
         Userpassword=findViewById();
         signup=findViewById();*/
         name=Username.getText().toString();
-        email=Useremail.getText().toString();
+        contact=Usercontact.getText().toString();
         password=Userpassword.getText().toString();
     }
 
@@ -53,7 +54,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
         else
         {
-            boolean Status = UserCredentials.getInstance(this).Register(name, password, email);
+            boolean Status = UserCredentials.getInstance(this).Register(name, password, contact);
 
             if (Status) {
                 GlobalMethods.print(this, "SuccessFully Registered!");
@@ -63,8 +64,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
             else {
                 GlobalMethods.print(this, "Something went wrong! Try Again");
-                MyAlert mydialog=new MyAlert(this);
-                mydialog.show(getFragmentManager(),"mydialog");
+                MyDialog myDialog=new MyDialog(this,"Something went wrong! Try Again");
+                Usercontact.setText("");
+                Username.setText("");
+                Userpassword.setText("");
             }
         }
     }
@@ -75,30 +78,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         editor.putString("UserName",name);
         editor.putString("Password",password);
         editor.commit();
-    }
-
-    private class MyAlert extends DialogFragment{
-
-        Context context;
-        public MyAlert(Register register) {
-            this.context=register;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            android.app.AlertDialog.Builder builder=new android.app.AlertDialog.Builder(context);
-            builder.setMessage("Something went wrong! Try Again");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Useremail.setText("");
-                    Username.setText("");
-                    Userpassword.setText("");
-                }
-            });
-            Dialog dialog=builder.create();
-            return dialog;
-        }
     }
 
 }
