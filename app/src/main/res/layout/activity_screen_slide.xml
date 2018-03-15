@@ -3,7 +3,6 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="#8e9196"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
@@ -36,29 +35,28 @@
             android:layout_marginTop="40dp"
             android:gravity="center"
             android:id="@+id/textView"
-            style="@style/customfontstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ready to order from top restaurants?" />
+            android:text="@string/welcome_screen" />
 
         <Button
             android:layout_marginTop="40dp"
-            android:id="@+id/button"
+            android:id="@+id/sign_up_button"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:fontFamily="@font/sf_cartoonist_hand_bold"
-            android:text="Sign Up" />
+            android:text="@string/sign_up" />
 
         <Button
             android:layout_marginTop="20dp"
-            android:id="@+id/button2"
+            android:id="@+id/login_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_cartoonist_hand_bold"
-            android:text="Have an account? Login"
+            android:text="@string/already_have_an_account"
             android:onClick="login"/>
     </LinearLayout>
 </LinearLayout>

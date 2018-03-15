@@ -4,6 +4,7 @@
     android:id="@+id/toolbar"
     android:background="@color/colorPrimary"
     android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:title="Dot7"
     xmlns:android="http://schemas.android.com/apk/res/android" />
 

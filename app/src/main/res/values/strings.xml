@@ -3,6 +3,7 @@
     <string name="title_activity_check_connection">CheckConnection</string>
     <string name="welcome_screen">Ready to order from top restaurants?</string>
     <string name="already_have_an_account">Have an account? Login</string>
+    <string name="sign_up">Sign Up</string>
     <string name="enter_email_id">Enter your Email-id</string>
     <string name="hint_name">Mobile Number</string>
     <string name="hint_name1">User Name</string>
