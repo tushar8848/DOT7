@@ -3,7 +3,7 @@
     package="a.dot7">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />'
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
 
@@ -37,7 +37,7 @@
         <activity
             android:theme="@style/LoginTheme"
             android:name=".Login"/>
-        <activity android:name=".Otp_generate_read"></activity>
+        <activity android:name=".Otp_generate_read"/>
     </application>
 
 </manifest>
