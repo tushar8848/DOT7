@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/input_layout_name4"
         android:padding="12dp"
-        android:onClick="signup"
+
         android:text="@string/signup_button"/>
 
     <Button android:id="@+id/link_login"

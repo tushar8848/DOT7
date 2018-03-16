@@ -81,7 +81,7 @@ private ImageView[] dots;
         startActivity(intent);
     }
 
-    public void signup(View view)
+    public void GoRegister(View view)
     {
         startActivity(new Intent(this,Register.class));
     }
@@ -109,14 +109,7 @@ private ImageView[] dots;
         }
     }
 
-    public void doSomething(View view)
-    {
-        if(view.getId()==R.id.sign_up_button)
-        {
-            startActivity(new Intent(this,Otp_generate_read.class));
 
-        }
-    }
 
 }
 

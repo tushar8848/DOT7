@@ -31,10 +31,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void getDetails() {
-        /*Username=findViewById();          // pooja and nitish fill here the ids.
-        Usercontact=findViewById();
-        Userpassword=findViewById();
-        signup=findViewById();*/
+        UserName =findViewById(R.id.Full_name);          // pooja and nitish fill here the ids.
+        UserContact=findViewById(R.id.mob_no);
+        UserPassword=findViewById(R.id.password);
+        signup=findViewById(R.id.btn_signup);
         name=UserName.getText().toString();
         contact=UserContact.getText().toString();
         password=UserPassword.getText().toString();
@@ -66,6 +66,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 UserName.setText("");
                 UserPassword.setText("");
             }
+            startActivity(new Intent(this,Otp_generate_read.class));
         }
     }
 
@@ -77,6 +78,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         editor.putString("Contact",contact);
         editor.commit();
     }
+
 
 }
 
