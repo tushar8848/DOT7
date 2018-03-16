@@ -15,4 +15,5 @@
     <string name="signup_link">No account yet? Create one</string>
     <string name="signup_button">Create Account</string>
     <string name="login_link">Already a member? Login</string>
+    <string name="forgot_button">Forgot Password</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
+    
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:fitsSystemWindows="true">
@@ -57,10 +57,18 @@
         android:padding="15dp"/>
 
 
+    <android.support.v7.widget.AppCompatButton  android:id="@+id/input_layout_name4" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_below="@id/input_layout_name3"
+        android:text="@string/forgot_button"
+        android:padding="15dp"/>
+
+
+
+
         <Button android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/input_layout_name3"
+            android:layout_below="@id/input_layout_name4"
             android:onClick="l_signup"
             android:text="@string/signup_link"
             android:gravity="center"
