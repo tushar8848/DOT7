@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="sendotp.key" android:value="@string/sendotp_key" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">

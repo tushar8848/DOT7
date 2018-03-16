@@ -16,4 +16,5 @@
     <string name="signup_button">Create Account</string>
     <string name="login_link">Already a member? Login</string>
     <string name="forgot_button">Forgot Password</string>
+    <string name="sendotp_key">203102Ap0zafxYzG5aaaa3a9</string>
 </resources>

@@ -109,5 +109,14 @@ private ImageView[] dots;
         }
     }
 
+    public void doSomething(View view)
+    {
+        if(view.getId()==R.id.sign_up_button)
+        {
+            startActivity(new Intent(this,Otp_generate_read.class));
+
+        }
+    }
+
 }
 

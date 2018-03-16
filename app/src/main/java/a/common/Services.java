@@ -48,7 +48,7 @@ public class Services {
         String url="http://172.31.143.55:3000/";          //harneet fill here url for registet
         boolean Status=ServiceCall(UserName,Password,Contact,url);
 
-        if (Status == true)
+        if (Status)
         {
             //intent to otp activity and start otp generation and reading
         }
@@ -88,14 +88,7 @@ public class Services {
             };
             MySingleton.getInstance(context).addToRequestQueue(request);
 
-            if(StatusFlag == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return StatusFlag == 1;
 
 
         }
@@ -104,45 +97,6 @@ public class Services {
             return false;
         }
     }
-
-    public boolean otp_service_call(final String msg, String url, final Context context) {
-
-        final boolean[] Status = new boolean[1];
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new
-                Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        String Code = GlobalMethods.GetSubString(response);
-                        if (Code.contains("302")) {
-                            Status[0] =true;
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                MyDialog myDialog=new MyDialog(context,error.toString(),"GOT IT");
-                Status[0] =false;
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> param=new HashMap<>();
-                param.put("otp",msg);
-                return param;
-            }
-        };
-        MySingleton.getInstance(context).addToRequestQueue(stringRequest);
-        if (Status[0] ==true)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
-
 }
 
 

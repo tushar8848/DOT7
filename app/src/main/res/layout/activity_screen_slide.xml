@@ -46,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:onClick="doSomething"
             android:fontFamily="@font/sf_cartoonist_hand_bold"
             android:text="@string/sign_up" />
 
