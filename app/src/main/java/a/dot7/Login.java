@@ -1,6 +1,7 @@
 package a.dot7;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,6 +42,10 @@ public class Login extends AppCompatActivity {
         password = pwd.toString();
     }
 
+    public void l_signup(View view)
+    {
+        startActivity(new Intent(this,Register.class));
+    }
     public void userLogin(View v)
     {
         userName = userNameText.getText().toString();

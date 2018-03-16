@@ -8,4 +8,11 @@
     <string name="hint_name">Mobile Number</string>
     <string name="hint_name1">User Name</string>
     <string name="hint_name2">Password</string>
+    <string name="hint_name3">Confirm Password</string>
+    <string name="hint1">Enter your Full Name</string>
+    <string name="hint2">Enter your Email_id</string>
+    <string name="login_button">Login</string>
+    <string name="signup_link">No account yet? Create one</string>
+    <string name="signup_button">Create Account</string>
+    <string name="login_link">Already a member? Login</string>
 </resources>

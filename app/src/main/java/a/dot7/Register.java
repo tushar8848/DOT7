@@ -1,6 +1,7 @@
 package a.dot7;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MyDialog;
 import a.common.Services;
+
+
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +38,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         name=UserName.getText().toString();
         contact=UserContact.getText().toString();
         password=UserPassword.getText().toString();
+    }
+    public void s_login(View view)
+    {
+        startActivity(new Intent(this,Login.class));
     }
 
     @Override

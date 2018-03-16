@@ -81,6 +81,10 @@ private ImageView[] dots;
         startActivity(intent);
     }
 
+    public void signup(View view)
+    {
+        startActivity(new Intent(this,Register.class));
+    }
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
     {
         public ScreenSlidePagerAdapter(FragmentManager fm)
