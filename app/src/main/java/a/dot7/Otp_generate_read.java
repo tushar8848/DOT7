@@ -34,8 +34,9 @@ import android.content.BroadcastReceiver;
 import android.util.Log;
 import android.widget.TextView;
 
-
-//Create button get otp type something and
+/**
+ * Created by Suman and Harneet on 17-03-2018.
+ */
 
 public class Otp_generate_read extends AppCompatActivity implements VerificationListener {
 
@@ -134,9 +135,6 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     @Override
     public void onInitiated(String response) {
         Log.d("HAR","Response Success with mesage "+response);
-
-
-
     }
 
     @Override
@@ -155,7 +153,7 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     @Override
     public void onVerificationFailed(Exception paramException) {
        Log.d("HAR","Error In verification "+paramException.toString());
-        //Nitish and pooja show suitable alert box if otp not verified
+        //Nitish and pooja show suitable alert box if otp not verified or otp is expired i.e 2 mins
     }
 
 }
