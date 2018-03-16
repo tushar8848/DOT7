@@ -60,6 +60,7 @@
     <android.support.v7.widget.AppCompatButton  android:id="@+id/input_layout_name4" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_below="@id/input_layout_name3"
         android:text="@string/forgot_button"
+        android:onClick="forgotPassword"
         android:padding="15dp"/>
 
 

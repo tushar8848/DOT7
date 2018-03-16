@@ -46,6 +46,10 @@ public class Login extends AppCompatActivity {
     {
         startActivity(new Intent(this,Register.class));
     }
+
+    public void forgotPassword(View view){
+        startActivity(new Intent(this,ForgotPassword.class));
+    }
     public void userLogin(View v)
     {
         userName = userNameText.getText().toString();
