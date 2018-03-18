@@ -13,26 +13,33 @@ import android.telephony.SmsMessage;
 
 public class SMS_broadcastReciever extends BroadcastReceiver {
 
+    private static Broadcast_Listener mlistener;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
         Bundle bundle=intent.getExtras();
-        SmsMessage[] sms;
+        SmsMessage sms;
         String sms_str;
 
-        if(bundle!=null)
+        if(bundle != null)
         {
-            Object[] pdus= (Object[]) bundle.get("pdus");
-            sms=new SmsMessage[pdus.length];
-            for (int i=0;i<sms.length;i++)
+            Object[] pdus = (Object[]) bundle.get("pdus");
+            for (int i = 0 ; i < pdus.length ; i++)
             {
-                sms[i]=SmsMessage.createFromPdu((byte[]) pdus[i]);
-                sms_str=sms[i].getMessageBody().toString();
-                String Sender = sms[i].getOriginatingAddress();
+                sms=SmsMessage.createFromPdu((byte[]) pdus[i]);
+                sms_str=sms.getMessageBody().toString();
+                String Sender = sms.getDisplayOriginatingAddress();
                 Intent smsIntent = new Intent("otp");
                 smsIntent.putExtra("message",sms_str);
-                LocalBroadcastManager.getInstance(context).sendBroadcast(smsIntent);
+                if (Sender.endsWith(""))                // Enter last part to detect the sender
+                    mlistener.message_Received(sms_str,smsIntent);
             }
         }
+    }
+
+    public static void bindListener(Broadcast_Listener listener)
+    {
+        mlistener=listener;
     }
 }
