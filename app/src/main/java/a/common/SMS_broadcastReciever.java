@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.SmsMessage;
+import android.util.Log;
 
 /**
  * Created by Suman on 14-03-2018.
@@ -27,13 +28,18 @@ public class SMS_broadcastReciever extends BroadcastReceiver {
             Object[] pdus = (Object[]) bundle.get("pdus");
             for (int i = 0 ; i < pdus.length ; i++)
             {
+
                 sms=SmsMessage.createFromPdu((byte[]) pdus[i]);
                 sms_str=sms.getMessageBody().toString();
                 String Sender = sms.getOriginatingAddress();
                 Intent smsIntent = new Intent("otp");
                 smsIntent.putExtra("message",sms_str);
                 if (Sender.contentEquals("DOTSMS"))
+                {
+                    Log.d("broadcast reciever","massege detect successfully");
                     mlistener.message_Received(sms_str,smsIntent);
+                }
+
             }
         }
     }

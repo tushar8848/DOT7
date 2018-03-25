@@ -34,6 +34,21 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
+        Intent intent=getIntent();
+        String determine_activity=intent.getStringExtra("ForgotPassword");
+        if (determine_activity==null)
+            register_work();
+        else
+            forgot_password();
+    }
+
+    private void forgot_password() {
+
+        read();
+        //intent to enter new password;
+    }
+
+    private void register_work() {
         if (read())
         {
             Intent intent=getIntent();
