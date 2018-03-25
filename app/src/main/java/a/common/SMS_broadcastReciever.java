@@ -29,10 +29,10 @@ public class SMS_broadcastReciever extends BroadcastReceiver {
             {
                 sms=SmsMessage.createFromPdu((byte[]) pdus[i]);
                 sms_str=sms.getMessageBody().toString();
-                String Sender = sms.getDisplayOriginatingAddress();
+                String Sender = sms.getOriginatingAddress();
                 Intent smsIntent = new Intent("otp");
                 smsIntent.putExtra("message",sms_str);
-                if (Sender.endsWith(""))                // Enter last part to detect the sender
+                if (Sender.contentEquals("DOTSMS"))
                     mlistener.message_Received(sms_str,smsIntent);
             }
         }

@@ -17,7 +17,7 @@ import java.util.List;
 public class Permissions {
 
     private static Permissions permissions;
-    Context context;
+    private Context context;
 
     private Permissions(Context context)
     {
@@ -27,7 +27,7 @@ public class Permissions {
     public static synchronized Permissions getInstance(Context context)
     {
         if (permissions == null)
-            permissions=new Permissions(context);
+            permissions = new Permissions(context);
         return permissions;
     }
 

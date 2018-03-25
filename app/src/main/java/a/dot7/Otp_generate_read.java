@@ -1,5 +1,6 @@
 package a.dot7;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import a.common.Broadcast_Listener;
 import a.common.MyDialog;
 import a.common.Permissions;
 import a.common.SMS_broadcastReciever;
+import a.common.Services;
 
 import android.util.Log;
 
@@ -26,13 +28,41 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     String OTP = Generate();
 
+    private String Name, Contact, Password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
-        read();
+        if (read())
+        {
+            Intent intent=getIntent();
+            Name=intent.getStringExtra("Name");
+            Contact=intent.getStringExtra("Contact");
+            Password=intent.getStringExtra("Password");
+
+            boolean Status = Services.getInstance(this).Register(Name,Password,Contact);
+
+            if (Status) {
+                createLocalfile(Name,Password,Contact);
+                /*Intent intent=new Intent(this,RestaurantView.class);
+                startActivity(intent);*/
+            }
+            else {
+                MyDialog myDialog=new MyDialog(this,"Something went wrong! Try Again","OK");
+                startActivity(new Intent(this,Register.class));
+            }
+        }
     }
 
+    private void createLocalfile(String name, String password, String contact) {
+        SharedPreferences sharedPreferences=getSharedPreferences("logDetails", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("Name",name);
+        editor.putString("Password",password);
+        editor.putString("Contact",contact);
+        editor.commit();
+    }
 
     private String Generate() {
         Random generate = new Random();
@@ -45,13 +75,19 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
 
     }
 
-    private void read() {
+    public boolean read() {
 
-        if (Permissions.getInstance(this).checkpermissions(this, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
-            SMS_broadcastReciever.bindListener(new Broadcast_Listener() {
+        final boolean[] flag = new boolean[1];
+        if (Permissions.getInstance(this).checkpermissions(this, REQUEST_ID_MULTIPLE_PERMISSIONS))
+        {
+            Log.d("HAR", "Final state success");
+            SMS_broadcastReciever.bindListener(new Broadcast_Listener()
+            {
                 @Override
-                public void message_Received(String message, Intent intent) {
-                    if (intent.getAction().equalsIgnoreCase("otp")) {
+                public void message_Received(String message, Intent intent)
+                {
+                    if (intent.getAction().equalsIgnoreCase("otp"))
+                    {
                         String msg = intent.getStringExtra("message");
                         msg = msg.substring(27, 30);
                         //suman, you will always get the code with body as:
@@ -59,16 +95,34 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
                         //write suitable substring function
                         if (msg.equals(OTP)) {
                             Log.d("HAR", "Final state success");
-                            // intent to restaurant view
+                            flag[0] = true;
 
                         }
-                    } else {
+                    }
+                    else {
                         Log.d("HAR", "Final state fail");
+                        flag[0] = false;
                         //otp_message.setText("Error Validating Phone No. \n Resend Code!");
                         //pooja and nitish add alert or something
                     }
                 }
             });
+
+        }
+
+        else
+        {
+            MyDialog myDialog = new MyDialog(this,"Cannot access OTP without" +
+                    " permissions!","Grant Permissions");
+            Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS);
+            flag[0] = false;
+        }
+        return flag[0];
+    }
+
+
+    //  MANUAL VERIFICATION
+
             /*Verification Verify = SendOtpVerification.createSmsVerification(
                     SendOtpVerification
                             .config("91"+"9039216432")  //specify the mobile number ID here
@@ -81,21 +135,8 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
                             .build(),this);
 
             Verify.initiate();
-            Verify.verify(OTP);  //Manual verification, not auto verification
+            Verify.verify(OTP);  //Manual verification, not auto verification.*/
 
-
-
-            //some problem here, Suman look into this.
-
-        }
-        else
-        {
-            MyDialog myDialog=new MyDialog(this,"Cannot access OTP without" +
-                    " permissions!","Grant Permissions");
-            Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS);
-        }*/
-        }
-    }
 
     @Override
     public void onInitiated(String response) {
