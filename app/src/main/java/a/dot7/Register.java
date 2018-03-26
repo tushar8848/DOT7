@@ -52,32 +52,23 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
         else
         {
-            boolean Status = Services.getInstance(this).Register(name, password, contact);
-
-            if (Status) {
-                createLocalfile(name, password,contact);
-                /*Intent intent=new Intent(this,RestaurantView.class);
-                startActivity(intent);*/
+            if (name != null && password != null && contact != null)
+            {
+                Intent intent = new Intent(this,Otp_generate_read.class);
+                intent.putExtra("Name",name);
+                intent.putExtra("Password",password);
+                intent.putExtra("Contact",contact);
+                startActivity(intent);
             }
-            else {
-                //GlobalMethods.print(this, "Something went wrong! Try Again");
-                MyDialog myDialog=new MyDialog(this,"Something went wrong! Try Again","OK");
-                UserContact.setText("");
-                UserName.setText("");
-                UserPassword.setText("");
+            else
+            {
+                GlobalMethods.print(this,"All feilds are required");
+                //pooja and nitish either make a hidden textbox for it
             }
-            startActivity(new Intent(this,Otp_generate_read.class));
         }
     }
 
-    private void createLocalfile(String name, String password, String contact) {
-        SharedPreferences sharedPreferences=getSharedPreferences("logDetails", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("UserName",name);
-        editor.putString("Password",password);
-        editor.putString("Contact",contact);
-        editor.commit();
-    }
+
 
 
 }

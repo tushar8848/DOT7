@@ -45,14 +45,9 @@ public class Services {
     }
     public boolean Register(final String UserName, final String Password, final String Contact)
     {
-        String url="http://172.31.143.55:3000/";          //harneet fill here url for registet
-        boolean Status=ServiceCall(UserName,Password,Contact,url);
-
-        if (Status)
-        {
-            //intent to otp activity and start otp generation and reading
-        }
-        return Status;
+        String url="http://172.31.143.55:3000/";
+        boolean Register_success = ServiceCall(UserName,Password,Contact,url);
+        return Register_success;
     }
     public boolean ServiceCall(final String UserName  /* Contact */, final String Password, final String Name,String url)
     {
