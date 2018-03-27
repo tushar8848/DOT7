@@ -15,8 +15,6 @@ import a.common.GlobalMethods;
 import a.common.MyDialog;
 import a.common.Services;
 
-
-
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
 

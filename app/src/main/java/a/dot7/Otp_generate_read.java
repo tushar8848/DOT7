@@ -34,7 +34,8 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
-        String determine_activity = intent.getStringExtra("ForgotPassword");
+        String determine_activity = null;
+             //  determine_activity = intent.getStringExtra("ForgotPassword");
         if (determine_activity == null)
             register_work();
         else
@@ -93,9 +94,10 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     public boolean read() {
 
         final boolean[] flag = new boolean[1];
-        if (Permissions.getInstance(this).checkpermissions(this, REQUEST_ID_MULTIPLE_PERMISSIONS))
+        Permissions.getInstance(this).checkpermissions(this, REQUEST_ID_MULTIPLE_PERMISSIONS);
+        if (true)
         {
-            Log.d("HAR", "Final state success");
+            Log.d("HAR", "Final state success permission mil gyi");
             SMS_broadcastReciever.bindListener(new Broadcast_Listener()
             {
                 @Override
@@ -104,12 +106,12 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
                     if (intent.getAction().equalsIgnoreCase("otp"))
                     {
                         String msg = intent.getStringExtra("message");
-                        msg = msg.substring(27, 30);
+                        String OTP_Received = msg.substring(27, 30);
                         //suman, you will always get the code with body as:
                         //Your verification code is ****
                         //write suitable substring function
-                        if (msg.equals(OTP)) {
-                            Log.e("HAR", "Final state success");
+                        if (OTP_Received.contentEquals(OTP)) {
+                            Log.e("HAR", "Final state success, otp: "+OTP_Received);
                             flag[0] = true;
 
                         }

@@ -99,9 +99,4 @@
         android:textSize="16dip"
         android:onClick="s_login"/>
 
-
-
-
-
-
 </RelativeLayout>
