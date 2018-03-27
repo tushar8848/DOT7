@@ -27,16 +27,15 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
 
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     String OTP = Generate();
-
+    Intent intent=getIntent();
     private String Name, Contact, Password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
-        Intent intent=getIntent();
-        String determine_activity=intent.getStringExtra("ForgotPassword");
-        if (determine_activity==null)
+        String determine_activity = intent.getStringExtra("ForgotPassword");
+        if (determine_activity == null)
             register_work();
         else
             forgot_password();
@@ -45,13 +44,12 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     private void forgot_password() {
 
         read();
-        //intent to enter new password;
+        //intent to enter new password; where new password is stored in local directory and send to server also
     }
 
     private void register_work() {
         if (read())
         {
-            Intent intent=getIntent();
             Name=intent.getStringExtra("Name");
             Contact=intent.getStringExtra("Contact");
             Password=intent.getStringExtra("Password");
@@ -75,7 +73,7 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("Name",name);
         editor.putString("Password",password);
-        editor.putString("Contact",contact);
+        editor.putString("UserName",contact);
         editor.commit();
     }
 
@@ -86,8 +84,10 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
             int x = generate.nextInt(10);
             otp[i] = (char) (x + '0');
         }
-        return String.valueOf(otp);
-
+        String Message = String.valueOf(otp);
+        final String URL = "http://172.31.143.78:3000/OTP";
+        boolean code = Services.getInstance(this).otp_service_call(Message, URL,this);
+        return Message;
     }
 
     public boolean read() {
@@ -109,13 +109,13 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
                         //Your verification code is ****
                         //write suitable substring function
                         if (msg.equals(OTP)) {
-                            Log.d("HAR", "Final state success");
+                            Log.e("HAR", "Final state success");
                             flag[0] = true;
 
                         }
                     }
                     else {
-                        Log.d("HAR", "Final state fail");
+                        Log.e("HAR", "Final state fail");
                         flag[0] = false;
                         //otp_message.setText("Error Validating Phone No. \n Resend Code!");
                         //pooja and nitish add alert or something
@@ -129,8 +129,7 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
         {
             MyDialog myDialog = new MyDialog(this,"Cannot access OTP without" +
                     " permissions!","Grant Permissions");
-            Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS);
-            flag[0] = false;
+            read();
         }
         return flag[0];
     }
