@@ -92,7 +92,42 @@ public class Services {
             return false;
         }
     }
+
+    public boolean otp_service_call(final String msg, String url, final Context context)
+    {
+        Log.d("service","done");
+        final boolean[] Status = new boolean[1];
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new
+        Response.Listener < String > ()
+        {
+            @Override
+            public void onResponse(String response) {
+                String Code = GlobalMethods.GetSubString(response);
+                if (Code.contains("302")) {
+                    Status[0] = true;
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                MyDialog myDialog = new MyDialog(context, error.toString(), "GOT IT");
+                Status[0] = false;
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams () throws AuthFailureError {
+                Map < String, String > param = new HashMap<>();
+                param.put("otp", msg);
+                return param;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringRequest);
+        return Status[0];
+    }
 }
+
 
 
         //********************OLD SERVICE CALL CODE*******************************//

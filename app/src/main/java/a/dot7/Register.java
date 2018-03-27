@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +14,6 @@ import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MyDialog;
 import a.common.Services;
-
-
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,13 +30,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void getDetails() {
-        UserName =findViewById(R.id.Full_name);          // pooja and nitish fill here the ids.
+        UserName =findViewById(R.id.Full_name);
         UserContact=findViewById(R.id.mob_no);
         UserPassword=findViewById(R.id.password);
         signup=findViewById(R.id.btn_signup);
         name=UserName.getText().toString();
         contact=UserContact.getText().toString();
         password=UserPassword.getText().toString();
+
     }
     public void s_login(View view)
     {
@@ -52,6 +52,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
         else
         {
+            Log.e("pass",password);
             if (name != null && password != null && contact != null)
             {
                 Intent intent = new Intent(this,Otp_generate_read.class);
