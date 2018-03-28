@@ -3,6 +3,7 @@ package a.dot7;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.msg91.sendotp.library.SendOtpVerification;
 import com.msg91.sendotp.library.Verification;
@@ -54,6 +55,11 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
             register_work();
         else
             forgot_password();
+    }
+
+    public void new_password(View view)
+    {
+        startActivity(new Intent(this,setnew_password.class));
     }
 
     private void forgot_password() {

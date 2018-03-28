@@ -76,7 +76,7 @@ private ImageView[] dots;
     public void login(View view)
 
     {
-        Toast.makeText(this,"Heyyyyy",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,"Heyyyyy",Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(this,Login.class);
         startActivity(intent);
     }
@@ -102,6 +102,7 @@ private ImageView[] dots;
                 default: return new ScreenSlidePage_Fragment();
             }
         }
+
 
         @Override
         public int getCount() {

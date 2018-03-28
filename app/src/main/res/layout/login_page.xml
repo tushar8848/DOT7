@@ -11,6 +11,9 @@
         android:layout_below="@id/tbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         >
 
         <EditText
@@ -18,6 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="10"
             android:hint="@string/hint_name" />
     </android.support.design.widget.TextInputLayout>
 
@@ -25,7 +30,9 @@
         android:id="@+id/input_layout_name1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/input_layout_name">
+        android:layout_below="@id/input_layout_name"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
 
         <EditText
             android:id="@+id/user_name"
@@ -40,20 +47,24 @@
         android:id="@+id/input_layout_name2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/input_layout_name1">
+        android:layout_below="@id/input_layout_name1"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-
+            android:inputType="textPassword"
             android:hint="@string/hint_name2" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton  android:id="@+id/input_layout_name3" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_below="@id/input_layout_name2"
         android:text="@string/login_button"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:padding="15dp"/>
 
 
@@ -61,6 +72,8 @@
         android:layout_height="wrap_content" android:layout_below="@id/input_layout_name3"
         android:text="@string/forgot_button"
         android:onClick="forgotPassword"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:padding="15dp"/>
 
 
@@ -72,8 +85,10 @@
             android:layout_below="@id/input_layout_name4"
             android:onClick="l_signup"
             android:text="@string/signup_link"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:textSize="20dip"/>
+            android:textSize="20sp"/>
 
 
 

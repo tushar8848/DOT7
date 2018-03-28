@@ -17,4 +17,7 @@
     <string name="login_link">Already a member? Login</string>
     <string name="forgot_button">Forgot Password</string>
     <string name="sendotp_key">203102Ap0zafxYzG5aaaa3a9</string>
+    <string name="gen_otp">Generate Otp</string>
+    <string name="new_password">Enter new Password</string>
+    <string name="new_confirm">Confirm new Password</string>
 </resources>

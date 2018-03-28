@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
 
 
 
-        Toast.makeText(this,"Login Page",Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this,"Login Page",Toast.LENGTH_SHORT).show();
         super.onCreate(savedInstanceState);  //, persistentState
         setContentView(R.layout.login_page);
         Toolbar toolbar=findViewById(R.id.toolbar);
