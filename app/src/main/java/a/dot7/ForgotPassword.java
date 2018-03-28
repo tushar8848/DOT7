@@ -7,6 +7,8 @@ import android.support.v7.widget.AppCompatButton;
 import android.widget.Button;
 import android.view.View;
 
+import a.common.OTP_Generator;
+
 public class ForgotPassword extends Activity {
 
     AppCompatButton forgot_password;
@@ -20,7 +22,7 @@ public class ForgotPassword extends Activity {
 
     public void onClick(View view)
     {
-        startActivity(new Intent(this,Otp_generate_read.class));
+        startActivity(new Intent(this,OTP_Generator.class));
     }
 
 

@@ -1,18 +1,33 @@
 package a.dot7;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.util.Log;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import a.common.CheckConnection;
-import a.common.LoginCheck;
-import a.common.Services;
+import a.common.GlobalMethods;
+import a.common.MySingleton;
+import a.common.TempActivity;
 import a.getter_setter.LoginData;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
+    String url = "http://192.168.43.92:3000/Login";
+    String StatusCode;
+    private String UserName,Password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,22 +44,75 @@ public class SplashActivity extends AppCompatActivity {
     }
     private void getNetworkState()
     {
-        LoginData credentials;
         Boolean State = CheckConnection.getInstance(this).getNetworkStatus();
         if(State)  //internet is connected
         {
-            Services.getInstance(this).Validate("Tushar2897","12345");
+            CheckUserCredentials();
 
-            credentials = LoginCheck.getInstance(this).CheckUserCredentials();
-            if(credentials == null)  //if login file is missing or credentials were changed
-            {
-                startActivity(new Intent(this,ScreenSlideActivity.class));
-            }
-            else
-            {
+        }
+    }
+    public void CheckUserCredentials()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                Context.MODE_PRIVATE);
+        UserName = sharedPreferences.getString("UserName",null);
+        Password = sharedPreferences.getString("Password",null);
+        Log.d("HAR","Username:"+UserName+" Password:"+Password);
+        if(UserName != null && Password != null) {
+            // Services.getInstance(context).Validate(UserName,Password);
 
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+            try {
+                StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
+                        Listener<String>() {
+
+                    @Override
+                    public void onResponse(String s) {
+                        StatusCode = GlobalMethods.GetSubString(s);
+                        Log.d("HAR", s);
+                        Log.d("HAR", "Satus code:" + StatusCode);
+                        //Log.d("HAR",StatusCode);
+
+                        // **********stop progress bar*************************
+
+
+                        if (StatusCode.contains("302")) {
+                            GlobalMethods.print(SplashActivity.this, "Data Found");
+                           // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
+                            startActivity(new Intent(SplashActivity.this, TempActivity.class));
+                            //StatusFlag=1;
+                        } else {
+                            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.d("HAR", volleyError.toString());
+                        Log.d("HAR", "Error");
+                        //Nitish and pooja, handle this error with a alert box or something
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> parameters = new HashMap<>();
+                        parameters.put("LoginID", UserName);
+                        parameters.put("password", Password);
+                        // if(Name != null)
+                        //   parameters.put("Name",Name);
+                        return parameters;
+                    }
+                };
+                MySingleton.getInstance(this).addToRequestQueue(request);
+                Log.d("HAR", "Service ab return kr ri hai");
+
+            } catch (Exception ex) {
+
             }
+        }
+        else
+        {
+            Log.d("HAR","Shared preference not found");
+            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
         }
     }
 }

@@ -20,4 +20,5 @@
     <string name="gen_otp">Generate Otp</string>
     <string name="new_password">Enter new Password</string>
     <string name="new_confirm">Confirm new Password</string>
+    <string name="title_activity_temp">TempActivity</string>
 </resources>

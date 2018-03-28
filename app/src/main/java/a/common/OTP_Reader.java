@@ -8,6 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import a.dot7.R;
 import a.dot7.Register;
 
@@ -19,9 +28,11 @@ public class OTP_Reader extends AppCompatActivity {
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     String OTP = null;
     Intent intent = null;
+    Context context = this;
     private String Name=null, Contact=null, Password=null;
+    String url = "http://192.168.43.92:3000/Register";
     boolean Flag = false;
-
+    String StatusCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,27 +58,7 @@ public class OTP_Reader extends AppCompatActivity {
         read();
         Log.d("HAR", "wapas register work me aaya");
     }
-    private void finalRegister()
-    {
-        if (Flag)
-        {
 
-            Log.d("HAR", "OTP is verified");
-            Toast.makeText(this, "OTP Verified Succesfully", Toast.LENGTH_SHORT).show();
-            boolean Status = Services.getInstance(this).Register(Name,Password,Contact);
-
-            if (Status) {
-                createLocalFile();
-                Toast.makeText(this, "User Registered succesfully", Toast.LENGTH_SHORT).show();
-                /*Intent intent=new Intent(this,RestaurantView.class);
-                startActivity(intent);*/
-            }
-            else {
-                MyDialog myDialog=new MyDialog(this,"Something went wrong! Try Again","OK");
-                startActivity(new Intent(this,Register.class));
-            }
-        }
-    }
 
     public void read() {
 
@@ -90,13 +81,69 @@ public class OTP_Reader extends AppCompatActivity {
                     {
                         Log.d("HAR", "Final state success,OTP verified, otp: "+OTP_Received);
                         Flag = true;
-                        //flag[0] = true;
+                        //calling webservice to register user
+
+
+                        try {
+                            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
+                                    Listener<String>() {
+
+                                @Override
+                                public void onResponse(String s) {
+                                    StatusCode = GlobalMethods.GetSubString(s);
+                                    Log.d("HAR", s);
+                                    Log.d("HAR", "Satus code:" + StatusCode);
+                                    //Log.d("HAR",StatusCode);
+                                    if (StatusCode.contains("201")) {
+                                        SharedPreferences sharedPreferences=getSharedPreferences("logDetails", OTP_Reader.this.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                                         editor.putString("Name",Name);
+                                         editor.putString("Password",Password);
+                                         editor.putString("UserName",Contact);
+                                        editor.commit();
+
+                                        Log.d("HAR", "Local file created");
+                                        //  Toast.makeText(Services.this, "User Registered succesfully", Toast.LENGTH_SHORT).show();
+                                        // **********stop progress bar*************************
+                                        startActivity(new Intent(OTP_Reader.this, TempActivity.class));
+                                    } else if (StatusCode.contains("302")) {
+                                        GlobalMethods.print(context, "Data Found");
+                                        //  StatusFlag=1;
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError volleyError) {
+                                    Log.d("HAR", volleyError.toString());
+                                    Log.d("HAR", "Error");
+                                    //Nitish and pooja, handle this error with a alert box or something
+                                }
+                            }) {
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+                                    Map<String, String> parameters = new HashMap<>();
+                                    parameters.put("LoginID", Contact);
+                                    parameters.put("password", Password);
+                                    if (Name != null)
+                                        parameters.put("Name", Name);
+                                    return parameters;
+                                }
+                            };
+                            MySingleton.getInstance(context).addToRequestQueue(request);
+                        }
+                        catch (Exception ex)
+                        {
+                            //return false;
+                        }
+
+
                     }
                     else
                     {
                             //Here OTP entered is wrong, handle the case
                     }
-                  finalRegister();
+
+
                 }
 
 
@@ -111,15 +158,6 @@ public class OTP_Reader extends AppCompatActivity {
                     " permissions!","Grant Permissions");
             read();
         }
-    }
-    private void createLocalFile() {
-        SharedPreferences sharedPreferences=getSharedPreferences("logDetails", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("Name",Name);
-        editor.putString("Password",Password);
-        editor.putString("UserName",Contact);
-        editor.commit();
-        Log.d("HAR","Local file created");
     }
 
 }

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
-import a.common.Services;
 
 /**
  * Created by TUSHAR on 11-03-18.
@@ -65,6 +64,7 @@ public class Login extends AppCompatActivity {
             editor.putString("UserName", userName);
             editor.putString("Password",password);
             editor.commit();
+            /*
             if(Services.getInstance(this).Validate("9039216432","hello"))
             {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
@@ -73,6 +73,7 @@ public class Login extends AppCompatActivity {
             {
                 Toast.makeText(this, "Incorrect userinfo", Toast.LENGTH_SHORT).show();
             }
+            */
         }
     }
 }
