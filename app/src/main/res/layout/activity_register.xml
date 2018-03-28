@@ -7,6 +7,9 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_name"
         android:layout_below="@id/tbar1"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -16,12 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:inputType="number"
             android:hint="@string/hint_name" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_name1"
         android:layout_below="@id/input_layout_name"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -37,6 +43,8 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_name2"
         android:layout_below="@id/input_layout_name1"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -54,6 +62,8 @@
         android:id="@+id/input_layout_name3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_below="@id/input_layout_name2">
 
         <EditText
@@ -69,6 +79,8 @@
         android:id="@+id/input_layout_name4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_below="@id/input_layout_name3">
 
         <EditText

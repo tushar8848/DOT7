@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="sendotp.key" android:value="@string/sendotp_key" />
+        <meta-data
+            android:name="sendotp.key"
+            android:value="@string/sendotp_key" />
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -28,7 +31,7 @@
         </activity>
 
         <receiver android:name="a.common.SmsReceiver">
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
@@ -41,7 +44,8 @@
             android:theme="@style/LoginTheme" />
         <activity android:name=".Otp_generate_read" />
         <activity android:name="a.common.OTP_Reader" />
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".setnew_password"></activity>
     </application>
 
 </manifest>

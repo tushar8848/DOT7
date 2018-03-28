@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="a.dot7.Otp_generate_read">
     <TextView
+        android:paddingTop="200dp"
+        android:paddingLeft="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtview"
-        android:text="Hello otp"/>
+        android:text="Enter Otp"/>
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtview"
+        android:layout_marginLeft="100dp"
+        android:text="Continue"
+        android:onClick="new_password"/>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

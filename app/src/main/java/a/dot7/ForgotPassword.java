@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.widget.Button;
+import android.view.View;
 
 public class ForgotPassword extends Activity {
 
@@ -13,12 +14,14 @@ public class ForgotPassword extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        onclick();
     }
 
-    private void onclick() {
-        Intent intent = new Intent(this,Otp_generate_read.class);
-        intent.putExtra("ForgotPassword","forgotpassword");
-        startActivity(intent);
+
+
+    public void onClick(View view)
+    {
+        startActivity(new Intent(this,Otp_generate_read.class));
     }
+
+
 }
