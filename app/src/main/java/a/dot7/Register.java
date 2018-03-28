@@ -13,6 +13,8 @@ import android.widget.EditText;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MyDialog;
+import a.common.OTP_Generator;
+import a.common.OTP_Reader;
 import a.common.Services;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
@@ -34,10 +36,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         UserContact=findViewById(R.id.mob_no);
         UserPassword=findViewById(R.id.password);
         signup=findViewById(R.id.btn_signup);
+
+    }
+    private void setDetails()
+    {
         name=UserName.getText().toString();
         contact=UserContact.getText().toString();
         password=UserPassword.getText().toString();
-
     }
     public void s_login(View view)
     {
@@ -46,6 +51,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
+
+
+        setDetails();
         if (!CheckConnection.getInstance(this).getNetworkStatus())
         {
             GlobalMethods.print(this, "Check Internet Connection");
@@ -55,10 +63,22 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             Log.e("pass",password);
             if (name != null && password != null && contact != null)
             {
-                Intent intent = new Intent(this,Otp_generate_read.class);
+                boolean flag = false;
+                //generating OTP
+               String OTP = OTP_Generator.getInstance(this).Generate();
+               //sending sms
+               flag = OTP_Generator.getInstance(this).sendMessage(OTP,contact);
+               if(flag == true)
+               Log.d("HAR","OTP generated and sent succesfully "+OTP);
+               else
+                   Log.d("HAR","OTP generated but not sent, contact:"+contact);
+
+
+                Intent intent = new Intent(this,OTP_Reader.class);
                 intent.putExtra("Name",name);
                 intent.putExtra("Password",password);
                 intent.putExtra("Contact",contact);
+                intent.putExtra("OTP",OTP);
                 startActivity(intent);
             }
             else

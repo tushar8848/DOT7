@@ -27,8 +27,8 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="a.common.SMS_broadcastReciever">
-            <intent-filter android:priority="999">
+        <receiver android:name="a.common.SmsReceiver">
+            <intent-filter >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
@@ -40,6 +40,7 @@
             android:name=".Login"
             android:theme="@style/LoginTheme" />
         <activity android:name=".Otp_generate_read" />
+        <activity android:name="a.common.OTP_Reader" />
         <activity android:name=".ForgotPassword"></activity>
     </application>
 
