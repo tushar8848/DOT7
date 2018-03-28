@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.msg91.sendotp.library.SendOtpVerification;
 import com.msg91.sendotp.library.Verification;
 import com.msg91.sendotp.library.VerificationListener;
@@ -36,12 +37,30 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
     String OTP = null;
     Intent intent = null;
     private String Name=null, Contact=null, Password=null;
-
+    PinEntryEditText pinEntry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
+
+        pinEntry = (PinEntryEditText) findViewById(R.id.txt_pin_entry);
+        if (pinEntry != null) {
+            pinEntry.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
+                @Override
+                public void onPinEntered(CharSequence str) {
+                    if (str.toString().equals("1234")) {
+                        Toast.makeText(Otp_generate_read.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Otp_generate_read.this, "FAIL", Toast.LENGTH_SHORT).show();
+                        pinEntry.setText(null);
+                    }
+                }
+            });
+        }
+
+
         intent = getIntent();
         String determine_activity = null;
              //  determine_activity = intent.getStringExtra("ForgotPassword");

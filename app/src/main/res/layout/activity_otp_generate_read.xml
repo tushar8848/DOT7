@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,38 +15,17 @@
         android:id="@+id/txtview"
         android:text="Enter Otp"/>
 
-    <LinearLayout
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/txt_pin_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="ExtraText">
-        android:id="@+id/pin_layout"
-
-        android:gravity="center-horizontal"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/pin1"
-            android:paddingLeft="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/pin2"
-            android:paddingLeft="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/pin3"
-            android:layout_width="wrap_content"
-            android:paddingLeft="50dp"
-            android:layout_height="match_parent" />
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/pin4"
-            android:layout_width="wrap_content"
-            android:paddingLeft="50dp"
-            android:layout_height="match_parent" />
-
-
-    </LinearLayout>
+        android:cursorVisible="false"
+    android:digits="1234567890"
+    android:inputType="number"
+    android:maxLength="4"
+    android:textIsSelectable="false"
+    android:textSize="20sp"
+    app:pinAnimationType="popIn"/>
 
     <android.support.v7.widget.AppCompatButton
         android:layout_width="wrap_content"
