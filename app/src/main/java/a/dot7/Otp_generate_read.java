@@ -59,7 +59,7 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
 
     public void new_password(View view)
     {
-        startActivity(new Intent(this,setnew_password.class));
+        //startActivity(new Intent(this,setnew_password.class));
     }
 
     private void forgot_password() {
