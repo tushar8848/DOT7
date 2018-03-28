@@ -178,7 +178,7 @@ public class Otp_generate_read extends AppCompatActivity implements Verification
                             .build(),this);
 
             Verify.initiate();
-            Verify.verify(OTP);  //Manual verification, not auto verification.*/
+           //Manual verification, not auto verification.*/
 
 
     @Override

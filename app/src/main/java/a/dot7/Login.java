@@ -65,7 +65,7 @@ public class Login extends AppCompatActivity {
             editor.putString("UserName", userName);
             editor.putString("Password",password);
             editor.commit();
-            if(Services.getInstance(this).Validate(userName,password))
+            if(Services.getInstance(this).Validate("9039216432","hello"))
             {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
             }

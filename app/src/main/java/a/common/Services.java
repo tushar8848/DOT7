@@ -9,6 +9,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,17 +42,18 @@ public class Services {
     public boolean Validate(final String UserName, final String Password)
     {
         boolean Status;
-        String Url = "http://172.31.143.55:3000/Login";
+        String Url = "http://192.168.43.16:3000/Login";
         Status = ServiceCall(UserName,Password,null,Url);
         return Status;
     }
     public boolean Register(final String UserName, final String Password, final String Contact)
     {
-        String url="http://172.31.143.55:3000/";
+        String url = "http://192.168.43.16:3000/Register";
         boolean Register_success = ServiceCall(UserName,Password,Contact,url);
         return Register_success;
     }
-    public boolean ServiceCall(final String UserName  /* Contact */, final String Password, final String Name,String url)
+    public boolean ServiceCall(final String Name /* Contact */, final String Password, final String
+            Contact,String url)
     {
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
@@ -57,8 +61,9 @@ public class Services {
 
                 @Override
                 public void onResponse(String s) {
-                    StatusCode = GlobalMethods.GetSubString(s);
-                    Log.d("HAR",StatusCode);
+                   StatusCode = GlobalMethods.GetSubString(s);
+                    Log.d("HAR",s);
+                    //Log.d("HAR",StatusCode);
                     if (StatusCode.contains("302")) {
                         GlobalMethods.print(context,"Data Found");
                         StatusFlag=1;
@@ -68,13 +73,14 @@ public class Services {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     Log.d("HAR",volleyError.toString());
+                    Log.d("HAR","Error");
                     //Nitish and pooja, handle this error with a alert box or something
                 }
             }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("LoginID", UserName);
+                    parameters.put("LoginID",Contact);
                     parameters.put("password", Password);
                     if(Name != null)
                         parameters.put("Name",Name);
@@ -93,7 +99,7 @@ public class Services {
         }
     }
 
-    public boolean otp_service_call(final String msg, String url, final Context context)
+   /* public boolean otp_service_call(final String msg, String url, final Context context)
     {
         Log.d("service","done");
         final boolean[] Status = new boolean[1];
@@ -125,9 +131,8 @@ public class Services {
         };
         MySingleton.getInstance(context).addToRequestQueue(stringRequest);
         return Status[0];
-    }
+    }*/
 }
-
 
 
         //********************OLD SERVICE CALL CODE*******************************//
