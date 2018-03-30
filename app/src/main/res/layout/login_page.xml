@@ -11,6 +11,7 @@
         android:layout_below="@id/tbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:inputType="number"
+
             android:maxLength="10"
             android:hint="@string/hint_name" />
     </android.support.design.widget.TextInputLayout>
@@ -88,7 +90,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:textSize="20sp"/>
+            />
 
 
 

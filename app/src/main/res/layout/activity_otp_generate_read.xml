@@ -5,15 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="a.dot7.Otp_generate_read">
+    >
     <TextView
         android:paddingTop="200dp"
-        android:paddingLeft="50dp"
+        android:paddingLeft="30dp"
+        android:textSize="20sp"
+
         android:paddingRight="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtview"
-        android:text="Enter Otp"/>
+        android:text="A 4 digit code will be sent to your Registered Mobile Number.Kindly Enter that code. "/>
 
     <com.alimuzaffar.lib.pin.PinEntryEditText
         android:id="@+id/txt_pin_entry"
@@ -28,10 +30,11 @@
     app:pinAnimationType="popIn"/>
 
     <android.support.v7.widget.AppCompatButton
-        android:layout_width="wrap_content"
+        android:layout_width="152dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:text="Continue"
-        android:onClick="new_password"/>
+        android:layout_marginTop="40dp"
+        android:onClick="new_password"
+        android:text="Continue" />
 
 </LinearLayout>

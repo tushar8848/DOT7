@@ -22,7 +22,7 @@ public class ForgotPassword extends Activity {
 
     public void onClick(View view)
     {
-        startActivity(new Intent(this,OTP_Generator.class));
+        startActivity(new Intent(this,activity_otp_gernerate_read.class));
     }
 
 

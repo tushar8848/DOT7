@@ -48,6 +48,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         startActivity(new Intent(this,Login.class));
     }
 
+    public void goto_genotp(View view)
+    {
+        startActivity(new Intent(this,activity_otp_gernerate_read.class));
+    }
+
     @Override
     public void onClick(View view) {
 

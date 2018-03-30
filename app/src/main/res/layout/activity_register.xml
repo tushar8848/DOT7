@@ -100,6 +100,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/input_layout_name4"
         android:padding="12dp"
+        android:onClick="goto_genotp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
 
         android:text="@string/signup_button"/>
 
@@ -108,6 +111,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_below="@id/btn_signup"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:text="@string/login_link"
         android:gravity="center"
         android:textSize="16sp"
