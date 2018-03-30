@@ -1,5 +1,4 @@
 package a.common;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +21,7 @@ import a.dot7.Register;
 
 /**
  * Created by TUSHAR on 28-03-18.
- */
+*/
 
 public class OTP_Reader extends AppCompatActivity {
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
@@ -50,7 +49,6 @@ public class OTP_Reader extends AppCompatActivity {
         {
             // forgot_password();
         }
-
     }
 
     private void initiateRegister() {
@@ -59,9 +57,8 @@ public class OTP_Reader extends AppCompatActivity {
         Log.d("HAR", "wapas register work me aaya");
     }
 
-
-    public void read() {
-
+    public void read()
+    {
         Log.d("HAR","read wale me aaya");
         //final boolean[] flag = {false};
         //final boolean[] Flag = {false};
@@ -71,6 +68,7 @@ public class OTP_Reader extends AppCompatActivity {
             Log.d("HAR", "Final state success permission mil gyi");
 
             SmsReceiver.bindListener(new SmsListener() {
+
                 @Override
                 public void messageReceived(String message) {
                     Log.d("HAR", "Reader pe message is:"+message);
@@ -82,8 +80,6 @@ public class OTP_Reader extends AppCompatActivity {
                         Log.d("HAR", "Final state success,OTP verified, otp: "+OTP_Received);
                         Flag = true;
                         //calling webservice to register user
-
-
                         try {
                             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                                     Listener<String>() {
@@ -97,9 +93,9 @@ public class OTP_Reader extends AppCompatActivity {
                                     if (StatusCode.contains("201")) {
                                         SharedPreferences sharedPreferences=getSharedPreferences("logDetails", OTP_Reader.this.MODE_PRIVATE);
                                         SharedPreferences.Editor editor=sharedPreferences.edit();
-                                         editor.putString("Name",Name);
-                                         editor.putString("Password",Password);
-                                         editor.putString("UserName",Contact);
+                                        editor.putString("Name",Name);
+                                        editor.putString("Password",Password);
+                                        editor.putString("UserName",Contact);
                                         editor.commit();
 
                                         Log.d("HAR", "Local file created");
@@ -135,17 +131,12 @@ public class OTP_Reader extends AppCompatActivity {
                         {
                             //return false;
                         }
-
-
                     }
                     else
                     {
                             //Here OTP entered is wrong, handle the case
                     }
-
-
                 }
-
 
             });
            // Log.d("HAR","return value: "+flag[0]);
@@ -159,5 +150,4 @@ public class OTP_Reader extends AppCompatActivity {
             read();
         }
     }
-
 }

@@ -85,7 +85,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/input_layout_name4"
-            android:onClick="l_signup"
+            android:onClick="Call_Signup"
             android:text="@string/signup_link"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
