@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import a.dot7.ForgotPassword;
 import a.dot7.R;
 import a.dot7.Register;
 
@@ -29,26 +31,29 @@ public class OTP_Reader extends AppCompatActivity {
     Intent intent = null;
     Context context = this;
     private String Name=null, Contact=null, Password=null;
+    String determine_activity=null;
     String url = "http://192.168.43.92:3000/Register";
     boolean Flag = false;
     String StatusCode;
+    PinEntryEditText OTPTEXT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_generate_read);
         intent = getIntent();
-        String determine_activity = null;
         //  determine_activity = intent.getStringExtra("ForgotPassword");
         Name = intent.getStringExtra("Name");
         Contact = intent.getStringExtra("Contact");
         Password = intent.getStringExtra("Password");
         OTP = intent.getStringExtra("OTP");
-        if (determine_activity == null)
-            initiateRegister();
+        OTPTEXT = findViewById(R.id.txt_pin_entry);
+        if(Name == null && Password == null && Contact != null && OTP != null)
+            determine_activity = "ForgotPassword";
         else
-        {
-            // forgot_password();
-        }
+            determine_activity = "Register";
+        //if (determine_activity == null)
+            initiateRegister();
+
     }
 
     private void initiateRegister() {
@@ -74,10 +79,23 @@ public class OTP_Reader extends AppCompatActivity {
                     Log.d("HAR", "Reader pe message is:"+message);
                     String OTP_Received = null;
                     OTP_Received = message.substring(26, 30);
+                    //filling OTP field
+                    int otp=0;
+                    otp=1000*(OTP_Received.charAt(0)-48) + 100*(OTP_Received.charAt(1)-48) +
+                            10*(OTP_Received.charAt(2)-48) + (OTP_Received.charAt(3)-48);
+                    OTPTEXT.setText(otp);
                     Log.d("HAR", "OTP is:"+OTP_Received);
                     if(OTP_Received.equals(OTP))
                     {
                         Log.d("HAR", "Final state success,OTP verified, otp: "+OTP_Received);
+                        // If otp is required for forgot password
+
+                        if(determine_activity.equals("ForgotPassword"))
+                        {
+                            Intent intent = new Intent(OTP_Reader.this,a.dot7.setnew_password.class);
+                            intent.putExtra("Contact",Contact);
+                            startActivity(intent);
+                        }
                         Flag = true;
                         //calling webservice to register user
                         try {
