@@ -3,9 +3,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.android.volley.AuthFailureError;
@@ -17,9 +17,8 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import a.dot7.ForgotPassword;
 import a.dot7.R;
-import a.dot7.Register;
+import a.dot7.Set_New_Password;
 
 /**
  * Created by TUSHAR on 28-03-18.
@@ -32,7 +31,7 @@ public class OTP_Reader extends AppCompatActivity {
     Context context = this;
     private String Name=null, Contact=null, Password=null;
     String determine_activity=null;
-    String url = "http://192.168.43.92:3000/Register";
+    String url = "http://192.168.43.184:3000/Register";
     boolean Flag = false;
     String StatusCode;
     PinEntryEditText OTPTEXT;
@@ -80,19 +79,21 @@ public class OTP_Reader extends AppCompatActivity {
                     String OTP_Received = null;
                     OTP_Received = message.substring(26, 30);
                     //filling OTP field
-                    int otp=0;
-                    otp=1000*(OTP_Received.charAt(0)-48) + 100*(OTP_Received.charAt(1)-48) +
-                            10*(OTP_Received.charAt(2)-48) + (OTP_Received.charAt(3)-48);
-                    OTPTEXT.setText(otp);
+                    //int otp=0;
+                   // otp=1000*(OTP_Received.charAt(0)-48) + 100*(OTP_Received.charAt(1)-48) +
+                     //       10*(OTP_Received.charAt(2)-48) + (OTP_Received.charAt(3)-48);
+                    OTPTEXT.setText(OTP_Received);
+
                     Log.d("HAR", "OTP is:"+OTP_Received);
                     if(OTP_Received.equals(OTP))
                     {
+                        //for(int i=0;i<100000000;i++);
                         Log.d("HAR", "Final state success,OTP verified, otp: "+OTP_Received);
                         // If otp is required for forgot password
 
                         if(determine_activity.equals("ForgotPassword"))
                         {
-                            Intent intent = new Intent(OTP_Reader.this,a.dot7.setnew_password.class);
+                            Intent intent = new Intent(OTP_Reader.this,Set_New_Password.class);
                             intent.putExtra("Contact",Contact);
                             startActivity(intent);
                         }

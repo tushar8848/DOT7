@@ -25,7 +25,7 @@ import a.getter_setter.LoginData;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
-    String url = "http://192.168.43.92:3000/Login";
+    String url = "http://192.168.43.184:3000/Login";
     String StatusCode;
     private String UserName,Password;
     @Override

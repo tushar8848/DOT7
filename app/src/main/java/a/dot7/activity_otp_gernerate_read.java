@@ -16,7 +16,7 @@ public class activity_otp_gernerate_read extends Activity {
 
     public void new_password(View view)
     {
-        startActivity(new Intent(this,setnew_password.class));
+        startActivity(new Intent(this,Set_New_Password.class));
     }
 
 

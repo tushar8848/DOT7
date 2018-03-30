@@ -20,14 +20,14 @@ import java.util.Map;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 
-public class setnew_password extends Activity implements View.OnClickListener {
+public class Set_New_Password extends Activity implements View.OnClickListener {
 
     AppCompatButton UpdatePasswordButton;
     EditText PasswordText;
     String Contact,Password;
     Intent intent;
     String StatusCode;
-    String url = "http://192.168.43.92:3000/Login";
+    String url = "http://192.168.43.184:3000/Login/UpdatePassword";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +59,8 @@ public class setnew_password extends Activity implements View.OnClickListener {
                     // **********stop progress bar*************************
 
 
-                    if (StatusCode.contains("302")) {
-                        startActivity(new Intent(setnew_password.this, Login.class));
+                    if (StatusCode.contains("202")) {
+                        startActivity(new Intent(Set_New_Password.this, Login.class));
                     }
                     else {
 

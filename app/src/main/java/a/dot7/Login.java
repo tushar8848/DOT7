@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     String Password;
     Button LoginButton;
     String StatusCode;
-    String url = "http://192.168.43.92:3000/Login";
+    String url = "http://192.168.43.184:3000/Login";
     MyDialog dialog;
     private AlertDialog CustomDialog;
     @Override

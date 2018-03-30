@@ -46,7 +46,7 @@
             android:theme="@style/LoginTheme" />
         <activity android:name="a.common.OTP_Reader" />
         <activity android:name=".ForgotPassword" />
-        <activity android:name=".setnew_password" />
+        <activity android:name=".Set_New_Password" />
         <activity
             android:name="a.common.TempActivity"
             android:label="@string/title_activity_temp"
