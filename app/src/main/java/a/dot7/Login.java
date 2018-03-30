@@ -75,6 +75,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     {
         startActivity(new Intent(this,Register.class));
     }
+    public void res_view_page(View view)
+    {
+        startActivity(new Intent(this,restaurant_recycler_view.class));
+    }
 
     public void forgotPassword(View view){
         startActivity(new Intent(this,ForgotPassword.class));

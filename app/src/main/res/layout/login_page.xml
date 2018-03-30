@@ -67,6 +67,7 @@
         android:text="@string/login_button"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:onClick="res_view_page"
         android:padding="15dp"/>
 
 

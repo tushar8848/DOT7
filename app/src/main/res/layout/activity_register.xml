@@ -115,7 +115,7 @@
         android:layout_marginLeft="10dp"
         android:text="@string/login_link"
         android:gravity="center"
-        android:textSize="16sp"
+
         android:onClick="s_login"/>
 
 </RelativeLayout>

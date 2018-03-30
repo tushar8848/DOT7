@@ -51,7 +51,10 @@
             android:name="a.common.TempActivity"
             android:label="@string/title_activity_temp"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity_otp_gernerate_read"></activity>
+        <activity android:name=".activity_otp_gernerate_read" />
+        <activity
+            android:name=".restaurant_recycler_view"
+            android:theme="@style/LoginTheme"/>
     </application>
 
 </manifest>
