@@ -1,47 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
-    
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:fitsSystemWindows="true">
-    <include  android:id="@+id/tbar" layout="@layout/custom_toolbar"/>
+
+    <include
+        android:id="@+id/tbar"
+        layout="@layout/custom_toolbar" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_name"
-        android:layout_below="@id/tbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tbar"
         android:gravity="center_vertical"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        >
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
 
         <EditText
             android:id="@+id/mob_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:hint="@string/hint_name"
             android:inputType="number"
 
             android:maxLength="10"
-            android:hint="@string/hint_name" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_name1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/input_layout_name"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp">
-
-        <EditText
-            android:id="@+id/user_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="@string/hint_name1" />
+            android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
 
@@ -49,52 +35,53 @@
         android:id="@+id/input_layout_name2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/input_layout_name1"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp">
+        android:layout_below="@id/input_layout_name"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:hint="@string/hint_name2"
             android:inputType="textPassword"
-            android:hint="@string/hint_name2" />
+            android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.v7.widget.AppCompatButton  android:id="@+id/input_layout_name3" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_below="@id/input_layout_name2"
-        android:text="@string/login_button"
-        android:layout_marginRight="10dp"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/input_layout_name3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_layout_name2"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:onClick="res_view_page"
-        android:padding="15dp"/>
+        android:padding="15dp"
+        android:text="@string/login_button" />
 
 
-    <android.support.v7.widget.AppCompatButton  android:id="@+id/input_layout_name4" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_below="@id/input_layout_name3"
-        android:text="@string/forgot_button"
-        android:onClick="forgotPassword"
-        android:layout_marginRight="10dp"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/input_layout_name4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_layout_name3"
         android:layout_marginLeft="10dp"
-        android:padding="15dp"/>
+        android:layout_marginRight="10dp"
+        android:onClick="forgotPassword"
+        android:padding="15dp"
+        android:text="@string/forgot_button" />
 
 
-
-
-        <Button android:id="@+id/link_signup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/input_layout_name4"
-            android:onClick="Call_Signup"
-            android:text="@string/signup_link"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            />
-
-
-
+    <Button
+        android:id="@+id/link_signup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_layout_name4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:onClick="Call_Signup"
+        android:text="@string/signup_link" />
 
 
 </RelativeLayout>
