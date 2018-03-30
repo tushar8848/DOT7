@@ -15,10 +15,11 @@
     <string name="signup_link">No account yet? Create one</string>
     <string name="signup_button">Create Account</string>
     <string name="login_link">Already a member? Login</string>
-    <string name="forgot_button">Forgot Password</string>
+    <string name="forgot_button">Forgot Password?</string>
     <string name="sendotp_key">203102Ap0zafxYzG5aaaa3a9</string>
     <string name="gen_otp">Generate Otp</string>
     <string name="new_password">Enter new Password</string>
     <string name="new_confirm">Confirm new Password</string>
     <string name="title_activity_temp">TempActivity</string>
+    <string name="forgot_password_description">We just need your registered mobile number to help you reset your password.</string>
 </resources>
