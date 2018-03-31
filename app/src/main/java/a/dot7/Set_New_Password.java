@@ -23,8 +23,8 @@ import a.common.MySingleton;
 public class Set_New_Password extends Activity implements View.OnClickListener {
 
     AppCompatButton UpdatePasswordButton;
-    EditText PasswordText;
-    String Contact,Password;
+    EditText PasswordText,UserCPassword;
+    String Contact,Password,cpassword;
     Intent intent;
     String StatusCode;
     String url = "http://192.168.43.184:3000/Login/UpdatePassword";
@@ -34,10 +34,35 @@ public class Set_New_Password extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_setnew_password);
         intent = getIntent();
         UpdatePasswordButton = findViewById(R.id.Update_Password);
+        UserCPassword = findViewById(R.id.newconfirm);
         PasswordText = findViewById(R.id.newp);
         Contact = intent.getStringExtra("Contact");
-        UpdatePasswordButton.setOnClickListener(this);
+
+        UserCPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                    Password=PasswordText.getText().toString();
+                    cpassword=UserCPassword.getText().toString();
+                    if(!cpassword.equals(Password))
+                    {
+                        UserCPassword.setError("Password do not match");
+                        UpdatePasswordButton.setOnClickListener(null);
+                    }
+                    else{
+                        UpdatePasswordButton.setOnClickListener(Set_New_Password.this);
+                    }
+            }
+        });
+
+
     }
+
+
+
+
+
+
+
     @Override
     public void onClick(View v) {
         Password = PasswordText.getText().toString();

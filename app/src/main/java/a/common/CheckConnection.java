@@ -38,10 +38,10 @@ public class CheckConnection {
         }
         if(networkInfo != null)
         {
-            GlobalMethods.print(context,"Internet Connected");
+            //GlobalMethods.print(context,"Internet Connected");
             return true;
         }
-        GlobalMethods.print(context,"Internet Not Connected");
+       // GlobalMethods.print(context,"Internet Not Connected");
         return false;
     }
     public static CheckConnection getInstance(Context context)

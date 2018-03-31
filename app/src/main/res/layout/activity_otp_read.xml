@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="40dp"
-        android:onClick="new_password"
+        android:id="@+id/verify_otp"
         android:text="Continue" />
 
 </LinearLayout>

@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     String Password;
     Button LoginButton;
     String StatusCode;
-    String url = "http://192.168.43.184:3000/Login";
+    String url = "http://192.168.43.161:3000/Login";
     MyDialog dialog;
     private AlertDialog CustomDialog;
     @Override
@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
 
 
-      //  Toast.makeText(this,"Login Page",Toast.LENGTH_SHORT).show();
+
         super.onCreate(savedInstanceState);  //, persistentState
         setContentView(R.layout.login_page);
         Toolbar toolbar=findViewById(R.id.toolbar);
@@ -112,22 +112,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 public void onResponse(String s) {
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
-                    Log.d("HAR", "Satus code:" + StatusCode);
-                    //Log.d("HAR",StatusCode);
+
+
 
                     // **********stop progress bar*************************
 
 
                     if (StatusCode.contains("302")) {
-                        //GlobalMethods.print(Login.this, "Data Found");
-                        // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
                         SharedPreferences sp = getSharedPreferences("logDetails", a.dot7.Login.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString("UserName", UserName);
                         editor.putString("Password",Password);
                         editor.commit();
                         startActivity(new Intent(Login.this, TempActivity.class));
-                        //StatusFlag=1;
                     } else {
 
                         AlertDialog.Builder builder=new AlertDialog.Builder(Login.this);
@@ -165,7 +162,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 }
             };
             MySingleton.getInstance(this).addToRequestQueue(request);
-            Log.d("HAR", "Service ab return kr ri hai");
+
 
         } catch (Exception ex) {
 

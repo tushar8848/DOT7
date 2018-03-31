@@ -13,21 +13,20 @@ import java.util.List;
 
 import a.dot7.R;
 
-public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_Adapter.ViewHolder>{
+public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_Adapter.ViewHolder> {
 
     private Context context;
     private List<Restaurant_Each_Row_data> data;
 
-    public RestaurantView_Adapter ( Context context, List<Restaurant_Each_Row_data> data)
-    {
-        this.context = context ;
-        this.data = data ;
+    public RestaurantView_Adapter(Context context, List<Restaurant_Each_Row_data> data) {
+        this.context = context;
+        this.data = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_item_restaurant_view,parent,false);
+                .inflate(R.layout.single_item_restaurant_view, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -46,7 +45,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         holder.Favourite_Flag.setChecked(favourite_flag);
 
         holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
-        new Load_ImageTask(holder.Restro_Image,context).execute(RowData.getRestaurantImage());
+        new Load_ImageTask(holder.Restro_Image, context).execute(RowData.getRestaurantImage());
     }
 
     @Override

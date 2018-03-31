@@ -25,7 +25,7 @@ import a.getter_setter.LoginData;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
-    String url = "http://192.168.43.184:3000/Login";
+    String url = "http://192.168.43.161:3000/Login";
     String StatusCode;
     private String UserName,Password;
     @Override
@@ -49,6 +49,11 @@ public class SplashActivity extends AppCompatActivity {
         {
             CheckUserCredentials();
 
+        }
+        else
+        {
+            GlobalMethods.print(this,"Please your internet connection");
+            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
         }
     }
     public void CheckUserCredentials()
@@ -76,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                         if (StatusCode.contains("302")) {
-                            GlobalMethods.print(SplashActivity.this, "Data Found");
+                           // GlobalMethods.print(SplashActivity.this, "Data Found");
                            // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
                             startActivity(new Intent(SplashActivity.this, TempActivity.class));
                             //StatusFlag=1;
