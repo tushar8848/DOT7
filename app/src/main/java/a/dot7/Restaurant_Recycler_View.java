@@ -34,7 +34,7 @@ public class Restaurant_Recycler_View extends Activity {
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
     private RecyclerView.Adapter Adapter;
-    final private String URL = "";              // Url from where data will be extracted - harneet
+    final private String URL = "";                                                                  // ***************  Url from where data will be extracted - harneet
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class Restaurant_Recycler_View extends Activity {
 
         set_RecyclerView_Details();
 
-        JSson_Data_Web_Call();
+        Json_Data_Web_Call();
 
     }
 
@@ -64,15 +64,41 @@ public class Restaurant_Recycler_View extends Activity {
         Restaurant_recycler_view.setLayoutManager(Layout);
     }
 
-    public void JSson_Data_Web_Call()
+    public void Json_Data_Web_Call()
     {
 
         RequestQueue Queue;
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new
+                JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
-                Json_Parse_Data(response);
+                //Json_Parse_Data(response);
+                for ( int i = 0 ; i < response.length() ; i++)
+                {
+                    Restaurant_Each_Row_data RowData = null;
+                    JSONObject json ;
+                    try
+                    {                                                                               // *****************harneet fill json ids*************
+                        json = response.getJSONObject(i);
+
+                        RowData.setRestaurantCuisine(json.getString(""));
+                        RowData.setRestaurantFavflag(json.getBoolean(""));
+                        RowData.setRestaurantName(json.getString(""));
+                        RowData.setRestaurantRating(json.getString(""));
+                        RowData.setRestaurantTiming(json.getString(""));
+                        RowData.setRestaurantImage(json.getString(""));
+
+
+                    }
+                    catch (Exception e) {
+                        Log.e("Error: " , String.valueOf(e));
+                    }
+                    AllRowData.add(RowData);
+                }
+                Adapter = new
+                        RestaurantView_Adapter(Restaurant_Recycler_View.this,AllRowData);
+                Restaurant_recycler_view.setAdapter(Adapter);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -85,29 +111,9 @@ public class Restaurant_Recycler_View extends Activity {
         Queue.add(jsonArrayRequest);
     }
 
-    public void Json_Parse_Data(JSONArray array)
+    /*public void Json_Parse_Data(JSONArray array)
     {
-        for ( int i = 0 ; i < array.length() ; i++)
-        {
-            Restaurant_Each_Row_data RowData = null;
-            JSONObject json ;
-            try
-            {                                           // harneet fill json ids
-                json = array.getJSONObject(i);
-                RowData.setRestaurantCuisine(json.getString(""));
-                RowData.setRestaurantFavflag(json.getBoolean(""));
-                RowData.setRestaurantName(json.getString(""));
-                RowData.setRestaurantRating(json.getString(""));
-                RowData.setRestaurantTiming(json.getString(""));
-                RowData.setRestaurantImage(json.getString(""));
-            }
-            catch (Exception e) {
-                Log.e("Error: " , String.valueOf(e));
-            }
-            AllRowData.add(RowData);
-        }
-        Adapter = new RestaurantView_Adapter(this,AllRowData);
-        Restaurant_recycler_view.setAdapter(Adapter);
-    }
+
+    }*/
 
 }

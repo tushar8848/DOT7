@@ -40,10 +40,14 @@ public class Restaurant_Each_Row_data {
         return Restaurant_Favourite_Flag;
     }
 
+
+
+
     public void setRestaurantTiming(String timing)
     {
         this.RestaurantTiming = timing;
     }
+
     public void setRestaurantImage(String Image)
     {
         this.RestaurantImage = Image;

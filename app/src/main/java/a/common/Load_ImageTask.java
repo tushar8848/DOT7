@@ -1,5 +1,6 @@
 package a.common;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,11 +12,13 @@ import java.net.MalformedURLException;
 
 public class Load_ImageTask extends AsyncTask<String,Void,Bitmap> {
 
-    ImageView Image;
+    private ImageView Image;
+    private Context context;
 
-    public Load_ImageTask(ImageView imgView)
+    public Load_ImageTask(ImageView imgView, Context context)
     {
         Image = imgView;
+        this.context = context;
     }
     @Override
     protected Bitmap doInBackground(String... urls) {
