@@ -23,5 +23,6 @@
     <string name="new_password">Enter new Password</string>
     <string name="new_confirm">Confirm new Password</string>
     <string name="title_activity_temp">TempActivity</string>
+    <string name="facebook_app_id">238145213423769</string>.
     <string name="forgot_password_description">We just need your registered mobile number to help you reset your password.</string>
 </resources>

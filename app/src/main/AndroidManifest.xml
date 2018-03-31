@@ -18,6 +18,7 @@
         <meta-data
             android:name="sendotp.key"
             android:value="@string/sendotp_key" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
         <activity
             android:name=".SplashActivity"
