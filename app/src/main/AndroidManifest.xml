@@ -55,6 +55,7 @@
         <activity
             android:name=".Restaurant_Recycler_View"
             android:theme="@style/LoginTheme"/>
+        <activity android:name=".Single_Item_Restaurant_View"/>
     </application>
 
 </manifest>

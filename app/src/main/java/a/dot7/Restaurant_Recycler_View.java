@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,10 +21,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import java.security.PrivateKey;
 
 import a.common.RestaurantView_Adapter;
 import a.common.Restaurant_Each_Row_data;
+
 
 public class Restaurant_Recycler_View extends Activity {
 
@@ -42,6 +45,13 @@ public class Restaurant_Recycler_View extends Activity {
         set_RecyclerView_Details();
 
         JSson_Data_Web_Call();
+
+    }
+
+
+
+    public void add_to_cart(View view)
+    {
 
     }
 

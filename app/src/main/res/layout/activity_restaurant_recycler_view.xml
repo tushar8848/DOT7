@@ -1,37 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        android:layout_marginTop="20dp"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <RelativeLayout
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/upper"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="328dp"
-
-            android:layout_height="match_parent"
-            android:text="@string/call" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_shopping_cart_black_24dp"
-            android:layout_marginStart="250dp"
-            android:contentDescription="@string/cart"
-            android:onClick="add_to_cart"/>
-    </LinearLayout>
+            android:id="@+id/upper"
+            android:orientation="horizontal">
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            <TextView
+                android:layout_width="271dp"
+                android:layout_height="match_parent"
 
-        android:id="@+id/rec_view"
-        android:layout_below="@id/upper"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+                android:layout_marginStart="50dp"
+                android:text="@string/call" />
 
-</RelativeLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_shopping_cart_black_24dp"
+                android:layout_marginStart="250dp"
+                android:contentDescription="@string/cart"
+                android:onClick="add_to_cart"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+
+            android:id="@+id/rec_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/upper"
+            android:scrollbars="vertical" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_below="@id/rec_view"
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigation_bar"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_view"
+        />
+
+</android.support.v4.widget.DrawerLayout>
