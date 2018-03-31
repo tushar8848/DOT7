@@ -1,39 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-    <TextView
-        android:paddingTop="200dp"
-        android:paddingLeft="30dp"
-        android:textSize="20sp"
-        android:paddingRight="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtview"
-        android:text="A 4 digit code will be sent to your Registered Mobile Number.Kindly Enter that code. "/>
+    android:background="@color/colorPrimary">
 
-    <com.alimuzaffar.lib.pin.PinEntryEditText
-        android:id="@+id/txt_pin_entry"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:cursorVisible="false"
-    android:digits="1234567890"
-    android:inputType="number"
-    android:maxLength="4"
-    android:textIsSelectable="false"
-    android:textSize="20sp"
-    app:pinAnimationType="popIn"/>
+        android:layout_height="464dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <android.support.v7.widget.AppCompatButton
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="40dp"
-        android:id="@+id/verify_otp"
-        android:text="Continue" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="124dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Waiting to automatically detect OTP sent to your entered mobile number."
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-</LinearLayout>
+        <com.alimuzaffar.lib.pin.PinEntryEditText
+            android:id="@+id/txt_pin_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="30dp"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textIsSelectable="false"
+            android:textSize="20sp"
+            app:pinAnimationType="popIn" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_pin_entry"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="new_password"
+            android:text="Continue"
+            android:textColor="#FFF" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="244dp"
+        android:layout_height="140dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="412dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@mipmap/message_logo" />
+</android.support.constraint.ConstraintLayout>

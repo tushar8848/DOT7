@@ -164,12 +164,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/google_sign_up"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
                 app:isDarkTheme="false" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/link_login"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="fill_parent"
