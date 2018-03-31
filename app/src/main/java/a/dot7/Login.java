@@ -1,7 +1,6 @@
 package a.dot7;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import android.support.v7.widget.Toolbar;
 
@@ -77,7 +75,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
     public void res_view_page(View view)
     {
-        startActivity(new Intent(this,restaurant_recycler_view.class));
+        startActivity(new Intent(this,Restaurant_Recycler_View.class));
     }
 
     public void forgotPassword(View view){

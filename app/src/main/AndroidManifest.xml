@@ -53,7 +53,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Otp" />
         <activity
-            android:name=".restaurant_recycler_view"
+            android:name=".Restaurant_Recycler_View"
             android:theme="@style/LoginTheme"/>
     </application>
 

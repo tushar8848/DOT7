@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +25,7 @@ import java.security.PrivateKey;
 import a.common.RestaurantView_Adapter;
 import a.common.Restaurant_Each_Row_data;
 
-public class restaurant_recycler_view extends Activity {
+public class Restaurant_Recycler_View extends Activity {
 
     private RecyclerView my_recycler_view;
     private List<Restaurant_Each_Row_data> AllRowData;
@@ -81,7 +82,7 @@ public class restaurant_recycler_view extends Activity {
         for ( int i = 0 ; i < array.length() ; i++)
         {
             Restaurant_Each_Row_data RowData = null;
-            JSONObject json = null;
+            JSONObject json ;
             try
             {                                           // harneet fill json ids
                 json = array.getJSONObject(i);
@@ -92,8 +93,8 @@ public class restaurant_recycler_view extends Activity {
                 RowData.setRestaurantTiming(json.getString(""));
                 RowData.setRestaurantImage(json.getString(""));
             }
-            catch (JSONException e) {
-
+            catch (Exception e) {
+                Log.e("Error: " , String.valueOf(e));
             }
             AllRowData.add(RowData);
         }
