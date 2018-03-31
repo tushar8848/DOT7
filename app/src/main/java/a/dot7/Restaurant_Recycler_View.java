@@ -27,10 +27,10 @@ import a.common.Restaurant_Each_Row_data;
 
 public class Restaurant_Recycler_View extends Activity {
 
-    private RecyclerView my_recycler_view;
-    private List<Restaurant_Each_Row_data> AllRowData;
-    private RecyclerView.LayoutManager  Layout;
-    private RecyclerView.Adapter Adapter;
+    RecyclerView my_recycler_view;
+    List<Restaurant_Each_Row_data> AllRowData;
+    RecyclerView.LayoutManager  Layout;
+    RecyclerView.Adapter Adapter;
 
     List<Restaurant_Each_Row_data> DataAdapter;
     final private String URL = "";              // Url from where data will be extracted
