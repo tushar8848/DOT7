@@ -1,8 +1,6 @@
 package a.dot7;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.widget.EditText;
 
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
-import a.common.MyDialog;
 import a.common.OTP_Generator;
 import a.common.OTP_Reader;
 
@@ -50,7 +47,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     public void goto_genotp(View view)
     {
-        startActivity(new Intent(this,activity_otp_gernerate_read.class));
+        startActivity(new Intent(this,Otp.class));
     }
 
     @Override

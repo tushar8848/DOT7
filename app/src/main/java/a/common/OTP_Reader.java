@@ -38,7 +38,7 @@ public class OTP_Reader extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp_generate_read);
+        setContentView(R.layout.activity_otp_read);
         intent = getIntent();
         //  determine_activity = intent.getStringExtra("ForgotPassword");
         Name = intent.getStringExtra("Name");

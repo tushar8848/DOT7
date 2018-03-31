@@ -51,7 +51,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
 
     public void onClick(View view)
     {
-        //startActivity(new Intent(this,activity_otp_gernerate_read.class));
+        //startActivity(new Intent(this,Otp.class));
         Contact = ContactText.getText().toString();
         if(Contact!=null)
             callService();

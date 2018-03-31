@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class activity_otp_gernerate_read extends Activity {
+public class Otp extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp_generate_read);
+        setContentView(R.layout.activity_otp_read);
     }
 
 
