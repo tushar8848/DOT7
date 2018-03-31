@@ -27,19 +27,17 @@ import a.common.Restaurant_Each_Row_data;
 
 public class Restaurant_Recycler_View extends Activity {
 
-    RecyclerView my_recycler_view;
-    List<Restaurant_Each_Row_data> AllRowData;
-    RecyclerView.LayoutManager  Layout;
-    RecyclerView.Adapter Adapter;
-
-    List<Restaurant_Each_Row_data> DataAdapter;
+    private RecyclerView Restaurant_recycler_view;
+    private List<Restaurant_Each_Row_data> AllRowData;
+    private RecyclerView.LayoutManager  Layout;
+    private RecyclerView.Adapter Adapter;
     final private String URL = "";              // Url from where data will be extracted
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_recycler_view);
-        my_recycler_view=findViewById(R.id.rec_view);
+        Restaurant_recycler_view=findViewById(R.id.rec_view);
 
         set_RecyclerView_Details();
 
@@ -49,11 +47,11 @@ public class Restaurant_Recycler_View extends Activity {
 
     private void set_RecyclerView_Details()
     {
-        DataAdapter = new ArrayList<>();
-        my_recycler_view = findViewById(R.id.rec_view);
-        my_recycler_view.setHasFixedSize(true);
+        AllRowData = new ArrayList<>();
+        Restaurant_recycler_view = findViewById(R.id.rec_view);
+        Restaurant_recycler_view.setHasFixedSize(true);
         Layout = new LinearLayoutManager(this);
-        my_recycler_view.setLayoutManager(Layout);
+        Restaurant_recycler_view.setLayoutManager(Layout);
     }
 
     public void JSson_Data_Web_Call()
@@ -69,7 +67,7 @@ public class Restaurant_Recycler_View extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("VolleyError: ",error.toString());
             }
         });
 
@@ -99,7 +97,7 @@ public class Restaurant_Recycler_View extends Activity {
             AllRowData.add(RowData);
         }
         Adapter = new RestaurantView_Adapter(this,AllRowData);
-        my_recycler_view.setAdapter(Adapter);
+        Restaurant_recycler_view.setAdapter(Adapter);
     }
 
 }
