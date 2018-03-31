@@ -31,7 +31,7 @@ public class Restaurant_Recycler_View extends Activity {
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
     private RecyclerView.Adapter Adapter;
-    final private String URL = "";              // Url from where data will be extracted
+    final private String URL = "";              // Url from where data will be extracted - harneet
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class Restaurant_Recycler_View extends Activity {
                 RowData.setRestaurantCuisine(json.getString(""));
                 RowData.setRestaurantFavflag(json.getBoolean(""));
                 RowData.setRestaurantName(json.getString(""));
-                RowData.setRestaurantRating((float) json.getDouble(""));
+                RowData.setRestaurantRating(json.getString(""));
                 RowData.setRestaurantTiming(json.getString(""));
                 RowData.setRestaurantImage(json.getString(""));
             }

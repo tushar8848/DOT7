@@ -59,7 +59,7 @@ public class Restaurant_Each_Row_data {
         this.RestaurantCuisine = Cuisine;
     }
 
-    public void setRestaurantRating(float Rating)
+    public void setRestaurantRating(String Rating)
     {
         this.RestaurantRating = String.valueOf(Rating);
     }
