@@ -45,10 +45,25 @@
         android:text="12 a.m to 10 p.m."
         android:textSize="15sp" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
+    <TextView
+        android:id="@+id/Rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/timing"
-        android:layout_toEndOf="@+id/res_name" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/res_name"
+        android:layout_marginEnd="17dp"
+        android:layout_marginTop="15dp"
+        android:text="2.5"
+        android:textSize="30sp" />
+
+    <android.support.design.widget.CheckableImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Rating"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/fav"
+        android:onClick="add_to_fav"
+        android:src="@drawable/ic_favorite_black_24dp"/>
+
+
 </RelativeLayout>
