@@ -49,13 +49,13 @@
             app:pinAnimationType="popIn" />
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/verify_otp"
             android:layout_width="152dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_pin_entry"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="44dp"
             android:background="@color/colorPrimaryDark"
-            android:onClick="new_password"
             android:text="Continue"
             android:textColor="#FFF" />
     </RelativeLayout>

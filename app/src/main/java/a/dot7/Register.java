@@ -25,7 +25,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         getDetails();
-
+        signup.setOnClickListener(Register.this);
     }
 
     private void getDetails() {
@@ -56,7 +56,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
                 else {
                     valid = 1;
-                    signup.setOnClickListener(Register.this);
+
                 }
                 //}
             }

@@ -24,48 +24,46 @@ public class Set_New_Password extends Activity implements View.OnClickListener {
 
     AppCompatButton UpdatePasswordButton;
     EditText PasswordText,UserCPassword;
-    String Contact,Password,cpassword;
+    String Contact,Password,Cpassword;
     Intent intent;
     String StatusCode;
-    String url = "http://192.168.43.184:3000/Login/UpdatePassword";
+    int valid=1;
+    String url = "http://192.168.43.161:3000/Login/UpdatePassword";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setnew_password);
         intent = getIntent();
         UpdatePasswordButton = findViewById(R.id.Update_Password);
-        UserCPassword = findViewById(R.id.newconfirm);
+        UserCPassword = findViewById(R.id.newconfirm1);
         PasswordText = findViewById(R.id.newp);
         Contact = intent.getStringExtra("Contact");
-
+        UpdatePasswordButton.setOnClickListener(this);
         UserCPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                     Password=PasswordText.getText().toString();
-                    cpassword=UserCPassword.getText().toString();
-                    if(!cpassword.equals(Password))
+                    Cpassword=UserCPassword.getText().toString();
+                    if(!Cpassword.equals(Password))
                     {
                         UserCPassword.setError("Password do not match");
-                        UpdatePasswordButton.setOnClickListener(null);
+                        //UpdatePasswordButton.setOnClickListener(null);
+                        valid=0;
                     }
                     else{
-                        UpdatePasswordButton.setOnClickListener(Set_New_Password.this);
+                        valid=1;
                     }
             }
         });
 
-
     }
-
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
         Password = PasswordText.getText().toString();
+        Cpassword=UserCPassword.getText().toString();
+        if(Password == null || Cpassword == null)
+            valid =0;
+        if(valid == 1)
         callService();
     }
     private void callService()
@@ -88,7 +86,7 @@ public class Set_New_Password extends Activity implements View.OnClickListener {
                         startActivity(new Intent(Set_New_Password.this, Login.class));
                     }
                     else {
-
+                            Log.d("HAR","NOT Verified new password");
                     }
                 }
             }, new Response.ErrorListener() {
