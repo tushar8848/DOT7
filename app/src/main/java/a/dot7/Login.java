@@ -28,6 +28,7 @@ import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.common.TempActivity;
 import a.common.MyDialog;
+import a.home_screen.Restaurant_Recycler_View;
 
 /**
  * Created by TUSHAR on 11-03-18.
@@ -40,7 +41,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     String Password;
     Button LoginButton;
     String StatusCode;
-    String url = "http://192.168.43.161:3000/Login";
+    String url = GlobalMethods.getURL() + "Login";
+    //String url = "http://192.168.43.161:3000/Login";
     MyDialog dialog;
     private AlertDialog CustomDialog;
     @Override
@@ -72,10 +74,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void Call_Signup(View view)
     {
         startActivity(new Intent(this,Register.class));
-    }
-    public void res_view_page(View view)
-    {
-        startActivity(new Intent(this,Restaurant_Recycler_View.class));
     }
 
     public void forgotPassword(View view){
@@ -124,7 +122,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         editor.putString("UserName", UserName);
                         editor.putString("Password",Password);
                         editor.commit();
-                        startActivity(new Intent(Login.this, TempActivity.class));
+                        startActivity(new Intent(Login.this, Restaurant_Recycler_View.class));
                     } else {
 
                         AlertDialog.Builder builder=new AlertDialog.Builder(Login.this);

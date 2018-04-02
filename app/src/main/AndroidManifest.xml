@@ -54,10 +54,7 @@
             android:label="@string/title_activity_temp"
             android:theme="@style/AppTheme" />
         <activity android:name=".Otp" />
-        <activity
-            android:name=".Restaurant_Recycler_View"
-            android:theme="@style/LoginTheme"/>
-        <activity android:name=".Single_Item_Restaurant_View"/>
+        <activity android:name="a.home_screen.Restaurant_Recycler_View" />
     </application>
 
 </manifest>

@@ -95,7 +95,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="res_view_page"
         android:padding="15dp"
         android:textColor="#FFF"
         android:background="@color/colorPrimary"

@@ -35,7 +35,8 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
     EditText ContactText;
     String Contact;
     String StatusCode;
-    String url = "http://192.168.43.161:3000/Login/CheckValidLogin";
+    String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
+    //String url = "http://192.168.43.161:3000/Login/CheckValidLogin";
     MyDialog dialog;
     private AlertDialog CustomDialog;
     @Override

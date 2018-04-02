@@ -1,4 +1,8 @@
-package a.common;
+package a.home_screen;
+
+/**
+ * Created by TUSHAR on 02-04-18.
+ */
 
 import android.content.Context;
 import android.support.design.widget.CheckableImageButton;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import a.dot7.R;
+import a.getter_setter.Restaurant_Each_Row_data;
 
 public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_Adapter.ViewHolder> {
 
@@ -27,7 +32,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_item_restaurant_view, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
+       ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
@@ -41,11 +46,11 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         holder.Restro_Name.setText(RowData.getRestaurantName());
         holder.timing.setText(RowData.getRestaurantTiming());
 
-        boolean favourite_flag = RowData.getRestaurantFavflag();
-        holder.Favourite_Flag.setChecked(favourite_flag);
+        String favourite_flag = RowData.getRestaurantFavflag();
+        //  holder.Favourite_Flag.setChecked(favourite_flag);
 
         holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
-        new Load_ImageTask(holder.Restro_Image, context).execute(RowData.getRestaurantImage());
+       // new Load_ImageTask(holder.Restro_Image, context).execute(RowData.getRestaurantImage());
     }
 
     @Override

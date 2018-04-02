@@ -17,6 +17,7 @@ import a.dot7.Register;
  */
 
 public class GlobalMethods {
+    static String URL = "http://172.31.143.34:3000/";
 
     public static String GetSubString(String res)
     {
@@ -26,6 +27,10 @@ public class GlobalMethods {
     public static void print(Context context,String msg)
     {
         Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+    }
+    public static String getURL()
+    {
+        return URL;
     }
 }
 

@@ -56,7 +56,6 @@
         android:layout_below="@+id/Rating"
         android:layout_alignParentEnd="true"
         android:id="@+id/favourite"
-        android:onClick="add_to_fav"
         android:src="@drawable/ic_favorite_black_24dp"/>
 
 

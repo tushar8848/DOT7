@@ -21,6 +21,7 @@ import java.util.Map;
 
 import a.dot7.R;
 import a.dot7.Set_New_Password;
+import a.home_screen.Restaurant_Recycler_View;
 
 /**
  * Created by TUSHAR on 28-03-18.
@@ -33,7 +34,8 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
     Context context = this;
     private String Name=null, Contact=null, Password=null;
     String determine_activity=null;
-    String url = "http://192.168.43.161:3000/Register";
+    String url = GlobalMethods.getURL() + "Register";
+   // String url = "http://192.168.43.161:3000/Register";
     boolean Flag = false;
     String StatusCode;
     PinEntryEditText OTPTEXT;
@@ -144,7 +146,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
 
                         Log.d("HAR", "Local file created");
                         // **********stop progress bar*************************
-                        startActivity(new Intent(OTP_Reader.this, TempActivity.class));
+                        startActivity(new Intent(OTP_Reader.this, Restaurant_Recycler_View.class));
                     }
                     else{
 

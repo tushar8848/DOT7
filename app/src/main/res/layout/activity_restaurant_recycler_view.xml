@@ -33,7 +33,7 @@
                 android:src="@drawable/ic_shopping_cart_black_24dp"
                 android:layout_marginStart="250dp"
                 android:contentDescription="@string/cart"
-                android:onClick="add_to_cart"/>
+                />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"

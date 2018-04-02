@@ -96,13 +96,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         cpassword=UserCPassword.getText().toString();
 
     }
-
-    public void s_login(View view)
-    {
-        startActivity(new Intent(this,Login.class));
-    }
-    
-
     @Override
     public void onClick(View view) {
 

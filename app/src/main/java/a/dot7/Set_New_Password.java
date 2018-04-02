@@ -28,7 +28,8 @@ public class Set_New_Password extends Activity implements View.OnClickListener {
     Intent intent;
     String StatusCode;
     int valid=1;
-    String url = "http://192.168.43.161:3000/Login/UpdatePassword";
+    String url = GlobalMethods.getURL() + "Login/UpdatePassword";
+   // String url = "http://192.168.43.161:3000/Login/UpdatePassword";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -22,10 +22,12 @@ import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.common.TempActivity;
 import a.getter_setter.LoginData;
+import a.home_screen.Restaurant_Recycler_View;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
-    String url = "http://192.168.43.161:3000/Login";
+    String url = GlobalMethods.getURL() + "Login";
+   // String url = "172.31.143.34:3000//Login";
     String StatusCode;
     private String UserName,Password;
     @Override
@@ -84,7 +86,7 @@ public class SplashActivity extends AppCompatActivity {
                         if (StatusCode.contains("302")) {
                            // GlobalMethods.print(SplashActivity.this, "Data Found");
                            // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
-                            startActivity(new Intent(SplashActivity.this, TempActivity.class));
+                            startActivity(new Intent(SplashActivity.this, Restaurant_Recycler_View.class));
                             //StatusFlag=1;
                         } else {
                             startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
