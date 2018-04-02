@@ -7,40 +7,40 @@ package a.getter_setter;
 
 public class Restaurant_Each_Row_data {
 
-    private String RestaurantTiming;
-    private String RestaurantImage;
-    private String RestaurantName;
-    private String RestaurantCuisine;
-    private String RestaurantRating;
-    private String Restaurant_Favourite_Flag;
+    public String timing=null;
+    public String imageURL=null;
+    public String restaurantName=null;
+    public String cuisines=null;
+    public String rating=null;
+    public String isFavourite=null;
 
     public String getRestaurantTiming()
     {
-        return RestaurantTiming;
+        return timing;
     }
     public String getRestaurantImage()
     {
-        return RestaurantImage;
+        return imageURL;
     }
 
     public String getRestaurantName()
     {
-        return RestaurantName;
+        return restaurantName;
     }
 
     public String getRestaurantCuisine()
     {
-        return RestaurantCuisine;
+        return cuisines;
     }
 
     public String getRestaurantRating()
     {
-        return RestaurantRating;
+        return rating;
     }
 
     public String getRestaurantFavflag()
     {
-        return Restaurant_Favourite_Flag;
+        return isFavourite;
     }
 
 
@@ -48,31 +48,32 @@ public class Restaurant_Each_Row_data {
 
     public void setRestaurantTiming(String timing)
     {
-        this.RestaurantTiming = timing;
+        this.timing = timing;
     }
 
     public void setRestaurantImage(String Image)
     {
-        this.RestaurantImage = Image;
+        this.imageURL = Image;
     }
 
     public void setRestaurantName(String Name)
     {
-        this.RestaurantName = Name;
+        this.restaurantName = Name;
     }
 
     public void setRestaurantCuisine(String Cuisine)
     {
-        this.RestaurantCuisine = Cuisine;
+        int l = Cuisine.length();
+        this.cuisines = Cuisine.substring(0,l-2);
     }
 
     public void setRestaurantRating(String Rating)
     {
-        this.RestaurantRating = String.valueOf(Rating);
+        this.rating = String.valueOf(Rating);
     }
 
     public void setRestaurantFavflag(String Flag)
     {
-        this.Restaurant_Favourite_Flag=Flag;
+        this.isFavourite=Flag;
     }
 }

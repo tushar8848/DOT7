@@ -81,17 +81,16 @@ public class Restaurant_Recycler_View extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Restaurant_Each_Row_data RowData = null;
+                Restaurant_Each_Row_data RowData;
                 for ( int i = 0 ; i < response.length() ; i++)
                 {
-                    RowData = null;
+                    RowData = new Restaurant_Each_Row_data();
                     JSONObject json ;
                     try
                     {                                                                               // *****************harneet fill json ids*************
                         json = response.getJSONObject(i);
-
                         RowData.setRestaurantCuisine(json.getString("cuisines"));
-                        RowData.setRestaurantFavflag(json.getString("isFav"));
+                        RowData.setRestaurantFavflag(json.getString("isFavourite"));
                         RowData.setRestaurantName(json.getString("restaurantName"));
                         RowData.setRestaurantRating(json.getString("rating"));
                         RowData.setRestaurantTiming(json.getString("time"));
