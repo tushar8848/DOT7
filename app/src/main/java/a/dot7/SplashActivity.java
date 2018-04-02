@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
+import android.provider.Settings;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -52,8 +52,9 @@ public class SplashActivity extends AppCompatActivity {
         }
         else
         {
-            GlobalMethods.print(this,"Please your internet connection");
-            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
+            GlobalMethods.print(this,"Please open internet connection");
+            Intent callGPSSettingIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+            startActivity(callGPSSettingIntent);
         }
     }
     public void CheckUserCredentials()

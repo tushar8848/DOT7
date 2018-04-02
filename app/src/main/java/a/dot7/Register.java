@@ -25,7 +25,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         getDetails();
-        signup.setOnClickListener(Register.this);
+        signup.setOnClickListener(this);
     }
 
     private void getDetails() {
@@ -34,11 +34,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         UserPassword=findViewById(R.id.password);
         UserCPassword=findViewById(R.id.cnfpassword);
         signup=findViewById(R.id.btn_signup);
-        signup.setOnClickListener(this);
         focusChangeListeners();
 
-
     }
+
+
     private void focusChangeListeners()
     {
         UserCPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -46,7 +46,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             public void onFocusChange(View v, boolean hasFocus) {
                 //Log.d("HAR","Focus is changes "+hasFocus);
                 //if(hasFocus)
-                //{
+
                 password=UserPassword.getText().toString();
                 cpassword=UserCPassword.getText().toString();
                 if(!cpassword.equals(password))
@@ -80,6 +80,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         });
     }
 
+    private void clearfocuses() {
+
+        UserName.clearFocus();
+        UserContact.clearFocus();
+        UserCPassword.clearFocus();
+        UserPassword.clearFocus();
+    }
+
     private void setDetails()
     {
         name=UserName.getText().toString();
@@ -98,7 +106,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
 
-
+        clearfocuses();
         setDetails();
         if(name == null || password == null || cpassword == null)
             valid = 0;
