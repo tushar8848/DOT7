@@ -50,7 +50,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         //  holder.Favourite_Flag.setChecked(favourite_flag);
 
         holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
-       // new Load_ImageTask(holder.Restro_Image, context).execute(RowData.getRestaurantImage());
+        new Load_ImageTask(holder.Restro_Image, context).execute(RowData.getRestaurantImage());
     }
 
     @Override
