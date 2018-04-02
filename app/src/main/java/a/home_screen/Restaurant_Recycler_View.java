@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -34,16 +35,16 @@ public class Restaurant_Recycler_View extends Activity {
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
     private RecyclerView.Adapter Adapter;
-    final private String URL = GlobalMethods.getURL()+ "Restaurant_Main/9711919938";                                                                  // ***************  Url from where data will be extracted - harneet
+    final private String URL = GlobalMethods.getURL()+ "Restaurant_Main/9039216432";                                                                  // ***************  Url from where data will be extracted - harneet
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_recycler_view);
         //Restaurant_recycler_view = findViewById(R.id.rec_view);
-
+        Log.d("HAR","Recycler view me aaya");
         set_RecyclerView_Details();
-
+        Log.d("HAR","details set ho gyi");
         Json_Data_Web_Call();
 
     }
@@ -68,9 +69,18 @@ public class Restaurant_Recycler_View extends Activity {
         JsonArrayRequest jsonArrayRequest = new
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONArray response1) {
 
                 //Json_Parse_Data(response);
+                Log.d("HAR","Response aaya");
+                Log.d("HAR",response1.toString());
+                String str = response1.toString();
+                JSONArray response = null;
+                try {
+                    response = new JSONArray(str);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Restaurant_Each_Row_data RowData = null;
                 for ( int i = 0 ; i < response.length() ; i++)
                 {
@@ -86,7 +96,7 @@ public class Restaurant_Recycler_View extends Activity {
                         RowData.setRestaurantRating(json.getString("rating"));
                         RowData.setRestaurantTiming(json.getString("time"));
                         RowData.setRestaurantImage(json.getString("imageURL"));
-
+                        Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
 
                     }
                     catch (Exception e) {
