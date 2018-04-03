@@ -55,7 +55,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         focusChangeListeners();
 
     }
-    public void callLogin()
+    public void callLogin(View v)
     {
         startActivity(new Intent(this,Login.class));
     }

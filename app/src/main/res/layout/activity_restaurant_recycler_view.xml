@@ -13,19 +13,22 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/restaurant_page_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            app:title="Search the delicacies"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/upper"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="271dp"
-                android:layout_height="match_parent"
-
-                android:layout_marginStart="50dp"
-                android:text="@string/call" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -57,8 +60,17 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
     </RelativeLayout>
+
+
 
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
@@ -66,7 +78,9 @@
         android:id="@+id/navigation_bar"
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/navigation_view"
+
         />
 
 </android.support.v4.widget.DrawerLayout>

@@ -26,4 +26,5 @@
     <string name="facebook_app_id">238145213423769</string>.
     <string name="forgot_password_description">We just need your registered mobile number to help you reset your password.</string>
     <string name="or">OR</string>
+    <string name="action_settings">Settings</string>
 </resources>
