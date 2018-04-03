@@ -51,7 +51,7 @@ private ImageView[] dots;
         sliderDotsPanel = findViewById(R.id.SliderDots);
         dotsCount = Min_Pages;
         dots = new ImageView[dotsCount];
-        
+
         f.refreshedToken = FirebaseInstanceId.getInstance().getToken();
         f.sendRegistrationToServer(f.refreshedToken,ScreenSlideActivity.this);
 
