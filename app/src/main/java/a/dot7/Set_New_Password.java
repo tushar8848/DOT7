@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,7 +22,7 @@ import java.util.Map;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 
-public class Set_New_Password extends Activity implements View.OnClickListener {
+public class Set_New_Password extends AppCompatActivity implements View.OnClickListener {
 
     AppCompatButton UpdatePasswordButton;
     EditText PasswordText,UserCPassword;
@@ -34,6 +36,9 @@ public class Set_New_Password extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setnew_password);
+        Toolbar toolbar=findViewById(R.id.tbar1);
+        toolbar.setTitle("Set New Password");
+        setSupportActionBar(toolbar);
         intent = getIntent();
         UpdatePasswordButton = findViewById(R.id.Update_Password);
         UserCPassword = findViewById(R.id.newconfirm1);

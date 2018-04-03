@@ -47,12 +47,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     //String url = "http://192.168.43.161:3000/Login";
     MyDialog dialog;
     private AlertDialog CustomDialog;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {  //, @Nullable PersistableBundle persistentState
         super.onCreate(savedInstanceState);  //, persistentState
         setContentView(R.layout.login_page);
-        Toolbar toolbar=findViewById(R.id.toolbar);
+        Toolbar toolbar=findViewById(R.id.tbar1);
+        toolbar.setTitle("Login");
         setSupportActionBar(toolbar);
+
         setDetails();
         LoginButton.setOnClickListener(this);
         focuschange();

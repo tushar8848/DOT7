@@ -42,7 +42,8 @@
         <activity android:name=".ScreenSlideActivity" />
         <activity
             android:name=".Register"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/LoginTheme"
+            />
         <activity
             android:name=".Login"
             android:theme="@style/LoginTheme" />

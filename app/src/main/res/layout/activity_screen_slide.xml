@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
-        android:text="@string/welcome_screen"
+        android:text="@string/Welcome_Screen_Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
         android:background="#09a2b8"
         android:textColor="#FFF"
         android:onClick="GoRegister"
-        android:text="@string/sign_up"
+        android:text="@string/Sign_Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -64,7 +64,7 @@
         android:layout_marginTop="12dp"
         style="?android:attr/borderlessButtonStyle"
         android:onClick="login"
-        android:text="@string/already_have_an_account"
+        android:text="@string/Already_Have_An_Account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sign_up_button" />

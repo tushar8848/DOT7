@@ -7,12 +7,16 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
-    <include
+    <android.support.v7.widget.Toolbar android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tbar1"
-        layout="@layout/custom_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        xmlns:android="http://schemas.android.com/apk/res/android" />
+
 
 
     <ScrollView
@@ -54,7 +58,7 @@
                     android:id="@+id/mob_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_name"
+                    android:hint="@string/Mobile_Hint"
                     android:inputType="number"
                     android:drawableStart="@mipmap/ic_phone_black_24dp"
                     android:maxLength="10"
@@ -75,7 +79,7 @@
                     android:id="@+id/Full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint1"
+                    android:hint="@string/Full_Name_Hint"
                     android:drawableStart="@mipmap/ic_account_circle_black_24dp"
                     android:inputType="textCapWords"
                     android:singleLine="true" />
@@ -94,7 +98,7 @@
                     android:id="@+id/Email_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint2"
+                    android:hint="@string/Email_Id_Hint"
                     android:drawableStart="@mipmap/ic_email_black_24dp"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
@@ -113,7 +117,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_name2"
+                    android:hint="@string/Password_Hint"
                     android:drawableStart="@mipmap/ic_lock_outline_black_24dp"
                     android:inputType="textPassword"
                     android:singleLine="true" />
@@ -132,7 +136,7 @@
                     android:id="@+id/cnfpassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_name3"
+                    android:hint="@string/Confirm_Password_Hint"
                     android:drawableStart="@mipmap/ic_lock_outline_black_24dp"
                     android:inputType="textPassword"
                     android:singleLine="true" />
@@ -147,7 +151,7 @@
                 android:layout_marginStart="8dp"
                 android:background="@color/colorPrimary"
                 android:padding="12dp"
-                android:text="@string/signup_button"
+                android:text="@string/Signup_Button"
                 android:textColor="#FFF" />
 
             <TextView
@@ -157,12 +161,12 @@
                 android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/or" />
+                android:text="@string/Or" />
 
             <com.shobhitpuri.custombuttons.GoogleSignInButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/google_sign_up"
+                android:text="@string/Google_Sign_Up"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 app:isDarkTheme="false" />
@@ -173,8 +177,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:onClick="callLogin"
-                android:text="@string/login_link"
+                android:onClick="s_login"
+                android:text="@string/Login_Link"
                 android:textColor="@color/colorAccent" />
 
 

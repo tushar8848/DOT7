@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <include
-        android:id="@+id/tbar"
-        layout="@layout/custom_toolbar" />
+    <android.support.v7.widget.Toolbar android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tbar1"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        xmlns:android="http://schemas.android.com/apk/res/android" />
 
     <ImageView
         android:id="@+id/loginPageUserAddPng"
@@ -17,7 +23,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbar"
+        app:layout_constraintTop_toBottomOf="@+id/tbar1"
         app:srcCompat="@drawable/loginpage" />
 
     <android.support.design.widget.TextInputLayout
@@ -40,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/ic_phone_black_24dp"
-            android:hint="@string/hint_name"
+            android:hint="@string/Mobile_Hint"
             android:inputType="number"
             android:maxLength="10"
             android:singleLine="true" />
@@ -65,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/ic_lock_outline_black_24dp"
-            android:hint="@string/hint_name2"
+            android:hint="@string/Password_Hint"
 
             android:inputType="textPassword"
             android:singleLine="true" />
@@ -82,7 +88,7 @@
         android:layout_marginStart="8dp"
         android:onClick="forgotPassword"
         android:padding="15dp"
-        android:text="@string/forgot_button"
+        android:text="@string/Forgot_Password"
         android:textColor="@color/tealButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -98,7 +104,7 @@
         android:padding="15dp"
         android:textColor="#FFF"
         android:background="@color/colorPrimary"
-        android:text="@string/login_button"
+        android:text="@string/Login_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_name4" />
@@ -127,7 +133,7 @@
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:onClick="Call_Signup"
-        android:text="@string/signup_link"
+        android:text="@string/Signup_Link"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
