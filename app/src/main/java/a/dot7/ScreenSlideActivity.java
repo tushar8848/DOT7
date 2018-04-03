@@ -9,11 +9,24 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import a.FirebasePushNotification.MyFirebaseInstanceIDService;
+import a.common.MySingleton;
 import a.fragments.ScreenSlidePage_Fragment;
 import a.fragments.ScreenSlidePage_Fragment2;
 import a.fragments.ScreenSlidePage_Fragment3;
@@ -26,6 +39,7 @@ private ViewPager mpager;
 private PagerAdapter mpageradapter;
 LinearLayout sliderDotsPanel;
 private int dotsCount;
+    MyFirebaseInstanceIDService f = new MyFirebaseInstanceIDService();
 private ImageView[] dots;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +51,9 @@ private ImageView[] dots;
         sliderDotsPanel = findViewById(R.id.SliderDots);
         dotsCount = Min_Pages;
         dots = new ImageView[dotsCount];
+        
+        f.refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        f.sendRegistrationToServer(f.refreshedToken,ScreenSlideActivity.this);
 
         for(int i=0;i<dotsCount;i++){
             dots[i] = new ImageView(this);
