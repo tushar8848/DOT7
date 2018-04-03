@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -41,23 +42,41 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     String Password;
     Button LoginButton;
     String StatusCode;
+    int validContact=0,ePass=0,eContact;
     String url = GlobalMethods.getURL() + "Login";
     //String url = "http://192.168.43.161:3000/Login";
     MyDialog dialog;
     private AlertDialog CustomDialog;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {  //, @Nullable PersistableBundle persistentState
-
-
-
-
         super.onCreate(savedInstanceState);  //, persistentState
         setContentView(R.layout.login_page);
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setDetails();
         LoginButton.setOnClickListener(this);
+        focuschange();
+    }
+    private void focuschange()
+    {
+        UserNameText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    UserName=UserNameText.getText().toString();
+                    if(!(UserName.length()==10))
+                    {
+                        UserNameText.setError("Invalid Contact");
+                        validContact = 0;
+                    }
+                    else
+                        validContact = 1;
 
+                }
+
+            }
+        });
     }
     private void setDetails()
     {
@@ -69,6 +88,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     {
         UserName = UserNameText.getText().toString();
         Password = PasswordText.getText().toString();
+        if(UserName.length()==0)
+        {
+            UserNameText.setError("This field is required");
+            eContact = 0;
+        }
+        else eContact = 1;
+        if(Password.length()==0)
+        {
+            PasswordText.setError("This field is required");
+            ePass = 0;
+        }
+        else ePass = 1;
     }
 
     public void Call_Signup(View view)
@@ -83,24 +114,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         getDetails();
-        if(!CheckConnection.getInstance(this).getNetworkStatus())
+        if(eContact == 1 && ePass == 1 && validContact == 1)
         {
-            GlobalMethods.print(this,"Check Internet Connection");
-        }
-        else {
-            //internet is connected
-            Log.d("HAR","Username:"+UserName+" Password:"+Password);
-            if(UserName != null && Password != null) {
-                    callService();
-
-            }
-            else {
-                //************************Review This***************************************
-                dialog = new MyDialog(this,"Invalid Input!!!","OK");
-            }
+             if(!CheckConnection.getInstance(this).getNetworkStatus())
+             {
+                GlobalMethods.print(this,"Check Internet Connection");
+               }
+             else {
+                 //internet is connected
+                 Log.d("HAR", "Username:" + UserName + " Password:" + Password);
+                     callService(v);
+             }
         }
     }
-    public void callService()
+    public void callService(final View view)
     {
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
@@ -117,28 +144,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
 
                     if (StatusCode.contains("302")) {
-                        SharedPreferences sp = getSharedPreferences("logDetails", a.dot7.Login.MODE_PRIVATE);
+                        SharedPreferences sp =
+                                getSharedPreferences("logDetails", a.dot7.Login.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString("UserName", UserName);
                         editor.putString("Password",Password);
                         editor.commit();
                         startActivity(new Intent(Login.this, Restaurant_Recycler_View.class));
-                    } else {
-
-                        AlertDialog.Builder builder=new AlertDialog.Builder(Login.this);
-                        builder.setMessage("Invalid Credentials!!!");
-                        builder.setPositiveButton("Login Again", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                                startActivity(new Intent(Login.this,Login.class));
-                            }
-                        });
-                        CustomDialog=builder.create();
-                        CustomDialog.show();
-
-
-
+                    }
+                    else if(StatusCode.contains("404"))
+                    {
+                        dialog = new MyDialog(Login.this,
+                                "Mobile number not registered","OK");
+                    }
+                    else {
+                        Snackbar.make(view, "Incorrect Password",
+                                Snackbar.LENGTH_LONG)
+                                .setAction("OK", null).show();
                     }
                 }
             }, new Response.ErrorListener() {
@@ -146,7 +168,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 public void onErrorResponse(VolleyError volleyError) {
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
-                    //Nitish and pooja, handle this error with a alert box or something
+                    Snackbar.make(view, "Some Error Occured",
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Retry", null).show();
                 }
             }) {
                 @Override
@@ -167,33 +191,3 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         }
     }
 }
-
-
-
-  /* public void userLogin(View v)
-    {
-
-        if(!CheckConnection.getInstance(this).getNetworkStatus())
-        {
-            GlobalMethods.print(this,"Check Internet Connection");
-        }
-        else {
-            //internet is connected
-            SharedPreferences sp = getSharedPreferences("logDetails", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString("UserName", UserName);
-            editor.putString("Password",Password);
-            editor.commit();
-            /*
-            if(Services.getInstance(this).Validate("9039216432","hello"))
-            {
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(this, "Incorrect userinfo", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    }
-*/

@@ -5,6 +5,8 @@ package a.home_screen;
  */
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,17 +27,19 @@ import java.util.List;
 
 
 import a.common.GlobalMethods;
+import a.common.MySingleton;
 import a.dot7.R;
 import a.getter_setter.Restaurant_Each_Row_data;
 
 
 public class Restaurant_Recycler_View extends Activity {
 
+    String Contact;
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
     private RecyclerView.Adapter Adapter;
-    final private String URL = GlobalMethods.getURL()+ "Restaurant_Main/9039216432";                                                                  // ***************  Url from where data will be extracted - harneet
+    private String URL ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +49,17 @@ public class Restaurant_Recycler_View extends Activity {
         Log.d("HAR","Recycler view me aaya");
         set_RecyclerView_Details();
         Log.d("HAR","details set ho gyi");
+        getContact();
+        URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
         Json_Data_Web_Call();
 
     }
-
+    private void getContact()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                Context.MODE_PRIVATE);
+        Contact = sharedPreferences.getString("UserName",null);
+    }
 
 
 
@@ -65,7 +76,7 @@ public class Restaurant_Recycler_View extends Activity {
     public void Json_Data_Web_Call()
     {
 
-        RequestQueue Queue;
+       // RequestQueue Queue;
         JsonArrayRequest jsonArrayRequest = new
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
@@ -82,26 +93,28 @@ public class Restaurant_Recycler_View extends Activity {
                     e.printStackTrace();
                 }
                 Restaurant_Each_Row_data RowData;
-                for ( int i = 0 ; i < response.length() ; i++)
-                {
-                    RowData = new Restaurant_Each_Row_data();
-                    JSONObject json ;
-                    try
-                    {                                                                               // *****************harneet fill json ids*************
-                        json = response.getJSONObject(i);
-                        RowData.setRestaurantCuisine(json.getString("cuisines"));
-                        RowData.setRestaurantFavflag(json.getString("isFavourite"));
-                        RowData.setRestaurantName(json.getString("restaurantName"));
-                        RowData.setRestaurantRating(json.getString("rating"));
-                        RowData.setRestaurantTiming(json.getString("time"));
-                        RowData.setRestaurantImage(json.getString("imageURL"));
-                        Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
+                if (response != null) {
+                    for ( int i = 0 ; i < response.length() ; i++)
+                    {
+                        RowData = new Restaurant_Each_Row_data();
+                        JSONObject json ;
+                        try
+                        {
+                            json = response.getJSONObject(i);
+                            RowData.setRestaurantCuisine(json.getString("cuisines"));
+                            RowData.setRestaurantFavflag(json.getString("isFavourite"));
+                            RowData.setRestaurantName(json.getString("restaurantName"));
+                            RowData.setRestaurantRating(json.getString("rating"));
+                            RowData.setRestaurantTiming(json.getString("time"));
+                            RowData.setRestaurantImage(json.getString("imageURL"));
+                            Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
 
+                        }
+                        catch (Exception e) {
+                            Log.e("Error: " , String.valueOf(e));
+                        }
+                        AllRowData.add(RowData);
                     }
-                    catch (Exception e) {
-                        Log.e("Error: " , String.valueOf(e));
-                    }
-                    AllRowData.add(RowData);
                 }
                 Adapter = new
                         RestaurantView_Adapter(Restaurant_Recycler_View.this,AllRowData);
@@ -114,8 +127,9 @@ public class Restaurant_Recycler_View extends Activity {
             }
         });
 
-        Queue = Volley.newRequestQueue(this);
-        Queue.add(jsonArrayRequest);
+      //  Queue = Volley.newRequestQueue(this);
+       // Queue.add(jsonArrayRequest);
+        MySingleton.getInstance(this).addToJsonRequestQueue(jsonArrayRequest);
     }
 
     /*public void Json_Parse_Data(JSONArray array)

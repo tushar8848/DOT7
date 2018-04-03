@@ -6,10 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.widget.Button;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -38,6 +40,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
     //String url = "http://192.168.43.161:3000/Login/CheckValidLogin";
     MyDialog dialog;
+    int validContact = 0;
     private AlertDialog CustomDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +49,41 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
         ContactText = findViewById(R.id.mob_number);
         forgot_password = findViewById(R.id.forgot_password_button);
         forgot_password.setOnClickListener(this);
+        focusChange();
     }
-
+    private void focusChange()
+    {
+        ContactText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    Contact = ContactText.getText().toString();
+                    if(!(Contact.length()==10))
+                    {
+                        ContactText.setError("Invalid Contact");
+                        validContact = 0;
+                    }
+                    else
+                        validContact = 1;
+                }
+            }
+        });
+    }
 
 
     public void onClick(View view)
     {
         //startActivity(new Intent(this,Otp.class));
         Contact = ContactText.getText().toString();
-        if(Contact!=null)
-            callService();
-        else {
-            dialog = new MyDialog(this,"Invalid Mobile number","OK");
+        if(Contact.length()==0)
+        {
+            ContactText.setError("This field is required");
         }
+        else if(Contact.length()!=0 && validContact == 1)
+            callService(view);
     }
-    private void callService()
+    private void callService(final View view)
     {
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
@@ -73,13 +96,10 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
                     Log.d("HAR", "Satus code:" + StatusCode);
                     //Log.d("HAR",StatusCode);
 
-                    // **********stop progress bar*************************
+                    // *************************************************stop progress bar*************************
 
 
                     if (StatusCode.contains("302")) {
-
-                        //startActivity(new Intent(ForgotPassword.this, TempActivity.class));
-                        //StatusFlag=1;
                         String OTP = OTP_Generator.getInstance(ForgotPassword.this).Generate();
                         //sending sms
                         boolean flag = OTP_Generator.getInstance(ForgotPassword.this).sendMessage(OTP,Contact);
@@ -89,11 +109,6 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
                         intent.putExtra("Contact",Contact);
                         intent.putExtra("OTP",OTP);
                         startActivity(intent);
-
-
-
-
-
                     } else {
 
                         AlertDialog.Builder builder=new AlertDialog.Builder(ForgotPassword.this);
@@ -107,9 +122,6 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
                         });
                         CustomDialog=builder.create();
                         CustomDialog.show();
-
-
-
                     }
                 }
             }, new Response.ErrorListener() {
@@ -117,16 +129,15 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
                 public void onErrorResponse(VolleyError volleyError) {
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
-                    //Nitish and pooja, handle this error with a alert box or something
+                    Snackbar.make(view, "Some Error Occured",
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Retry", null).show();
                 }
             }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
                     parameters.put("LoginID", Contact);
-
-                    // if(Name != null)
-                    //   parameters.put("Name",Name);
                     return parameters;
                 }
             };

@@ -173,7 +173,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:onClick="s_login"
+                android:onClick="callLogin"
                 android:text="@string/login_link"
                 android:textColor="@color/colorAccent" />
 

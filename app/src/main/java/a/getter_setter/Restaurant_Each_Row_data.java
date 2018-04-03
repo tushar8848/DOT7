@@ -7,12 +7,12 @@ package a.getter_setter;
 
 public class Restaurant_Each_Row_data {
 
-    public String timing=null;
-    public String imageURL=null;
-    public String restaurantName=null;
-    public String cuisines=null;
-    public String rating=null;
-    public String isFavourite=null;
+    private String timing=null;
+    private String imageURL=null;
+    private String restaurantName=null;
+    private String cuisines=null;
+    private String rating=null;
+    private String isFavourite=null;
 
     public String getRestaurantTiming()
     {
@@ -64,7 +64,7 @@ public class Restaurant_Each_Row_data {
     public void setRestaurantCuisine(String Cuisine)
     {
         int l = Cuisine.length();
-        this.cuisines = Cuisine.substring(0,l-2);
+        this.cuisines = Cuisine.substring(0,l-1);
     }
 
     public void setRestaurantRating(String Rating)
