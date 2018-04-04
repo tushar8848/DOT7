@@ -25,7 +25,7 @@ import a.getter_setter.LoginData;
 import a.home_screen.Restaurant_Recycler_View;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 5000;
     String url = GlobalMethods.getURL() + "Login";
    // String url = "172.31.143.34:3000//Login";
     String StatusCode;
@@ -51,6 +51,11 @@ public class SplashActivity extends AppCompatActivity {
             Intent callGPSSettingIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
             startActivity(callGPSSettingIntent);
         }
+    }
+
+    public void KillActivity()
+    {
+        SplashActivity.this.finish();
     }
     public void CheckUserCredentials()
     {
@@ -79,24 +84,15 @@ public class SplashActivity extends AppCompatActivity {
                         if (StatusCode.contains("302")) {
                            // GlobalMethods.print(SplashActivity.this, "Data Found");
                            // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
 
-                                    startActivity(new Intent(SplashActivity.this,Restaurant_Recycler_View.class));
-                                    finish();
-                                }
-                            },SPLASH_TIME_OUT);
-                            //StatusFlag=1;
+                            KillActivity();
+                            startActivity(new Intent(SplashActivity.this,Restaurant_Recycler_View.class));
+
+
                         } else {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
-                                    finish();
-                                }
-                            },SPLASH_TIME_OUT);
+                            KillActivity();
+                            startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
+                            
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -118,6 +114,7 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 };
                 MySingleton.getInstance(this).addToRequestQueue(request);
+                finish();
                 Log.d("HAR", "Service ab return kr ri hai");
 
             } catch (Exception ex) {
