@@ -93,7 +93,6 @@ private ImageView[] dots;
     public void login(View view)
 
     {
-       Toast.makeText(this,"Heyyyyy",Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(this,Login.class);
         startActivity(intent);
     }
