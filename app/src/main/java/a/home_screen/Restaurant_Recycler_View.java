@@ -120,7 +120,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     private void set_RecyclerView_Details()
     {
         AllRowData = new ArrayList<>();
-        Restaurant_recycler_view = findViewById(R.id.Recyler_View);
+        Restaurant_recycler_view = findViewById(R.id.Recycler_View);
         Restaurant_recycler_view.setHasFixedSize(true);
         Layout = new LinearLayoutManager(this);
         Restaurant_recycler_view.setLayoutManager(Layout);
