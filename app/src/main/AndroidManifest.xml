@@ -15,6 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/dot7"
         android:supportsRtl="true"
+        
         android:theme="@style/AppTheme">
         <meta-data
             android:name="sendotp.key"

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Toolbar toolbar=findViewById(R.id.tbar1);
+        toolbar.setTitle("Register");
+        setSupportActionBar(toolbar);
         getDetails();
         signup.setOnClickListener(this);
     }
@@ -55,7 +59,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         focusChangeListeners();
 
     }
-    public void callLogin(View v)
+    public void callLogin(View view)
     {
         startActivity(new Intent(this,Login.class));
     }
