@@ -53,7 +53,9 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         //  holder.Favourite_Flag.setChecked(favourite_flag);
 
         //holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
-        Picasso.get().load(RowData.getRestaurantImage()).
+        Picasso.get().
+                load(RowData.
+                getRestaurantImage()).fit().
                 placeholder(R.drawable.dot7_low).
                 error(R.drawable.dot7_low).into(holder.Restro_Image);
 
