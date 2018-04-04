@@ -56,9 +56,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_recycler_view);
-        //Toolbar toolbar = findViewById(R.id.restaurant_page_toolbar);
+        Toolbar toolbar = findViewById(R.id.restaurant_page_toolbar);
         mDrawerLayout = findViewById(R.id.drawer_layout);
-       // setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
 
         if (actionbar != null) {

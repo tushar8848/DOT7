@@ -5,6 +5,7 @@ package a.home_screen;
  */
 
 import android.content.Context;
+import android.media.Image;
 import android.support.design.widget.CheckableImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -66,7 +67,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         TextView Restro_Name;
         ImageView Restro_Image;
         TextView Rating;
-        CheckableImageButton Favourite_Flag;
+        ImageView Favourite_Flag;
 
         private ViewHolder(View itemView) {
             super(itemView);
