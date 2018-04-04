@@ -25,7 +25,7 @@ import a.getter_setter.LoginData;
 import a.home_screen.Restaurant_Recycler_View;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 5000;
+    private static int SPLASH_TIME_OUT = 4000;
     String url = GlobalMethods.getURL() + "Login";
    // String url = "172.31.143.34:3000//Login";
     String StatusCode;
@@ -33,7 +33,14 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getNetworkState();
+        new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            getNetworkState();
+                                //startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
+            finish();
+                           }
+       },SPLASH_TIME_OUT);
 
 
     }
@@ -53,10 +60,6 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    public void KillActivity()
-    {
-        SplashActivity.this.finish();
-    }
     public void CheckUserCredentials()
     {
         SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
@@ -84,15 +87,11 @@ public class SplashActivity extends AppCompatActivity {
                         if (StatusCode.contains("302")) {
                            // GlobalMethods.print(SplashActivity.this, "Data Found");
                            // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
-
-
-                            startActivity(new Intent(SplashActivity.this,Restaurant_Recycler_View.class));
-                            KillActivity();
+                            startActivity(new Intent(SplashActivity.this, Restaurant_Recycler_View.class));
 
 
                         } else {
-                            KillActivity();
-                            startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
+                            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
 
                         }
                     }
