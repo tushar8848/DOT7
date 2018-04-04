@@ -46,8 +46,8 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        ContactText = findViewById(R.id.mob_number);
-        forgot_password = findViewById(R.id.forgot_password_button);
+        ContactText = findViewById(R.id.Mob_Number);
+        forgot_password = findViewById(R.id.Forgot_Password_Button);
         forgot_password.setOnClickListener(this);
         focusChange();
     }

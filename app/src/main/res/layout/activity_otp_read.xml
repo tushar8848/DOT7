@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/RelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="464dp"
         android:layout_marginBottom="16dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/TextView_Otp_Message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -32,11 +32,11 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <com.alimuzaffar.lib.pin.PinEntryEditText
-            android:id="@+id/txt_pin_entry"
+            android:id="@+id/Txt_Pin_Entry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView2"
+            android:layout_below="@+id/TextView_Otp_Message"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="30dp"
@@ -49,10 +49,10 @@
             app:pinAnimationType="popIn" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/verify_otp"
+            android:id="@+id/Verify_Otp"
             android:layout_width="152dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_pin_entry"
+            android:layout_below="@+id/Txt_Pin_Entry"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="44dp"
             android:background="@color/colorPrimaryDark"
@@ -61,7 +61,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ImageView2"
         android:layout_width="244dp"
         android:layout_height="140dp"
         android:layout_alignParentTop="true"

@@ -30,4 +30,5 @@
     <string name="Or">OR</string>
     <string name="Update_Password">Update Password</string>
     <string name="Google_Sign_Up">Sign up from Google</string>
+    <string name="action_settings">Action Settings</string>
 </resources>

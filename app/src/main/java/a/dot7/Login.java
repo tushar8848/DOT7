@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onCreate(@Nullable Bundle savedInstanceState) {  //, @Nullable PersistableBundle persistentState
         super.onCreate(savedInstanceState);  //, persistentState
         setContentView(R.layout.login_page);
-        Toolbar toolbar=findViewById(R.id.tbar1);
+        Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Login");
         setSupportActionBar(toolbar);
 
@@ -84,9 +84,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
     private void setDetails()
     {
-        UserNameText = findViewById(R.id.mob_no);
-        PasswordText = findViewById(R.id.password);
-        LoginButton = findViewById(R.id.input_layout_name3);
+        UserNameText = findViewById(R.id.Mob_No);
+        PasswordText = findViewById(R.id.Password);
+        LoginButton = findViewById(R.id.Input_Layout_Name_Login_Button);
     }
     private void getDetails()
     {

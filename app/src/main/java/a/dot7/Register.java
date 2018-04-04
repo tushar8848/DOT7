@@ -43,7 +43,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Toolbar toolbar=findViewById(R.id.tbar1);
+        Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Register");
         setSupportActionBar(toolbar);
         getDetails();
@@ -51,11 +51,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void getDetails() {
-        UserName =findViewById(R.id.Full_name);
-        UserContact=findViewById(R.id.mob_no);
-        UserPassword=findViewById(R.id.password);
-        UserCPassword=findViewById(R.id.cnfpassword);
-        signup=findViewById(R.id.btn_signup);
+        UserName =findViewById(R.id.Full_Name);
+        UserContact=findViewById(R.id.Mob_No);
+        UserPassword=findViewById(R.id.Password);
+        UserCPassword=findViewById(R.id.Cnfpassword);
+        signup=findViewById(R.id.Btn_Signup);
         focusChangeListeners();
 
     }

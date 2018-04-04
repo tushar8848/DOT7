@@ -45,7 +45,7 @@ private ImageView[] dots;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
-        mpager=findViewById(R.id.pager);
+        mpager=findViewById(R.id.Pager);
         mpageradapter=new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mpager.setAdapter(mpageradapter);
         sliderDotsPanel = findViewById(R.id.SliderDots);
@@ -93,7 +93,7 @@ private ImageView[] dots;
     public void login(View view)
 
     {
-       // Toast.makeText(this,"Heyyyyy",Toast.LENGTH_SHORT).show();
+       Toast.makeText(this,"Heyyyyy",Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(this,Login.class);
         startActivity(intent);
     }

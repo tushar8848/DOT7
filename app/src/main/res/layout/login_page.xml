@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar android:layout_height="wrap_content"
         android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tbar1"
+        android:id="@+id/Tbar1"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -15,7 +15,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android" />
 
     <ImageView
-        android:id="@+id/loginPageUserAddPng"
+        android:id="@+id/LoginPageUserAddPng"
         android:layout_width="216dp"
         android:layout_height="180dp"
         android:layout_marginEnd="8dp"
@@ -23,11 +23,11 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbar1"
+        app:layout_constraintTop_toBottomOf="@+id/Tbar1"
         app:srcCompat="@drawable/loginpage" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_name"
+        android:id="@+id/Input_Layout_Name_Mobile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -39,10 +39,10 @@
         android:paddingTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPageUserAddPng">
+        app:layout_constraintTop_toBottomOf="@+id/LoginPageUserAddPng">
 
         <EditText
-            android:id="@+id/mob_no"
+            android:id="@+id/Mob_No"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/ic_phone_black_24dp"
@@ -54,7 +54,7 @@
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_name2"
+        android:id="@+id/Input_Layout_Name_Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -64,10 +64,10 @@
         android:paddingRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_layout_name">
+        app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Mobile">
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/ic_lock_outline_black_24dp"
@@ -79,7 +79,7 @@
 
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/input_layout_name4"
+        android:id="@+id/Input_Layout_Name_Forgot_Password"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
@@ -93,10 +93,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_layout_name2" />
+        app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Password" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/input_layout_name3"
+        android:id="@+id/Input_Layout_Name_Login_Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -107,10 +107,10 @@
         android:text="@string/Login_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_layout_name4" />
+        app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Forgot_Password" />
 
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+        android:id="@+id/Sign_In_Button"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -120,11 +120,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_layout_name3"
+        app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Login_Button"
         app:layout_constraintVertical_bias="0.132" />
 
     <Button
-        android:id="@+id/link_signup"
+        android:id="@+id/Link_Signup"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_button"
+        app:layout_constraintTop_toBottomOf="@+id/Sign_In_Button"
         app:layout_constraintVertical_bias="0.0" />
 
 

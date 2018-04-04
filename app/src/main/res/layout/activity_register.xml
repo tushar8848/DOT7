@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar android:layout_height="wrap_content"
         android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tbar1"
+        android:id="@+id/Tbar1"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -20,7 +20,7 @@
 
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/ScrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="false"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbar1">
+        app:layout_constraintTop_toBottomOf="@+id/Tbar1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,17 +36,17 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/ImageView"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/dot7_register3" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_name"
+                android:id="@+id/Input_Layout_Mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tbar1"
+                android:layout_below="@id/Tbar1"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:paddingLeft="10dp"
@@ -55,7 +55,7 @@
                 tools:layout_editor_absoluteY="216dp">
 
                 <EditText
-                    android:id="@+id/mob_no"
+                    android:id="@+id/Mob_No"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/Mobile_Hint"
@@ -66,17 +66,17 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_name1"
+                android:id="@+id/Input_Layout_FullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/input_layout_name"
+                android:layout_below="@id/Input_Layout_Mobile"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
                 <EditText
-                    android:id="@+id/Full_name"
+                    android:id="@+id/Full_Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/Full_Name_Hint"
@@ -86,7 +86,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_name2"
+                android:id="@+id/Input_Layout_Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -95,7 +95,7 @@
                 android:paddingRight="10dp">
 
                 <EditText
-                    android:id="@+id/Email_id"
+                    android:id="@+id/Email_Id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/Email_Id_Hint"
@@ -105,7 +105,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_name3"
+                android:id="@+id/Input_Layout_Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -114,7 +114,7 @@
                 android:paddingRight="10dp">
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/Password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/Password_Hint"
@@ -124,7 +124,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_name4"
+                android:id="@+id/Input_Layout_Confirm_Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -133,7 +133,7 @@
                 android:paddingRight="10dp">
 
                 <EditText
-                    android:id="@+id/cnfpassword"
+                    android:id="@+id/Cnfpassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/Confirm_Password_Hint"
@@ -143,7 +143,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_signup"
+                android:id="@+id/Btn_Signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -155,7 +155,7 @@
                 android:textColor="#FFF" />
 
             <TextView
-                android:id="@+id/textViewOR"
+                android:id="@+id/TextViewOR"
                 android:gravity="center"
                 android:layout_marginTop="4dp"
                 android:textSize="18sp"
@@ -169,10 +169,11 @@
                 android:text="@string/Google_Sign_Up"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
+                android:padding="12dp"
                 app:isDarkTheme="false" />
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/link_login"
+                android:id="@+id/Link_Login"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

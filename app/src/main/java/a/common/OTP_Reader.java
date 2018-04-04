@@ -45,14 +45,14 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_read);
-        verify = findViewById(R.id.verify_otp);
+        verify = findViewById(R.id.Verify_Otp);
         verify.setOnClickListener(this);
         intent = getIntent();
         Name = intent.getStringExtra("Name");
         Contact = intent.getStringExtra("Contact");
         Password = intent.getStringExtra("Password");
         OTP = intent.getStringExtra("OTP");
-        OTPTEXT = findViewById(R.id.txt_pin_entry);
+        OTPTEXT = findViewById(R.id.Txt_Pin_Entry);
         if(Name == null && Password == null && Contact != null && OTP != null)
             determine_activity = "ForgotPassword";
         else

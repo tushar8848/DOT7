@@ -6,11 +6,12 @@
     android:layout_height="match_parent">
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+        android:id="@+id/Pager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="411dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,15 +22,15 @@
         android:layout_marginBottom="42dp"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/TextView_Ready_To_Order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pager" />
+        app:layout_constraintTop_toBottomOf="@id/Pager" />
 
     <TextView
         android:layout_marginTop="20dp"
-        android:id="@+id/textView"
+        android:id="@+id/TextView_Ready_To_Order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
@@ -37,11 +38,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pager"
+        app:layout_constraintTop_toBottomOf="@id/Pager"
         app:layout_constraintVertical_bias="0.089" />
 
     <Button
-        android:id="@+id/sign_up_button"
+        android:id="@+id/Sign_Up_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -53,10 +54,10 @@
         android:text="@string/Sign_Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/TextView_Ready_To_Order" />
 
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/Login_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -67,5 +68,5 @@
         android:text="@string/Already_Have_An_Account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_button" />
+        app:layout_constraintTop_toBottomOf="@id/Sign_Up_Button" />
 </android.support.constraint.ConstraintLayout>
