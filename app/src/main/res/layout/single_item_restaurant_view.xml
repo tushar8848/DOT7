@@ -5,55 +5,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/res_image"
         android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_height="142dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="76dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cuisines_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/res_name"
-        android:layout_width="wrap_content"
+        android:layout_width="84dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/res_image"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
         android:layout_toEndOf="@+id/res_image"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toEndOf="@+id/res_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cuisines_list"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/res_name"
         android:layout_below="@+id/res_name"
-        android:layout_marginTop="11dp"
-        android:textSize="20sp" />
+        android:layout_marginStart="8dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/res_image"
+        app:layout_constraintTop_toBottomOf="@+id/res_name" />
+
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/timing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="101dp"
+        android:layout_height="23dp"
         android:layout_alignStart="@+id/res_name"
         android:layout_below="@+id/cuisines_list"
-        android:layout_marginTop="11dp"
-        android:textSize="15sp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginStart="8dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/res_image"
+        app:layout_constraintTop_toBottomOf="@+id/cuisines_list"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/Rating"
-        android:layout_width="wrap_content"
+        android:layout_width="47dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/res_name"
-        android:layout_marginEnd="17dp"
-        android:layout_marginTop="15dp"
-        android:textSize="30sp" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/favourite"
+        app:layout_constraintStart_toEndOf="@+id/timing"
+        app:layout_constraintTop_toBottomOf="@+id/cuisines_list" />
 
     <ImageView
         android:id="@+id/favourite"
@@ -61,13 +85,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/Rating"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="140dp"
+        android:contentDescription="Favourite"
         android:src="@drawable/ic_favorite_black_24dp"
-        tools:layout_editor_absoluteX="332dp"
-        tools:layout_editor_absoluteY="108dp"
-        android:contentDescription="Favourite" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Rating"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

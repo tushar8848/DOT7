@@ -4,7 +4,6 @@ package a.home_screen;
  * Created by TUSHAR on 02-04-18.
  */
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,11 +21,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,8 +53,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_recycler_view);
-        Toolbar toolbar = findViewById(R.id.restaurant_page_toolbar);
-        mDrawerLayout = findViewById(R.id.drawer_layout);
+        Toolbar toolbar = findViewById(R.id.Restaurant_Page_Toolbar);
+        mDrawerLayout = findViewById(R.id.Drawer_Layout);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
 
@@ -102,7 +99,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.Drawer_Layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -122,7 +119,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     private void set_RecyclerView_Details()
     {
         AllRowData = new ArrayList<>();
-        Restaurant_recycler_view = findViewById(R.id.rec_view);
+        Restaurant_recycler_view = findViewById(R.id.Recyler_View);
         Restaurant_recycler_view.setHasFixedSize(true);
         Layout = new LinearLayoutManager(this);
         Restaurant_recycler_view.setLayoutManager(Layout);
