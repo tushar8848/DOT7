@@ -61,7 +61,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
     public void callLogin(View view)
     {
-        startActivity(new Intent(this,Login.class));
+        Intent intent=new Intent(this,Login.class);
+        startActivity(intent);
     }
 
 
@@ -211,8 +212,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         intent.putExtra("OTP", OTP);
                         startActivity(intent);
                     } else {
-                        dialog = new MyDialog(Register.this,
-                                "User Already Registered","OK");
+                        Snackbar.make(view, "User Already Registered",
+                                Snackbar.LENGTH_LONG)
+                                .setAction("OK", null).show();
                     }
                 }
             }, new Response.ErrorListener() {

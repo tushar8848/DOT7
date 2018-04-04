@@ -2,8 +2,12 @@ package a.common;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -17,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import a.dot7.R;
@@ -39,14 +44,17 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
     boolean Flag = false;
     String StatusCode;
     PinEntryEditText OTPTEXT;
-    String OTP_Received = null;
+    String OTP_Received;
+    int OTPFlag = 0;
     AppCompatButton verify;
+    View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_read);
         verify = findViewById(R.id.Verify_Otp);
         verify.setOnClickListener(this);
+
         intent = getIntent();
         Name = intent.getStringExtra("Name");
         Contact = intent.getStringExtra("Contact");
@@ -57,52 +65,58 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             determine_activity = "ForgotPassword";
         else
             determine_activity = "Register";
-
-         read();
+        Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS,verify);
+        read();
+         //read();
 
     }
-    public void read()
-    {
-        Permissions.getInstance(this).checkpermissions(this, REQUEST_ID_MULTIPLE_PERMISSIONS);
-        if (true)
-        {
-            Log.d("HAR", "Permission granted");
+   public void read()
+   {
+       SmsReceiver.bindListener(new SmsListener() {
 
-            SmsReceiver.bindListener(new SmsListener() {
+           @Override
+           public void messageReceived(String message) {
+               Log.d("HAR", "Message is:"+message);
 
-                @Override
-                public void messageReceived(String message) {
-                    Log.d("HAR", "Message is:"+message);
+               OTP_Received = message.substring(26, 30);
+               OTPTEXT.setText(OTP_Received);
+                OTPFlag=1;
+           }
 
-                    OTP_Received = message.substring(26, 30);
-                    OTPTEXT.setText(OTP_Received);
+       });
+   }
 
-                }
 
-            });
-        }
-
-        else
-        {
-            MyDialog myDialog = new MyDialog(this,"Cannot access OTP without" +
-                    " permissions!","Grant Permissions");
-            read();
-        }
-    }
 
     @Override
     public void onClick(View v) {
 
-        if (OTP_Received==null && OTPTEXT != null) {
+     /*   if (OTPTEXT!=null) {
             OTPTEXT.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
                 @Override
                 public void onPinEntered(CharSequence str) {
-                    OTP_Received = str.toString();
+                    if(str.toString().equals(OTP))
+                    {
+                        if(determine_activity.equals("ForgotPassword"))
+                        {
+                            Intent intent = new Intent(OTP_Reader.this,Set_New_Password.class);
+                            intent.putExtra("Contact",Contact);
+                            startActivity(intent);
+                        }
+                        Flag = true;
+                        //calling webservice to register user
+                        callService();
+                    }
+                    else
+                    {
+
+                    }
                 }
             });
+
         }
 
-
+*/
         if(OTP_Received.equals(OTP))
         {
 
@@ -137,7 +151,8 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     if (StatusCode.contains("201")) {
-                        SharedPreferences sharedPreferences=getSharedPreferences("logDetails", OTP_Reader.this.MODE_PRIVATE);
+                        SharedPreferences sharedPreferences =
+                                getSharedPreferences("logDetails", OTP_Reader.this.MODE_PRIVATE);
                         SharedPreferences.Editor editor=sharedPreferences.edit();
                         editor.putString("Name",Name);
                         editor.putString("Password",Password);

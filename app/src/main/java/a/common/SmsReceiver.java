@@ -28,7 +28,7 @@ public class SmsReceiver extends BroadcastReceiver {
             String messageBody = smsMessage.getMessageBody();
             Log.d("HAR", "message is:"+messageBody);
             if (Sender.contentEquals("IM-DOTSMS")) {
-                Log.d("BR", "message detected successfully");
+                Log.d("HAR", "message detected successfully");
                 mListener.messageReceived(messageBody);
             }
 

@@ -5,7 +5,6 @@ package a.home_screen;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
@@ -21,6 +20,7 @@ public class Load_ImageTask extends AsyncTask<String,Void,Void> {
     {
         Image = imgView;
         this.context = context;
+
     }
     @Override
     protected Void doInBackground(String... urls) {
@@ -28,10 +28,12 @@ public class Load_ImageTask extends AsyncTask<String,Void,Void> {
         String UrlDisplay = urls[0];
         try
         {
-            Picasso.with(context).load(UrlDisplay)
+          /*  Picasso.with(context).load(UrlDisplay)
                     .placeholder(R.drawable.ic_menu_white_18dp)
                     .error(R.drawable.ic_menu_white_18dp)
                     .into(Image);
+           */
+
 
         } catch (Exception e) {
             e.printStackTrace();
