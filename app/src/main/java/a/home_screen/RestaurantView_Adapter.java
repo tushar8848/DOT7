@@ -20,7 +20,7 @@ import a.getter_setter.Restaurant_Each_Row_data;
 
 public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_Adapter.ViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Restaurant_Each_Row_data> data;
 
     public RestaurantView_Adapter(Context context, List<Restaurant_Each_Row_data> data) {
@@ -49,7 +49,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         String favourite_flag = RowData.getRestaurantFavflag();
         //  holder.Favourite_Flag.setChecked(favourite_flag);
 
-        holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
+        //holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
         new Load_ImageTask(holder.Restro_Image, context).execute(RowData.getRestaurantImage());
     }
 

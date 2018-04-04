@@ -6,18 +6,16 @@ package a.home_screen;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
+import com.squareup.picasso.Picasso;
+import a.dot7.R;
 
-public class Load_ImageTask extends AsyncTask<String,Void,Bitmap> {
+public class Load_ImageTask extends AsyncTask<String,Void,Void> {
 
-    private ImageView Image;
-    private Context context;
+    private final ImageView Image;
+    private final Context context;
 
     public Load_ImageTask(ImageView imgView, Context context)
     {
@@ -25,22 +23,30 @@ public class Load_ImageTask extends AsyncTask<String,Void,Bitmap> {
         this.context = context;
     }
     @Override
-    protected Bitmap doInBackground(String... urls) {
+    protected Void doInBackground(String... urls) {
+
         String UrlDisplay = urls[0];
-        Bitmap bitmap = null;
         try
         {
-            InputStream in =  new java.net.URL(UrlDisplay).openStream();
-            bitmap = BitmapFactory.decodeStream(in);
+            Picasso.with(context).load(UrlDisplay)
+                    .placeholder(R.drawable.ic_menu_white_18dp)
+                    .error(R.drawable.ic_menu_white_18dp)
+                    .into(Image);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return bitmap;
+
+        return null;
     }
 
-    @Override
-    protected void onPostExecute(Bitmap bitmap) {
-        Image.setImageBitmap(bitmap);
-    }
 }
+
+/* *****************************************************************************
+    String UrlDisplay = urls[0];
+    Bitmap bitmap = null;
+    InputStream in =  new java.net.URL(UrlDisplay).openStream();
+            bitmap = BitmapFactory.decodeStream(in);
+    return bitmap;
+
+ */
