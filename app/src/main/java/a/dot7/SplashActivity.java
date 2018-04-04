@@ -92,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
                         } else {
                             KillActivity();
                             startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
-                            
+
                         }
                     }
                 }, new Response.ErrorListener() {
