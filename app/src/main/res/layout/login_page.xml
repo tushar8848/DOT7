@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -13,10 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
         xmlns:android="http://schemas.android.com/apk/res/android" />
-    <android.support.v4.widget.ContentLoadingProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Login_Progress_Bar"/>
+
 
     <ImageView
         android:id="@+id/LoginPageUserAddPng"
@@ -99,19 +97,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Password" />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/Input_Layout_Name_Login_Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:padding="15dp"
-        android:textColor="#FFF"
-        android:background="@color/colorPrimary"
-        android:text="@string/Login_Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Forgot_Password" />
+
+
+
+
+
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/Sign_In_Button"
@@ -142,7 +132,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Sign_In_Button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/Input_Layout_Name_Login_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="11dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/Sign_In_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Forgot_Password">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/Login_Button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="#FFF" />
+
+        <ProgressBar
+            android:id="@+id/Login_Progress_Bar"
+            android:layout_width="32dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </LinearLayout>
+
 
 
 </android.support.constraint.ConstraintLayout>

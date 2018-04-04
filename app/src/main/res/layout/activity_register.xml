@@ -16,9 +16,6 @@
 
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <android.support.v4.widget.ContentLoadingProgressBar
-        android:id="@+id/Register_Progress_Bar"
-        android:layout_width="wrap_content"
 
         android:layout_height="wrap_content" />
     <!--By default it will show cyclic animation-->
@@ -146,17 +143,40 @@
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.v7.widget.AppCompatButton
+
+            <LinearLayout
                 android:id="@+id/Btn_Signup"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/colorPrimary"
                 android:padding="12dp"
-                android:text="@string/Signup_Button"
-                android:textColor="#FFF" />
+                android:layout_gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/Signup_Button"
+                    android:textColor="#FFF"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    />
+
+                <ProgressBar
+                    android:id="@+id/Register_Progress_Bar"
+                    android:layout_width="32dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/TextViewOR"

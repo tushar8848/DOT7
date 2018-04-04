@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -40,8 +42,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     EditText PasswordText;
     String UserName;
     String Password;
-    Button LoginButton;
+    LinearLayout LoginButton;
     String StatusCode;
+    ProgressBar progressBar;
     int validContact=0,ePass=0,eContact;
     String url = GlobalMethods.getURL() + "Login";
     //String url = "http://192.168.43.161:3000/Login";
@@ -56,7 +59,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Login");
         setSupportActionBar(toolbar);
-
+        progressBar = findViewById(R.id.Login_Progress_Bar);
         setDetails();
         LoginButton.setOnClickListener(this);
         focuschange();
@@ -127,6 +130,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
              else {
                  //internet is connected
                  Log.d("HAR", "Username:" + UserName + " Password:" + Password);
+                 progressBar.setVisibility(View.VISIBLE);
                      callService(v);
              }
         }
@@ -139,6 +143,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                 @Override
                 public void onResponse(String s) {
+                    progressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
 
@@ -170,6 +175,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
+                    progressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     Snackbar.make(view, "Some Error Occured",

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import a.dot7.R;
@@ -51,7 +53,10 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         //  holder.Favourite_Flag.setChecked(favourite_flag);
 
         //holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
-        new Load_ImageTask(holder.Restro_Image, context).execute(RowData.getRestaurantImage());
+        Picasso.get().load(RowData.getRestaurantImage()).
+                placeholder(R.drawable.dot7_low).
+                error(R.drawable.dot7_low).into(holder.Restro_Image);
+
     }
 
     @Override

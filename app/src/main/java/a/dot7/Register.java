@@ -1,6 +1,7 @@
 package a.dot7;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,13 +34,15 @@ import a.common.OTP_Reader;
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
 
-    Button signup;
+    LinearLayout signup;
     EditText UserName,UserContact,UserPassword,UserCPassword;
     String name,contact,password,cpassword;
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
     int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0
             ,eCpass=0;
     String StatusCode;
+    ProgressBar progressBar;
+
     a.common.MyDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Register");
         setSupportActionBar(toolbar);
+        progressBar = findViewById(R.id.Register_Progress_Bar);
+        progressBar.setIndeterminate(true);
         getDetails();
         signup.setOnClickListener(this);
     }
@@ -177,6 +184,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             if (!CheckConnection.getInstance(this).getNetworkStatus()) {
                 GlobalMethods.print(this, "Check Internet Connection");
             } else {
+                //setProgressBarIndeterminate(true);
+
+               // progressBar.setProgress(1);
+                progressBar.setVisibility(View.VISIBLE);
+              //  progressBar.setActivated(true);
                 callService(view);
             }
         }
@@ -189,11 +201,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
                 @Override
                 public void onResponse(String s) {
+                   // progressBar.setActivated(false);
+                    progressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     // ********************************************************stop progress bar*************************
 
                     if (!StatusCode.contains("302")) {
+
                         boolean flag;
                         //generating OTP
                         String OTP = OTP_Generator.getInstance(Register.this).Generate();
@@ -220,6 +235,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
+                   // setProgressBarIndeterminate(false);
+                    progressBar.setVisibility(View.GONE);
+                    //progressBar.setActivated(false);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     //***************************************Stop Progress Bar********************************
