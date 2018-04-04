@@ -33,15 +33,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getNetworkState();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getNetworkState();
-                //startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
-                finish();
-            }
-        },SPLASH_TIME_OUT);
 
     }
     private void getNetworkState()
@@ -86,10 +79,24 @@ public class SplashActivity extends AppCompatActivity {
                         if (StatusCode.contains("302")) {
                            // GlobalMethods.print(SplashActivity.this, "Data Found");
                            // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
-                            startActivity(new Intent(SplashActivity.this, Restaurant_Recycler_View.class));
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    startActivity(new Intent(SplashActivity.this,Restaurant_Recycler_View.class));
+                                    finish();
+                                }
+                            },SPLASH_TIME_OUT);
                             //StatusFlag=1;
                         } else {
-                            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    startActivity(new Intent(SplashActivity.this,ScreenSlideActivity.class));
+                                    finish();
+                                }
+                            },SPLASH_TIME_OUT);
                         }
                     }
                 }, new Response.ErrorListener() {
