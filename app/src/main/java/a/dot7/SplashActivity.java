@@ -85,8 +85,9 @@ public class SplashActivity extends AppCompatActivity {
                            // GlobalMethods.print(SplashActivity.this, "Data Found");
                            // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
 
-                            KillActivity();
+
                             startActivity(new Intent(SplashActivity.this,Restaurant_Recycler_View.class));
+                            KillActivity();
 
 
                         } else {
