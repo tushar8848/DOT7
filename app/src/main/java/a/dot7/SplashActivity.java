@@ -25,7 +25,7 @@ import a.getter_setter.LoginData;
 import a.home_screen.Restaurant_Recycler_View;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 4000;
+    private static int SPLASH_TIME_OUT = 2000;
     String url = GlobalMethods.getURL() + "Login";
    // String url = "172.31.143.34:3000//Login";
     String StatusCode;

@@ -50,13 +50,14 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         holder.timing.setText(RowData.getRestaurantTiming());
 
         String favourite_flag = RowData.getRestaurantFavflag();
+        if(favourite_flag.equals("1"))
+            holder.Favourite_Flag.setVisibility(View.VISIBLE);
         //  holder.Favourite_Flag.setChecked(favourite_flag);
 
         //holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
         Picasso.get().
                 load(RowData.
-                getRestaurantImage()).fit().
-                placeholder(R.drawable.dot7_low).
+                getRestaurantImage()).resize(300,300).
                 error(R.drawable.dot7_low).into(holder.Restro_Image);
 
     }
