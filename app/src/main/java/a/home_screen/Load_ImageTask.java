@@ -33,6 +33,7 @@ public class Load_ImageTask extends AsyncTask<String,Void,Void> {
                     .error(R.drawable.ic_menu_white_18dp)
                     .into(Image);
            */
+          Picasso.get().load(UrlDisplay).placeholder(R.drawable.dot7_low).error(R.drawable.dot7_low).into(Image);
 
 
         } catch (Exception e) {

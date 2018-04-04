@@ -69,8 +69,18 @@ public class SplashActivity extends AppCompatActivity {
         Log.d("HAR","Username:"+UserName+" Password:"+Password);
         if(UserName != null && Password != null) {
             // Services.getInstance(context).Validate(UserName,Password);
+            startActivity(new Intent(SplashActivity.this, Restaurant_Recycler_View.class));
 
-            try {
+        }
+        else
+        {
+            Log.d("HAR","Shared preference not found");
+            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
+        }
+    }
+}
+/*
+ try {
                 StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                         Listener<String>() {
 
@@ -114,17 +124,11 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 };
                 MySingleton.getInstance(this).addToRequestQueue(request);
-                finish();
+
                 Log.d("HAR", "Service ab return kr ri hai");
 
             } catch (Exception ex) {
 
             }
-        }
-        else
-        {
-            Log.d("HAR","Shared preference not found");
-            startActivity(new Intent(SplashActivity.this, ScreenSlideActivity.class));
-        }
-    }
-}
+
+ */
