@@ -53,16 +53,19 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.e("Forgot password  ","Hello");
-        if (getIntent().hasExtra("Contact"))
-        {
-            ContactText.setText(getIntent().getStringExtra("Contact"));
-        }
         setContentView(R.layout.activity_forgot_password);
         ContactText = findViewById(R.id.Mob_Number);
         forgot_password = findViewById(R.id.Forgot_Password_Button);
         forgot_password.setOnClickListener(this);
         progressBar = findViewById(R.id.Forgot_Password_Progress_bar);
+
+
+        if (getIntent().hasExtra("Contact"))
+        {
+            ContactText.setText(getIntent().getStringExtra("Contact"));
+            ContactText.setFocusable(true);
+        }
+
         //focusChange();
     }
 
@@ -129,7 +132,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
                         intent.putExtra("Password",(String) null);
                         intent.putExtra("Contact",Contact);
                         intent.putExtra("OTP",OTP);
-                        startActivity(intent);
+                        startActivityForResult(intent,1);
                     } else {
 
                         AlertDialog.Builder builder=new AlertDialog.Builder(ForgotPassword.this);

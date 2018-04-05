@@ -24,6 +24,7 @@ import java.util.Map;
 
 import a.common.GlobalMethods;
 import a.common.MySingleton;
+import a.common.OTP_Reader;
 
 public class Set_New_Password extends AppCompatActivity implements View.OnClickListener {
 
@@ -156,8 +157,9 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
 
         //Passing_Contact = Contact;
         Intent ForgotPassword = new Intent(Set_New_Password.this, ForgotPassword.class);
+        ForgotPassword.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         ForgotPassword.putExtra("Contact",Contact);
-        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK  );
+        //finishActivity(1);
         startActivity(ForgotPassword);
     }
 }

@@ -60,6 +60,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     String Contact;
     final boolean[] DoubleBackPressed = {false};
+
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
@@ -164,24 +165,32 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     @Override
     public void onBackPressed() {
 
+        Log.e("back button: ",String.valueOf(DoubleBackPressed[0]));
+
         DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else {
             if (DoubleBackPressed[0]) {
-                finish();
-                return;
+                Intent intent = new Intent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
 
-            DoubleBackPressed[0] = true;
-            GlobalMethods.print(this,"Please Click again to exit!");
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+            else
+            {
+                DoubleBackPressed[0] = true;
+                GlobalMethods.print(this,"Please Click again to exit!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                    DoubleBackPressed[0] = false;
-                }
-            },3000);
+                        DoubleBackPressed[0] = false;
+                    }
+                },2000);
+            }
         }
     }
     private void getContact()

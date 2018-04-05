@@ -113,7 +113,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             {
                 Intent intent = new Intent(OTP_Reader.this,Set_New_Password.class);
                 intent.putExtra("Contact",Contact);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
             Flag = true;
             //calling webservice to register user

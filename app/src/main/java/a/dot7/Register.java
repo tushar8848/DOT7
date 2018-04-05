@@ -264,8 +264,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        Intent ForgotPassword = new Intent(Register .this, ScreenSlideActivity.class);
+        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP   );
+        startActivity(ForgotPassword);
+    }
 }
 

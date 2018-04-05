@@ -201,4 +201,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent ForgotPassword = new Intent(Login.this, ScreenSlideActivity.class);
+        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP   );
+        startActivity(ForgotPassword);
+    }
 }
