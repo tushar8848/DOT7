@@ -27,6 +27,8 @@ import a.common.MySingleton;
 
 public class Set_New_Password extends AppCompatActivity implements View.OnClickListener {
 
+    public static String Passing_Contact = null;
+
     LinearLayout UpdatePasswordButton;
     EditText PasswordText,UserCPassword;
     String Contact,Password,Cpassword;
@@ -54,6 +56,8 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
             focuschange();
 
     }
+
+
     private void focuschange()
     {
         UserCPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -64,6 +68,8 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
+
     @Override
     public void onClick(View v) {
         Password=PasswordText.getText().toString();
@@ -92,6 +98,8 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
             callService();
         }
     }
+
+
     private void callService()
     {
         try {
@@ -142,5 +150,15 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+
+        //Passing_Contact = Contact;
+        Intent ForgotPassword = new Intent(Set_New_Password.this, ForgotPassword.class);
+        ForgotPassword.putExtra("Contact",Contact);
+        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK  );
+        startActivity(ForgotPassword);
+    }
 }
 

@@ -24,7 +24,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -44,7 +43,6 @@ import java.util.List;
 import java.util.Map;
 
 
-import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.Login;
@@ -58,10 +56,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
-    private RestaurantView_Adapter Adapter;
+    private RecyclerView.Adapter Adapter;
     private String URL ;
     private DrawerLayout mDrawerLayout;
-    View view;
     String url = GlobalMethods.getURL() + "Login";
     AlertDialog CustomDialog;
     @Override
@@ -79,7 +76,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        view = fab;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,12 +90,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         addRowData();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
-        if(CheckConnection.getInstance(this).getNetworkStatus())
-            checkUserLogin();
-        else
-        {
-            //******************************************set error internet connection image*********************************
-        }
+        checkUserLogin();
 
 
     }
@@ -122,7 +113,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.Drawer_Layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -220,15 +211,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
                 Adapter = new
                         RestaurantView_Adapter(Restaurant_Recycler_View.this,AllRowData);
                 Restaurant_recycler_view.setAdapter(Adapter);
-
-                Adapter.setOnItemClickListener(new RestaurantView_Adapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                       // Toast.makeText(Restaurant_Recycler_View.this,"Card "+position+" clicked ",Toast.LENGTH_SHORT).show();
-                        Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-
-                    }
-                });
                 Restaurant_recycler_view.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -243,13 +225,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if(CheckConnection.getInstance(Restaurant_Recycler_View.this).getNetworkStatus())
-                {
-                    Log.e("VolleyError: ",error.toString());
-                }
-                else {
-                    //******************************************set error internet connection image*********************************
-                }
+                Log.e("VolleyError: ",error.toString());
             }
         });
 

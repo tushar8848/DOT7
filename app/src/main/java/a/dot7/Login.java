@@ -109,12 +109,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         else ePass = 1;
     }
 
-    public void Call_Signup(View view)
-    {
+    public void Call_Signup(View view) {
+
         startActivity(new Intent(this,Register.class));
     }
 
     public void forgotPassword(View view){
+
         startActivity(new Intent(this,ForgotPassword.class));
     }
 

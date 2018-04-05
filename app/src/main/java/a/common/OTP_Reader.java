@@ -72,7 +72,6 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             determine_activity = "Register";
         Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS,verify);
         read();
-         //read();
 
     }
    public void read()

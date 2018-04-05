@@ -33,6 +33,8 @@ import a.common.OTP_Generator;
 import a.common.OTP_Reader;
 import a.common.TempActivity;
 
+import static a.dot7.Set_New_Password.Passing_Contact;
+
 public class ForgotPassword extends Activity implements View.OnClickListener{
 
     LinearLayout forgot_password;
@@ -45,16 +47,26 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
     ProgressBar progressBar;
     int validContact = 0;
     private AlertDialog CustomDialog;
+    //private String determine_activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.e("Forgot password  ","Hello");
+        if (getIntent().hasExtra("Contact"))
+        {
+            ContactText.setText(getIntent().getStringExtra("Contact"));
+        }
         setContentView(R.layout.activity_forgot_password);
         ContactText = findViewById(R.id.Mob_Number);
         forgot_password = findViewById(R.id.Forgot_Password_Button);
         forgot_password.setOnClickListener(this);
         progressBar = findViewById(R.id.Forgot_Password_Progress_bar);
-        focusChange();
+        //focusChange();
     }
+
+
     private void focusChange()
     {
         ContactText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
