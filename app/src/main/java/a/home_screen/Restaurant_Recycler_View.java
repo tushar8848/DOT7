@@ -4,7 +4,10 @@ package a.home_screen;
  * Created by TUSHAR on 02-04-18.
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
@@ -22,9 +25,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -32,11 +38,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 import a.common.GlobalMethods;
 import a.common.MySingleton;
+import a.dot7.Login;
 import a.dot7.R;
 import a.getter_setter.Restaurant_Each_Row_data;
 
@@ -50,6 +59,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     private RecyclerView.Adapter Adapter;
     private String URL ;
     private DrawerLayout mDrawerLayout;
+    String url = GlobalMethods.getURL() + "Login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +75,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
             actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,9 +88,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         set_RecyclerView_Details();
         Log.d("HAR","details set ho gyi");
         addRowData();
+        checkUserLogin();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
-        Json_Data_Web_Call();
+        checkUserLogin();
+
 
     }
 
@@ -223,9 +235,75 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         MySingleton.getInstance(this).addToJsonRequestQueue(jsonArrayRequest);
     }
 
-    /*public void Json_Parse_Data(JSONArray array)
-    {
+   private void checkUserLogin()
+   {
+       SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+               Context.MODE_PRIVATE);
+       final String  UserName = sharedPreferences.getString("UserName",null);
+       final String Password = sharedPreferences.getString("Password",null);
+       try {
+           StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
+                   Listener<String>() {
 
-    }*/
+               @Override
+               public void onResponse(String s) {
+                   String StatusCode = GlobalMethods.GetSubString(s);
+                   Log.d("HAR", s);
+                   Log.d("HAR", "Satus code:" + StatusCode);
+                   //Log.d("HAR",StatusCode);
+
+                   // **********stop progress bar*************************
+
+
+                   if (StatusCode.contains("302")) {
+                       // GlobalMethods.print(SplashActivity.this, "Data Found");
+                       // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
+                       Json_Data_Web_Call();
+
+
+                   } else {
+                       AlertDialog CustomDialog;
+                       AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
+                       builder.setMessage("You have logged out");
+                       builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialogInterface, int i) {
+                               dialogInterface.cancel();
+                               startActivity(new Intent(Restaurant_Recycler_View.this, Login.class));
+                           }
+                       });
+                       CustomDialog=builder.create();
+                       CustomDialog.show();
+
+
+                   }
+               }
+           }, new Response.ErrorListener() {
+               @Override
+               public void onErrorResponse(VolleyError volleyError) {
+                   Log.d("HAR", volleyError.toString());
+                   Log.d("HAR", "Error");
+                   //Nitish and pooja, handle this error with a alert box or something
+               }
+           }) {
+               @Override
+               protected Map<String, String> getParams() throws AuthFailureError {
+                   Map<String, String> parameters = new HashMap<>();
+                   parameters.put("LoginID", UserName);
+                   parameters.put("password", Password);
+                   // if(Name != null)
+                   //   parameters.put("Name",Name);
+                   return parameters;
+               }
+           };
+           MySingleton.getInstance(this).addToRequestQueue(request);
+
+           Log.d("HAR", "Service ab return kr ri hai");
+
+       } catch (Exception ex) {
+
+       }
+
+   }
 
 }
