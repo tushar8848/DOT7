@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -43,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 
+import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.Login;
@@ -90,7 +92,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         addRowData();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
-        checkUserLogin();
+        if(CheckConnection.getInstance(this).getNetworkStatus())
+            checkUserLogin();
+        else
+        {
+            //******************************************set error internet connection image*********************************
+        }
 
 
     }
@@ -113,7 +120,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.Drawer_Layout);
+        DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -225,7 +232,13 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("VolleyError: ",error.toString());
+                if(CheckConnection.getInstance(Restaurant_Recycler_View.this).getNetworkStatus())
+                {
+                    Log.e("VolleyError: ",error.toString());
+                }
+                else {
+                    //******************************************set error internet connection image*********************************
+                }
             }
         });
 

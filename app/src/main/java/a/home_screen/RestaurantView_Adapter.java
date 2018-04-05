@@ -77,7 +77,6 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
                 .with(context)
                 .load(RowData.getRestaurantImage())
                 .centerCrop()
-                .placeholder(R.drawable.dot7_low)
                 .into(holder.Restro_Image);
     }
 
