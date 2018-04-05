@@ -95,32 +95,14 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
 
-     /*   if (OTPTEXT!=null) {
-            OTPTEXT.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
-                @Override
-                public void onPinEntered(CharSequence str) {
-                    if(str.toString().equals(OTP))
-                    {
-                        if(determine_activity.equals("ForgotPassword"))
-                        {
-                            Intent intent = new Intent(OTP_Reader.this,Set_New_Password.class);
-                            intent.putExtra("Contact",Contact);
-                            startActivity(intent);
-                        }
-                        Flag = true;
-                        //calling webservice to register user
-                        callService();
-                    }
-                    else
-                    {
+        Log.d("OTPText : ", String.valueOf(OTPTEXT.getText()));
 
-                    }
-                }
-            });
-
+        if (OTPTEXT.getText() != null)
+        {
+            GlobalMethods.print(this,String.valueOf(OTPTEXT.getText()));
+            OTP_Received = String.valueOf(OTPTEXT.getText());
         }
 
-*/
         if(OTP_Received.equals(OTP))
         {
 
