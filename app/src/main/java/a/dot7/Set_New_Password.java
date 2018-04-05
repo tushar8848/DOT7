@@ -157,7 +157,7 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
         //Passing_Contact = Contact;
         Intent ForgotPassword = new Intent(Set_New_Password.this, ForgotPassword.class);
         ForgotPassword.putExtra("Contact",Contact);
-        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK  );
+        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK  );
         startActivity(ForgotPassword);
     }
 }
