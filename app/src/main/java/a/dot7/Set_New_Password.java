@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,7 +33,7 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
     Intent intent;
     String StatusCode;
     ProgressBar progressBar;
-    int validCpassword=0,eCpass=0,ePass=0;
+    int validCpassword=0,eCpass=1,ePass=0;
     int valid=1;
     String url = GlobalMethods.getURL() + "Login/UpdatePassword";
    // String url = "http://192.168.43.161:3000/Login/UpdatePassword";
@@ -58,23 +59,22 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
         UserCPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Password=PasswordText.getText().toString();
-                Cpassword=UserCPassword.getText().toString();
-                if(!(Cpassword.equals(Password)))
-                {
-                    validCpassword = 0;
-                    UserCPassword.setError("Passwords do not match");
-                }
-                else
-                    validCpassword = 1;
+
 
             }
         });
     }
     @Override
     public void onClick(View v) {
-        Password = PasswordText.getText().toString();
+        Password=PasswordText.getText().toString();
         Cpassword=UserCPassword.getText().toString();
+        if(!(Cpassword.equals(Password)))
+        {
+            validCpassword = 0;
+            UserCPassword.setError("Passwords do not match");
+        }
+        else
+            validCpassword = 1;
         if(Password.length() == 0)
         {
             PasswordText.setError("This field is required");
@@ -121,6 +121,7 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
                 public void onErrorResponse(VolleyError volleyError) {
                     progressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
+                    Log.d("HAR",StatusCode);
                     Log.d("HAR", "Error");
                     //Nitish and pooja, handle this error with a alert box or something
                 }

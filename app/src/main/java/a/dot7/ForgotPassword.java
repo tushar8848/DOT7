@@ -62,14 +62,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus)
                 {
-                    Contact = ContactText.getText().toString();
-                    if(!(Contact.length()==10))
-                    {
-                        ContactText.setError("Invalid Contact");
-                        validContact = 0;
-                    }
-                    else
-                        validContact = 1;
+
                 }
             }
         });
@@ -78,13 +71,22 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
 
     public void onClick(View view)
     {
-        //startActivity(new Intent(this,Otp.class));
         Contact = ContactText.getText().toString();
-        if(Contact.length()==0)
+        if(!(Contact.length()==10))
+        {
+            ContactText.setError("Invalid Contact");
+            validContact = 0;
+        }
+        else
+            validContact = 1;
+        //startActivity(new Intent(this,Otp.class));
+
+        /*if(Contact.length()==0)
         {
             ContactText.setError("This field is required");
         }
-        else if(Contact.length()!=0 && validContact == 1) {
+        else*/
+            if(Contact.length()!=0 && validContact == 1) {
             progressBar.setVisibility(View.VISIBLE);
             callService(view);
         }

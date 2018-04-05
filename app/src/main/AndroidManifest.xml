@@ -11,8 +11,10 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:fullBackupContent="true"
         android:icon="@drawable/dot7"
+        android:largeHeap="true"
         android:label="@string/App_Name"
         android:roundIcon="@drawable/dot7"
         android:supportsRtl="true"
