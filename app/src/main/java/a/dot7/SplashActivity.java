@@ -46,7 +46,8 @@ public class SplashActivity extends AppCompatActivity {
     }
     private void getNetworkState()
     {
-        Boolean State = CheckConnection.getInstance(this).getNetworkStatus();
+      //  Boolean State = CheckConnection.getInstance(this).getNetworkStatus();
+        Boolean State = true;
         if(State)  //internet is connected
         {
             CheckUserCredentials();

@@ -24,6 +24,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -43,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 
+import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.Login;
@@ -50,7 +54,7 @@ import a.dot7.R;
 import a.getter_setter.Restaurant_Each_Row_data;
 
 
-public class Restaurant_Recycler_View extends AppCompatActivity {
+public class Restaurant_Recycler_View extends AppCompatActivity implements View.OnClickListener {
 
     String Contact;
     private RecyclerView Restaurant_recycler_view;
@@ -59,14 +63,20 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     private RecyclerView.Adapter Adapter;
     private String URL ;
     private DrawerLayout mDrawerLayout;
+    ImageView Error_Image;
+    Button Error_Button;
     String url = GlobalMethods.getURL() + "Login";
     AlertDialog CustomDialog;
+    int determineService = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_recycler_view);
         Toolbar toolbar = findViewById(R.id.Restaurant_Page_Toolbar);
         mDrawerLayout = findViewById(R.id.Drawer_Layout);
+        Error_Image = findViewById(R.id.Restaurant_View_Error);
+        Error_Button = findViewById(R.id.Restaurant_View_RetryButton);
+        Error_Button.setOnClickListener(Restaurant_Recycler_View.this);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
 
@@ -90,7 +100,15 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         addRowData();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
-        checkUserLogin();
+        if(CheckConnection.getInstance(this).getNetworkStatus())
+            checkUserLogin();
+        else
+        {
+            Restaurant_recycler_view.setVisibility(View.GONE);
+            Error_Image.setVisibility(View.VISIBLE);
+            Error_Button.setVisibility(View.VISIBLE);
+            //******************************************set error internet connection image*********************************
+        }
 
 
     }
@@ -113,7 +131,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.Drawer_Layout);
+        DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -163,6 +181,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
         //AllRowData = new ArrayList<>();
        // RequestQueue Queue;
+        determineService = 2;
         JsonArrayRequest jsonArrayRequest = new
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
@@ -225,7 +244,16 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("VolleyError: ",error.toString());
+                if(CheckConnection.getInstance(Restaurant_Recycler_View.this).getNetworkStatus())
+                {
+                    Log.e("VolleyError: ",error.toString());
+                }
+                else {
+                    Restaurant_recycler_view.setVisibility(View.GONE);
+                    Error_Image.setVisibility(View.VISIBLE);
+                    Error_Button.setVisibility(View.VISIBLE);
+                    //******************************************set error internet connection image*********************************
+                }
             }
         });
 
@@ -280,6 +308,14 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
            }, new Response.ErrorListener() {
                @Override
                public void onErrorResponse(VolleyError volleyError) {
+                   if(!(CheckConnection.getInstance(Restaurant_Recycler_View.this).getNetworkStatus()))
+
+                   {
+                       Restaurant_recycler_view.setVisibility(View.GONE);
+                       Error_Image.setVisibility(View.VISIBLE);
+                       Error_Button.setVisibility(View.VISIBLE);
+                       //******************************************set error internet connection image*********************************
+                   }
                    Log.d("HAR", volleyError.toString());
                    Log.d("HAR", "Error");
                    //Nitish and pooja, handle this error with a alert box or something
@@ -305,4 +341,17 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
    }
 
+    @Override
+    public void onClick(View v) {
+        if(CheckConnection.getInstance(this).getNetworkStatus()) {
+            Error_Image.setVisibility(View.GONE);
+            Error_Button.setVisibility(View.GONE);
+            Restaurant_recycler_view.setVisibility(View.VISIBLE);
+            if(determineService == 1)
+            checkUserLogin();
+            else
+                Json_Data_Web_Call();
+        }
+
+    }
 }
