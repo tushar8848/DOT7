@@ -60,9 +60,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
-    private RecyclerView.Adapter Adapter;
+    private RestaurantView_Adapter Adapter;
     private String URL ;
     private DrawerLayout mDrawerLayout;
+    View view;
     ImageView Error_Image;
     Button Error_Button;
     String url = GlobalMethods.getURL() + "Login";
@@ -86,6 +87,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        view = fab;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -230,6 +232,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 Adapter = new
                         RestaurantView_Adapter(Restaurant_Recycler_View.this,AllRowData);
                 Restaurant_recycler_view.setAdapter(Adapter);
+                Adapter.setOnItemClickListener(new RestaurantView_Adapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    }
+                });
                 Restaurant_recycler_view.postDelayed(new Runnable() {
                     @Override
                     public void run() {

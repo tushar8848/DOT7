@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/Restaurant_View_Error"
             android:layout_centerInParent="true"
-            android:text="retry"
+            android:text="No internet connection. Retry!"
             android:textColor="@color/colorPrimary"
             android:visibility="gone" />
 
