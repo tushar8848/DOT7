@@ -53,11 +53,13 @@ import a.common.MySingleton;
 import a.dot7.Login;
 import a.dot7.R;
 import a.getter_setter.Restaurant_Each_Row_data;
+import android.os.Handler;
 
 
 public class Restaurant_Recycler_View extends AppCompatActivity implements View.OnClickListener {
 
     String Contact;
+    final boolean[] DoubleBackPressed = {false};
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurant_Each_Row_data> AllRowData;
     private RecyclerView.LayoutManager  Layout;
@@ -135,13 +137,51 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         return super.onOptionsItemSelected(item);
     }
 
+    /*final boolean[] DoubleBackPressed = {false};
+        Log.e("back button: ",String.valueOf(DoubleBackPressed[0]));
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.Drawer_Layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+
+            if (DoubleBackPressed[0]) {
+                finish();
+                return;
+            }
+
+            DoubleBackPressed[0] = true;
+            GlobalMethods.print(this,"Please Click again to exit!");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    DoubleBackPressed[0] = false;
+                }
+            },3000);*/
+
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (DoubleBackPressed[0]) {
+                finish();
+                return;
+            }
+
+            DoubleBackPressed[0] = true;
+            GlobalMethods.print(this,"Please Click again to exit!");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    DoubleBackPressed[0] = false;
+                }
+            },3000);
         }
     }
     private void getContact()
