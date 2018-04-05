@@ -17,10 +17,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 
-        android:layout_height="wrap_content" />
-    <!--By default it will show cyclic animation-->
-
-
     <ScrollView
         android:id="@+id/ScrollView2"
         android:layout_width="match_parent"
