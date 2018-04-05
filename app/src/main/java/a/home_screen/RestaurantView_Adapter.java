@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+//import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import a.common.GlideApp;
 import a.dot7.R;
 import a.getter_setter.Restaurant_Each_Row_data;
 
@@ -65,11 +67,18 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         //  holder.Favourite_Flag.setChecked(favourite_flag);
 
         //holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
-        Picasso.get().
+       /* Picasso.get().
                 load(RowData.
                 getRestaurantImage()).resize(300,300).
-               into(holder.Restro_Image);
+               into(holder.Restro_Image);*/
 
+
+        GlideApp
+                .with(context)
+                .load(RowData.getRestaurantImage())
+                .centerCrop()
+                .placeholder(R.drawable.dot7_low)
+                .into(holder.Restro_Image);
     }
 
     @Override
