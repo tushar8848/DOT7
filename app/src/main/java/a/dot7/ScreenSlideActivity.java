@@ -63,7 +63,7 @@ private ImageView[] dots;
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
                     (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            params.setMargins(0,8,20,8);
+            params.setMargins(0,8,20,16);
             sliderDotsPanel.addView(dots[i],params);
         }
         dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
