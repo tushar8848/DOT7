@@ -80,7 +80,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         addRowData();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
-
         Json_Data_Web_Call();
 
     }

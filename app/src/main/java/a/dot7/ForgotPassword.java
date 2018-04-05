@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -33,13 +35,14 @@ import a.common.TempActivity;
 
 public class ForgotPassword extends Activity implements View.OnClickListener{
 
-    AppCompatButton forgot_password;
+    LinearLayout forgot_password;
     EditText ContactText;
     String Contact;
     String StatusCode;
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
     //String url = "http://192.168.43.161:3000/Login/CheckValidLogin";
     MyDialog dialog;
+    ProgressBar progressBar;
     int validContact = 0;
     private AlertDialog CustomDialog;
     @Override
@@ -49,6 +52,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
         ContactText = findViewById(R.id.Mob_Number);
         forgot_password = findViewById(R.id.Forgot_Password_Button);
         forgot_password.setOnClickListener(this);
+        progressBar = findViewById(R.id.Forgot_Password_Progress_bar);
         focusChange();
     }
     private void focusChange()
@@ -80,8 +84,10 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
         {
             ContactText.setError("This field is required");
         }
-        else if(Contact.length()!=0 && validContact == 1)
+        else if(Contact.length()!=0 && validContact == 1) {
+            progressBar.setVisibility(View.VISIBLE);
             callService(view);
+        }
     }
     private void callService(final View view)
     {
@@ -91,6 +97,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
 
                 @Override
                 public void onResponse(String s) {
+                    progressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     Log.d("HAR", "Satus code:" + StatusCode);
@@ -127,6 +134,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
+                    progressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     Snackbar.make(view, "Some Error Occured",

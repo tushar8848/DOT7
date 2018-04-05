@@ -48,16 +48,52 @@
             android:textSize="20sp"
             app:pinAnimationType="popIn" />
 
-        <android.support.v7.widget.AppCompatButton
+
+
+        <ProgressBar
+            android:id="@+id/OTP_Progress_Bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/Verify_Otp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:visibility="visible" />
+
+        <LinearLayout
             android:id="@+id/Verify_Otp"
-            android:layout_width="152dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Txt_Pin_Entry"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="44dp"
             android:background="@color/colorPrimaryDark"
-            android:text="@string/Continue_Button"
-            android:textColor="#FFF" />
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="11dp"
+            android:padding="12dp"
+          >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:text="@string/Continue_Button"
+                android:textColor="#FFF"/>
+
+            <ProgressBar
+                android:id="@+id/OTPVerify_Progress_Bar"
+                android:layout_width="32dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+            >
+
+        </LinearLayout>
     </RelativeLayout>
 
     <ImageView

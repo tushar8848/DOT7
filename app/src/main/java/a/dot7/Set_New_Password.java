@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -24,11 +26,12 @@ import a.common.MySingleton;
 
 public class Set_New_Password extends AppCompatActivity implements View.OnClickListener {
 
-    AppCompatButton UpdatePasswordButton;
+    LinearLayout UpdatePasswordButton;
     EditText PasswordText,UserCPassword;
     String Contact,Password,Cpassword;
     Intent intent;
     String StatusCode;
+    ProgressBar progressBar;
     int validCpassword=0,eCpass=0,ePass=0;
     int valid=1;
     String url = GlobalMethods.getURL() + "Login/UpdatePassword";
@@ -45,6 +48,7 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
         UserCPassword = findViewById(R.id.newconfirm1);
         PasswordText = findViewById(R.id.newp);
         Contact = intent.getStringExtra("Contact");
+        progressBar = findViewById(R.id.Set_NewPass_ProgressBar);
         UpdatePasswordButton.setOnClickListener(this);
             focuschange();
 
@@ -83,8 +87,10 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
             UserCPassword.setError("This field is required");
             eCpass = 0;
         }
-        if(validCpassword == 1 && ePass == 1 && eCpass == 1)
+        if(validCpassword == 1 && ePass == 1 && eCpass == 1) {
+            progressBar.setVisibility(View.VISIBLE);
             callService();
+        }
     }
     private void callService()
     {
@@ -94,6 +100,7 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
 
                 @Override
                 public void onResponse(String s) {
+                    progressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     Log.d("HAR", "Satus code:" + StatusCode);
@@ -112,6 +119,7 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
+                    progressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     //Nitish and pooja, handle this error with a alert box or something

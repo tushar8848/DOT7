@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.android.volley.AuthFailureError;
@@ -46,7 +48,9 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
     PinEntryEditText OTPTEXT;
     String OTP_Received;
     int OTPFlag = 0;
-    AppCompatButton verify;
+    LinearLayout verify;
+    ProgressBar verifyProgressBar;
+    ProgressBar progressBar;
     View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,8 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_otp_read);
         verify = findViewById(R.id.Verify_Otp);
         verify.setOnClickListener(this);
-
+        progressBar = findViewById(R.id.OTP_Progress_Bar);
+        verifyProgressBar = findViewById(R.id.OTPVerify_Progress_Bar);
         intent = getIntent();
         Name = intent.getStringExtra("Name");
         Contact = intent.getStringExtra("Contact");
@@ -77,7 +82,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
            @Override
            public void messageReceived(String message) {
                Log.d("HAR", "Message is:"+message);
-
+                progressBar.setVisibility(View.INVISIBLE);
                OTP_Received = message.substring(26, 30);
                OTPTEXT.setText(OTP_Received);
                 OTPFlag=1;
@@ -131,6 +136,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             }
             Flag = true;
             //calling webservice to register user
+            verifyProgressBar.setVisibility(View.VISIBLE);
             callService();
 
         }
@@ -148,6 +154,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
 
                 @Override
                 public void onResponse(String s) {
+                    verifyProgressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     if (StatusCode.contains("201")) {
@@ -170,6 +177,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
+                    verifyProgressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     //Nitish and pooja, handle this error with a alert box or something
