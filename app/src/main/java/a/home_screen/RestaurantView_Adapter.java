@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -30,11 +31,11 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         this.context = context;
         this.data = data;
     }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_item_restaurant_view, parent, false);
+
        ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -43,12 +44,21 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Restaurant_Each_Row_data RowData = data.get(position);
+        if(RowData.isShowShimmer()){
+            holder.shimmerFrameLayout.startShimmerAnimation();
+        }
+        else {
+            holder.shimmerFrameLayout.stopShimmerAnimation();
+            holder.Restro_Name.setBackground(null);
+            holder.Cuisine.setBackground(null);
+            holder.timing.setBackground(null);
+            holder.Rating.setBackground(null);
 
-        holder.Rating.setText(RowData.getRestaurantRating());
-        holder.Cuisine.setText(RowData.getRestaurantCuisine());
-        holder.Restro_Name.setText(RowData.getRestaurantName());
-        holder.timing.setText(RowData.getRestaurantTiming());
-
+            holder.Rating.setText(RowData.getRestaurantRating());
+            holder.Cuisine.setText(RowData.getRestaurantCuisine());
+            holder.Restro_Name.setText(RowData.getRestaurantName());
+            holder.timing.setText(RowData.getRestaurantTiming());
+        }
         String favourite_flag = RowData.getRestaurantFavflag();
         if(favourite_flag.equals("1"))
             holder.Favourite_Flag.setVisibility(View.VISIBLE);
@@ -76,9 +86,10 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         ImageView Restro_Image;
         TextView Rating;
         ImageView Favourite_Flag;
-
+        public ShimmerFrameLayout shimmerFrameLayout;
         private ViewHolder(View itemView) {
             super(itemView);
+            shimmerFrameLayout = itemView.findViewById(R.id.fl_shimmer);
             timing = itemView.findViewById( R.id.timing);
             Restro_Name = itemView.findViewById( R.id.res_name);
             Cuisine = itemView.findViewById( R.id.cuisines_list);

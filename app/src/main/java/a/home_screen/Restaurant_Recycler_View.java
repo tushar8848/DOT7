@@ -6,6 +6,7 @@ package a.home_screen;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -79,6 +80,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         addRowData();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
+
         Json_Data_Web_Call();
 
     }
@@ -117,9 +119,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
     private void addRowData()
     {
-        AllRowData = new ArrayList<>();
+        //AllRowData = new ArrayList<>();
         Restaurant_Each_Row_data RowData;
-        for(int i=0;i<6;i++) {
+        for(int i=0;i<5;i++) {
 
             RowData = new Restaurant_Each_Row_data();
             RowData.setRestaurantCuisine("Cuisines List");
@@ -128,6 +130,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
             RowData.setRestaurantRating("4.5");
             RowData.setRestaurantTiming("Timing");
             RowData.setRestaurantImage("https://drive.google.com/uc?authuser=0&id=1YV9-p0r1v7TRlN7QAxhU7SMzdq37XDvc&export=download");
+            RowData.setShowShimmer(true);
             AllRowData.add(RowData);
         }
         Adapter = new
@@ -138,7 +141,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
     private void set_RecyclerView_Details()
     {
-        //AllRowData = new ArrayList<>();
+        AllRowData = new ArrayList<>();
         Restaurant_recycler_view = findViewById(R.id.Recycler_View);
         Restaurant_recycler_view.setHasFixedSize(true);
         Layout = new LinearLayoutManager(this);
@@ -148,7 +151,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     public void Json_Data_Web_Call()
     {
 
-        AllRowData = new ArrayList<>();
+        //AllRowData = new ArrayList<>();
        // RequestQueue Queue;
         JsonArrayRequest jsonArrayRequest = new
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
@@ -180,18 +183,34 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
                             RowData.setRestaurantRating(json.getString("rating"));
                             RowData.setRestaurantTiming(json.getString("time"));
                             RowData.setRestaurantImage(json.getString("imageURL"));
+                            RowData.setShowShimmer(true);
                             Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
 
                         }
                         catch (Exception e) {
                             Log.e("Error: " , String.valueOf(e));
                         }
-                        AllRowData.add(RowData);
+                        if(i<5)
+                            AllRowData.set(i, RowData);
+                        else
+                            AllRowData.add(RowData);
                     }
                 }
+
+
                 Adapter = new
                         RestaurantView_Adapter(Restaurant_Recycler_View.this,AllRowData);
                 Restaurant_recycler_view.setAdapter(Adapter);
+                Restaurant_recycler_view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(Restaurant_Each_Row_data restaurant_each_row_data : AllRowData){
+                                restaurant_each_row_data.setShowShimmer(false);
+                        }
+                        Adapter.notifyDataSetChanged();
+                    }
+                },3000);
+
             }
         }, new Response.ErrorListener() {
             @Override

@@ -13,6 +13,7 @@ public class Restaurant_Each_Row_data {
     private String cuisines=null;
     private String rating=null;
     private String isFavourite=null;
+    private boolean showShimmer;
 
     public String getRestaurantTiming()
     {
@@ -76,4 +77,8 @@ public class Restaurant_Each_Row_data {
     {
         this.isFavourite=Flag;
     }
+
+    public boolean isShowShimmer(){ return showShimmer; }
+
+    public void setShowShimmer(boolean showShimmer) {   this.showShimmer = showShimmer; }
 }
