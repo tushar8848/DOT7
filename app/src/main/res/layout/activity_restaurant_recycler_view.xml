@@ -33,14 +33,25 @@
             android:visibility="gone"
             app:srcCompat="@drawable/loginpage" />
 
-        <Button
-            android:id="@+id/Restaurant_View_RetryButton"
-            style="?android:attr/borderlessButtonStyle"
+
+        <TextView
+            android:id="@+id/Restaurant_Error_Message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Restaurant_View_Error"
+            android:paddingTop="30dp"
             android:layout_centerInParent="true"
-            android:text="No internet connection. Retry!"
+            android:text="Oops! Are you connected to the Internet?"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/Restaurant_View_RetryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Restaurant_Error_Message"
+            android:layout_centerInParent="true"
+            android:text="Retry"
             android:textColor="@color/colorPrimary"
             android:visibility="gone" />
 

@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -65,6 +66,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private DrawerLayout mDrawerLayout;
     View view;
     ImageView Error_Image;
+    TextView Error_Message;
     Button Error_Button;
     String url = GlobalMethods.getURL() + "Login";
     AlertDialog CustomDialog;
@@ -76,6 +78,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Toolbar toolbar = findViewById(R.id.Restaurant_Page_Toolbar);
         mDrawerLayout = findViewById(R.id.Drawer_Layout);
         Error_Image = findViewById(R.id.Restaurant_View_Error);
+        Error_Message = findViewById(R.id.Restaurant_Error_Message);
         Error_Button = findViewById(R.id.Restaurant_View_RetryButton);
         Error_Button.setOnClickListener(Restaurant_Recycler_View.this);
         setSupportActionBar(toolbar);
@@ -108,6 +111,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         {
             Restaurant_recycler_view.setVisibility(View.GONE);
             Error_Image.setVisibility(View.VISIBLE);
+            Error_Message.setVisibility(View.VISIBLE);
             Error_Button.setVisibility(View.VISIBLE);
             //******************************************set error internet connection image*********************************
         }
