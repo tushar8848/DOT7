@@ -33,6 +33,11 @@
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Contact Us" />
+
+            <item
+                android:id="@+id/logout_button"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Logout" />
         </menu>
     </item>
 

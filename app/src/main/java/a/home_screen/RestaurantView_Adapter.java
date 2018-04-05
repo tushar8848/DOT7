@@ -85,6 +85,15 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         return data.size();
     }
 
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
@@ -95,6 +104,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         TextView Rating;
         ImageView Favourite_Flag;
         public ShimmerFrameLayout shimmerFrameLayout;
+
         private ViewHolder(View itemView) {
             super(itemView);
             shimmerFrameLayout = itemView.findViewById(R.id.fl_shimmer);
@@ -104,6 +114,18 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
             Rating = itemView.findViewById( R.id.Rating);
             Restro_Image = itemView.findViewById(R.id.res_image);
             Favourite_Flag = itemView.findViewById(R.id.favourite);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mListener!=null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }
