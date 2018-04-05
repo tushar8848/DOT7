@@ -68,7 +68,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         Picasso.get().
                 load(RowData.
                 getRestaurantImage()).resize(300,300).
-                error(R.drawable.dot7_low).into(holder.Restro_Image);
+               into(holder.Restro_Image);
 
     }
 

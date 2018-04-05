@@ -60,7 +60,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
     private String URL ;
     private DrawerLayout mDrawerLayout;
     String url = GlobalMethods.getURL() + "Login";
-
+    AlertDialog CustomDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +88,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
         set_RecyclerView_Details();
         Log.d("HAR","details set ho gyi");
         addRowData();
-        checkUserLogin();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
         checkUserLogin();
@@ -140,7 +139,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
             RowData.setRestaurantName("Restaurant Name");
             RowData.setRestaurantRating("4.5");
             RowData.setRestaurantTiming("Timing");
-            RowData.setRestaurantImage("https://drive.google.com/uc?authuser=0&id=1YV9-p0r1v7TRlN7QAxhU7SMzdq37XDvc&export=download");
+            RowData.setRestaurantImage("https://drive.google.com/TRlN7QAxhU7SMzdq37XDvc&export=download");
             RowData.setShowShimmer(true);
             AllRowData.add(RowData);
         }
@@ -262,7 +261,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity {
 
 
                    } else {
-                       AlertDialog CustomDialog;
+
                        AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
                        builder.setMessage("You have logged out");
                        builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
