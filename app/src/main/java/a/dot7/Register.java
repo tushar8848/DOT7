@@ -30,18 +30,19 @@ import a.common.MyDialog;
 import a.common.MySingleton;
 import a.common.OTP_Generator;
 import a.common.OTP_Reader;
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
 
-    LinearLayout signup;
+
     EditText UserName,UserContact,UserPassword,UserCPassword;
     String name,contact,password,cpassword;
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
     int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0
             ,eCpass=0;
     String StatusCode;
-    ProgressBar progressBar;
+    CircularProgressButton progress;
 
     a.common.MyDialog dialog;
     @Override
@@ -51,10 +52,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Register");
         setSupportActionBar(toolbar);
-        progressBar = findViewById(R.id.Register_Progress_Bar);
-        progressBar.setIndeterminate(true);
+        //progressBar = findViewById(R.id.Register_Progress_Bar);
+        progress = findViewById(R.id.btn_id);
+        //progressBar.setIndeterminate(true);
         getDetails();
-        signup.setOnClickListener(this);
+        progress.setOnClickListener(this);
     }
 
     private void getDetails() {
@@ -62,7 +64,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         UserContact=findViewById(R.id.Mob_No);
         UserPassword=findViewById(R.id.Password);
         UserCPassword=findViewById(R.id.Cnfpassword);
-        signup=findViewById(R.id.Btn_Signup);
         focusChangeListeners();
 
     }
@@ -187,7 +188,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 //setProgressBarIndeterminate(true);
 
                // progressBar.setProgress(1);
-                progressBar.setVisibility(View.VISIBLE);
+               // progressBar.setVisibility(View.VISIBLE);
+                progress.startAnimation();
               //  progressBar.setActivated(true);
                 callService(view);
             }
@@ -202,7 +204,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 @Override
                 public void onResponse(String s) {
                    // progressBar.setActivated(false);
-                    progressBar.setVisibility(View.GONE);
+                   // progressBar.setVisibility(View.GONE);
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     // ********************************************************stop progress bar*************************
@@ -236,8 +243,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                    // setProgressBarIndeterminate(false);
-                    progressBar.setVisibility(View.GONE);
+                   // progressBar.setVisibility(View.GONE);
                     //progressBar.setActivated(false);
+                    progress.revertAnimation();
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     //***************************************Stop Progress Bar********************************
@@ -260,6 +268,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             Log.d("HAR", "Service ab return kr ri hai");
 
         } catch (Exception ex) {
+            progress.revertAnimation();
 
         }
     }
