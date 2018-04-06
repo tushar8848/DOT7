@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,7 +23,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +33,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +49,7 @@ import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.Login;
 import a.dot7.R;
-import a.getter_setter.Restaurant_Each_Row_data;
+import a.getter_setter.Restaurants;
 import android.os.Handler;
 
 
@@ -62,9 +59,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     final boolean[] DoubleBackPressed = {false};
 
     private RecyclerView Restaurant_recycler_view;
-    private List<Restaurant_Each_Row_data> AllRowData;
+    private List<Restaurants> AllRowData;
     private RecyclerView.LayoutManager  Layout;
-    private RestaurantView_Adapter Adapter;
+    private RestaurantsAdapter Adapter;
     private String URL ;
     private DrawerLayout mDrawerLayout;
     View view;
@@ -203,10 +200,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private void addRowData()
     {
         //AllRowData = new ArrayList<>();
-        Restaurant_Each_Row_data RowData;
+        Restaurants RowData;
         for(int i=0;i<5;i++) {
 
-            RowData = new Restaurant_Each_Row_data();
+            RowData = new Restaurants();
             RowData.setRestaurantCuisine("Cuisines List");
             RowData.setRestaurantFavflag("0");
             RowData.setRestaurantName("Restaurant Name");
@@ -217,7 +214,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
             AllRowData.add(RowData);
         }
         Adapter = new
-                RestaurantView_Adapter(Restaurant_Recycler_View.this,AllRowData);
+                RestaurantsAdapter(Restaurant_Recycler_View.this,AllRowData);
         Restaurant_recycler_view.setAdapter(Adapter);
     }
 
@@ -252,11 +249,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Restaurant_Each_Row_data RowData;
+                Restaurants RowData;
                 if (response != null) {
                     for ( int i = 0 ; i < response.length() ; i++)
                     {
-                        RowData = new Restaurant_Each_Row_data();
+                        RowData = new Restaurants();
                         JSONObject json ;
                         try
                         {
@@ -283,9 +280,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
 
                 Adapter = new
-                        RestaurantView_Adapter(Restaurant_Recycler_View.this,AllRowData);
+                        RestaurantsAdapter(Restaurant_Recycler_View.this,AllRowData);
                 Restaurant_recycler_view.setAdapter(Adapter);
-                Adapter.setOnItemClickListener(new RestaurantView_Adapter.OnItemClickListener() {
+                Adapter.setOnItemClickListener(new RestaurantsAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
@@ -294,7 +291,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 Restaurant_recycler_view.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        for(Restaurant_Each_Row_data restaurant_each_row_data : AllRowData){
+                        for(Restaurants restaurant_each_row_data : AllRowData){
                                 restaurant_each_row_data.setShowShimmer(false);
                         }
                         Adapter.notifyDataSetChanged();

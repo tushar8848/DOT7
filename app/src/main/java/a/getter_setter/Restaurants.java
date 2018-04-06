@@ -5,7 +5,7 @@ package a.getter_setter;
  */
 
 
-public class Restaurant_Each_Row_data {
+public class Restaurants {
 
     private String timing=null;
     private String imageURL=null;

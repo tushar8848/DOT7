@@ -5,8 +5,6 @@ package a.home_screen;
  */
 
 import android.content.Context;
-import android.media.Image;
-import android.support.design.widget.CheckableImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +14,19 @@ import android.widget.TextView;
 
 //import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import a.common.GlideApp;
 import a.dot7.R;
-import a.getter_setter.Restaurant_Each_Row_data;
+import a.getter_setter.Restaurants;
 
-public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_Adapter.ViewHolder> {
+public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder> {
 
     private final Context context;
-    private List<Restaurant_Each_Row_data> data;
+    private List<Restaurants> data;
 
-    public RestaurantView_Adapter(Context context, List<Restaurant_Each_Row_data> data) {
+    public RestaurantsAdapter(Context context, List<Restaurants> data) {
         this.context = context;
         this.data = data;
     }
@@ -45,7 +42,7 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Restaurant_Each_Row_data RowData = data.get(position);
+        Restaurants RowData = data.get(position);
         if(RowData.isShowShimmer()){
             holder.shimmerFrameLayout.startShimmerAnimation();
         }
@@ -64,15 +61,6 @@ public class RestaurantView_Adapter extends RecyclerView.Adapter<RestaurantView_
         String favourite_flag = RowData.getRestaurantFavflag();
         if(favourite_flag.equals("1"))
             holder.Favourite_Flag.setVisibility(View.VISIBLE);
-        //  holder.Favourite_Flag.setChecked(favourite_flag);
-
-        //holder.Restro_Image.setImageResource(R.drawable.ic_launcher_background);
-       /* Picasso.get().
-                load(RowData.
-                getRestaurantImage()).resize(300,300).
-               into(holder.Restro_Image);*/
-
-
         GlideApp
                 .with(context)
                 .load(RowData.getRestaurantImage())
