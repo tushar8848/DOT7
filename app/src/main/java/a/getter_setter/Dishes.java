@@ -33,10 +33,7 @@ public class Dishes {
         return availability;
     }
     public int getQuantity(){ return  quantity; }
-    public void setDishImageUrl(String imageURL)
-    {
-        this.imageURL = imageURL;
-    }
+    public void setDishImageUrl(String imageURL) { this.imageURL = imageURL;}
     public void setDishName(String Name)
     {
         this.Name = Name;

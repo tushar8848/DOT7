@@ -68,8 +68,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
-
-
+    
     public class DishViewHolder extends RecyclerView.ViewHolder {
         TextView DishName;
         TextView DishPrice;

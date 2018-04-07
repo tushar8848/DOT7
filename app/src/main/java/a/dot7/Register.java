@@ -19,12 +19,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,10 +31,6 @@ import a.common.MySingleton;
 import a.common.OTP_Generator;
 import a.common.OTP_Reader;
 
-import a.getter_setter.Restaurant_Each_Row_data;
-import a.home_screen.RestaurantView_Adapter;
-import a.home_screen.Restaurant_Recycler_View;
-import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -47,8 +38,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     EditText UserName,UserContact,UserPassword,UserCPassword;
     String name,contact,password,cpassword;
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
-    int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0,eCpass=0;
-    public final String URL_Auth = GlobalMethods.getURL()+"token";
+    int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0
+            ,eCpass=0;
     String StatusCode;
     ProgressBar progressBar;
 
@@ -91,7 +82,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 //if(hasFocus)
                 password=UserPassword.getText().toString();
                 cpassword=UserCPassword.getText().toString();
-               // Log.d("HAR","Focus changed to "+hasFocus+" Password:"+password+" cpass:"+cpassword );
+                // Log.d("HAR","Focus changed to "+hasFocus+" Password:"+password+" cpass:"+cpassword );
                 if(!cpassword.equals(password))
                 {
                     UserCPassword.setError("Passwords do not match");
@@ -195,99 +186,85 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             } else {
                 //setProgressBarIndeterminate(true);
 
-               // progressBar.setProgress(1);
+                // progressBar.setProgress(1);
                 progressBar.setVisibility(View.VISIBLE);
-              //  progressBar.setActivated(true);
-                //CheckAuthorization(view);
+                //  progressBar.setActivated(true);
                 callService(view);
             }
         }
     }
-    private void callService(final View view) {
+    private void callService(final View view)
+    {
         try {
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
+                    Listener<String>() {
+
+                @Override
+                public void onResponse(String s) {
+                    // progressBar.setActivated(false);
+                    progressBar.setVisibility(View.GONE);
+                    StatusCode = GlobalMethods.GetSubString(s);
+                    Log.d("HAR", s);
+                    // ********************************************************stop progress bar*************************
+
+                    if (!StatusCode.contains("302")) {
+
+                        boolean flag;
+                        //generating OTP
+                        String OTP = OTP_Generator.getInstance(Register.this).Generate();
+                        //sending sms
+                        flag = OTP_Generator.getInstance(Register.this).sendMessage(OTP, contact);
+                        if (flag)
+                            Log.d("HAR", "OTP generated and sent succesfully " + OTP);
+                        else
+                            Log.d("HAR", "OTP generated but not sent, contact:" + contact);
 
 
-                StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
-                        Listener<String>() {
-
-                    @Override
-                    public void onResponse(String s) {
-                        // progressBar.setActivated(false);
-                         progressBar.setVisibility(View.GONE);
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        StatusCode = GlobalMethods.GetSubString(s);
-                        Log.d("HAR", s);
-                        // ********************************************************stop progress bar*************************
-
-                        if (!StatusCode.contains("302")) {
-
-                            boolean flag;
-                            //generating OTP
-                            String OTP = OTP_Generator.getInstance(Register.this).Generate();
-                            //sending sms
-                            flag = OTP_Generator.getInstance(Register.this).sendMessage(OTP, contact);
-                            if (flag)
-                                Log.d("HAR", "OTP generated and sent succesfully " + OTP);
-                            else
-                                Log.d("HAR", "OTP generated but not sent, contact:" + contact);
-
-
-                            Intent intent = new Intent(Register.this, OTP_Reader.class);
-                            intent.putExtra("Name", name);
-                            intent.putExtra("Password", password);
-                            intent.putExtra("Contact", contact);
-                            intent.putExtra("OTP", OTP);
-                            startActivity(intent);
-                        } else {
-                            Snackbar.make(view, "User Already Registered",
-                                    Snackbar.LENGTH_LONG)
-                                    .setAction("OK", null).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // setProgressBarIndeterminate(false);
-                        progressBar.setVisibility(View.GONE);
-                        //progressBar.setActivated(false);
-                        Log.d("HAR", volleyError.toString());
-                        Log.d("HAR", "Error");
-                        //***************************************Stop Progress Bar********************************
-                        Snackbar.make(view, "Some Error occured",
+                        Intent intent = new Intent(Register.this, OTP_Reader.class);
+                        intent.putExtra("Name", name);
+                        intent.putExtra("Password", password);
+                        intent.putExtra("Contact", contact);
+                        intent.putExtra("OTP", OTP);
+                        startActivity(intent);
+                    } else {
+                        Snackbar.make(view, "User Already Registered",
                                 Snackbar.LENGTH_LONG)
                                 .setAction("OK", null).show();
-
                     }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    // setProgressBarIndeterminate(false);
+                    progressBar.setVisibility(View.GONE);
+                    //progressBar.setActivated(false);
+                    Log.d("HAR", volleyError.toString());
+                    Log.d("HAR", "Error");
+                    //***************************************Stop Progress Bar********************************
+                    Snackbar.make(view, "Some Error Occured",
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Retry", null).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("LoginID", contact);
 
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> parameters = new HashMap<>();
-                        parameters.put("LoginID", contact);
-                        // if(Name != null)
-                        //   parameters.put("Name",Name);
-                        return parameters;
-                    }
-                };
+                    // if(Name != null)
+                    //   parameters.put("Name",Name);
+                    return parameters;
+                }
+            };
+            MySingleton.getInstance(this).addToRequestQueue(request);
+            Log.d("HAR", "Service ab return kr ri hai");
+
+        } catch (Exception ex) {
+
         }
-        catch(Exception ex){
-
-                Log.d("HAR","Error AYA");
-
-            }
-        }
-
-
-
-    @Override
-    public void onBackPressed() {
-        Intent ForgotPassword = new Intent(Register .this, ScreenSlideActivity.class);
-        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP   );
-        startActivity(ForgotPassword);
     }
-}
 
+
+
+
+}
