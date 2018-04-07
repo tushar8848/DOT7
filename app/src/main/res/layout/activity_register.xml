@@ -23,7 +23,7 @@
 
     <ScrollView
         android:id="@+id/ScrollView2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,9 +39,9 @@
 
             <ImageView
                 android:id="@+id/ImageView"
+                android:contentDescription="@string/DOT7_Banner"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:contentDescription="@string/DOT7_Banner"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/dot7_banner" />
 
@@ -144,19 +144,38 @@
             </android.support.design.widget.TextInputLayout>
 
 
-            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                android:id="@+id/btn_id"
+            <LinearLayout
+                android:id="@+id/Btn_Signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/progress_shape"
-                android:text="Register"
-                android:layout_marginLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="12dp"
-                app:spinning_bar_color="@color/tealButton"
-                app:spinning_bar_padding="6dp"
-                app:spinning_bar_width="4dp" />
+                android:background="@color/colorPrimary"
+                android:padding="12dp"
+                android:layout_gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/Signup_Button"
+                    android:textColor="#FFF"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    />
+
+                <ProgressBar
+                    android:id="@+id/Register_Progress_Bar"
+                    android:layout_width="32dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
 
 
             <TextView
@@ -169,12 +188,10 @@
                 android:textSize="18sp" />
 
             <com.shobhitpuri.custombuttons.GoogleSignInButton
-                android:layout_width="362dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-
+                android:layout_marginStart="8dp"
                 android:padding="12dp"
                 android:text="@string/Google_Sign_Up"
                 app:isDarkTheme="false" />

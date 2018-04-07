@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.android.volley.AuthFailureError;
@@ -30,7 +29,6 @@ import java.util.Map;
 import a.dot7.R;
 import a.dot7.Set_New_Password;
 import a.home_screen.Restaurant_Recycler_View;
-import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
 /**
  * Created by TUSHAR on 28-03-18.
@@ -50,18 +48,18 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
     PinEntryEditText OTPTEXT;
     String OTP_Received;
     int OTPFlag = 0;
-    CircularProgressButton progressButton;
+    LinearLayout verify;
+    ProgressBar verifyProgressBar;
     ProgressBar progressBar;
-    RelativeLayout Pass_View;
     View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_read);
-        progressButton = findViewById(R.id.btn_id);
-        Pass_View = findViewById(R.id.RelativeLayout);
-        progressButton.setOnClickListener(this);
+        verify = findViewById(R.id.Verify_Otp);
+        verify.setOnClickListener(this);
         progressBar = findViewById(R.id.OTP_Progress_Bar);
+        verifyProgressBar = findViewById(R.id.OTPVerify_Progress_Bar);
         intent = getIntent();
         Name = intent.getStringExtra("Name");
         Contact = intent.getStringExtra("Contact");
@@ -72,8 +70,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             determine_activity = "ForgotPassword";
         else
             determine_activity = "Register";
-        Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS,Pass_View
-        );
+        Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS,verify);
         read();
 
     }
@@ -120,8 +117,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             }
             Flag = true;
             //calling webservice to register user
-            //verifyProgressBar.setVisibility(View.VISIBLE);
-            progressButton.startAnimation();
+            verifyProgressBar.setVisibility(View.VISIBLE);
             callService();
 
         }
@@ -139,12 +135,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
 
                 @Override
                 public void onResponse(String s) {
-                    //verifyProgressBar.setVisibility(View.GONE);
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    verifyProgressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     if (StatusCode.contains("201")) {
@@ -167,8 +158,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    progressButton.revertAnimation();
-                    //verifyProgressBar.setVisibility(View.GONE);
+                    verifyProgressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     //Nitish and pooja, handle this error with a alert box or something
@@ -188,7 +178,6 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
         }
         catch (Exception ex)
         {
-            progressButton.revertAnimation();
             //return false;
         }
     }
