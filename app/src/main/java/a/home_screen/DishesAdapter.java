@@ -68,7 +68,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
-    
+
     public class DishViewHolder extends RecyclerView.ViewHolder {
         TextView DishName;
         TextView DishPrice;
@@ -84,12 +84,12 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
             super(itemView);
             //*******************************************set id's*************************************************************
 
-            DishName = itemView.findViewById(R.id.title);
+         //   DishName = itemView.findViewById(R.id.title);
            // DishPrice = itemView.findViewById(R.id.count);
             //DishVegImage = itemView.findViewById();
-            DishImage = itemView.findViewById(R.id.thumbnail);
+           // DishImage = itemView.findViewById();
            // DishNVegImage = itemView.findViewById();
-            Quantity =  itemView.findViewById(R.id.count);
+          //  Quantity =  itemView.findViewById(R.id.count);
           //  DishAdd = itemView.findViewById();
             //QMinus =  itemView.findViewById();
             //QPlus =  itemView.findViewById();

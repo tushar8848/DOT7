@@ -99,7 +99,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
 
         if (OTPTEXT.getText() != null)
         {
-            GlobalMethods.print(this,String.valueOf(OTPTEXT.getText()));
+           // GlobalMethods.print(this,String.valueOf(OTPTEXT.getText()));
             OTP_Received = String.valueOf(OTPTEXT.getText());
         }
 
