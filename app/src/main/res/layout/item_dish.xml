@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_album_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/dish_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dish_thumbnail_height"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/dish_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dish Name"
+                android:layout_below="@id/dish_thumbnail"
+                android:paddingLeft="@dimen/dish_name_padding"
+                android:paddingRight="@dimen/dish_name_padding"
+                android:paddingTop="@dimen/dish_name_padding"
+                android:textColor="@color/dish_name"
+                android:textSize="@dimen/dish_name" />
+
+            <TextView
+                android:id="@+id/dish_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dish_name"
+                android:text="Rs. 150"
+                android:paddingBottom="@dimen/dish_price_padding_bottom"
+                android:paddingLeft="@dimen/dish_name_padding"
+                android:paddingRight="@dimen/dish_name_padding"
+                android:textSize="@dimen/dish_price" />
+
+            <ImageView
+                android:id="@+id/overflow"
+                android:layout_width="@dimen/ic_album_overflow_width"
+                android:layout_height="@dimen/ic_album_overflow_height"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/dish_name"
+                android:layout_marginTop="@dimen/ic_album_overflow_margin_top"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_dots" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

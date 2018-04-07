@@ -286,6 +286,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     @Override
                     public void onItemClick(int position) {
                         Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                        Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
+                        startActivity(intent);
                     }
                 });
                 Restaurant_recycler_view.postDelayed(new Runnable() {

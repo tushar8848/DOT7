@@ -32,7 +32,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     public DishViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //***********************************************replace single item dish view*******************************************************
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_item_restaurant_view, parent, false);
+                .inflate(R.layout.item_dish, parent, false);
 
         DishViewHolder viewHolder = new DishViewHolder(v);
         return viewHolder;
@@ -83,17 +83,17 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
         public DishViewHolder(View itemView) {
             super(itemView);
             //*******************************************set id's*************************************************************
-         /*
-            DishName = itemView.findViewById();
-            DishPrice = itemView.findViewById();
-            DishVegImage = itemView.findViewById();
-            DishImage = itemView.findViewById();
-            DishNVegImage = itemView.findViewById();
-            Quantity =  itemView.findViewById();
-            DishAdd = itemView.findViewById();
-            QMinus =  itemView.findViewById();
-            QPlus =  itemView.findViewById();
-           */
+
+            DishName = itemView.findViewById(R.id.title);
+           // DishPrice = itemView.findViewById(R.id.count);
+            //DishVegImage = itemView.findViewById();
+            DishImage = itemView.findViewById(R.id.thumbnail);
+           // DishNVegImage = itemView.findViewById();
+            Quantity =  itemView.findViewById(R.id.count);
+          //  DishAdd = itemView.findViewById();
+            //QMinus =  itemView.findViewById();
+            //QPlus =  itemView.findViewById();
+
          DishAdd.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {

@@ -11,23 +11,20 @@
 
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
         android:fullBackupContent="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/dot7"
-        android:largeHeap="true"
         android:label="@string/App_Name"
+        android:largeHeap="true"
         android:roundIcon="@drawable/dot7"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-
         tools:replace="android:label">
         <meta-data
             android:name="sendotp.key"
-            android:value="@string/sendotp_key"
-             />
+            android:value="@string/sendotp_key" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-
             android:value="@string/facebook_app_id" />
 
         <activity
@@ -78,6 +75,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name="a.home_screen.Individual_Restaurant_Page"></activity>
     </application>
 
 </manifest>

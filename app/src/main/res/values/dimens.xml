@@ -4,4 +4,24 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="activity_margin_content">24dp</dimen>
+    <dimen name="appbar_header_height">256dp</dimen>
+
+    //From CardView project
+    <dimen name="item_offset">10dp</dimen>
+    <dimen name="detail_backdrop_height">250dp</dimen>
+    <dimen name="backdrop_title">30dp</dimen>
+    <dimen name="backdrop_subtitle">18dp</dimen>
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_album_radius">0dp</dimen>
+    <dimen name="dish_thumbnail_height">160dp</dimen>
+    <dimen name="dish_name_padding">10dp</dimen>
+    <dimen name="dish_name">15sp</dimen>
+    <dimen name="dish_price_padding_bottom">5dp</dimen>
+    <dimen name="dish_price">12dp</dimen>
+    <dimen name="ic_album_overflow_width">20dp</dimen>
+    <dimen name="ic_album_overflow_height">30dp</dimen>
+    <dimen name="ic_album_overflow_margin_top">10dp</dimen>
+
+
 </resources>

@@ -5,4 +5,7 @@
     <color name="colorAccent">#00BFA5</color>
     <color name ="tealButton">#00796B</color>
     <color name="gray">#d9d9d9</color>
+    <color name="dish_name">#4c4c4c</color>
+    <color name="black_trans80">#33000000</color>
+    <color name="primary_500">#3F51B5</color>
 </resources>
