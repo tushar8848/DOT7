@@ -49,31 +49,51 @@
             app:pinAnimationType="popIn" />
 
 
+
         <ProgressBar
             android:id="@+id/OTP_Progress_Bar"
             style="?android:attr/progressBarStyle"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_centerInParent="true"
-
-            android:layout_below="@+id/btn_id"
-
+            android:layout_below="@+id/Verify_Otp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
             android:visibility="visible" />
 
-        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-            android:id="@+id/btn_id"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/Verify_Otp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/Txt_Pin_Entry"
-            android:layout_alignStart="@+id/Txt_Pin_Entry"
             android:layout_below="@+id/Txt_Pin_Entry"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/progress_shape"
-            android:text="Register"
-            app:spinning_bar_color="@color/tealButton"
-            app:spinning_bar_padding="6dp"
-            app:spinning_bar_width="4dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="11dp"
+            android:padding="12dp"
+          >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:text="@string/Continue_Button"
+                android:textColor="#FFF"/>
+
+            <ProgressBar
+                android:id="@+id/OTPVerify_Progress_Bar"
+                android:layout_width="32dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+            >
+
+        </LinearLayout>
     </RelativeLayout>
 
     <ImageView

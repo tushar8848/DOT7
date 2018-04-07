@@ -32,7 +32,6 @@ import a.common.MySingleton;
 import a.common.TempActivity;
 import a.common.MyDialog;
 import a.home_screen.Restaurant_Recycler_View;
-import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
 /**
  * Created by TUSHAR on 11-03-18.
@@ -46,7 +45,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     LinearLayout LoginButton;
     String StatusCode;
     ProgressBar progressBar;
-    CircularProgressButton btn;
     int validContact=0,ePass=0,eContact;
     String url = GlobalMethods.getURL() + "Login";
     //String url = "http://192.168.43.161:3000/Login";
@@ -61,11 +59,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Login");
         setSupportActionBar(toolbar);
-       // progressBar = findViewById(R.id.Login_Progress_Bar);
-         btn = findViewById(R.id.btn_id);
+        progressBar = findViewById(R.id.Login_Progress_Bar);
         setDetails();
-        btn.setOnClickListener(this);
-//        LoginButton.setOnClickListener(this);
+        LoginButton.setOnClickListener(this);
         focuschange();
     }
     private void focuschange()
@@ -135,8 +131,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
              else {
                  //internet is connected
                  Log.d("HAR", "Username:" + UserName + " Password:" + Password);
-                // progressBar.setVisibility(View.VISIBLE);
-                 btn.startAnimation();
+                 progressBar.setVisibility(View.VISIBLE);
                      callService(v);
              }
         }
@@ -149,14 +144,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                 @Override
                 public void onResponse(String s) {
-                    //progressBar.setVisibility(View.GONE);
-                    //btn.doneLoadingAnimation(R.color.tealButton,null);
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
+                    progressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
 
@@ -188,9 +176,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    //progressBar.setVisibility(View.GONE);
-                   // btn.doneLoadingAnimation(R.color.tealButton,null);
-                    btn.revertAnimation();
+                    progressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
                     Snackbar.make(view, "Some Error Occured",

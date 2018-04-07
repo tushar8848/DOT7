@@ -36,10 +36,13 @@ import a.common.MySingleton;
 import a.common.OTP_Generator;
 import a.common.OTP_Reader;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import a.getter_setter.Restaurant_Each_Row_data;
 import a.home_screen.RestaurantView_Adapter;
 import a.home_screen.Restaurant_Recycler_View;
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+=======
+>>>>>>> temp
 =======
 >>>>>>> temp
 
@@ -383,6 +386,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 <<<<<<< HEAD
 =======
         } catch (Exception ex) {
+<<<<<<< HEAD
+>>>>>>> temp
+=======
 >>>>>>> temp
 
             }

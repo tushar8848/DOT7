@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.Toolbar android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/Tbar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        xmlns:android="http://schemas.android.com/apk/res/android" />
 
 
     <ImageView
@@ -99,17 +98,21 @@
         app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Password" />
 
 
+
+
+
+
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/Sign_In_Button"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Login_Button"
         app:layout_constraintVertical_bias="0.132" />
@@ -133,7 +136,7 @@
 
         />
 
-    <!--<LinearLayout
+    <LinearLayout
         android:id="@+id/Input_Layout_Name_Login_Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -164,24 +167,8 @@
             android:layout_gravity="center"
             android:indeterminate="true"
             android:visibility="gone" />
-    </LinearLayout>-->
+    </LinearLayout>
 
-    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-        android:id="@+id/btn_id"
-        android:layout_width="219dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/progress_shape"
-        android:text="@string/Login_Button"
-        app:layout_constraintBottom_toTopOf="@+id/Link_Signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Password"
-        app:spinning_bar_color="@color/tealButton"
-        app:spinning_bar_padding="6dp"
-        app:spinning_bar_width="4dp" />
+
 
 </android.support.constraint.ConstraintLayout>
