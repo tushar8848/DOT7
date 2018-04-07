@@ -35,17 +35,11 @@ import a.common.MyDialog;
 import a.common.MySingleton;
 import a.common.OTP_Generator;
 import a.common.OTP_Reader;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import a.getter_setter.Restaurant_Each_Row_data;
 import a.home_screen.RestaurantView_Adapter;
 import a.home_screen.Restaurant_Recycler_View;
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
-=======
->>>>>>> temp
-=======
->>>>>>> temp
-
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -211,7 +205,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
     private void callService(final View view) {
         try {
-<<<<<<< HEAD
+
 
                 StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                         Listener<String>() {
@@ -219,7 +213,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     @Override
                     public void onResponse(String s) {
                         // progressBar.setActivated(false);
-                        // progressBar.setVisibility(View.GONE);
+                         progressBar.setVisibility(View.GONE);
                         try {
                             Thread.sleep(2000);
                         } catch (InterruptedException e) {
@@ -258,173 +252,37 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         // setProgressBarIndeterminate(false);
-                        // progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                         //progressBar.setActivated(false);
-                        progress.revertAnimation();
                         Log.d("HAR", volleyError.toString());
                         Log.d("HAR", "Error");
                         //***************************************Stop Progress Bar********************************
-                        Snackbar.make(view, "Some Error Occured",
-=======
-            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
-                    Listener<String>() {
-
-                @Override
-                public void onResponse(String s) {
-                   // progressBar.setActivated(false);
-                    progressBar.setVisibility(View.GONE);
-                    StatusCode = GlobalMethods.GetSubString(s);
-                    Log.d("HAR", s);
-                    // ********************************************************stop progress bar*************************
-
-                    if (!StatusCode.contains("302")) {
-
-                        boolean flag;
-                        //generating OTP
-                        String OTP = OTP_Generator.getInstance(Register.this).Generate();
-                        //sending sms
-                        flag = OTP_Generator.getInstance(Register.this).sendMessage(OTP, contact);
-                        if (flag)
-                            Log.d("HAR", "OTP generated and sent succesfully " + OTP);
-                        else
-                            Log.d("HAR", "OTP generated but not sent, contact:" + contact);
-
-
-                        Intent intent = new Intent(Register.this, OTP_Reader.class);
-                        intent.putExtra("Name", name);
-                        intent.putExtra("Password", password);
-                        intent.putExtra("Contact", contact);
-                        intent.putExtra("OTP", OTP);
-                        startActivity(intent);
-                    } else {
-                        Snackbar.make(view, "User Already Registered",
->>>>>>> temp
+                        Snackbar.make(view, "Some Error occured",
                                 Snackbar.LENGTH_LONG)
-                                .setAction("Retry", null).show();
+                                .setAction("OK", null).show();
+
                     }
+
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> parameters = new HashMap<>();
                         parameters.put("LoginID", contact);
-
                         // if(Name != null)
                         //   parameters.put("Name",Name);
                         return parameters;
                     }
                 };
-                MySingleton.getInstance(this).addToRequestQueue(request);
-                Log.d("HAR", "Service ab return kr ri hai");
-
-
         }
         catch(Exception ex){
-                progress.revertAnimation();
+
                 Log.d("HAR","Error AYA");
 
             }
         }
 
 
-   public void CheckAuthorization(final View view)
-    {
 
-        JsonArrayRequest jsonArrayRequest = new
-                JsonArrayRequest(URL_Auth, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response1) {
-                Log.d("HAR",response1.toString());
-                JSONArray response = null;
-                JSONObject response_JSON = null;
-                try {
-                    response = new JSONArray(response1);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-<<<<<<< HEAD
-
-
-                try {
-                     response_JSON = response.getJSONObject(0);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-=======
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                   // setProgressBarIndeterminate(false);
-                    progressBar.setVisibility(View.GONE);
-                    //progressBar.setActivated(false);
-                    Log.d("HAR", volleyError.toString());
-                    Log.d("HAR", "Error");
-                    //***************************************Stop Progress Bar********************************
-                    Snackbar.make(view, "Some Error Occured",
-                            Snackbar.LENGTH_LONG)
-                            .setAction("Retry", null).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> parameters = new HashMap<>();
-                    parameters.put("LoginID", contact);
-
-                    // if(Name != null)
-                    //   parameters.put("Name",Name);
-                    return parameters;
->>>>>>> temp
-                }
-                    if(!(response_JSON.has("error")))
-                    {
-                        Log.d("HAR","success");
-                       // callService(view);
-                    }
-                    else
-                        Snackbar.make(view, "Internal Server Error",
-                                Snackbar.LENGTH_LONG)
-                                .setAction("Retry", null).show();
-
-<<<<<<< HEAD
-=======
-        } catch (Exception ex) {
-<<<<<<< HEAD
->>>>>>> temp
-=======
->>>>>>> temp
-
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Snackbar.make(view, "Internal Server Error",
-                        Snackbar.LENGTH_LONG)
-                        .setAction("Retry", null).show();
-
-            }
-        }){
-        @Override
-        protected Map<String, String> getParams() throws AuthFailureError {
-            Map<String, String> parameters = new HashMap<>();
-            parameters.put("username", "harneet.singh.ts@gmail.com");
-            parameters.put("password", "Dot7-app");
-            parameters.put("grant_type", "password");
-            Log.d("HAR",parameters.toString());
-            return parameters;
-        }
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String,String> params = new HashMap<String, String>();
-                        // Removed this line if you dont need it or Use application/json
-                         params.put("Content-Type", "application/x-www-form-urlencoded");
-                         Log.d("HAR",params.toString());
-                        return params;
-                    }
-    };
-
-        //  Queue = Volley.newRequestQueue(this);
-        // Queue.add(jsonArrayRequest);
-        MySingleton.getInstance(this).addToJsonRequestQueue(jsonArrayRequest);
-    }
     @Override
     public void onBackPressed() {
         Intent ForgotPassword = new Intent(Register .this, ScreenSlideActivity.class);
