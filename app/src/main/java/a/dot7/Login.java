@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     {
         UserNameText = findViewById(R.id.Mob_No);
         PasswordText = findViewById(R.id.Password);
-        LoginButton = findViewById(R.id.Input_Layout_Name_Login_Button);
+        LoginButton = findViewById(R.id.btn_id);
     }
     private void getDetails()
     {

@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v7.widget.SearchView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -71,6 +72,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     String url = GlobalMethods.getURL() + "Login";
     AlertDialog CustomDialog;
     int determineService = 1;
+   // FloatingActionButton fab = findViewById(R.id.fab);
+
+    private boolean isFabOPEN=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +98,14 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                if(!isFabOPEN)
+                {
+                    showfab();
+                }
+                else
+                    closefab();
+
             }
         });
 
@@ -118,12 +129,49 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
 
     }
+    private void showfab()
+    {
+        FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
+        isFabOPEN=true;
+
+        fab_call.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        Snackbar.make(view, "Replace with your own action .....", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+    }
+    private void closefab()
+    {
+        FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
+        isFabOPEN=false;
+        fab_call.animate().translationY(0);
+    }
+
+    public void call_to_order(View view)
+    {
+        Snackbar.make(view, "Replace with your own action ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.res_view_menu, menu);
+        getMenuInflater().inflate(R.menu.restaurant_toolbar_menu, menu);
+      /* final MenuItem searchItem= menu.findItem(R.id.Search);
+        if (searchItem != null) {
+
+           searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                @Override
+                public boolean onClose() {
+                    //some operation
+                }
+            });
+            searchView.setOnSearchClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //some operation
+                }
+            });*/
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

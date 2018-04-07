@@ -19,9 +19,13 @@
             android:icon="@drawable/ic_favorite_black_24dp"
             android:title="Favourites" />
         <item
-            android:id="@+id/logout"
+            android:id="@+id/about"
             android:icon="@drawable/ic_people_black_24dp"
             android:title="About Us" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="Logout" />
     </group>
     <item android:title="Communicate">
         <menu>
