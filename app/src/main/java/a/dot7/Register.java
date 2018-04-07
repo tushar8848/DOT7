@@ -35,22 +35,25 @@ import a.common.MyDialog;
 import a.common.MySingleton;
 import a.common.OTP_Generator;
 import a.common.OTP_Reader;
+<<<<<<< HEAD
 import a.getter_setter.Restaurant_Each_Row_data;
 import a.home_screen.RestaurantView_Adapter;
 import a.home_screen.Restaurant_Recycler_View;
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+=======
+>>>>>>> temp
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
 
-
+    LinearLayout signup;
     EditText UserName,UserContact,UserPassword,UserCPassword;
     String name,contact,password,cpassword;
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
     int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0,eCpass=0;
     public final String URL_Auth = GlobalMethods.getURL()+"token";
     String StatusCode;
-    CircularProgressButton progress;
+    ProgressBar progressBar;
 
     a.common.MyDialog dialog;
     @Override
@@ -60,11 +63,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Register");
         setSupportActionBar(toolbar);
-        //progressBar = findViewById(R.id.Register_Progress_Bar);
-        progress = findViewById(R.id.btn_id);
-        //progressBar.setIndeterminate(true);
+        progressBar = findViewById(R.id.Register_Progress_Bar);
+        progressBar.setIndeterminate(true);
         getDetails();
-        progress.setOnClickListener(this);
+        signup.setOnClickListener(this);
     }
 
     private void getDetails() {
@@ -72,6 +74,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         UserContact=findViewById(R.id.Mob_No);
         UserPassword=findViewById(R.id.Password);
         UserCPassword=findViewById(R.id.Cnfpassword);
+        signup=findViewById(R.id.Btn_Signup);
         focusChangeListeners();
 
     }
@@ -196,8 +199,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 //setProgressBarIndeterminate(true);
 
                // progressBar.setProgress(1);
-               // progressBar.setVisibility(View.VISIBLE);
-                progress.startAnimation();
+                progressBar.setVisibility(View.VISIBLE);
               //  progressBar.setActivated(true);
                 //CheckAuthorization(view);
                 callService(view);
@@ -206,6 +208,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
     private void callService(final View view) {
         try {
+<<<<<<< HEAD
 
                 StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                         Listener<String>() {
@@ -259,6 +262,40 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         Log.d("HAR", "Error");
                         //***************************************Stop Progress Bar********************************
                         Snackbar.make(view, "Some Error Occured",
+=======
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
+                    Listener<String>() {
+
+                @Override
+                public void onResponse(String s) {
+                   // progressBar.setActivated(false);
+                    progressBar.setVisibility(View.GONE);
+                    StatusCode = GlobalMethods.GetSubString(s);
+                    Log.d("HAR", s);
+                    // ********************************************************stop progress bar*************************
+
+                    if (!StatusCode.contains("302")) {
+
+                        boolean flag;
+                        //generating OTP
+                        String OTP = OTP_Generator.getInstance(Register.this).Generate();
+                        //sending sms
+                        flag = OTP_Generator.getInstance(Register.this).sendMessage(OTP, contact);
+                        if (flag)
+                            Log.d("HAR", "OTP generated and sent succesfully " + OTP);
+                        else
+                            Log.d("HAR", "OTP generated but not sent, contact:" + contact);
+
+
+                        Intent intent = new Intent(Register.this, OTP_Reader.class);
+                        intent.putExtra("Name", name);
+                        intent.putExtra("Password", password);
+                        intent.putExtra("Contact", contact);
+                        intent.putExtra("OTP", OTP);
+                        startActivity(intent);
+                    } else {
+                        Snackbar.make(view, "User Already Registered",
+>>>>>>> temp
                                 Snackbar.LENGTH_LONG)
                                 .setAction("Retry", null).show();
                     }
@@ -301,12 +338,37 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+<<<<<<< HEAD
 
 
                 try {
                      response_JSON = response.getJSONObject(0);
                 } catch (JSONException e) {
                     e.printStackTrace();
+=======
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                   // setProgressBarIndeterminate(false);
+                    progressBar.setVisibility(View.GONE);
+                    //progressBar.setActivated(false);
+                    Log.d("HAR", volleyError.toString());
+                    Log.d("HAR", "Error");
+                    //***************************************Stop Progress Bar********************************
+                    Snackbar.make(view, "Some Error Occured",
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Retry", null).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("LoginID", contact);
+
+                    // if(Name != null)
+                    //   parameters.put("Name",Name);
+                    return parameters;
+>>>>>>> temp
                 }
                     if(!(response_JSON.has("error")))
                     {
@@ -318,6 +380,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                                 Snackbar.LENGTH_LONG)
                                 .setAction("Retry", null).show();
 
+<<<<<<< HEAD
+=======
+        } catch (Exception ex) {
+>>>>>>> temp
 
             }
 
