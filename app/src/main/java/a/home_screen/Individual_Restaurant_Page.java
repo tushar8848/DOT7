@@ -13,7 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import java.util.List;
+
 import a.dot7.R;
+import a.getter_setter.Dishes;
 
 public class Individual_Restaurant_Page extends AppCompatActivity {
 
@@ -22,7 +25,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
     private RecyclerView recyclerView;
     private boolean appBarExpanded = true;
     private DishesAdapter dishesAdapter;
-
+    private List<Dishes> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        dishesAdapter = new DishesAdapter(this);
+        dishesAdapter = new DishesAdapter(this,data);
         recyclerView.setAdapter(dishesAdapter);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
