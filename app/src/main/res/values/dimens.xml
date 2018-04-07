@@ -6,6 +6,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="activity_margin_content">24dp</dimen>
     <dimen name="appbar_header_height">256dp</dimen>
+    <dimen name="standard_55">55dp</dimen>
 
     //From CardView project
     <dimen name="item_offset">10dp</dimen>
