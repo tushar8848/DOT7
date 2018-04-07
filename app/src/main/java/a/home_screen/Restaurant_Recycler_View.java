@@ -146,7 +146,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     public void call_to_order(View view)
     {
-        Snackbar.make(view, "Replace with your own action ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        Snackbar.make(view, "Call To Order ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
 
