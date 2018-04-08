@@ -82,3 +82,4 @@ public class Restaurants {
 
     public void setShowShimmer(boolean showShimmer) {   this.showShimmer = showShimmer; }
 }
+

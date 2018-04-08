@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import a.common.CheckConnection;
+import a.common.GlideApp;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.R;
@@ -49,6 +51,8 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
     private List<Dishes> data;
     private Intent intent;
     private String URL;
+    private ImageView BannerImage;
+
 
 
 
@@ -58,6 +62,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         setContentView(R.layout.activity_individual_restaurant_page);
         intent = getIntent();
         final Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+        BannerImage = findViewById(R.id.header);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,7 +70,13 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("Restaurant View");
+        collapsingToolbar.setTitle(intent.getStringExtra("RestaurantName"));
+
+        GlideApp
+                .with(Individual_Restaurant_Page.this)
+                .load(intent.getStringExtra("RestaurantImage"))
+                .centerCrop()
+                .into(BannerImage);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.dot7_banner);
@@ -99,6 +110,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         set_RecyclerView_Details();
         addRowData();
         GetProducts();
+
     }
 
     private void set_RecyclerView_Details()

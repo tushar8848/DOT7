@@ -63,7 +63,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurants> AllRowData;
-    private List<String> RestaurantKey, UserSelectedRestaurant;
+    private List<String> RestaurantKey, RestaurantImage, RestaurantName, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
     private RestaurantsAdapter Adapter;
     private String URL ;
@@ -305,6 +305,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     public void Json_Data_Web_Call()
     {
         RestaurantKey = new ArrayList<>();
+        RestaurantName = new ArrayList<>();
+        RestaurantImage = new ArrayList<>();
         UserSelectedRestaurant = new ArrayList<>();
         //AllRowData = new ArrayList<>();
        // RequestQueue Queue;
@@ -342,6 +344,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                             RowData.setRestaurantTiming(json.getString("time"));
                             RowData.setRestaurantImage(json.getString("imageURL"));
                             RestaurantKey.add(json.getString("key"));
+                            RestaurantName.add(json.getString("restaurantName"));
+                            RestaurantImage.add(json.getString("imageURL"));
 
                             RowData.setShowShimmer(true);
                             Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
@@ -367,10 +371,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     @Override
                     public void onItemClick(int position) {
 
-                        //UserSelectedRestaurant.add()
+                        UserSelectedRestaurant.add(RestaurantKey.get(position).toString());
                         Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
                         intent.putExtra("RestaurantKey", RestaurantKey.get(position).toString());
+                        intent.putExtra("RestaurantName", RestaurantName.get(position).toString());
+                        intent.putExtra("RestaurantImage", RestaurantImage.get(position).toString());
                         startActivity(intent);
                     }
                 });
