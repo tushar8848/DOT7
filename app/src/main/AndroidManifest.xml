@@ -76,7 +76,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page"></activity>
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page" />
+        <activity android:name=".activity_cart"></activity>
     </application>
 
 </manifest>

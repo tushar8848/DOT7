@@ -17,7 +17,9 @@
     <item
         android:id="@+id/Cart"
         android:title="Cart_icon"
+
         android:icon="@drawable/ic_shopping_cart_white_24dp"
+
         app:showAsAction="ifRoom">
 
     </item>
