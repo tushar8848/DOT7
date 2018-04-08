@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,7 +13,7 @@
         android:elevation="3dp"
         card_view:cardCornerRadius="@dimen/card_album_radius">
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -20,106 +21,132 @@
                 android:id="@+id/dish_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:src="@drawable/dot7"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:focusable="true"
                 android:scaleType="fitXY"
-                android:focusable="true" />
+                android:src="@drawable/dot7"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/veg_non_veg_logo"
-                android:src="@drawable/veg_logo"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/dish_thumbnail"
-                android:paddingStart="5dp"
-                android:layout_alignParentStart="true"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/dish_thumbnail"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:paddingStart="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/veg_logo"
+                card_view:layout_constraintBottom_toTopOf="@+id/dish_price"
+                card_view:layout_constraintEnd_toStartOf="@+id/dish_name"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="@+id/dish_name"
+                card_view:layout_constraintVertical_bias="0.15" />
 
             <TextView
                 android:id="@+id/dish_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dish Name"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/dish_thumbnail"
                 android:layout_toEndOf="@id/veg_non_veg_logo"
+                android:paddingEnd="20dp"
                 android:paddingLeft="@dimen/dish_name_padding"
                 android:paddingRight="@dimen/dish_name_padding"
                 android:paddingTop="@dimen/dish_name_padding"
+                android:text="Dish Name"
                 android:textColor="@color/dish_name"
-                android:textSize="@dimen/dish_name" />
-
+                android:textSize="@dimen/dish_name"
+                card_view:layout_constraintBottom_toTopOf="@+id/dish_price"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/veg_non_veg_logo"
+                card_view:layout_constraintTop_toBottomOf="@+id/dish_thumbnail"
+                card_view:layout_constraintVertical_bias="1.0" />
 
 
             <TextView
                 android:id="@+id/dish_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dish_name"
-                android:text="Rs. 150"
                 android:layout_alignStart="@id/dish_name"
+                android:layout_below="@id/dish_name"
                 android:paddingBottom="@dimen/dish_price_padding_bottom"
                 android:paddingLeft="@dimen/dish_name_padding"
                 android:paddingRight="@dimen/dish_name_padding"
-                android:textSize="@dimen/dish_price" />
+                android:text="Rs. 150"
+                android:textSize="@dimen/dish_price"
+                card_view:layout_constraintBottom_toTopOf="@+id/add_button"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/dish_name" />
 
             <RelativeLayout
                 android:id="@+id/add_button"
-                android:orientation="vertical"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/rectangle_border"
-                android:layout_below="@id/dish_price"
-                android:layout_alignParentEnd="true"
-                android:backgroundTint="@color/colorAccent"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/dish_price"
+                android:background="@drawable/rectangle_border"
+                android:backgroundTint="@color/colorAccent"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/dish_price">
 
                 <android.support.v7.widget.AppCompatButton
-                    android:text="Add"
                     android:id="@+id/add_to_cart_button"
                     style="?attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
-                    android:textColor="#fff"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:text="Add"
+                    android:textColor="#fff" />
 
                 <LinearLayout
                     android:id="@+id/quantity_modifier"
                     android:layout_width="match_parent"
-                    android:visibility="invisible"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="invisible">
+
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/Minus"
-                        android:text="-"
-                        android:textColor="#fff"
-                        android:backgroundTint="@color/colorAccent"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="-"
+                        android:textColor="#fff" />
+
                     <TextView
                         android:id="@+id/DishQuantity"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="1"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:background="#fff"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="2"
+                        android:background="#fff"
+                        android:gravity="center"
+                        android:text="1" />
+
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/Plus"
-                        android:text="+"
-                        android:textColor="#fff"
-                        android:backgroundTint="@color/colorAccent"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="+"
+                        android:textColor="#fff" />
                 </LinearLayout>
 
 
             </RelativeLayout>
 
 
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 
