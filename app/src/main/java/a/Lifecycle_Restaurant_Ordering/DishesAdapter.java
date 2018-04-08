@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,7 +31,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
 
     @Override
     public DishViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //***********************************************replace single item dish view*******************************************************
+
+
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_dish, parent, false);
 
@@ -39,9 +41,9 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     }
 
     @Override
-    public void onBindViewHolder(DishesAdapter.DishViewHolder holder, int position) {
+    public void onBindViewHolder(final DishesAdapter.DishViewHolder holder, final int position) {
 
-        Dishes BlockData = data.get(position);
+        final Dishes BlockData = data.get(position);
         holder.DishName.setText(BlockData.getDishName());
         holder.DishPrice.setText(BlockData.getDishPrice());
         String vFlag = BlockData.getDishVFlag();
@@ -55,6 +57,49 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                 .load(BlockData.getDishImageUrl())
                 .centerCrop()
                 .into(holder.DishImage);
+        holder.DishAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mListener!=null){
+                    //int position = getAdapterPosition();
+                    //if(position != RecyclerView.NO_POSITION){
+                      //  mListener.onItemClick(position);
+                   // }
+
+                    if(v == holder.QMinus)
+
+                    mListener.onItemClick(position);
+                    holder.DishAdd.setVisibility(View.GONE);
+                    BlockData.setQuantity(BlockData.getQuantity()+1);
+                   holder.QuantityModifier.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        holder.QPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = BlockData.getQuantity();
+                quantity++;
+                BlockData.setQuantity(quantity);
+
+                holder.Quantity.setText(String.valueOf(quantity));
+            }
+        });
+        holder.QMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = BlockData.getQuantity();
+                quantity--;
+                BlockData.setQuantity(quantity);
+               holder.Quantity.setText(String.valueOf(quantity));
+                if(quantity == 0)
+                {
+                    holder.QuantityModifier.setVisibility(View.GONE);
+                    holder.DishAdd.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
 
 
     }
@@ -69,7 +114,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
-
+    public void setOnItemClickListener(OnItemClickListener listener){ mListener = listener;}
     public class DishViewHolder extends RecyclerView.ViewHolder {
         TextView DishName;
         TextView DishPrice;
@@ -77,57 +122,25 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
         ImageView DishNVegImage;
         ImageView DishImage;
         TextView Quantity;
+        LinearLayout QuantityModifier;
         Button DishAdd;
         Button QMinus;
         Button QPlus;
 
         public DishViewHolder(View itemView) {
             super(itemView);
-            //*******************************************set id's*************************************************************
 
           DishName = itemView.findViewById(R.id.dish_name);
             DishPrice = itemView.findViewById(R.id.dish_price);
             DishVegImage = itemView.findViewById(R.id.veg_non_veg_logo);
             DishImage = itemView.findViewById(R.id.dish_thumbnail);
            // DishNVegImage = itemView.findViewById();
-          //  Quantity =  itemView.findViewById(R.id.count);
-          //  DishAdd = itemView.findViewById();
-            //QMinus =  itemView.findViewById();
-            //QPlus =  itemView.findViewById();
+            Quantity =  itemView.findViewById(R.id.DishQuantity);
+            DishAdd = itemView.findViewById(R.id.add_to_cart_button);
+            QMinus =  itemView.findViewById(R.id.Minus);
+            QPlus =  itemView.findViewById(R.id.Plus);
+            QuantityModifier = itemView.findViewById(R.id.quantity_modifier);
 
-       /*  DishAdd.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 if(mListener!=null){
-                     int position = getAdapterPosition();
-                     if(position != RecyclerView.NO_POSITION){
-                         mListener.onItemClick(position);
-                     }
-                 }
-             }
-         });
-         QMinus.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 if(mListener!=null){
-                     int position = getAdapterPosition();
-                     if(position != RecyclerView.NO_POSITION){
-                         mListener.onItemClick(position);
-                     }
-                 }
-             }
-         });
-         QPlus.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 if(mListener!=null){
-                     int position = getAdapterPosition();
-                     if(position != RecyclerView.NO_POSITION){
-                         mListener.onItemClick(position);
-                     }
-                 }
-             }
-         });*/
         }
     }
 }

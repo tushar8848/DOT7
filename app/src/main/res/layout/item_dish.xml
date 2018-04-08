@@ -82,10 +82,12 @@
                     android:layout_height="match_parent" />
 
                 <LinearLayout
+                    android:id="@+id/quantity_modifier"
                     android:layout_width="match_parent"
                     android:visibility="invisible"
                     android:layout_height="match_parent">
                     <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/Minus"
                         android:text="-"
                         android:textColor="#fff"
                         android:backgroundTint="@color/colorAccent"
@@ -93,6 +95,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/DishQuantity"
                         android:layout_weight="2"
                         android:gravity="center"
                         android:text="1"
@@ -102,6 +105,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
                     <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/Plus"
                         android:text="+"
                         android:textColor="#fff"
                         android:backgroundTint="@color/colorAccent"

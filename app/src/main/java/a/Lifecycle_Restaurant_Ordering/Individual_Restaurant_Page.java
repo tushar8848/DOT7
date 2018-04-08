@@ -45,7 +45,7 @@ import a.dot7.R;
 import a.getter_setter.Dishes;
 import a.getter_setter.Restaurants;
 
-public class Individual_Restaurant_Page extends AppCompatActivity {
+public class Individual_Restaurant_Page extends AppCompatActivity implements View.OnClickListener {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
@@ -171,6 +171,11 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         private int spanCount;
@@ -230,6 +235,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         dishesAdapter = new
                 DishesAdapter(Individual_Restaurant_Page.this,data);
         recyclerView.setAdapter(dishesAdapter);
+
     }
 
     public void GetProducts()
@@ -286,38 +292,29 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
                 dishesAdapter = new
                         DishesAdapter(Individual_Restaurant_Page.this,data);
                 recyclerView.setAdapter(dishesAdapter);
-               /* Adapter.setOnItemClickListener(new RestaurantsAdapter.OnItemClickListener() {
+                dishesAdapter.setOnItemClickListener(new DishesAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                        Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
-                        startActivity(intent);
+
                     }
                 });
-                Restaurant_recycler_view.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        for(Restaurants restaurant_each_row_data : AllRowData){
-                            restaurant_each_row_data.setShowShimmer(false);
-                        }
-                        Adapter.notifyDataSetChanged();
-                    }
-                },3000);*/
+
+
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-               /* if(CheckConnection.getInstance(Restaurant_Recycler_View.this).getNetworkStatus())
+                if(CheckConnection.getInstance(Individual_Restaurant_Page.this).getNetworkStatus())
                 {
                     Log.e("VolleyError: ",error.toString());
                 }
                 else {
-                    Restaurant_recycler_view.setVisibility(View.GONE);
-                    Error_Image.setVisibility(View.VISIBLE);
-                    Error_Button.setVisibility(View.VISIBLE);
+                  //  recyclerView.setVisibility(View.GONE);
+                  //  Error_Image.setVisibility(View.VISIBLE);
+                   // Error_Button.setVisibility(View.VISIBLE);
                     //******************************************set error internet connection image*********************************
-                }*/
+                }
                Log.d("HAR",error.toString());
             }
         });
@@ -326,4 +323,13 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         // Queue.add(jsonArrayRequest);
         MySingleton.getInstance(this).addToJsonRequestQueue(jsonArrayRequest);
     }
+
+    private void quantityModifier()
+    {
+
+    }
+
+
+
+
 }
