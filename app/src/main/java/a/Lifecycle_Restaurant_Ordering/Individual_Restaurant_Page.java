@@ -11,6 +11,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,8 +19,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -52,6 +57,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
     private Intent intent;
     private String URL;
     private ImageView BannerImage;
+    private Menu collapsedMenu;
 
 
 
@@ -61,15 +67,18 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_restaurant_page);
         intent = getIntent();
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
-        BannerImage = findViewById(R.id.header);
+
+        final Toolbar toolbar = findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
+
+        BannerImage = findViewById(R.id.header);
+
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout = findViewById(R.id.appbar);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(intent.getStringExtra("RestaurantName"));
 
         GlideApp
@@ -111,6 +120,43 @@ public class Individual_Restaurant_Page extends AppCompatActivity {
         addRowData();
         GetProducts();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+        if (item.getTitle() == "Add") {
+            Toast.makeText(this, "clicked add", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (collapsedMenu != null
+                && (!appBarExpanded || collapsedMenu.size() != 1)) {
+            //collapsed
+            collapsedMenu.add("Add")
+                    .setIcon(R.drawable.ic_call_white_48dp)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        } else {
+            //expanded
+        }
+        return super.onPrepareOptionsMenu(collapsedMenu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.res_view_menu, menu);
+        collapsedMenu = menu;
+        return true;
     }
 
     private void set_RecyclerView_Details()
