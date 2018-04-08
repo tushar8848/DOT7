@@ -8,4 +8,5 @@
     <color name="dish_name">#4c4c4c</color>
     <color name="black_trans80">#33000000</color>
     <color name="primary_500">#3F51B5</color>
+    <color name="individualRestaurantViewBg">#f1f5f8</color>
 </resources>

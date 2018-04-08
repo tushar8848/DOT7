@@ -19,7 +19,7 @@
             <ImageView
                 android:id="@+id/dish_thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dish_thumbnail_height"
+                android:layout_height="120dp"
                 android:src="@drawable/dot7"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="Dish Name"
                 android:layout_below="@id/dish_thumbnail"
-                android:layout_toRightOf="@id/veg_non_veg_logo"
+                android:layout_toEndOf="@id/veg_non_veg_logo"
                 android:paddingLeft="@dimen/dish_name_padding"
                 android:paddingRight="@dimen/dish_name_padding"
                 android:paddingTop="@dimen/dish_name_padding"
@@ -57,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dish_name"
                 android:text="Rs. 150"
-                android:layout_alignLeft="@id/dish_name"
-                android:layout_alignBaseline="@id/add_button"
+                android:layout_alignStart="@id/dish_name"
                 android:paddingBottom="@dimen/dish_price_padding_bottom"
                 android:paddingLeft="@dimen/dish_name_padding"
                 android:paddingRight="@dimen/dish_name_padding"
@@ -67,17 +66,18 @@
             <RelativeLayout
                 android:id="@+id/add_button"
                 android:orientation="vertical"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/rectangle_border"
-                android:layout_below="@id/dish_name"
-
-                android:layout_alignParentEnd="true"
-                android:layout_width="60dp"
+                android:layout_below="@id/dish_price"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_width="match_parent"
                 android:layout_height="40dp">
 
                 <android.support.v7.widget.AppCompatButton
                     android:text="Add"
                     style="?attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
+                    android:textColor="#fff"
                     android:layout_height="match_parent" />
 
             </RelativeLayout>

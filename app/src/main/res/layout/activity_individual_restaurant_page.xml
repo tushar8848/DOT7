@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/individualRestaurantViewBg"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
@@ -51,7 +52,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/scrollableview"
-        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

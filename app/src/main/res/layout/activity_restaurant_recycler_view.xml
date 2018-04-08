@@ -5,12 +5,13 @@
     android:id="@+id/Drawer_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+
     android:fitsSystemWindows="true">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="5dp"
         android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
@@ -62,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
+            android:clipToPadding="false"
             android:layout_below="@id/Restaurant_Page_Toolbar"
             android:scrollbars="vertical" />
 
