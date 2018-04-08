@@ -63,7 +63,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurants> AllRowData;
-    private List<String> RestaurantKey;
+    private List<String> RestaurantKey, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
     private RestaurantsAdapter Adapter;
     private String URL ;
@@ -305,6 +305,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     public void Json_Data_Web_Call()
     {
         RestaurantKey = new ArrayList<>();
+        UserSelectedRestaurant = new ArrayList<>();
         //AllRowData = new ArrayList<>();
        // RequestQueue Queue;
         determineService = 2;
@@ -366,6 +367,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     @Override
                     public void onItemClick(int position) {
 
+                        //UserSelectedRestaurant.add()
                         Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
                         intent.putExtra("RestaurantKey", RestaurantKey.get(position).toString());
