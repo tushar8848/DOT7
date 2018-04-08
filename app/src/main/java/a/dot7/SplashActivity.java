@@ -8,21 +8,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.provider.Settings;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import a.common.CheckConnection;
 import a.common.GlobalMethods;
-import a.common.MySingleton;
-import a.common.TempActivity;
-import a.getter_setter.LoginData;
-import a.home_screen.Restaurant_Recycler_View;
+import a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2000;

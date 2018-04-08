@@ -2,14 +2,8 @@ package a.common;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -23,12 +17,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import a.dot7.R;
 import a.dot7.Set_New_Password;
-import a.home_screen.Restaurant_Recycler_View;
+import a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View;
 
 /**
  * Created by TUSHAR on 28-03-18.

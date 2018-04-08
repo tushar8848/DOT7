@@ -1,6 +1,5 @@
-package a.home_screen;
+package a.Lifecycle_Restaurant_Ordering;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;

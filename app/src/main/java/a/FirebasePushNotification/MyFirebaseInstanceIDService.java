@@ -2,12 +2,7 @@ package a.FirebasePushNotification;
 
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -23,8 +18,6 @@ import java.util.Map;
 
 import a.common.GlobalMethods;
 import a.common.MySingleton;
-import a.dot7.Login;
-import a.home_screen.Restaurant_Recycler_View;
 
 
 //Class extending FirebaseInstanceIdService

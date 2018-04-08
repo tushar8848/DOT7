@@ -62,7 +62,7 @@
             android:label="@string/title_activity_temp"
             android:theme="@style/AppTheme" />
         <activity android:name=".Otp" />
-        <activity android:name="a.home_screen.Restaurant_Recycler_View" />
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View" />
 
         <service android:name="a.FirebasePushNotification.MyFirebaseMessagingService">
             <intent-filter>
@@ -75,7 +75,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name="a.home_screen.Individual_Restaurant_Page"></activity>
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page"></activity>
     </application>
 
 </manifest>
