@@ -58,6 +58,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
     private String URL;
     private ImageView BannerImage;
     private Menu collapsedMenu;
+    Snackbar snackbar;
 
 
 
@@ -233,7 +234,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
             AllRowData.add(RowData);
         }*/
         dishesAdapter = new
-                DishesAdapter(Individual_Restaurant_Page.this,data);
+                DishesAdapter(Individual_Restaurant_Page.this,data,snackbar);
         recyclerView.setAdapter(dishesAdapter);
 
     }
@@ -290,7 +291,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
 
 
                 dishesAdapter = new
-                        DishesAdapter(Individual_Restaurant_Page.this,data);
+                        DishesAdapter(Individual_Restaurant_Page.this,data,snackbar);
                 recyclerView.setAdapter(dishesAdapter);
                 dishesAdapter.setOnItemClickListener(new DishesAdapter.OnItemClickListener() {
                     @Override

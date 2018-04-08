@@ -1,6 +1,9 @@
 package a.Lifecycle_Restaurant_Ordering;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +26,13 @@ import a.getter_setter.Dishes;
 public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHolder> {
     private final Context context;
     private List<Dishes> data;
-    public DishesAdapter(Context context,List<Dishes> data)
+    Snackbar snackbar;
+    View sbView;
+    public DishesAdapter(Context context,List<Dishes> data,Snackbar snackbar)
     {
         this.context = context;
         this.data = data;
+        this.snackbar = snackbar;
     }
 
     @Override
@@ -61,17 +67,25 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
             @Override
             public void onClick(View v) {
                 if(mListener!=null){
-                    //int position = getAdapterPosition();
-                    //if(position != RecyclerView.NO_POSITION){
-                      //  mListener.onItemClick(position);
-                   // }
-
-                    if(v == holder.QMinus)
-
                     mListener.onItemClick(position);
+                    int quantity = BlockData.getQuantity();
+                    quantity++;
                     holder.DishAdd.setVisibility(View.GONE);
-                    BlockData.setQuantity(BlockData.getQuantity()+1);
+                    BlockData.setQuantity(quantity);
+                    holder.Quantity.setText(String.valueOf(quantity));
                    holder.QuantityModifier.setVisibility(View.VISIBLE);
+                   snackbar = Snackbar.make(v,quantity+" item(s)",Snackbar.LENGTH_INDEFINITE);
+                   sbView = snackbar.getView();
+                   sbView.setBackgroundColor(Color.parseColor("#00BFA5"));
+                   snackbar.setAction("View Cart", new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+
+                       }
+                   });
+                   snackbar.setActionTextColor(Color.WHITE);
+                   snackbar.show();
+
                 }
             }
         });
@@ -81,7 +95,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                 int quantity = BlockData.getQuantity();
                 quantity++;
                 BlockData.setQuantity(quantity);
-
+                snackbar.setText(quantity+" item(s)");
                 holder.Quantity.setText(String.valueOf(quantity));
             }
         });
@@ -92,8 +106,10 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                 quantity--;
                 BlockData.setQuantity(quantity);
                holder.Quantity.setText(String.valueOf(quantity));
+                snackbar.setText(quantity+" item(s)");
                 if(quantity == 0)
                 {
+                    snackbar.dismiss();
                     holder.QuantityModifier.setVisibility(View.GONE);
                     holder.DishAdd.setVisibility(View.VISIBLE);
                 }
