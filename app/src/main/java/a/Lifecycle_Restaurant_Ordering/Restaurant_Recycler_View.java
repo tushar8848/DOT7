@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -65,6 +66,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private RestaurantsAdapter Adapter;
     private String URL ;
     private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private int mCurrentSelectedPosition;
     View view;
     ImageView Error_Image;
     TextView Error_Message;
@@ -90,8 +93,29 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
+            actionbar.setHomeAsUpIndicator(R.drawable.ic_drawer);
         }
+
+        mNavigationView = findViewById(R.id.navigation_bar);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                menuItem.setChecked(true);
+                switch (menuItem.getItemId()) {
+                    case R.id.home:
+                        Snackbar.make(view, "Item One", Snackbar.LENGTH_SHORT).show();
+                        mCurrentSelectedPosition = 0;
+                        return true;
+                    case R.id.your_account:
+                        Snackbar.make(view, "Item Two", Snackbar.LENGTH_SHORT).show();
+                        mCurrentSelectedPosition = 1;
+                        return true;
+                    default:
+                        return true;
+                }
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         view = fab;
