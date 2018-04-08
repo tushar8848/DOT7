@@ -10,7 +10,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/Tbar1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
 
@@ -26,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Tbar1">
+        app:layout_constraintTop_toBottomOf="@+id/Tbar1"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,9 +36,9 @@
 
             <ImageView
                 android:id="@+id/ImageView"
-                android:contentDescription="@string/DOT7_Banner"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:contentDescription="@string/DOT7_Banner"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/dot7_banner" />
 
@@ -144,23 +145,22 @@
                 android:id="@+id/Btn_Signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/colorPrimary"
-                android:padding="12dp"
-                android:layout_gravity="center_vertical"
-                >
+                android:orientation="horizontal"
+                android:padding="12dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/Signup_Button"
-                    android:textColor="#FFF"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    />
+                    android:textColor="#FFF" />
 
                 <ProgressBar
                     android:id="@+id/Register_Progress_Bar"
@@ -171,7 +171,6 @@
                     android:visibility="gone" />
 
             </LinearLayout>
-
 
 
             <TextView
