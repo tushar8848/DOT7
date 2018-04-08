@@ -120,7 +120,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+       /* FloatingActionButton fab = findViewById(R.id.fab);
         view = fab;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +134,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     closefab();
 
             }
-        });
+        });*/
 
         //Restaurant_recycler_view = findViewById(R.id.rec_view);
         Log.d("HAR","Recycler view me aaya");
@@ -156,7 +156,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
 
     }
-    private void showfab()
+  /*  private void showfab()
     {
         FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
         isFabOPEN=true;
@@ -169,11 +169,13 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
         isFabOPEN=false;
         fab_call.animate().translationY(0);
-    }
+    }*/
 
     public void call_to_order(View view)
     {
         Snackbar.make(view, "Call To Order ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        
+
     }
 
 
