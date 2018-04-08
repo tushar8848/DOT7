@@ -104,8 +104,8 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                 .centerCrop()
                 .into(BannerImage);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.dot7_banner);
+       /* Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                R.drawable.loginpage);
 
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @SuppressWarnings("ResourceType")
@@ -115,7 +115,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                 collapsingToolbar.setContentScrimColor(vibrantColor);
                 collapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
             }
-        });
+        });*/
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override

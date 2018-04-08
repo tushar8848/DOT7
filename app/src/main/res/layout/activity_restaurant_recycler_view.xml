@@ -5,7 +5,7 @@
     android:id="@+id/Drawer_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/black_trans80"
     android:fitsSystemWindows="true">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,6 +25,10 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Search the delicacies" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/shadow" />
 
         <ImageView
             android:id="@+id/Restaurant_View_Error"
@@ -62,28 +66,23 @@
             android:id="@+id/Recycler_View"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
             android:layout_alignParentStart="true"
-            android:clipToPadding="false"
             android:layout_below="@id/Restaurant_Page_Toolbar"
             android:scrollbars="vertical" />
 
 
-        <ImageButton
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/Call_to_Order"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-
-
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="normal"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/fab_margin"
             android:onClick="call_to_order"
-            app:srcCompat="@drawable/ic_call_black_24dp" />
-
-
-
-
-
+            app:srcCompat="@drawable/ic_call_white_48dp" />
 
     </RelativeLayout>
 
