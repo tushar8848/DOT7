@@ -84,10 +84,10 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
             super(itemView);
             //*******************************************set id's*************************************************************
 
-         //   DishName = itemView.findViewById(R.id.title);
-           // DishPrice = itemView.findViewById(R.id.count);
-            //DishVegImage = itemView.findViewById();
-           // DishImage = itemView.findViewById();
+          DishName = itemView.findViewById(R.id.dish_name);
+            DishPrice = itemView.findViewById(R.id.dish_price);
+            DishVegImage = itemView.findViewById(R.id.veg_non_veg_logo);
+            DishImage = itemView.findViewById(R.id.dish_thumbnail);
            // DishNVegImage = itemView.findViewById();
           //  Quantity =  itemView.findViewById(R.id.count);
           //  DishAdd = itemView.findViewById();
