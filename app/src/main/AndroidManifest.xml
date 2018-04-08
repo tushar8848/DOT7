@@ -62,6 +62,7 @@
             android:label="@string/title_activity_temp"
             android:theme="@style/AppTheme" />
         <activity android:name=".Otp" />
+        <activity android:name=".myProfile"/>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View" />
 
         <service android:name="a.FirebasePushNotification.MyFirebaseMessagingService">

@@ -69,6 +69,7 @@
                 android:layout_marginTop="3dp"
                 android:background="@drawable/rectangle_border"
                 android:layout_below="@id/dish_price"
+                android:layout_alignParentEnd="true"
                 android:backgroundTint="@color/colorAccent"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">

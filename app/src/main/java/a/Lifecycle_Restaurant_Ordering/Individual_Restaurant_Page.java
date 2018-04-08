@@ -132,7 +132,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                 return true;
         }
         if (item.getTitle() == "Add") {
-            Toast.makeText(this, "clicked add", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Added to favourites", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -144,7 +144,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                 && (!appBarExpanded || collapsedMenu.size() != 1)) {
             //collapsed
             collapsedMenu.add("Add")
-                    .setIcon(R.drawable.ic_call_white_48dp)
+                    .setIcon(R.drawable.unfavourite)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         } else {
             //expanded
