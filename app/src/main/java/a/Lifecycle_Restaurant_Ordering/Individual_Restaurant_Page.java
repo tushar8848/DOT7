@@ -1,6 +1,8 @@
 package a.Lifecycle_Restaurant_Ordering;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +10,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -26,21 +29,28 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import a.common.CheckConnection;
 import a.common.GlideApp;
 import a.common.GlobalMethods;
+import a.common.MyDialog;
 import a.common.MySingleton;
+import a.dot7.Login;
 import a.dot7.R;
 import a.getter_setter.Dishes;
 import a.getter_setter.Restaurants;
@@ -56,8 +66,12 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
     private List<Dishes> data;
     private Intent intent;
     private String URL;
+    private FloatingActionButton Favourite;
     private ImageView BannerImage;
     private Menu collapsedMenu;
+    private int countFav = 0;
+    private String Url;
+    private String StatusCode;
     Snackbar snackbar;
 
 
@@ -68,7 +82,9 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_restaurant_page);
         intent = getIntent();
-
+        Url = GlobalMethods.getURL() + "Restaurant_Main";
+        Favourite = findViewById(R.id.favourite);
+        Favourite.setOnClickListener(this);
         final Toolbar toolbar = findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
 
@@ -120,6 +136,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
         set_RecyclerView_Details();
         addRowData();
         GetProducts();
+        callInitialFavService();
 
     }
 
@@ -131,24 +148,35 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                 return true;
             case R.id.action_settings:
                 return true;
-        }
-        if (item.getTitle() == "Add") {
-            Toast.makeText(this, "Added to favourites", Toast.LENGTH_SHORT).show();
-        }
+            }
 
+
+
+        if (item.getTitle() == "Add") {
+
+         /*   if(countFav%2!=0)*/
+         //collapsedMenu.removeItem(R.id.favourite);
+
+         /* collapsedMenu.add("Add")
+                    .setIcon(R.drawable.favourite)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+*/
+           /* collapsedMenu.add("Add")
+                    .setIcon(R.drawable.unfavourite)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);*/
+            //expanded
+
+            Toast.makeText(this, "Added", Toast.LENGTH_LONG).show();
+        }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (collapsedMenu != null
                 && (!appBarExpanded || collapsedMenu.size() != 1)) {
-            //collapsed
-            collapsedMenu.add("Add")
-                    .setIcon(R.drawable.unfavourite)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        } else {
-            //expanded
+
         }
         return super.onPrepareOptionsMenu(collapsedMenu);
     }
@@ -174,6 +202,19 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
 
     @Override
     public void onClick(View v) {
+
+        countFav++;
+        if(v.getId()==R.id.favourite)
+        {
+            if(countFav%2!=0) {
+                Favourite.setImageResource(R.drawable.favourite);
+                callServiceForAdding();
+            }
+            else {
+                Favourite.setImageResource(R.drawable.unfavourite);
+                callServiceForRemoving();
+            }
+        }
 
     }
 
@@ -330,6 +371,182 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
 
     }
 
+    public void callServiceForAdding()
+    {
+        final String RestaurantKey = intent.getStringExtra("RestaurantKey");
+        Log.d("HAR",String.valueOf(countFav));
+        SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                Context.MODE_PRIVATE);
+        final String LoginID = sharedPreferences.getString("UserName",null);
+
+        Log.d("HAR",LoginID);
+        Log.d("HAR",RestaurantKey);
+        try {
+            StringRequest request = new StringRequest(Request.Method.POST, Url, new Response.
+                    Listener<String>() {
+
+                @Override
+                public void onResponse(String s) {
+                    StatusCode = GlobalMethods.GetSubString(s);
+                    Log.d("HAR", s);
+
+
+
+                    // **********stop progress bar*************************
+
+
+                    if (StatusCode.contains("202")) {
+                        Toast.makeText(Individual_Restaurant_Page.this,"Restaurant " +
+                                "added to your favourite",2).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(Individual_Restaurant_Page.this,"Some Error " +
+                                "Occured",2).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.d("HAR", volleyError.toString());
+                    Log.d("HAR", "Error");
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("RestaurantID", RestaurantKey);
+                    parameters.put("LoginID", LoginID);
+                    parameters.put("Count",String.valueOf(countFav));
+                    return parameters;
+                }
+            };
+            MySingleton.getInstance(this).addToRequestQueue(request);
+
+
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public void callServiceForRemoving()
+    {
+        final String RestaurantKey = intent.getStringExtra("RestaurantKey");
+        Log.d("HAR",String.valueOf(countFav));
+        SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                Context.MODE_PRIVATE);
+        final String LoginID = sharedPreferences.getString("UserName",null);
+        Log.d("HAR",LoginID);
+        Log.d("HAR",RestaurantKey);
+
+        try {
+            StringRequest request = new StringRequest(Request.Method.POST, Url, new Response.
+                    Listener<String>() {
+
+                @Override
+                public void onResponse(String s) {
+                    StatusCode = GlobalMethods.GetSubString(s);
+                    Log.d("HAR", s);
+
+
+
+                    // **********stop progress bar*************************
+
+
+                    if (StatusCode.contains("202")) {
+                        Toast.makeText(Individual_Restaurant_Page.this,"Restaurant " +
+                                "deleted from your Favourite",2).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(Individual_Restaurant_Page.this,"Some Error " +
+                                "Occured",2).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.d("HAR", volleyError.toString());
+                    Log.d("HAR", "Error");
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("RestaurantID",RestaurantKey );
+                    parameters.put("LoginID", LoginID);
+                    parameters.put("Count",String.valueOf(countFav));
+                    return parameters;
+                }
+            };
+            MySingleton.getInstance(this).addToRequestQueue(request);
+
+
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public void callInitialFavService()
+    {
+        String url_response = GlobalMethods.getURL() + "Restaurant_Main/GetFav";
+        final String RestaurantKey = intent.getStringExtra("RestaurantKey");
+        Log.d("HAR",String.valueOf(countFav));
+        SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                Context.MODE_PRIVATE);
+        final String LoginID = sharedPreferences.getString("UserName",null);
+
+        Log.d("HAR",LoginID);
+        Log.d("HAR",RestaurantKey);
+        try {
+            StringRequest request = new StringRequest(Request.Method.POST, url_response, new Response.
+                    Listener<String>() {
+
+                @Override
+                public void onResponse(String s) {
+                    StatusCode = GlobalMethods.GetSubString(s);
+                    Log.d("HAR", s);
+
+
+
+                    // **********stop progress bar*************************
+
+
+                    if (StatusCode.contains("202")) {
+                        Favourite.setImageResource(R.drawable.favourite);
+                       countFav=1;
+                    }
+                    else
+                    {
+                        Favourite.setImageResource(R.drawable.unfavourite);
+                        countFav = 2;
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.d("HAR", volleyError.toString());
+                    Log.d("HAR", "Error");
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("RestaurantID", RestaurantKey);
+                    parameters.put("LoginID", LoginID);
+                    return parameters;
+                }
+            };
+            MySingleton.getInstance(this).addToRequestQueue(request);
+
+
+        } catch (Exception ex) {
+
+        }
+    }
 
 
 

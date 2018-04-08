@@ -61,6 +61,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
+        android:id="@+id/favourite"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
@@ -69,6 +70,7 @@
         app:fabSize="normal"
         app:layout_anchor="@+id/appbar"
         app:layout_anchorGravity="bottom|right|end"
-        android:focusable="true" />
+        android:focusable="true"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
