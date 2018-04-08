@@ -94,7 +94,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
             //QMinus =  itemView.findViewById();
             //QPlus =  itemView.findViewById();
 
-         DishAdd.setOnClickListener(new View.OnClickListener() {
+       /*  DishAdd.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  if(mListener!=null){
@@ -126,7 +126,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                      }
                  }
              }
-         });
+         });*/
         }
     }
 }

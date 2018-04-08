@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,6 +63,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurants> AllRowData;
+    private List<String> RestaurantKey;
     private RecyclerView.LayoutManager  Layout;
     private RestaurantsAdapter Adapter;
     private String URL ;
@@ -302,7 +304,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     public void Json_Data_Web_Call()
     {
-
+        RestaurantKey = new ArrayList<>();
         //AllRowData = new ArrayList<>();
        // RequestQueue Queue;
         determineService = 2;
@@ -310,12 +312,13 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response1) {
-
+                JSONArray response = null;
+                JSONObject json;
                 //Json_Parse_Data(response);
                 Log.d("HAR","Response aaya");
                 Log.d("HAR",response1.toString());
                 String str = response1.toString();
-                JSONArray response = null;
+
                 try {
                     response = new JSONArray(str);
                 } catch (JSONException e) {
@@ -323,10 +326,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 }
                 Restaurants RowData;
                 if (response != null) {
+
                     for ( int i = 0 ; i < response.length() ; i++)
                     {
                         RowData = new Restaurants();
-                        JSONObject json ;
+
                         try
                         {
                             json = response.getJSONObject(i);
@@ -336,6 +340,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                             RowData.setRestaurantRating(json.getString("rating"));
                             RowData.setRestaurantTiming(json.getString("time"));
                             RowData.setRestaurantImage(json.getString("imageURL"));
+                            RestaurantKey.add(json.getString("key"));
+
                             RowData.setShowShimmer(true);
                             Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
 
@@ -354,11 +360,15 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 Adapter = new
                         RestaurantsAdapter(Restaurant_Recycler_View.this,AllRowData);
                 Restaurant_recycler_view.setAdapter(Adapter);
+
+
                 Adapter.setOnItemClickListener(new RestaurantsAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
+
                         Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
+                        intent.putExtra("RestaurantKey", RestaurantKey.get(position).toString());
                         startActivity(intent);
                     }
                 });
