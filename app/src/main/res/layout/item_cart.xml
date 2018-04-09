@@ -15,7 +15,7 @@
             android:layout_height="match_parent">
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/Restaurant_Name"
+            android:id="@+id/CartRestaurant_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Restaurant_Name"
@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/dish_list"
                 android:scrollbars="vertical"
-                android:layout_below="@id/Restaurant_Name">
+                android:layout_below="@id/CartRestaurant_Name">
 
 
             </android.support.v7.widget.RecyclerView>

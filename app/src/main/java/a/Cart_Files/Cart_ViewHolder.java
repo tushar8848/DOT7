@@ -28,11 +28,11 @@ public class Cart_ViewHolder extends RecyclerView.ViewHolder {
     }
     private void setRecyclerViewDetails(View itemView)
     {
-        CartResturantView = itemView.findViewById();
+        CartResturantView = itemView.findViewById(R.id.dish_list);
         CartResturantView.setHasFixedSize(true);
         dishLayout = new LinearLayoutManager(context);
         CartResturantView.setLayoutManager(dishLayout);
-        RName = itemView.findViewById();
+        RName = itemView.findViewById(R.id.CartRestaurant_Name);
 
     }
 }
