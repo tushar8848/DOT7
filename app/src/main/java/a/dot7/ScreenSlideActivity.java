@@ -52,8 +52,8 @@ private ImageView[] dots;
         dotsCount = Min_Pages;
         dots = new ImageView[dotsCount];
 
-        f.refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        f.sendRegistrationToServer(f.refreshedToken,ScreenSlideActivity.this);
+//        f.refreshedToken = FirebaseInstanceId.getInstance().getToken();
+  //      f.sendRegistrationToServer(f.refreshedToken,ScreenSlideActivity.this);
 
         for(int i=0;i<dotsCount;i++){
             dots[i] = new ImageView(this);
