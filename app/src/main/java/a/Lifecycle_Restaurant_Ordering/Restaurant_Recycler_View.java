@@ -550,11 +550,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     {
 
         Log.d("HAR",Username);
+        String URI = GlobalMethods.getURL()+"Restaurant_Main/GetNavData?id="+Username;
         //AllRowData = new ArrayList<>();
         // RequestQueue Queue;
 
         JsonArrayRequest jsonArrayRequest = new
-                JsonArrayRequest(GlobalMethods.getURL()+"Restaurant_Main/GetNavData",
+                JsonArrayRequest(URI,
                 new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response1) {
@@ -576,14 +577,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     e.printStackTrace();
                 }
                 try {
-                    Log.d("HAR",jsonObject.getString("Name"));
-                    Log.d("HAR",jsonObject.getString("Email"));
-                    UserName_Nav.setText(jsonObject.getString("Name"));
-                    UserEmail_Nav.setText(jsonObject.getString("Email"));
+                    UserName_Nav.setText(jsonObject.getString("name"));
+                    UserEmail_Nav.setText(jsonObject.getString("email"));
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d("HAR","nav error");
+                    Log.d("HAR","nav JSON error");
                     Log.d("HAR",e.toString());
                 }
 
@@ -596,20 +595,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 Log.d("HAR",error.toString());
 
             }
-        }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> parameters = new HashMap<>();
-                        if(Username!=null)
-                        parameters.put("LoginID", Username);
-                        else
-                            parameters.put("LoginID","9039216432");
-
-                        // if(Name != null)
-                        //   parameters.put("Name",Name);
-                        return parameters;
-                    }
-                };
+        });
 
         //  Queue = Volley.newRequestQueue(this);
         // Queue.add(jsonArrayRequest);
