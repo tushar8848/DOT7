@@ -45,6 +45,7 @@ public class Cart_Items {
             cartItems.get(id).setQuantity(dishes.getQuantity());
         }
         else {
+
             Cart NewCart = new Cart();
             NewCart.setDishKey(dishes.getDishKey());
             NewCart.setDishName(dishes.getDishName());
@@ -53,6 +54,7 @@ public class Cart_Items {
             NewCart.setQuantity(dishes.getQuantity());
             NewCart.setResName(Rname);
             cartItems.add(NewCart);
+            totalDishes++;
         }
         totalQuantity++;
     }
@@ -64,6 +66,7 @@ public class Cart_Items {
         if(quantity == 1)
         {
             cartItems.remove(id);
+            totalDishes--;
         }
         else
             cartItems.get(id).setQuantity(quantity-1);
@@ -85,6 +88,14 @@ public class Cart_Items {
     public int getTotalQuantity()
     {
         return totalQuantity;
+    }
+    public ArrayList<Cart> getCartItems()
+    {
+        return cartItems;
+    }
+    public int getTotalDishes()
+    {
+        return totalDishes;
     }
 
 }

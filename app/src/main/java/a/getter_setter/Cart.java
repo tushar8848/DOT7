@@ -5,12 +5,12 @@ package a.getter_setter;
  */
 
 public class Cart {
-    public String RName = null;
-    public String DName = null;
-    public int DQuantity = 0;
-    public String Dprice = null;
-    public String Rkey = null;
-    public String Dkey = null;
+    private String RName = null;
+    private String DName = null;
+    private int DQuantity = 0;
+    private String Dprice = null;
+    private String Rkey = null;
+    private String Dkey = null;
 
     public String getDishName()
     {
