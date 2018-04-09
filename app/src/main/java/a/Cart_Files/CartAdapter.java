@@ -18,6 +18,9 @@ public class CartAdapter extends RecyclerView.Adapter<Cart_ViewHolder> {
 
     ArrayList<IndividualRestaurant> Restaurants;
     Context context;
+    private RecyclerView CartResturantView;
+    private RecyclerView.LayoutManager  dishLayout;
+    private Cart_Individual_Restaurant_Adapter cart_individual_restaurant_adapter;
     CartAdapter(Context context,ArrayList<IndividualRestaurant> restaurants)
     {
         this.context = context;
