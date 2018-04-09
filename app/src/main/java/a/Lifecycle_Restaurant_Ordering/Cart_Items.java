@@ -1,6 +1,7 @@
 package a.Lifecycle_Restaurant_Ordering;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -58,6 +59,7 @@ public class Cart_Items {
     public void removeDish(String Key)
     {
         int id = searchDish(Key);
+        Log.d("HAR","Key: "+Key);
         int quantity = cartItems.get(id).getQuantity();
         if(quantity == 1)
         {
@@ -69,8 +71,10 @@ public class Cart_Items {
     }
     private int searchDish(String key)
     {
+        Log.d("HAR","CART ITEMS");
         for(int i=0;i<totalDishes;i++)
         {
+            Log.d("HAR","Key: "+cartItems.get(i).getDishKey()+"  Name: "+cartItems.get(i).getDishName());
             if(cartItems.get(i).getDishKey() == key)
             {
                 return i;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,10 +88,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                    if(totalQuantity == 1) {
                        snackbar.show();
                    }
-                   else
-                   {
-                       snackbar.setText(totalQuantity+ "Item(s)");
-                   }
+                       snackbar.setText(totalQuantity+ " Item(s)");
+
                 }
             }
         });
@@ -113,7 +112,9 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                 int quantity = BlockData.getQuantity();
                 quantity--;
                 BlockData.setQuantity(quantity);
-                Cart_Items.getInstance(context).removeDish(BlockData.getDishKey());
+                String DishKey =BlockData.getDishKey() ;
+                Log.d("HAR","OnClick key: "+DishKey);
+                Cart_Items.getInstance(context).removeDish(DishKey);
                 totalQuantity = Cart_Items.getInstance(context).getTotalQuantity();
 
                holder.Quantity.setText(String.valueOf(quantity));

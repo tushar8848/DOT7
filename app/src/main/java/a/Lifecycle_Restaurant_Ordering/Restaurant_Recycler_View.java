@@ -88,6 +88,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     String url = GlobalMethods.getURL() + "Login";
     AlertDialog CustomDialog;
     int determineService = 1;
+    SearchView searchView = null;
    // FloatingActionButton fab = findViewById(R.id.fab);
 
     private boolean isFabOPEN=false;
@@ -199,7 +200,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
         isFabOPEN=true;
 
-        fab_call.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        fab_call.animate().translationY(-getResources().getDimension( R.dimen.standard_55));
         Snackbar.make(view, "Replace with your own action .....", Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
     private void closefab()
@@ -223,6 +224,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.restaurant_toolbar_menu, menu);
+        searchView = (SearchView) menu.findItem(R.id.Search).getActionView();
         Log.e("","create kr liya");
         return true;
     }

@@ -14,7 +14,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
+//import android.support.v7.graphics.Palette;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -151,7 +151,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
     private void setSnackbar()
     {
         int totalQuantity = Cart_Items.getInstance(Individual_Restaurant_Page.this).getTotalQuantity();
-        snackbar = Snackbar.make(findViewById(R.id.favourites), totalQuantity + " item(s)", Snackbar.LENGTH_INDEFINITE);
+       snackbar = Snackbar.make(findViewById(R.id.favourite), totalQuantity + " item(s)", Snackbar.LENGTH_INDEFINITE);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(Color.parseColor("#00BFA5"));
         snackbar.setAction("View Cart", new View.OnClickListener() {
