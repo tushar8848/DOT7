@@ -13,7 +13,7 @@
         <item
             android:id="@+id/your_orders"
             android:icon="@drawable/ic_shopping_cart_white_24dp"
-            android:title="Cart" />
+            android:title="Your Orders" />
         <item
             android:id="@+id/favourites"
             android:icon="@drawable/ic_favorite_black_24dp"
