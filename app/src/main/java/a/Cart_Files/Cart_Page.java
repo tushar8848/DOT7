@@ -10,8 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 
 import a.dot7.R;
-import a.getter_setter.Cart;
-import a.Lifecycle_Restaurant_Ordering.Cart_Items;
+
 /**
  * Created by TUSHAR on 09-04-18.
  */
@@ -20,7 +19,7 @@ public class Cart_Page extends AppCompatActivity {
 
     private RecyclerView CartView;
     private RecyclerView.LayoutManager  CartLayout;
-    private CartRestaurantAdapter cartRestaurantAdapter;
+    private CartAdapter cartAdapter;
     private ArrayList<IndividualRestaurant> Restaurants;
     ManageData data;
     int totalRestaurants;
@@ -44,7 +43,9 @@ public class Cart_Page extends AppCompatActivity {
     }
     private void initiateCartView()
     {
-        cartRestaurantAdapter = new CartRestaurantAdapter();
+        cartAdapter = new CartAdapter(this,Restaurants);
+        CartView.setAdapter(cartAdapter);
+
 
     }
 }
