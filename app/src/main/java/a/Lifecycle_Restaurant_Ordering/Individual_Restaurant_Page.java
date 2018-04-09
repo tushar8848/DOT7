@@ -73,8 +73,8 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
     private String Url;
     private String StatusCode;
     Snackbar snackbar;
-
-
+    Toolbar toolbar;
+    private String RName,Rkey;
 
 
     @Override
@@ -82,22 +82,20 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_restaurant_page);
         intent = getIntent();
+        RName = intent.getStringExtra("RestaurantName");
+        Rkey = intent.getStringExtra("RestaurantKey");
+        toolbar = findViewById(R.id.anim_toolbar);
         Url = GlobalMethods.getURL() + "Restaurant_Main";
         Favourite = findViewById(R.id.favourite);
         Favourite.setOnClickListener(this);
         final Toolbar toolbar = findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
-
         BannerImage = findViewById(R.id.header);
-
+        appBarLayout = findViewById(R.id.appbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        appBarLayout = findViewById(R.id.appbar);
-
-        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(intent.getStringExtra("RestaurantName"));
-
         GlideApp
                 .with(Individual_Restaurant_Page.this)
                 .load(intent.getStringExtra("RestaurantImage"))
@@ -282,7 +280,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
             AllRowData.add(RowData);
         }*/
         dishesAdapter = new
-                DishesAdapter(Individual_Restaurant_Page.this,data,snackbar);
+                DishesAdapter(Individual_Restaurant_Page.this,data,snackbar,RName,Rkey);
         recyclerView.setAdapter(dishesAdapter);
 
     }
@@ -323,7 +321,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                             RowData.setDishAvailability(json.getString("availabilityFlag"));
                             RowData.setDishPrice(json.getString("price"));
                             RowData.setDishVFlag(json.getString("veg_nVeg_Flag"));
-
+                            RowData.setDishKey(json.getString("ProductID"));
                         }
                         catch (Exception e) {
                             Log.e("Error: " , String.valueOf(e));
@@ -339,7 +337,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
 
 
                 dishesAdapter = new
-                        DishesAdapter(Individual_Restaurant_Page.this,data,snackbar);
+                        DishesAdapter(Individual_Restaurant_Page.this,data,snackbar,RName,Rkey);
                 recyclerView.setAdapter(dishesAdapter);
                 dishesAdapter.setOnItemClickListener(new DishesAdapter.OnItemClickListener() {
                     @Override

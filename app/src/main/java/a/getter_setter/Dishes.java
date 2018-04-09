@@ -10,6 +10,7 @@ public class Dishes {
     private String price = null;
     private String vFlag = null;
     private String availability = null;
+    private String dishKey = null;
     private int quantity = 0;
 
     public String getDishImageUrl()
@@ -33,6 +34,7 @@ public class Dishes {
         return availability;
     }
     public int getQuantity(){ return  quantity; }
+    public String getDishKey(){ return dishKey;}
     public void setDishImageUrl(String imageURL) { this.imageURL = imageURL;}
     public void setDishName(String Name)
     {
@@ -51,5 +53,7 @@ public class Dishes {
         this.availability = availability;
     }
     public void setQuantity(int quantity){ this.quantity = quantity; }
+    public void setDishKey(String key){ this.dishKey = key; }
+
 
 }

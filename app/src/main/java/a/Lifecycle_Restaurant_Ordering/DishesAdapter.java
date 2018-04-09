@@ -2,7 +2,6 @@ package a.Lifecycle_Restaurant_Ordering;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import java.util.List;
 
 import a.common.GlideApp;
 import a.dot7.R;
+import a.getter_setter.Cart;
 import a.getter_setter.Dishes;
 
 /**
@@ -26,13 +26,19 @@ import a.getter_setter.Dishes;
 public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHolder> {
     private final Context context;
     private List<Dishes> data;
+    private String RKey;
+    private String RName;
+    Dishes BlockData;
+    int totalQuantity;
     Snackbar snackbar;
     View sbView;
-    public DishesAdapter(Context context,List<Dishes> data,Snackbar snackbar)
+    public DishesAdapter(Context context,List<Dishes> data,Snackbar snackbar,String Rkey,String Rname)
     {
         this.context = context;
         this.data = data;
         this.snackbar = snackbar;
+        this.RKey = Rkey;
+        this.RName = Rname;
     }
 
     @Override
@@ -49,7 +55,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     @Override
     public void onBindViewHolder(final DishesAdapter.DishViewHolder holder, final int position) {
 
-        final Dishes BlockData = data.get(position);
+       BlockData = data.get(position);
         holder.DishName.setText(BlockData.getDishName());
         holder.DishPrice.setText(BlockData.getDishPrice());
         String vFlag = BlockData.getDishVFlag();
@@ -74,18 +80,30 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                     BlockData.setQuantity(quantity);
                     holder.Quantity.setText(String.valueOf(quantity));
                    holder.QuantityModifier.setVisibility(View.VISIBLE);
-                   snackbar = Snackbar.make(v,quantity+" item(s)",Snackbar.LENGTH_INDEFINITE);
-                   sbView = snackbar.getView();
-                   sbView.setBackgroundColor(Color.parseColor("#00BFA5"));
-                   snackbar.setAction("View Cart", new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
 
-                       }
-                   });
-                   snackbar.setActionTextColor(Color.WHITE);
-                   snackbar.show();
 
+                    Cart_Items.getInstance(context).addDish(BlockData, RName, RKey);
+                    totalQuantity = Cart_Items.getInstance(context).getTotalQuantity();
+
+
+                   if(totalQuantity == 1) {
+                       snackbar = Snackbar.make(v, totalQuantity + " item(s)", Snackbar.LENGTH_INDEFINITE);
+                       sbView = snackbar.getView();
+                       sbView.setBackgroundColor(Color.parseColor("#00BFA5"));
+                       Cart_Items.getInstance(context).addDish(BlockData, "", "");
+                       snackbar.setAction("View Cart", new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+
+                           }
+                       });
+                       snackbar.setActionTextColor(Color.WHITE);
+                       snackbar.show();
+                   }
+                   else
+                   {
+                       snackbar.setText(totalQuantity+ "Item(s)");
+                   }
                 }
             }
         });
@@ -95,7 +113,9 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                 int quantity = BlockData.getQuantity();
                 quantity++;
                 BlockData.setQuantity(quantity);
-                snackbar.setText(quantity+" item(s)");
+                Cart_Items.getInstance(context).addDish(BlockData,RName,RKey);
+                totalQuantity = Cart_Items.getInstance(context).getTotalQuantity();
+                snackbar.setText(totalQuantity+" item(s)");
                 holder.Quantity.setText(String.valueOf(quantity));
             }
         });
@@ -105,14 +125,20 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                 int quantity = BlockData.getQuantity();
                 quantity--;
                 BlockData.setQuantity(quantity);
+                Cart_Items.getInstance(context).removeDish(BlockData.getDishKey());
+                totalQuantity = Cart_Items.getInstance(context).getTotalQuantity();
                holder.Quantity.setText(String.valueOf(quantity));
-                snackbar.setText(quantity+" item(s)");
+                snackbar.setText(totalQuantity+" item(s)");
                 if(quantity == 0)
                 {
-                    snackbar.dismiss();
                     holder.QuantityModifier.setVisibility(View.GONE);
                     holder.DishAdd.setVisibility(View.VISIBLE);
                 }
+                if(totalQuantity == 0)
+                {
+                    snackbar.dismiss();
+                }
+
 
             }
         });

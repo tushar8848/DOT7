@@ -167,9 +167,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
 
     }
-
-
-
   /*  private void showfab()
     {
         FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
@@ -202,7 +199,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Log.e("","create kr liya");
         return true;
     }
-
 
 
     @Override
@@ -337,6 +333,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     public void onItemClick(int position) {
 
                         UserSelectedRestaurant.add(RestaurantKey.get(position).toString());
+//                        Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                        // Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
                         intent.putExtra("RestaurantKey", RestaurantKey.get(position).toString());
