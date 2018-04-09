@@ -39,7 +39,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     String name,contact,password,cpassword,Email;
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
     int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0
-            ,eCpass=0, eEmail=0;
+            ,eCpass=0, eEmail=0, validMail=0;
     String StatusCode;
     ProgressBar progressBar;
 
@@ -113,15 +113,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
             }
         });
-        UserMail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        UserEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus)
                 {
-                    mail = UserMail.getText().toString();
-                    if(!mail.endsWith(".com")||!mail.contains("@"))
+                    Email = UserEmail.getText().toString();
+                    if(!Email.endsWith(".com")||!Email.contains("@"))
                     {
-                        UserMail.setError("Invalid Email Id");
+                        UserEmail.setError("Invalid Email Id");
                         validMail = 0;
                     }
                     else
@@ -190,7 +190,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
         else eCpass = 1;
         if(eName == 0 || eContact == 0 || ePass == 0 || eCpass == 0 ||
-                validContact == 0 || validCpass == 0 || eEmail == 0 )
+                validContact == 0 || validCpass == 0 || eEmail == 0 || validMail == 0)
         {
             empty = 1;
         }
