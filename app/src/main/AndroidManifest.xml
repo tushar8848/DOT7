@@ -102,6 +102,7 @@
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity_cart"></activity>
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Your_Orders" />
     </application>
 
 </manifest>
