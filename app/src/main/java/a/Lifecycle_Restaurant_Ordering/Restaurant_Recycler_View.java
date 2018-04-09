@@ -33,6 +33,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v7.widget.SearchView;
@@ -55,6 +56,7 @@ import java.util.Map;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
+import a.common.OTP_Reader;
 import a.dot7.Login;
 import a.dot7.R;
 import a.dot7.ScreenSlideActivity;
@@ -76,15 +78,16 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private List<String> RestaurantKey, RestaurantImage, RestaurantName, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
     private RestaurantsAdapter Adapter = null;
-    private String URL ;
+    private String URL,Username, Email, Status ;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private int mCurrentSelectedPosition;
     private AlertDialog Dialog;
     View view;
     ImageView Error_Image;
-    TextView Error_Message;
+    TextView Error_Message, UserName_Nav, UserEmail_Nav;
     Button Error_Button;
+    private NavigationView navigationView;
     String url = GlobalMethods.getURL() + "Login";
     AlertDialog CustomDialog;
     int determineService = 1;
@@ -97,14 +100,19 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_recycler_view);
         Toolbar toolbar = findViewById(R.id.Restaurant_Page_Toolbar);
+         navigationView =  findViewById(R.id.navigation_bar);
+        View header = navigationView.getHeaderView(0);
         mDrawerLayout = findViewById(R.id.Drawer_Layout);
         Error_Image = findViewById(R.id.Restaurant_View_Error);
         Error_Message = findViewById(R.id.Restaurant_Error_Message);
         Error_Button = findViewById(R.id.Restaurant_View_RetryButton);
         Log.e("","SearchIcon mil gya");
-
+        UserName_Nav = header.findViewById(R.id.UserName);
+        UserEmail_Nav = header.findViewById(R.id.UserEmail);
         Error_Button.setOnClickListener(Restaurant_Recycler_View.this);
         setSupportActionBar(toolbar);
+        setSharedPreference();
+        GetNavData();
         ActionBar actionbar = getSupportActionBar();
 
         if (actionbar != null) {
@@ -153,6 +161,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                         CustomDialog.show();
 
                         return true;
+
                     default:
                         return true;
                 }
@@ -528,5 +537,90 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         }
     }
 
+    public void SetSharedValues()
+    {
+        SharedPreferences sharedPreferences =
+                getSharedPreferences("logDetails",this.MODE_PRIVATE);
+        Username = sharedPreferences.getString("Name",null);
+        Email = sharedPreferences.getString("Email",null);
+
+    }
+
+    public void GetNavData()
+    {
+
+        Log.d("HAR",Username);
+        //AllRowData = new ArrayList<>();
+        // RequestQueue Queue;
+
+        JsonArrayRequest jsonArrayRequest = new
+                JsonArrayRequest(GlobalMethods.getURL()+"Restaurant_Main/GetNavData",
+                new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response1) {
+                JSONArray response = null;
+                JSONObject json;
+                //Json_Parse_Data(response);
+                Log.d("HAR", "Response navbar valla aaya");
+                Log.d("HAR", response1.toString());
+                String str = response1.toString();
+                JSONObject jsonObject = null;
+                try {
+                    response = new JSONArray(str);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                     jsonObject = response.getJSONObject(0);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    Log.d("HAR",jsonObject.getString("Name"));
+                    Log.d("HAR",jsonObject.getString("Email"));
+                    UserName_Nav.setText(jsonObject.getString("Name"));
+                    UserEmail_Nav.setText(jsonObject.getString("Email"));
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d("HAR","nav error");
+                    Log.d("HAR",e.toString());
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("HAR","nav error");
+                Log.d("HAR",error.toString());
+
+            }
+        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> parameters = new HashMap<>();
+                        if(Username!=null)
+                        parameters.put("LoginID", Username);
+                        else
+                            parameters.put("LoginID","9039216432");
+
+                        // if(Name != null)
+                        //   parameters.put("Name",Name);
+                        return parameters;
+                    }
+                };
+
+        //  Queue = Volley.newRequestQueue(this);
+        // Queue.add(jsonArrayRequest);
+        MySingleton.getInstance(this).addToJsonRequestQueue(jsonArrayRequest);
+    }
+
+    public void setSharedPreference()
+    {
+        SharedPreferences sp = getSharedPreferences("logDetails", a.dot7.Login.MODE_PRIVATE);
+        Username = sp.getString("UserName",null);
+
+    }
 
 }
