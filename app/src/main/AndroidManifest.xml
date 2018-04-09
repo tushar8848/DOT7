@@ -28,17 +28,20 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name="a.Lifecycle_Restaurant_Ordering.SearchableActivity">
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.SearchableActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
             <meta-data android:name="android.app.searchable"
                     android:resource="@xml/searchable" />
+
         </activity>
 
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -53,26 +56,37 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ScreenSlideActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ScreenSlideActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Register"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Login"
-            android:theme="@style/LoginTheme" />
-        <activity android:name="a.common.OTP_Reader" />
-        <activity android:name=".ForgotPassword" />
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name="a.common.OTP_Reader"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ForgotPassword"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Set_New_Password"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="a.common.TempActivity"
             android:label="@string/title_activity_temp"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".Otp" />
-        <activity android:name=".myProfile"/>
-        <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Otp"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".myProfile"
+            android:screenOrientation="portrait"/>
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View"
+            android:screenOrientation="portrait"/>
 
         <service android:name="a.FirebasePushNotification.MyFirebaseMessagingService">
             <intent-filter>
@@ -85,7 +99,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page" />
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity_cart"></activity>
     </application>
 

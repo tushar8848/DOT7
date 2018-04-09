@@ -52,17 +52,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import a.dot7.activity_cart;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.Login;
 import a.dot7.R;
+import a.dot7.ScreenSlideActivity;
 import a.dot7.myProfile;
 import a.getter_setter.Restaurants;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
+import a.common.MyDialog;
 
 
 public class Restaurant_Recycler_View extends AppCompatActivity implements View.OnClickListener {
@@ -80,6 +80,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private int mCurrentSelectedPosition;
+    private AlertDialog Dialog;
     View view;
     ImageView Error_Image;
     TextView Error_Message;
@@ -124,6 +125,32 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     case R.id.your_account:
                         Snackbar.make(view, "Item Two", Snackbar.LENGTH_SHORT).show();
                         mCurrentSelectedPosition = 1;
+                        return true;
+                    case R.id.logout:
+                        AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
+                        builder.setMessage("Are you sure you want to logout?");
+                        builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                                        Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("UserName", null);
+                                editor.putString("Password",null);
+                                editor.commit();
+                                startActivity(new Intent(Restaurant_Recycler_View.this, ScreenSlideActivity.class));
+                                dialogInterface.cancel();
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        CustomDialog=builder.create();
+                        CustomDialog.show();
+
                         return true;
                     default:
                         return true;
@@ -215,7 +242,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 return true;
             case R.id.Cart:
                 Log.e("","Cart pe click hua");
-                startActivity(new Intent(Restaurant_Recycler_View.this,activity_cart.class));
+              //  startActivity(new Intent(Restaurant_Recycler_View.this,activity_cart.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -333,7 +360,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     public void onItemClick(int position) {
 
                         UserSelectedRestaurant.add(RestaurantKey.get(position).toString());
-//                        Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                        // Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
                         intent.putExtra("RestaurantKey", RestaurantKey.get(position).toString());

@@ -59,11 +59,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
         holder.DishName.setText(BlockData.getDishName());
         holder.DishPrice.setText(BlockData.getDishPrice());
         String vFlag = BlockData.getDishVFlag();
-       /* if(vFlag.equals("1"))
-            holder.DishVegImage.setVisibility(View.VISIBLE);
-        else
-            holder.DishNVegImage.setVisibility(View.VISIBLE);
-*/
+        if(vFlag.equals("0"))
+            holder.DishVegImage.setImageResource(R.drawable.non_veg_logo);
        holder.DishVegImage.setVisibility(View.VISIBLE);
         GlideApp.with(context)
                 .load(BlockData.getDishImageUrl())
