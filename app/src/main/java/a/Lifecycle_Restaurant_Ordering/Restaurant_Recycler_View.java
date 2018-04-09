@@ -53,10 +53,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+//import a.dot7.activity_cart;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.common.OTP_Reader;
+import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
 import a.dot7.ScreenSlideActivity;
@@ -162,6 +165,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
                         return true;
 
+
+                    case R.id.about:
+                        startActivity(new Intent(Restaurant_Recycler_View.this,About_Us.class));
+                        return true;
                     default:
                         return true;
                 }
@@ -204,6 +211,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
 
     }
+
+
+
   /*  private void showfab()
     {
         FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
@@ -237,6 +247,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Log.e("","create kr liya");
         return true;
     }
+
 
 
     @Override

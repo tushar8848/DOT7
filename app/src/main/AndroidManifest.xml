@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="a.dot7">
@@ -31,8 +30,12 @@
         <activity android:name="a.Lifecycle_Restaurant_Ordering.SearchableActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
             <meta-data android:name="android.app.searchable"
                     android:resource="@xml/searchable" />
 
@@ -87,6 +90,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View"
             android:screenOrientation="portrait"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Otp" />
+        <activity android:name=".myProfile" />
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View" />
 
         <service android:name="a.FirebasePushNotification.MyFirebaseMessagingService">
             <intent-filter>
@@ -101,8 +108,10 @@
 
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity_cart"></activity>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Your_Orders" />
+        <activity android:name=".activity_cart" />
+        <activity android:name=".About_Us"
+            android:theme="@style/LoginTheme"/>
     </application>
 
 </manifest>

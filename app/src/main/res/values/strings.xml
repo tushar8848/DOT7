@@ -34,4 +34,6 @@
     <string name="DOT7_Banner">DOT7 Banner</string>
     <string name="search_label">Search Restaurants</string>
     <string name="search_hint">Search 9280</string>
+    <string name="about_us">Team DOT 7</string>
+    <string name="Tushar_Garg">Tushar Garg</string>
 </resources>

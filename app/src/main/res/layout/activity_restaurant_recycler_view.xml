@@ -28,6 +28,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
+            android:layout_below="@id/Restaurant_Page_Toolbar"
             android:background="@drawable/shadow" />
 
 
@@ -80,6 +81,7 @@
             android:layout_alignParentBottom="true"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="normal"
+
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/fab_margin"
             android:onClick="call_to_order"
