@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import a.dot7.R;
+import a.getter_setter.Dishes;
 
 /**
  * Created by TUSHAR on 09-04-18.
@@ -18,8 +19,6 @@ public class CartAdapter extends RecyclerView.Adapter<Cart_ViewHolder> {
 
     ArrayList<IndividualRestaurant> Restaurants;
     Context context;
-    private RecyclerView CartResturantView;
-    private RecyclerView.LayoutManager  dishLayout;
     private Cart_Individual_Restaurant_Adapter cart_individual_restaurant_adapter;
     CartAdapter(Context context,ArrayList<IndividualRestaurant> restaurants)
     {
@@ -30,16 +29,24 @@ public class CartAdapter extends RecyclerView.Adapter<Cart_ViewHolder> {
 
     @Override
     public Cart_ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.single_item_restaurant_view, parent, false);
+
+        Cart_ViewHolder viewHolder = new Cart_ViewHolder(v,context);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(Cart_ViewHolder holder, int position) {
-
+        IndividualRestaurant individualRestaurant = Restaurants.get(position);
+        holder.RName.setText(individualRestaurant.getRName());
+        ArrayList<DishesDetails> dishes = individualRestaurant.getRDishes();
+        cart_individual_restaurant_adapter = new Cart_Individual_Restaurant_Adapter(context,dishes);
+        holder.CartResturantView.setAdapter(cart_individual_restaurant_adapter);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return Restaurants.size();
     }
 }

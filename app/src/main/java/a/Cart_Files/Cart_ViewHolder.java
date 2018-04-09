@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,20 +16,23 @@ import a.dot7.R;
 
 public class Cart_ViewHolder extends RecyclerView.ViewHolder {
 
-    private ArrayList<DishesDetails> dishesDetails;
+    RecyclerView CartResturantView;
+    RecyclerView.LayoutManager  dishLayout;
+    TextView RName;
     Context context;
-    public Cart_ViewHolder(View itemView,Context context,RecyclerView CartResturantView,RecyclerView.LayoutManager  dishLayout) {
+    public Cart_ViewHolder(View itemView,Context context) {
         super(itemView);
         this.context = context;
-        setRecyclerViewDetails(itemView,CartResturantView,dishLayout);
+        setRecyclerViewDetails(itemView);
 
     }
-    private void setRecyclerViewDetails(View itemView,RecyclerView CartResturantView,RecyclerView.LayoutManager  dishLayout)
+    private void setRecyclerViewDetails(View itemView)
     {
-       /* CartResturantView = itemView.findViewById();
+        CartResturantView = itemView.findViewById();
         CartResturantView.setHasFixedSize(true);
         dishLayout = new LinearLayoutManager(context);
         CartResturantView.setLayoutManager(dishLayout);
-       */
+        RName = itemView.findViewById();
+
     }
 }
