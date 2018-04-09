@@ -141,7 +141,6 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
                         editor.commit();
 
                         Log.d("HAR", "Local file created");
-                        // **********stop progress bar*************************
                         startActivity(new Intent(OTP_Reader.this, Restaurant_Recycler_View.class));
                     }
                     else{

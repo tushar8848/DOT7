@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -102,6 +103,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                 .centerCrop()
                 .into(BannerImage);
 
+
        /* Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.loginpage);
 
@@ -139,11 +141,29 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
 
         } else {
             //internet is connected
+            setSnackbar();
             GetProducts();
             callInitialFavService();
         }
 
 
+    }
+    private void setSnackbar()
+    {
+        int totalQuantity = Cart_Items.getInstance(Individual_Restaurant_Page.this).getTotalQuantity();
+        snackbar = Snackbar.make(findViewById(R.id.favourites), totalQuantity + " item(s)", Snackbar.LENGTH_INDEFINITE);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.parseColor("#00BFA5"));
+        snackbar.setAction("View Cart", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        snackbar.setActionTextColor(Color.WHITE);
+        if(totalQuantity >= 1) {
+            snackbar.show();
+        }
     }
 
     @Override
@@ -339,13 +359,6 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                 dishesAdapter = new
                         DishesAdapter(Individual_Restaurant_Page.this,data,snackbar,RName,Rkey);
                 recyclerView.setAdapter(dishesAdapter);
-                dishesAdapter.setOnItemClickListener(new DishesAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-
-                    }
-                });
-
 
 
             }

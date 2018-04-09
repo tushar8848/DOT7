@@ -35,11 +35,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
 
     LinearLayout signup;
-    EditText UserName,UserContact,UserPassword,UserCPassword;
-    String name,contact,password,cpassword;
+    EditText UserName,UserContact,UserPassword,UserCPassword,UserMail;
+    String name,contact,password,cpassword,mail;
     String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
     int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0
-            ,eCpass=0;
+            ,eCpass=0,validMail=0,eMail=0;
     String StatusCode;
     ProgressBar progressBar;
 
@@ -63,6 +63,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         UserPassword=findViewById(R.id.Password);
         UserCPassword=findViewById(R.id.Cnfpassword);
         signup=findViewById(R.id.Btn_Signup);
+        UserMail = findViewById(R.id.Email_Id);
         focusChangeListeners();
 
     }
@@ -112,7 +113,22 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
             }
         });
-
+        UserMail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    mail = UserMail.getText().toString();
+                    if(!mail.endsWith(".com")||!mail.contains("@"))
+                    {
+                        UserMail.setError("Invalid Email Id");
+                        validMail = 0;
+                    }
+                    else
+                        validMail = 1;
+                }
+            }
+        });
 
     }
 
@@ -130,6 +146,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         contact=UserContact.getText().toString();
         password=UserPassword.getText().toString();
         cpassword=UserCPassword.getText().toString();
+        mail = UserMail.getText().toString();
         if(name.length()==0)
         {
             UserName.setError("This field is required");
@@ -164,8 +181,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             eCpass = 0;
         }
         else eCpass = 1;
+        if(mail.length() == 0)
+        {
+            UserMail.setError("This field is required");
+            eMail = 0;
+        }
+        else
+            eMail = 1;
         if(eName == 0 || eContact == 0 || ePass == 0 || eCpass == 0 ||
-                validContact == 0 || validCpass == 0 )
+                validContact == 0 || validCpass == 0 || validMail ==0 || eMail == 0 )
         {
             empty = 1;
         }
