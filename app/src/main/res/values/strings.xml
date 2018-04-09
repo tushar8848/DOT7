@@ -32,4 +32,6 @@
     <string name="Google_Sign_Up">Sign up from Google</string>
     <string name="action_settings">Action Settings</string>
     <string name="DOT7_Banner">DOT7 Banner</string>
+    <string name="search_label">Search Restaurants</string>
+    <string name="search_hint">Search 9280</string>
 </resources>

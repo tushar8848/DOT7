@@ -26,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MyDialog;
 import a.common.MySingleton;
@@ -101,9 +102,19 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
             ContactText.setError("This field is required");
         }
         else*/
-            if(Contact.length()!=0 && validContact == 1) {
-            progressBar.setVisibility(View.VISIBLE);
-            callService(view);
+        if(Contact.length()!=0 && validContact == 1) {
+
+           if(!CheckConnection.getInstance(this).getNetworkStatus()) {
+               Snackbar.make(view, "Some Error Occured",
+                       Snackbar.LENGTH_LONG)
+                       .setAction("Retry", null).show();
+           }
+           else {
+               //internet is connected
+               progressBar.setVisibility(View.VISIBLE);
+               callService(view);
+           }
+
         }
     }
     private void callService(final View view)

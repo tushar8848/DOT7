@@ -5,10 +5,15 @@ package a.Lifecycle_Restaurant_Ordering;
  */
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,12 +26,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v7.widget.SearchView;
 
@@ -46,7 +53,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+import a.dot7.activity_cart;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
@@ -55,18 +62,20 @@ import a.dot7.R;
 import a.dot7.myProfile;
 import a.getter_setter.Restaurants;
 import android.os.Handler;
+import android.support.v4.view.MenuItemCompat;
 
 
 public class Restaurant_Recycler_View extends AppCompatActivity implements View.OnClickListener {
 
     String Contact;
     final boolean[] DoubleBackPressed = {false};
+    List<String> Restaurants_name;
 
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurants> AllRowData;
     private List<String> RestaurantKey, RestaurantImage, RestaurantName, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
-    private RestaurantsAdapter Adapter;
+    private RestaurantsAdapter Adapter = null;
     private String URL ;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -90,6 +99,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Error_Image = findViewById(R.id.Restaurant_View_Error);
         Error_Message = findViewById(R.id.Restaurant_Error_Message);
         Error_Button = findViewById(R.id.Restaurant_View_RetryButton);
+        Log.e("","SearchIcon mil gya");
+
         Error_Button.setOnClickListener(Restaurant_Recycler_View.this);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
@@ -156,6 +167,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
 
     }
+
+
+
   /*  private void showfab()
     {
         FloatingActionButton fab_call = findViewById(R.id.fab_call_to_order);
@@ -173,6 +187,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     public void call_to_order(View view)
     {
+        //Snackbar.make(view, "Call To Order ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel: 8285320858"));
+        startActivity(intent);
+
         Snackbar.make(view, "Call To Order ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
@@ -180,91 +199,33 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.restaurant_toolbar_menu, menu);
-      /* final MenuItem searchItem= menu.findItem(R.id.Search);
-        if (searchItem != null) {
-
-           searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-                @Override
-                public boolean onClose() {
-                    //some operation
-                }
-            });
-            searchView.setOnSearchClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //some operation
-                }
-            });*/
+        Log.e("","create kr liya");
         return true;
     }
 
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Log.e("id of item selected: ",String.valueOf(item.getItemId()));
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.Search:
+                Log.e("","Search icon clicked");
+                return true;
+            case R.id.Cart:
+                Log.e("","Cart pe click hua");
+                startActivity(new Intent(Restaurant_Recycler_View.this,activity_cart.class));
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /*final boolean[] DoubleBackPressed = {false};
-        Log.e("back button: ",String.valueOf(DoubleBackPressed[0]));
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.Drawer_Layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-
-            if (DoubleBackPressed[0]) {
-                finish();
-                return;
-            }
-
-            DoubleBackPressed[0] = true;
-            GlobalMethods.print(this,"Please Click again to exit!");
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    DoubleBackPressed[0] = false;
-                }
-            },3000);*/
-
-    @Override
-    public void onBackPressed() {
-
-        Log.e("back button: ",String.valueOf(DoubleBackPressed[0]));
-
-        DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
-            if (DoubleBackPressed[0]) {
-                Intent intent = new Intent();
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-
-            else
-            {
-                DoubleBackPressed[0] = true;
-                GlobalMethods.print(this,"Please Click again to exit!");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        DoubleBackPressed[0] = false;
-                    }
-                },2000);
-            }
-        }
-    }
     private void getContact()
     {
         SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
@@ -348,6 +309,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                             RestaurantName.add(json.getString("restaurantName"));
                             RestaurantImage.add(json.getString("imageURL"));
 
+
+                            Restaurants_name.add(json.getString("restaurantName"));                          // for searching
+                            Log.e("Added Restaurant name: ",RowData.getRestaurantName());
                             RowData.setShowShimmer(true);
                             Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
 
@@ -505,4 +469,39 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        Log.e("back button: ",String.valueOf(DoubleBackPressed[0]));
+
+        DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else {
+            if (DoubleBackPressed[0]) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+
+            else
+            {
+                DoubleBackPressed[0] = true;
+                GlobalMethods.print(this,"Please Click again to exit!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        DoubleBackPressed[0] = false;
+                    }
+                },2000);
+            }
+        }
+    }
+
+
 }

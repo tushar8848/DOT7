@@ -135,8 +135,16 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
 
         set_RecyclerView_Details();
         addRowData();
-        GetProducts();
-        callInitialFavService();
+        if (!CheckConnection.getInstance(this).getNetworkStatus()) {
+
+            /********************************* Handle error here ************************/
+
+        } else {
+            //internet is connected
+            GetProducts();
+            callInitialFavService();
+        }
+
 
     }
 
@@ -170,7 +178,6 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

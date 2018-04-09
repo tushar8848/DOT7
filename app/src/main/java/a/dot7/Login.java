@@ -123,8 +123,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         {
              if(!CheckConnection.getInstance(this).getNetworkStatus())
              {
-                GlobalMethods.print(this,"Check Internet Connection");
-               }
+                 Snackbar.make(v, "Some Error Occured",
+                         Snackbar.LENGTH_LONG)
+                         .setAction("Retry", null).show();
+             }
              else {
                  //internet is connected
                  Log.d("HAR", "Username:" + UserName + " Password:" + Password);

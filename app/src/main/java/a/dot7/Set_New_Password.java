@@ -3,6 +3,7 @@ package a.dot7;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.common.OTP_Reader;
@@ -95,8 +97,15 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
             eCpass = 0;
         }
         if(validCpassword == 1 && ePass == 1 && eCpass == 1) {
-            progressBar.setVisibility(View.VISIBLE);
-            callService();
+            if (!CheckConnection.getInstance(this).getNetworkStatus()) {
+                Snackbar.make(v, "Some Error Occured",
+                        Snackbar.LENGTH_LONG)
+                        .setAction("Retry", null).show();
+            } else {
+                //internet is connected
+                progressBar.setVisibility(View.VISIBLE);
+                callService();
+            }
         }
     }
 

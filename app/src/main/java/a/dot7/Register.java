@@ -182,14 +182,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         if(empty == 0) {
 
             if (!CheckConnection.getInstance(this).getNetworkStatus()) {
-                GlobalMethods.print(this, "Check Internet Connection");
+                Snackbar.make(view, "Some Error Occured",
+                        Snackbar.LENGTH_LONG)
+                        .setAction("Retry", null).show();
             } else {
-                //setProgressBarIndeterminate(true);
-
-                // progressBar.setProgress(1);
-                progressBar.setVisibility(View.VISIBLE);
-                //  progressBar.setActivated(true);
-                callService(view);
+                    //internet is connected
+                    progressBar.setVisibility(View.VISIBLE);
+                    callService(view);
             }
         }
     }
@@ -264,7 +263,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+        Intent ForgotPassword = new Intent(Register.this, ScreenSlideActivity.class);
+        ForgotPassword.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP   );
+        startActivity(ForgotPassword);
+    }
 
 
 }
