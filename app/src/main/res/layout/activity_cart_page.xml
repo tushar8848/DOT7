@@ -49,7 +49,7 @@
                 android:background="@color/colorAccent"
                 android:textColor="#fff"
                 android:layout_height="wrap_content"
-                android:text="Order Bill: "
+                android:text="Order Bill"
                 android:layout_marginTop="10dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
