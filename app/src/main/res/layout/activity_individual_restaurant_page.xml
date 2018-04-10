@@ -53,6 +53,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
+        android:id="@+id/Individual_InternetError"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
@@ -65,7 +66,6 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="260dp"
-            android:visibility="visible"
             app:srcCompat="@drawable/loginpage" />
 
 
@@ -79,8 +79,7 @@
             android:layout_marginTop="8dp"
             android:paddingTop="30dp"
             android:text="Oops! Are you connected to the Internet?"
-            android:textColor="@color/colorPrimary"
-            android:visibility="visible" />
+            android:textColor="@color/colorPrimary" />
 
         <Button
             android:id="@+id/Individual_Restaurant_View_RetryButton"
@@ -90,8 +89,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
             android:text="Retry"
-            android:textColor="@color/colorPrimary"
-            android:visibility="visible" />
+            android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
 
