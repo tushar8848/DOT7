@@ -33,56 +33,53 @@ import a.fragments.ScreenSlidePage_Fragment3;
 
 public class ScreenSlideActivity extends FragmentActivity {
 
-    private static int Min_Pages=3;
+    private static int Min_Pages = 3;
 
-private ViewPager mpager;
-private PagerAdapter mpageradapter;
-LinearLayout sliderDotsPanel;
-private int dotsCount;
+    private ViewPager mpager;
+    private PagerAdapter mpageradapter;
+    LinearLayout sliderDotsPanel;
+    private int dotsCount;
     MyFirebaseInstanceIDService f = new MyFirebaseInstanceIDService();
-private ImageView[] dots;
+    private ImageView[] dots;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
-        mpager=findViewById(R.id.Pager);
-        mpageradapter=new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mpager = findViewById(R.id.Pager);
+        mpageradapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mpager.setAdapter(mpageradapter);
         sliderDotsPanel = findViewById(R.id.SliderDots);
         dotsCount = Min_Pages;
         dots = new ImageView[dotsCount];
 
 //        f.refreshedToken = FirebaseInstanceId.getInstance().getToken();
-  //      f.sendRegistrationToServer(f.refreshedToken,ScreenSlideActivity.this);
+        //      f.sendRegistrationToServer(f.refreshedToken,ScreenSlideActivity.this);
 
-        for(int i=0;i<dotsCount;i++){
+        for (int i = 0; i < dotsCount; i++) {
             dots[i] = new ImageView(this);
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
-                    R.drawable.nonactive_dot));
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                    (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            params.setMargins(0,8,20,16);
-            sliderDotsPanel.addView(dots[i],params);
+            params.setMargins(0, 8, 20, 16);
+            sliderDotsPanel.addView(dots[i], params);
         }
-        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
-                R.drawable.active_dot));
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
         mpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             int pos;
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
             @Override
             public void onPageSelected(int position) {
-                pos=position;
-                for(int i=0;i<dotsCount;i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
-                            R.drawable.nonactive_dot));
+                pos = position;
+                for (int i = 0; i < dotsCount; i++) {
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
                 }
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
-                        R.drawable.active_dot));
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
             }
 
             @Override
@@ -90,32 +87,35 @@ private ImageView[] dots;
             }
         });
     }
+
     public void login(View view)
 
     {
-        Intent intent=new Intent(this,Login.class);
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
 
-    public void GoRegister(View view)
-    {
-        startActivity(new Intent(this,Register.class));
+    public void GoRegister(View view) {
+        startActivity(new Intent(this, Register.class));
     }
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
-    {
-        public ScreenSlidePagerAdapter(FragmentManager fm)
-        {
+
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
             int index = position % 3;
-            switch (index){
-                case 0:  return new ScreenSlidePage_Fragment();
-                case 1: return  new ScreenSlidePage_Fragment2();
-                case 2: return new ScreenSlidePage_Fragment3();
-                default: return new ScreenSlidePage_Fragment();
+            switch (index) {
+                case 0:
+                    return new ScreenSlidePage_Fragment();
+                case 1:
+                    return new ScreenSlidePage_Fragment2();
+                case 2:
+                    return new ScreenSlidePage_Fragment3();
+                default:
+                    return new ScreenSlidePage_Fragment();
             }
         }
 
@@ -125,7 +125,6 @@ private ImageView[] dots;
             return Min_Pages;
         }
     }
-
 
 
 }

@@ -130,12 +130,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,myProfile.class));
-                        mCurrentSelectedPosition = 0;
-                        return true;
                     case R.id.your_account:
-                        Snackbar.make(view, "Item Two", Snackbar.LENGTH_SHORT).show();
+                        startActivity(new Intent(Restaurant_Recycler_View.this,myProfile.class));
                         mCurrentSelectedPosition = 1;
                         return true;
                     case R.id.logout:

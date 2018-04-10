@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
-        <item
             android:id="@+id/your_account"
             android:icon="@mipmap/ic_account_circle_black_24dp"
             android:title="Your Account" />
@@ -14,10 +10,6 @@
             android:id="@+id/your_orders"
             android:icon="@drawable/ic_shopping_cart_white_24dp"
             android:title="Your Orders" />
-        <item
-            android:id="@+id/favourites"
-            android:icon="@drawable/ic_favorite_black_24dp"
-            android:title="Favourites" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_people_black_24dp"
