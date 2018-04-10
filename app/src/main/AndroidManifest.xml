@@ -108,9 +108,14 @@
 
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page"
             android:screenOrientation="portrait"/>
-        <activity android:name="a.Lifecycle_Restaurant_Ordering.Your_Orders" />
-        <activity android:name="a.Cart_Files.Cart_Page" />
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Your_Orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme"/>
+        <activity android:name="a.Cart_Files.Cart_Page"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme"/>
         <activity android:name=".About_Us"
+            android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"/>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Address_Recycler_View" />
     </application>

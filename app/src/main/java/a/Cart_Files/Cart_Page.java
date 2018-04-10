@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,6 +40,14 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         //*****************************************************************set the layout file********************************
         setContentView(R.layout.activity_cart_page);
+        Toolbar toolbar = findViewById(R.id.Orders_Toolbar);
+        setSupportActionBar(toolbar);
+
+        if(getSupportActionBar()!=null)
+        {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         Log.d("HAR","Cart_Page pe aaya");
         setRecyclerViewDetails();
         Restaurants = new ArrayList<>();
@@ -59,6 +69,17 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return true;
+        }
     }
 
     private void setRecyclerViewDetails()
