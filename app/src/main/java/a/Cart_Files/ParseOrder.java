@@ -27,8 +27,8 @@ public class ParseOrder {
         String dishes="[";
         for(int i=0;i<size;i++)
         {
-            dishes = dishes + "{\"" + "key1\": " + "\"" +
-                    dishesDetails.get(i).getDishKey() + "\",\"quantity\": " + dishesDetails.get(i).getQuantity() + "}";
+            dishes = dishes + "{\\\"" + "key1\\\": " + "\\\"" +
+                    dishesDetails.get(i).getDishKey() + "\\\",\\\"quantity\\\": " + dishesDetails.get(i).getQuantity() + "}";
             if(i<size-1)
                 dishes = dishes + ",";
         }
@@ -41,9 +41,9 @@ public class ParseOrder {
         String Rdata = "[";
         for(int i=0;i<Rsize;i++)
         {
-            Rdata = Rdata + "{\"" + "Rkey\": " + "\"" +
-                    AllRestaurants.get(i).getRKey() + "\",\"products\": "
-                    + parseDishToJSON(AllRestaurants.get(i).getRDishes()) + ",\"totalPrice\": "
+            Rdata = Rdata + "{\\\"" + "Rkey\\\": " + "\\\"" +
+                    AllRestaurants.get(i).getRKey() + "\\\",\\\"products\\\": "
+                    + parseDishToJSON(AllRestaurants.get(i).getRDishes()) + ",\\\"totalPrice\\\": "
             + String.valueOf(AllRestaurants.get(i).getRBill()) + "}";
             if(i<Rsize-1)
                 Rdata = Rdata + ",";

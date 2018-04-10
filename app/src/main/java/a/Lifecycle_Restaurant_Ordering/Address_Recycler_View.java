@@ -131,8 +131,8 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
                     Log.d("HAR", s);
                     // ********************************************************stop progress bar*************************
 
-                    if (!StatusCode.contains("302")) {
-
+                    if (!StatusCode.contains("201")) {
+                        Log.d("HAR","Error");
 
                     } else {
                         AlertDialog.Builder builder=new AlertDialog.Builder(Address_Recycler_View.this);
