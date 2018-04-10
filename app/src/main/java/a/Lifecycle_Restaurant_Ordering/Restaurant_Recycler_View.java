@@ -69,7 +69,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private List<String> RestaurantKey, RestaurantImage, RestaurantName, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
     private RestaurantsAdapter Adapter = null;
-    private String URL,Username, Email, Status ;
+    private String URL,Username, Email, Status, Name ;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private int mCurrentSelectedPosition;
@@ -119,7 +119,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
                     case R.id.your_account:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,YourAccount.class));
+                        Intent i = new Intent(Restaurant_Recycler_View.this,YourAccount.class);
+                        i.putExtra("Name",Name);
+                        i.putExtra("Email",Email);
+                        i.putExtra("Contact",Username);
+                        startActivity(i);
                         mCurrentSelectedPosition = 1;
                         return true;
                     case R.id.logout:
@@ -579,8 +583,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     e.printStackTrace();
                 }
                 try {
-                    UserName_Nav.setText(jsonObject.getString("name"));
-                    UserEmail_Nav.setText(jsonObject.getString("email"));
+                    Name = jsonObject.getString("name");
+                    UserName_Nav.setText(Name);
+                    Email = jsonObject.getString("email");
+                    UserEmail_Nav.setText(Email);
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

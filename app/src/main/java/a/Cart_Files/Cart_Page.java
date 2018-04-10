@@ -61,9 +61,12 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
         totalBill = data.totalBill;
         GST = (totalBill*5)/100;
         finalBill = totalBill + GST + 30;
-        TotalBill.setText(String.valueOf(totalBill));
-        Gst.setText(String.valueOf(GST));
-        FinalBill.setText(String.valueOf(finalBill));
+        String temp = "Rs. "+String.valueOf(totalBill);
+        TotalBill.setText(temp);
+        temp = "Rs. "+String.valueOf(GST);
+        Gst.setText(temp);
+        temp = "Rs. "+String.valueOf(finalBill);
+        FinalBill.setText(temp);
         ConfirmOrder = findViewById(R.id.ConfirmOrder);
         ConfirmOrder.setOnClickListener(this);
 
