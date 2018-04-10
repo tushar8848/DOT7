@@ -26,7 +26,7 @@ public class ManageData {
         this.restaurants = restaurants;
         CartItems = Cart_Items.getInstance(context).getCartItems();
         totalRestaurants = 0;
-        totalBill = 0;
+        totalBill = 30;
       //  this.restaurants = new ArrayList<>();
         size = Cart_Items.getInstance(context).getTotalDishes();
         Log.d("HAR","Total dishes: "+size);
@@ -78,5 +78,9 @@ public class ManageData {
         }
 
         return dishes;
+    }
+    public ArrayList<IndividualRestaurantData> getOderData()
+    {
+        return restaurants;
     }
 }

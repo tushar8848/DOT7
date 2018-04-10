@@ -71,7 +71,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private int mCurrentSelectedPosition;
-    private AlertDialog Dialog;
+
     View view;
     ImageView Error_Image;
     TextView Error_Message, UserName_Nav, UserEmail_Nav;
