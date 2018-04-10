@@ -80,6 +80,15 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
 
 
     @Override
+    protected void onResume() {
+        if(Cart_Items.getInstance(this).getTotalQuantity()>0)
+        {
+            snackbar.show();
+        }
+        super.onResume();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_restaurant_page);

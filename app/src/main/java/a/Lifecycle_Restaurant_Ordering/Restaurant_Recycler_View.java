@@ -546,14 +546,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         }
     }
 
-    public void SetSharedValues()
-    {
-        SharedPreferences sharedPreferences =
-                getSharedPreferences("logDetails",this.MODE_PRIVATE);
-        Username = sharedPreferences.getString("Name",null);
-        Email = sharedPreferences.getString("Email",null);
 
-    }
 
     public void GetNavData()
     {

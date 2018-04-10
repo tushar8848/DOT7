@@ -111,6 +111,7 @@
         <activity android:name="a.Cart_Files.Cart_Page" />
         <activity android:name=".About_Us"
             android:theme="@style/LoginTheme"/>
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Address_Recycler_View" />
     </application>
 
 </manifest>
