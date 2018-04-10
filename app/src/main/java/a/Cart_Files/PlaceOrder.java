@@ -5,25 +5,23 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import a.getter_setter.Dishes;
-
 /**
  * Created by TUSHAR on 10-04-18.
  */
 
 public class PlaceOrder {
-    IndividualRestaurant Restaurants;
-    ArrayList<IndividualRestaurant> AllRestaurants;
+    IndividualRestaurantData Restaurants;
+    ArrayList<IndividualRestaurantData> AllRestaurants;
     Context context;
     int size,Rsize;
-    ArrayList<DishesDetails> dishesDetails;
-    public PlaceOrder(Context context,ArrayList<IndividualRestaurant> restaurants)
+    ArrayList<DishesData> dishesDetails;
+    public PlaceOrder(Context context,ArrayList<IndividualRestaurantData> restaurants)
     {
         this.context = context;
         this.AllRestaurants = restaurants;
         Rsize = this.AllRestaurants.size();
     }
-    public String parseDishToJSON( ArrayList<DishesDetails> dishesDetails)
+    public String parseDishToJSON( ArrayList<DishesData> dishesDetails)
     {
         size = dishesDetails.size();
         String dishes="[";
@@ -46,7 +44,8 @@ public class PlaceOrder {
         {
             Rdata = Rdata + "{\"" + "Rkey\": " + "\"" +
                     AllRestaurants.get(i).getRKey() + "\",\"products\": "
-                    + parseDishToJSON(AllRestaurants.get(i).getRDishes()) + "\"}";
+                    + parseDishToJSON(AllRestaurants.get(i).getRDishes()) + "\",\"totalPrice\": "
+            + String.valueOf(AllRestaurants.get(i).getRBill()) + "\"}";
             if(i<Rsize-1)
                 Rdata = Rdata + ",";
         }

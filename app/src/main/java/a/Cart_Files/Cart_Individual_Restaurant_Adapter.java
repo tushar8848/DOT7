@@ -2,7 +2,6 @@ package a.Cart_Files;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,9 @@ import a.dot7.R;
 
 class Cart_Individual_Restaurant_Adapter extends RecyclerView.Adapter<CartRestaurant_ViewHolder> {
 
-    ArrayList<DishesDetails> dishesDetails;
+    ArrayList<DishesData> dishesDetails;
     Context context;
-    Cart_Individual_Restaurant_Adapter(Context context,ArrayList<DishesDetails> dishesDetails)
+    Cart_Individual_Restaurant_Adapter(Context context,ArrayList<DishesData> dishesDetails)
     {
         this.context = context;
         this.dishesDetails = dishesDetails;
@@ -36,7 +35,7 @@ class Cart_Individual_Restaurant_Adapter extends RecyclerView.Adapter<CartRestau
 
     @Override
     public void onBindViewHolder(CartRestaurant_ViewHolder holder, int position) {
-        DishesDetails dishes = dishesDetails.get(position);
+        DishesData dishes = dishesDetails.get(position);
        // Log.d("HAR", String.valueOf(dishes));
         holder.DName.setText(dishes.getDishName());
         holder.Dprice.setText(dishes.getDishPrice());
@@ -57,9 +56,9 @@ class Cart_Individual_Restaurant_Adapter extends RecyclerView.Adapter<CartRestau
 
 
  /*
-    ArrayList<DishesDetails> dishesDetails;
+    ArrayList<DishesData> dishesDetails;
     Context context;
-    Cart_Individual_Restaurant_Adapter(Context context,ArrayList<DishesDetails> dishesDetails)
+    Cart_Individual_Restaurant_Adapter(Context context,ArrayList<DishesData> dishesDetails)
     {
         this.context = context;
         this.dishesDetails = dishesDetails;
@@ -75,7 +74,7 @@ class Cart_Individual_Restaurant_Adapter extends RecyclerView.Adapter<CartRestau
 
     @Override
     public void onBindViewHolder(CartRestaurant_ViewHolder holder, int position) {
-        DishesDetails dishes = dishesDetails.get(position);
+        DishesData dishes = dishesDetails.get(position);
         holder.DName.setText(dishes.getDishName());
         holder.Dprice.setText(dishes.getDishPrice());
         String quantity = "x "+String.valueOf(dishes.getQuantity());

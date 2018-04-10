@@ -1,8 +1,6 @@
 package a.Cart_Files;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +20,7 @@ public class Cart_Page extends AppCompatActivity {
     private RecyclerView CartView;
     private RecyclerView.LayoutManager  CartLayout;
     private CartAdapter cartAdapter;
-    private ArrayList<IndividualRestaurant> Restaurants;
+    private ArrayList<IndividualRestaurantData> Restaurants;
     ManageData data;
     int totalRestaurants;
     TextView TotalBill;
