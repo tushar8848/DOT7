@@ -4,13 +4,20 @@ package a.Lifecycle_Restaurant_Ordering;
  * Created by TUSHAR on 02-04-18.
  */
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -21,9 +28,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,13 +66,17 @@ import a.dot7.ScreenSlideActivity;
 import a.dot7.YourAccount;
 import a.getter_setter.Restaurants;
 import android.os.Handler;
+import android.support.v4.view.MenuItemCompat;
+import android.widget.Toast;
+
+import a.common.MyDialog;
 
 
 public class Restaurant_Recycler_View extends AppCompatActivity implements View.OnClickListener {
 
     String Contact;
     final boolean[] DoubleBackPressed = {false};
-    List<String> Restaurants_name;
+    String[] Restaurants_name;
 
     private RecyclerView Restaurant_recycler_view;
     private List<Restaurants> AllRowData;
@@ -73,6 +87,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private int mCurrentSelectedPosition;
+    private AlertDialog Dialog;
     View view;
     ImageView Error_Image;
     TextView Error_Message, UserName_Nav, UserEmail_Nav;
@@ -260,11 +275,90 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.restaurant_toolbar_menu, menu);
-        searchView = (SearchView) menu.findItem(R.id.Search).getActionView();
-        Log.e("","create kr liya");
+
+        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);;
+        searchView = (SearchView)  menu.findItem(R.id.Search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        Log.e("","Searchmmanager create ho gya");
+
+        if (searchView.isSubmitButtonEnabled())
+        {
+            Log.e("","Yes Enables");
+        }
+        final SearchView.SearchAutoComplete searchAutoComplete =
+                searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchAutoComplete.setDropDownBackgroundResource(R.color.gray);
+        searchAutoComplete.setDropDownAnchor(R.id.Search);
+        searchAutoComplete.setThreshold(1);
+
+        ArrayAdapter<String> newsAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, Restaurants_name);
+
+        searchAutoComplete.setAdapter(newsAdapter);
+        searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int itemIndex, long id) {
+                String queryString=(String)adapterView.getItemAtPosition(itemIndex);
+                searchAutoComplete.setText("" + queryString);
+                GlobalMethods.print(Restaurant_recycler_view.getContext(),
+                        "you clicked " + queryString);
+                RestaurantNameselected(queryString);
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                AlertDialog alertDialog = new AlertDialog.Builder(Restaurant_recycler_view.getContext()).create();
+                alertDialog.setMessage("Search keyword is " + query);
+                alertDialog.show();
+                MenuItem cart = menu.findItem(R.id.Cart);
+                cart.setVisible(true);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                GlobalMethods.print(Restaurant_recycler_view.getContext(),newText);
+                MenuItem cart = menu.findItem(R.id.Cart);
+                if(cart.isVisible())
+                {
+                    cart.setVisible(false);
+                }
+                return false;
+            }
+        });
+
+
         return true;
     }
 
+    private void RestaurantNameselected(String queryString) {
+
+        int size =  AllRowData.size();
+        List<Restaurants> Searched_rows = null;
+        for(int  i =0; i < size; i++)
+        {
+            Restaurants Rowdata = new Restaurants();
+            if (AllRowData.get(i).getRestaurantName().contentEquals(queryString))
+            {
+                Rowdata.setRestaurantName(AllRowData.get(i).getRestaurantName());
+                Rowdata.setRestaurantCuisine(AllRowData.get(i).getRestaurantCuisine());
+                Rowdata.setRestaurantFavflag(AllRowData.get(i).getRestaurantFavflag());
+                Rowdata.setRestaurantImage(AllRowData.get(i).getRestaurantImage());
+                Rowdata.setRestaurantRating(AllRowData.get(i).getRestaurantRating());
+                Rowdata.setRestaurantTiming(AllRowData.get(i).getRestaurantTiming());
+                Rowdata.setShowShimmer(false);
+                Searched_rows.add(Rowdata);
+                Log.e("Added Restaurant name: ",Rowdata.getRestaurantName());
+            }
+        }
+        Adapter = new
+                RestaurantsAdapter(Restaurant_Recycler_View.this,Searched_rows);
+        Restaurant_recycler_view.setAdapter(Adapter);
+
+    }
 
 
     @Override
@@ -276,7 +370,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.Search:
-                Log.e("HAR","Search icon clicked");
+                Log.e("","Search icon clicked");
                 return true;
             case R.id.Cart:
                 Log.e("HAR","Cart pe click hua");
@@ -353,7 +447,9 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 Restaurants RowData;
                 if (response != null) {
 
-                    for ( int i = 0 ; i < response.length() ; i++)
+                    int length = response.length();
+                    Restaurants_name = new String[length];
+                    for ( int i = 0 ; i < length ; i++)
                     {
                         RowData = new Restaurants();
 
@@ -371,7 +467,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                             RestaurantImage.add(json.getString("imageURL"));
 
 
-                            Restaurants_name.add(json.getString("restaurantName"));                          // for searching
+                            Restaurants_name[i] = RestaurantName.get(i);                             // for searching
                             Log.e("Added Restaurant name: ",RowData.getRestaurantName());
                             RowData.setShowShimmer(true);
                             Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
