@@ -89,8 +89,11 @@
         <activity android:name=".myProfile"
             android:screenOrientation="portrait"/>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View"
-            android:screenOrientation="portrait"/>
-            android:theme="@style/AppTheme" />
+            android:screenOrientation="portrait">
+        </activity>
+
+           <!-- android:theme="@style/AppTheme" />-->
+
         <service android:name="a.FirebasePushNotification.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -113,6 +113,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
+                String title="Share your App";
 
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
@@ -154,6 +155,17 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     case R.id.your_orders:
                         startActivity(new Intent(Restaurant_Recycler_View.this,Your_Orders.class));
                         return true;
+
+                    case R.id.nav_share:
+                         Uri link=Uri.parse("https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2Fopen%3Fid%3D1NXRB6qLELnlua-KgoloWgKe0jvVg5Kyh&h=ATOdApSjytGmLQ8PMCiVVA26X9P7Q_qsYOZPfZERcacLv39jnRJI4XpnaWR4gN0JPg_2WeEUl44-dcAwgQmlWfx1pOFU2pKhKY5Z0Vdnq1zNCgUfBo5YKw");
+
+                         Intent sendintent=new Intent(Intent.ACTION_SEND,link);
+                         Intent chooser=Intent.createChooser(sendintent,title);
+                         if (sendintent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(chooser);
+                         }
+                         return true;
+
 
                     default:
                         return true;
