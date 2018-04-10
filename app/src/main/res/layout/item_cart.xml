@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -12,11 +13,16 @@
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            android:clipToPadding="false"
+            card_view:cardCornerRadius="5dp"
             android:layout_marginTop="10dp">
 
             <RelativeLayout
                 android:id="@+id/single_cart"
                 android:layout_width="match_parent"
+                android:background="@drawable/rectangle_border"
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatTextView
@@ -35,10 +41,19 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/CartRestaurant_Name"
                     android:paddingBottom="10dp"
-                    android:scrollbars="vertical">
+                    android:layout_alignRight="@id/delete_cart_card"
+                    android:scrollbars="vertical"/>
 
-
-                </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.AppCompatImageButton
+                    android:id="@+id/delete_cart_card"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="#fff"
+                    android:padding="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_delete_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
 
