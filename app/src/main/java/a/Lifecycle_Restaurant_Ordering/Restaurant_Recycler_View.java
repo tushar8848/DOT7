@@ -453,7 +453,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                    } else {
 
                        AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
-                       builder.setMessage("You have logged out");
+                       builder.setMessage("You have been logged out");
                        builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialogInterface, int i) {

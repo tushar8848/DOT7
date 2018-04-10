@@ -3,6 +3,7 @@ package a.Cart_Files;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
     private RecyclerView CartView;
     private RecyclerView.LayoutManager  CartLayout;
     private CartAdapter cartAdapter;
+    private CardView BillView;
     private ArrayList<IndividualRestaurantData> Restaurants;
     ManageData data;
     int totalRestaurants;
@@ -35,6 +38,8 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
     int totalBill;
     double GST,finalBill;
     Button ConfirmOrder;
+    ImageView cartemptyimage;
+    TextView cartemptytext;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,15 +55,20 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
 
         Log.d("HAR","Cart_Page pe aaya");
         setRecyclerViewDetails();
+        BillView = findViewById(R.id.total_bill_cart);
         Restaurants = new ArrayList<>();
         data = new ManageData(this,Restaurants);
         CartData_Singleton.getInstance(this).setData(Restaurants);
-        initiateCartView();
         totalRestaurants = data.setAllData();
        TotalBill = findViewById(R.id.totalBill);
         Gst = findViewById(R.id.totalGST);
         FinalBill = findViewById(R.id.FinalBill);
         totalBill = data.totalBill;
+        cartemptyimage = findViewById(R.id.CartEmptyImage);
+        cartemptytext = findViewById(R.id.CartEmptyText);
+
+        checkEmptyCart();
+
         GST = (totalBill*5)/100;
         finalBill = totalBill + GST + 30;
         String temp = "Rs. "+String.valueOf(totalBill);
@@ -69,9 +79,7 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
         FinalBill.setText(temp);
         ConfirmOrder = findViewById(R.id.ConfirmOrder);
         ConfirmOrder.setOnClickListener(this);
-
-
-
+        initiateCartView();
     }
 
     @Override
@@ -97,6 +105,16 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
         cartAdapter = new CartAdapter(this,Restaurants);
         CartView.setAdapter(cartAdapter);
 
+    }
+    private void checkEmptyCart()
+    {
+        if(totalBill == 0)
+        {
+            CartView.setVisibility(View.GONE);
+            BillView.setVisibility(View.GONE);
+            cartemptyimage.setVisibility(View.VISIBLE);
+            cartemptytext.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
