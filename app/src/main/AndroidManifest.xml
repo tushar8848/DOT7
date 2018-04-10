@@ -105,7 +105,7 @@
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Individual_Restaurant_Page"
             android:screenOrientation="portrait"/>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Your_Orders" />
-        <activity android:name=".activity_cart" />
+        <activity android:name="a.Cart_Files.Cart_Page" />
         <activity android:name=".About_Us"
             android:theme="@style/LoginTheme"/>
     </application>

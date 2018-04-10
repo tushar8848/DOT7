@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import a.Cart_Files.Cart_Page;
 import a.common.CheckConnection;
 import a.common.GlideApp;
 import a.common.GlobalMethods;
@@ -157,6 +158,8 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
         snackbar.setAction("View Cart", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HAR","ON Click View Cart");
+                startActivity(new Intent(Individual_Restaurant_Page.this, Cart_Page.class));
 
             }
         });
@@ -341,7 +344,7 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
                             RowData.setDishAvailability(json.getString("availabilityFlag"));
                             RowData.setDishPrice(json.getString("price"));
                             RowData.setDishVFlag(json.getString("veg_nVeg_Flag"));
-                            RowData.setDishKey(json.getString("ProductID"));
+                            RowData.setDishKey(json.getString("productID"));
                         }
                         catch (Exception e) {
                             Log.e("Error: " , String.valueOf(e));

@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,20 +25,37 @@ public class Cart_Page extends AppCompatActivity {
     private ArrayList<IndividualRestaurant> Restaurants;
     ManageData data;
     int totalRestaurants;
-
+    TextView TotalBill;
+    TextView Gst;
+    TextView FinalBill;
+    int totalBill;
+    double GST,finalBill;
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         //*****************************************************************set the layout file********************************
-        setContentView(R.layout.activity_restaurant_recycler_view);
+        setContentView(R.layout.activity_cart);
+        Log.d("HAR","Cart_Page pe aaya");
         setRecyclerViewDetails();
-        initiateCartView();
+        Restaurants = new ArrayList<>();
         data = new ManageData(this,Restaurants);
+        initiateCartView();
         totalRestaurants = data.setAllData();
+       TotalBill = findViewById(R.id.totalBill);
+        Gst = findViewById(R.id.totalGST);
+        FinalBill = findViewById(R.id.FinalBill);
+        totalBill = data.totalBill;
+        GST = (totalBill*5)/100;
+        finalBill = totalBill + GST;
+        TotalBill.setText(String.valueOf(totalBill));
+        Gst.setText(String.valueOf(GST));
+        FinalBill.setText(String.valueOf(finalBill));
+
     }
+
     private void setRecyclerViewDetails()
     {
-        CartView = findViewById(R.id.Recycler_View);
+        CartView = findViewById(R.id.cart_recycler);
         CartView.setHasFixedSize(true);
         CartLayout = new LinearLayoutManager(this);
         CartView.setLayoutManager(CartLayout);
@@ -45,7 +64,6 @@ public class Cart_Page extends AppCompatActivity {
     {
         cartAdapter = new CartAdapter(this,Restaurants);
         CartView.setAdapter(cartAdapter);
-
 
     }
 }

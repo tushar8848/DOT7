@@ -29,11 +29,10 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     private List<Dishes> data;
     private String RKey;
     private String RName;
-    Dishes BlockData;
     int totalQuantity;
     Snackbar snackbar;
     View sbView;
-    public DishesAdapter(Context context,List<Dishes> data,Snackbar snackbar,String Rkey,String Rname)
+    public DishesAdapter(Context context,List<Dishes> data,Snackbar snackbar,String Rname,String Rkey)
     {
         this.context = context;
         this.data = data;
@@ -56,7 +55,8 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
     @Override
     public void onBindViewHolder(final DishesAdapter.DishViewHolder holder, final int position) {
 
-       BlockData = data.get(position);
+       final Dishes BlockData = data.get(position);
+     //  Log.d("HAR","Adding: "+BlockData.getDishName());
         holder.DishName.setText(BlockData.getDishName());
         holder.DishPrice.setText(BlockData.getDishPrice());
         String vFlag = BlockData.getDishVFlag();
@@ -80,7 +80,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                     holder.Quantity.setText(String.valueOf(quantity));
                    holder.QuantityModifier.setVisibility(View.VISIBLE);
 
-
+                    Log.d("HAR","Adding: "+BlockData.getDishName());
                     Cart_Items.getInstance(context).addDish(BlockData, RName, RKey);
                     totalQuantity = Cart_Items.getInstance(context).getTotalQuantity();
 
@@ -100,6 +100,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishViewHo
                 quantity++;
                 BlockData.setQuantity(quantity);
 
+                Log.d("HAR","Adding: "+BlockData.getDishName());
                 Cart_Items.getInstance(context).addDish(BlockData,RName,RKey);
                 totalQuantity = Cart_Items.getInstance(context).getTotalQuantity();
                 snackbar.setText(totalQuantity+" item(s)");

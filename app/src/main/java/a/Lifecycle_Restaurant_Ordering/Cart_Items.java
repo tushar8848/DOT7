@@ -39,6 +39,7 @@ public class Cart_Items {
     }
     public void addDish(Dishes dishes,String Rname,String RKey)
     {
+        Log.d("HAR","Dish added: "+dishes.getDishName());
         int id = searchDish(dishes.getDishKey());
         if(id!=-1)
         {
@@ -77,7 +78,7 @@ public class Cart_Items {
         Log.d("HAR","CART ITEMS");
         for(int i=0;i<totalDishes;i++)
         {
-            Log.d("HAR","Key: "+cartItems.get(i).getDishKey()+"  Name: "+cartItems.get(i).getDishName());
+            //Log.d("HAR","Key: "+cartItems.get(i).getDishKey()+"  Name: "+cartItems.get(i).getDishName());
             if(cartItems.get(i).getDishKey() == key)
             {
                 return i;

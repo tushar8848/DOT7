@@ -24,7 +24,8 @@
     android:layout_height="wrap_content"
     android:id="@+id/cart_recycler"
     android:scrollbars="vertical"
-    android:layout_marginTop="20dp">
+    android:layout_marginTop="20dp"
+    android:layout_below="@id/Orders_Toolbar">
 
 </android.support.v7.widget.RecyclerView>
 
@@ -53,6 +54,7 @@
             android:textSize="20sp"/>
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/totalBill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/total"
@@ -69,6 +71,7 @@
                 android:textSize="20sp"/>
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/totalGST"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                android:layout_below="@id/total"
@@ -94,6 +97,7 @@
                 android:textSize="25sp"
                 android:text="Rs.30" />
 
+
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/grand_total"
                 android:layout_width="wrap_content"
@@ -101,6 +105,15 @@
                 android:layout_below="@id/delivery"
                 android:text="Total Amount Payable"
                 android:textSize="20sp"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/FinalBill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/grand_total"
+                android:layout_alignParentEnd="true"
+                android:paddingLeft="200dp"
+                android:textSize="25sp"
+                android:text="Rs.500" />
 
             <android.support.v7.widget.AppCompatButton
                 android:layout_width="wrap_content"
