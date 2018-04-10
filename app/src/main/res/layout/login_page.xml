@@ -162,8 +162,8 @@
 
         <ProgressBar
             android:id="@+id/Login_Progress_Bar"
-            android:layout_width="32dp"
-            android:layout_height="25dp"
+            android:layout_width="16dp"
+            android:layout_height="18dp"
             android:layout_gravity="center"
             android:indeterminate="true"
             android:visibility="gone" />

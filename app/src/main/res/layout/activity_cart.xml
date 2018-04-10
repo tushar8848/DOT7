@@ -15,7 +15,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Your Orders" />
+        app:title="Your Cart" />
 
 
 
@@ -35,23 +35,26 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/restaurant_bill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order Bill-"
-            android:textSize="20sp"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/restaurant_bill"
-            android:text="Item Total"
-            android:textSize="20sp"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/restaurant_bill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Bill-"
+                android:textSize="20sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/restaurant_bill"
+                android:text="Item Total"
+                android:textSize="20sp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/totalBill"
@@ -60,25 +63,26 @@
                 android:layout_alignBottom="@+id/total"
                 android:layout_alignParentEnd="true"
                 android:paddingLeft="200dp"
-                android:textSize="25sp"
-                android:text="Rs.500" />
+                android:text="Rs.500"
+                android:textSize="25sp" />
+
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/gst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/total"
                 android:text="GST"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/totalGST"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_below="@id/total"
                 android:layout_alignParentEnd="true"
+                android:layout_below="@id/total"
                 android:paddingLeft="200dp"
-                android:textSize="25sp"
-                android:text="Rs.50" />
+                android:text="Rs.50"
+                android:textSize="25sp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/delivery"
@@ -86,16 +90,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/gst"
                 android:text="Delievery Charges"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gst"
                 android:layout_alignParentEnd="true"
+                android:layout_below="@id/gst"
                 android:paddingLeft="200dp"
-                android:textSize="25sp"
-                android:text="Rs.30" />
+                android:text="Rs.30"
+                android:textSize="25sp" />
 
 
             <android.support.v7.widget.AppCompatTextView
@@ -104,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/delivery"
                 android:text="Total Amount Payable"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
+
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/FinalBill"
                 android:layout_width="wrap_content"
@@ -112,14 +117,16 @@
                 android:layout_alignBottom="@+id/grand_total"
                 android:layout_alignParentEnd="true"
                 android:paddingLeft="200dp"
-                android:textSize="25sp"
-                android:text="Rs.500" />
+                android:text="Rs.500"
+                android:textSize="25sp" />
 
             <android.support.v7.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/restaurant_bill"
+                android:layout_below="@+id/grand_total"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="64dp"
+                android:layout_toEndOf="@+id/total"
                 android:text="Confirm Order" />
 
         </RelativeLayout>
