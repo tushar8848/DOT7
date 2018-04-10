@@ -2,9 +2,11 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="20dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cartDishName"
@@ -12,28 +14,33 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/cartDishQuantity"
+        android:layout_marginTop="5dp"
         android:text="shahi Paneer"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteY="47dp" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/cartDishQuantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="70dp"
-        android:layout_marginTop="73dp"
-        android:layout_toStartOf="@+id/cartDishPrice"
-        android:text="Quantity"
-        android:textSize="15sp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cartDishPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/cartDishName"
         android:layout_alignBottom="@+id/cartDishName"
+        android:layout_alignEnd="@id/cartDishQuantity"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"
+        android:text="Price"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/cartDishQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="32dp"
-        android:text="Price" />
+        android:text="Quantity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+
 </RelativeLayout>

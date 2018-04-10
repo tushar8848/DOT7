@@ -2,17 +2,18 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cart_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="3dp"
         card_view:cardCornerRadius="0dp"
-        android:id="@+id/cart_view">
+        card_view:cardUseCompatPadding="true">
 
 
         <RelativeLayout
@@ -23,13 +24,12 @@
                 android:id="@+id/YourOrderRestaurant_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="34dp"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
                 android:text="Pind Balluchi"
-                android:textSize="35sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/YourorderID"
@@ -38,6 +38,7 @@
                 android:layout_alignBaseline="@+id/order_id"
                 android:layout_alignBottom="@+id/order_id"
                 android:layout_alignParentStart="true"
+                android:paddingStart="30dp"
                 android:text="Order Id:"
                 android:textSize="20sp" />
 
@@ -45,10 +46,10 @@
                 android:id="@+id/order_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/YourOrderRestaurant_Name"
-                android:layout_marginStart="200dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="6dp"
-                android:layout_toEndOf="@+id/YourorderID"
                 android:text="#12345"
                 android:textSize="20sp" />
 
@@ -56,22 +57,20 @@
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_below="@+id/YourorderID"
-                android:text="Total Price -"
-                android:textSize="25sp" />
+                android:paddingStart="30dp"
+                android:text="Total Price: "
+                android:textSize="20sp" />
 
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/OrderTotal_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_alignStart="@+id/order_id"
                 android:layout_below="@+id/order_id"
                 android:text="Rs.500"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/OrderDate"
@@ -79,9 +78,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/YourorderID"
                 android:layout_below="@+id/price"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="15dp"
                 android:text="April 8,2018"
-                android:textSize="20sp" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

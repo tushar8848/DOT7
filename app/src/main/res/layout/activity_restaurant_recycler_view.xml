@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/Restaurant_View_Error"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -48,11 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Restaurant_View_Error"
-            android:paddingTop="30dp"
             android:layout_centerInParent="true"
+            android:paddingTop="30dp"
             android:text="Oops! Are you connected to the Internet?"
             android:textColor="@color/colorPrimary"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/Restaurant_View_RetryButton"

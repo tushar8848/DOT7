@@ -1,28 +1,35 @@
 package a.Cart_Files;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import a.Lifecycle_Restaurant_Ordering.Address_Recycler_View;
 import a.dot7.R;
 
 /**
  * Created by TUSHAR on 09-04-18.
  */
 
-public class Cart_Page extends AppCompatActivity {
+public class Cart_Page extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView CartView;
     private RecyclerView.LayoutManager  CartLayout;
     private CartAdapter cartAdapter;
-    private ArrayList<IndividualRestaurant> Restaurants;
+    private CardView BillView;
+    private ArrayList<IndividualRestaurantData> Restaurants;
     ManageData data;
     int totalRestaurants;
     TextView TotalBill;
@@ -30,29 +37,60 @@ public class Cart_Page extends AppCompatActivity {
     TextView FinalBill;
     int totalBill;
     double GST,finalBill;
+    Button ConfirmOrder;
+    ImageView cartemptyimage;
+    TextView cartemptytext;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //*****************************************************************set the layout file********************************
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_cart_page);
+        Toolbar toolbar = findViewById(R.id.Orders_Toolbar);
+        setSupportActionBar(toolbar);
+
+        if(getSupportActionBar()!=null)
+        {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         Log.d("HAR","Cart_Page pe aaya");
         setRecyclerViewDetails();
+        BillView = findViewById(R.id.total_bill_cart);
         Restaurants = new ArrayList<>();
         data = new ManageData(this,Restaurants);
-        initiateCartView();
+        CartData_Singleton.getInstance(this).setData(Restaurants);
         totalRestaurants = data.setAllData();
        TotalBill = findViewById(R.id.totalBill);
         Gst = findViewById(R.id.totalGST);
         FinalBill = findViewById(R.id.FinalBill);
         totalBill = data.totalBill;
-        GST = (totalBill*5)/100;
-        finalBill = totalBill + GST;
-        TotalBill.setText(String.valueOf(totalBill));
-        Gst.setText(String.valueOf(GST));
-        FinalBill.setText(String.valueOf(finalBill));
-        PlaceOrder order = new PlaceOrder(this,Restaurants);
-        String rorder = order.parseRestaurantToJSON();
+        cartemptyimage = findViewById(R.id.CartEmptyImage);
+        cartemptytext = findViewById(R.id.CartEmptyText);
 
+        checkEmptyCart();
+
+        GST = (totalBill*5)/100;
+        finalBill = totalBill + GST + 30;
+        String temp = "Rs. "+String.valueOf(totalBill);
+        TotalBill.setText(temp);
+        temp = "Rs. "+String.valueOf(GST);
+        Gst.setText(temp);
+        temp = "Rs. "+String.valueOf(finalBill);
+        FinalBill.setText(temp);
+        ConfirmOrder = findViewById(R.id.ConfirmOrder);
+        ConfirmOrder.setOnClickListener(this);
+        initiateCartView();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return true;
+        }
     }
 
     private void setRecyclerViewDetails()
@@ -67,5 +105,20 @@ public class Cart_Page extends AppCompatActivity {
         cartAdapter = new CartAdapter(this,Restaurants);
         CartView.setAdapter(cartAdapter);
 
+    }
+    private void checkEmptyCart()
+    {
+        if(totalBill == 0)
+        {
+            CartView.setVisibility(View.GONE);
+            BillView.setVisibility(View.GONE);
+            cartemptyimage.setVisibility(View.VISIBLE);
+            cartemptytext.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(this, Address_Recycler_View.class));
     }
 }

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="a.dot7.myProfile">
+    tools:context="a.dot7.YourAccount">
 
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,9 +17,9 @@
         android:layout_height="58dp"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="Your Account"
-        app:titleMarginTop="10dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        app:titleMarginTop="10dp" />
 
     <ScrollView
         android:id="@+id/ScrollView2"
@@ -57,77 +57,46 @@
                 android:layout_marginTop="-50dp"
                 app:srcCompat="@drawable/loginpage" />
 
-                <RelativeLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text="Pooja Singhal"
-                        android:textStyle="bold"
-                        android:textSize="22sp" />
-
-                <!--    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:hint="Swastika Rai"
-                        android:textSize="15sp" /> -->
-
-                    <TextView
-                        android:id="@+id/mobNo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/name"
-                        android:layout_below="@+id/name"
-
-                        android:layout_marginTop="16dp"
-                        android:text="9873704102"
-                        android:textSize="18sp" />
-
-                 <!--   <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="90dp"
-                        android:hint="9453567326"
-                        android:textSize="15sp" />-->
-
-                    <TextView
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/mobNo"
-                        android:layout_below="@+id/mobNo"
-
-                        android:layout_marginTop="16dp"
-                        android:text="abc@gmail.com"
-                        android:textSize="18sp" />
-
-                 <!--   <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="165dp"
-
-                        android:hint="abc.me@gmail.com"
-
-                        android:textSize="15sp"
-                        android:textStyle="bold" />-->
-
-                </RelativeLayout>
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:text="Pooja Singhal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
+                <TextView
+                    android:id="@+id/mobNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/name"
+                    android:layout_below="@+id/name"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="9873704102"
+                    android:textSize="18sp" />
 
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/mobNo"
+                    android:layout_below="@+id/mobNo"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="abc@gmail.com"
+                    android:textSize="18sp" />
+
+
+            </RelativeLayout>
 
 
             <RelativeLayout
@@ -162,8 +131,8 @@
                         android:layout_width="26dp"
                         android:layout_height="18dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
                         android:indeterminate="true"
                         android:visibility="gone" />
 
@@ -176,12 +145,12 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/change_password"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginTop="27dp"
-                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
                     android:background="@color/colorPrimary"
                     android:orientation="horizontal"
-                    android:padding="15dp">
+                    android:padding="12dp">
 
                     <TextView
                         android:layout_width="wrap_content"

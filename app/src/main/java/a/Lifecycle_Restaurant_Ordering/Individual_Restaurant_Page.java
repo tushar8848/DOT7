@@ -27,7 +27,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -77,6 +80,8 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
     Snackbar snackbar;
     Toolbar toolbar;
     private String RName,Rkey;
+    RelativeLayout ErrorPortion;
+    Button retryButton;
 
 
     @Override
@@ -92,6 +97,21 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_restaurant_page);
+
+        ErrorPortion = findViewById(R.id.Individual_InternetError);
+        retryButton = findViewById(R.id.Individual_Restaurant_View_RetryButton);
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (CheckConnection.getInstance(Individual_Restaurant_Page.this).getNetworkStatus())
+                {
+                    ErrorPortion.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    initiatePage();
+                }
+            }
+        });
+
         intent = getIntent();
         RName = intent.getStringExtra("RestaurantName");
         Rkey = intent.getStringExtra("RestaurantKey");
@@ -148,15 +168,22 @@ public class Individual_Restaurant_Page extends AppCompatActivity implements Vie
         if (!CheckConnection.getInstance(this).getNetworkStatus()) {
 
             /********************************* Handle error here ************************/
+            recyclerView.setVisibility(View.GONE);
+           ErrorPortion.setVisibility(View.VISIBLE);
+           // retryButton.setVisibility(View.VISIBLE);
 
         } else {
             //internet is connected
-            setSnackbar();
-            GetProducts();
-            callInitialFavService();
+            initiatePage();
         }
 
 
+    }
+    private void initiatePage()
+    {
+        setSnackbar();
+        GetProducts();
+        callInitialFavService();
     }
     private void setSnackbar()
     {

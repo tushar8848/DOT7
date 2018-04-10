@@ -6,12 +6,12 @@ import java.util.ArrayList;
  * Created by TUSHAR on 09-04-18.
  */
 
-public class IndividualRestaurant {
+public class IndividualRestaurantData {
 
     private String RName;
     private  String RKey;
-    ArrayList<DishesDetails> RDishes;
-
+    ArrayList<DishesData> RDishes;
+    private int restauarntBill;
     public void setRName(String rName)
     {
         this.RName = rName;
@@ -22,10 +22,11 @@ public class IndividualRestaurant {
         this.RKey = rKey;
     }
 
-    public void setRDishes(ArrayList<DishesDetails> rDishes)
+    public void setRDishes(ArrayList<DishesData> rDishes)
     {
         this.RDishes = rDishes;
     }
+    public void setRBill(int bill){this.restauarntBill = bill;}
 
     public String getRName()
     {
@@ -37,8 +38,9 @@ public class IndividualRestaurant {
         return this.RKey;
     }
 
-    public ArrayList<DishesDetails> getRDishes()
+    public ArrayList<DishesData> getRDishes()
     {
         return this.RDishes;
     }
+    public int getRBill(){return restauarntBill;}
 }

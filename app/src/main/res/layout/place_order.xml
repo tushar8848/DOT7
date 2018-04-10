@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView">
 
                 <EditText
-
+                    android:id="@+id/Flat_Num_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Flat Number"
@@ -78,6 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/Flat_Num">
 
                 <EditText
+                    android:id="@+id/streetEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Street Name" />
@@ -97,6 +98,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/street">
 
                 <EditText
+                    android:id="@+id/landmarkEditText"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:layout_width="match_parent"

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:fitsSystemWindows="true"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:fitsSystemWindows="true">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/Orders_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -18,43 +19,55 @@
         app:title="Your Cart" />
 
 
-
-<android.support.v7.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/cart_recycler"
-    android:scrollbars="vertical"
-    android:layout_marginTop="20dp"
-    android:layout_below="@id/Orders_Toolbar">
-
-</android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cart_recycler"
+        android:layout_weight="7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:scrollbars="vertical"
+        android:visibility="visible" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/total_bill_cart"
-        android:layout_below="@id/cart_recycler"
-
+        android:layout_weight="3"
+        android:background="@color/black_trans80"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="220dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
         <RelativeLayout
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/restaurant_bill"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:background="@color/colorAccent"
+                android:textColor="#fff"
                 android:layout_height="wrap_content"
-                android:text="Order Bill-"
-                android:textSize="20sp" />
+                android:text="Order Bill"
+                android:layout_marginTop="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+                tools:layout_editor_absoluteX="294dp"
+                tools:layout_editor_absoluteY="8dp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
                 android:layout_below="@id/restaurant_bill"
                 android:text="Item Total"
-                android:textSize="20sp" />
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="35dp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/totalBill"
@@ -62,17 +75,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/total"
                 android:layout_alignParentEnd="true"
-                android:paddingLeft="200dp"
                 android:text="Rs.500"
-                android:textSize="25sp" />
+                android:layout_marginEnd="30dp"
+                tools:layout_editor_absoluteX="313dp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/gst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/total"
+                android:layout_marginStart="30dp"
                 android:text="GST"
-                android:textSize="20sp" />
+                tools:layout_editor_absoluteY="62dp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/totalGST"
@@ -80,26 +94,29 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/total"
-                android:paddingLeft="200dp"
+                android:layout_marginEnd="30dp"
                 android:text="Rs.50"
-                android:textSize="25sp" />
+                tools:layout_editor_absoluteX="321dp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/delivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/gst"
+                android:layout_marginStart="30dp"
                 android:text="Delievery Charges"
-                android:textSize="20sp" />
+                tools:layout_editor_absoluteY="89dp" />
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/gst"
-                android:paddingLeft="200dp"
+                android:layout_marginEnd="30dp"
                 android:text="Rs.30"
-                android:textSize="25sp" />
+                tools:layout_editor_absoluteX="321dp"
+                tools:layout_editor_absoluteY="27dp" />
 
 
             <android.support.v7.widget.AppCompatTextView
@@ -108,7 +125,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/delivery"
                 android:text="Total Amount Payable"
-                android:textSize="20sp" />
+                android:layout_marginStart="30dp"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="116dp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/FinalBill"
@@ -116,22 +135,43 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/grand_total"
                 android:layout_alignParentEnd="true"
-                android:paddingLeft="200dp"
+                android:layout_marginEnd="30dp"
                 android:text="Rs.500"
-                android:textSize="25sp" />
+                tools:layout_editor_absoluteX="313dp"
+                tools:layout_editor_absoluteY="54dp" />
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/ConfirmOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/grand_total"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="64dp"
-                android:layout_toEndOf="@+id/total"
+                android:background="@color/colorAccent"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="#fff"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@id/FinalBill"
+                android:layout_centerHorizontal="true"
                 android:text="Confirm Order" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
+    <ImageView
+        android:id="@+id/CartEmptyImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:visibility="gone"
+        app:srcCompat="@drawable/login_logo_guy_72x72px" />
+
+    <TextView
+        android:id="@+id/CartEmptyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:text="Your Cart Is empty"
+        android:visibility="gone" />
 
 
-</RelativeLayout>
+</LinearLayout>

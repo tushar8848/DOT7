@@ -4,7 +4,7 @@ package a.Cart_Files;
  * Created by TUSHAR on 09-04-18.
  */
 
-public class DishesDetails {
+public class DishesData {
 
 
     private String DishName = null;

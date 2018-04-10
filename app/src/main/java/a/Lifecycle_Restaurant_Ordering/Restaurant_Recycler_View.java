@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import a.Cart_Files.Cart_Page;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
@@ -51,7 +53,7 @@ import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
 import a.dot7.ScreenSlideActivity;
-import a.dot7.myProfile;
+import a.dot7.YourAccount;
 import a.getter_setter.Restaurants;
 import android.os.Handler;
 
@@ -67,11 +69,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private List<String> RestaurantKey, RestaurantImage, RestaurantName, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
     private RestaurantsAdapter Adapter = null;
-    private String URL,Username, Email, Status ;
+    private String URL,Username, Email, Status, Name ;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private int mCurrentSelectedPosition;
-    private AlertDialog Dialog;
     View view;
     ImageView Error_Image;
     TextView Error_Message, UserName_Nav, UserEmail_Nav;
@@ -118,7 +119,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
                     case R.id.your_account:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,myProfile.class));
+                        Intent i = new Intent(Restaurant_Recycler_View.this,YourAccount.class);
+                        i.putExtra("Name",Name);
+                        i.putExtra("Email",Email);
+                        i.putExtra("Contact",Username);
+                        startActivity(i);
                         mCurrentSelectedPosition = 1;
                         return true;
                     case R.id.logout:
@@ -252,17 +257,16 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     public boolean onOptionsItemSelected(MenuItem item) {
 
         Log.e("id of item selected: ",String.valueOf(item.getItemId()));
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.Search:
-                Log.e("","Search icon clicked");
+                Log.e("HAR","Search icon clicked");
                 return true;
             case R.id.Cart:
-                Log.e("","Cart pe click hua");
-              //  startActivity(new Intent(Restaurant_Recycler_View.this,activity_cart.class));
+                Log.e("HAR","Cart pe click hua");
+                startActivity(new Intent(Restaurant_Recycler_View.this,Cart_Page.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -449,7 +453,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                    } else {
 
                        AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
-                       builder.setMessage("You have logged out");
+                       builder.setMessage("You have been logged out");
                        builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialogInterface, int i) {
@@ -579,8 +583,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     e.printStackTrace();
                 }
                 try {
-                    UserName_Nav.setText(jsonObject.getString("name"));
-                    UserEmail_Nav.setText(jsonObject.getString("email"));
+                    Name = jsonObject.getString("name");
+                    UserName_Nav.setText(Name);
+                    Email = jsonObject.getString("email");
+                    UserEmail_Nav.setText(Email);
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
