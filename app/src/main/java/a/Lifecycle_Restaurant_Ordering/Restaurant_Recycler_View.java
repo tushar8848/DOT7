@@ -262,7 +262,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 return true;
             case R.id.Cart:
                 Log.e("","Cart pe click hua");
-              //  startActivity(new Intent(Restaurant_Recycler_View.this,activity_cart.class));
+              //  startActivity(new Intent(Restaurant_Recycler_View.this,activity_cart_page.class));
         }
         return super.onOptionsItemSelected(item);
     }

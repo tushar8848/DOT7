@@ -32,7 +32,7 @@ public class Cart_Page extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //*****************************************************************set the layout file********************************
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_cart_page);
         Log.d("HAR","Cart_Page pe aaya");
         setRecyclerViewDetails();
         Restaurants = new ArrayList<>();
