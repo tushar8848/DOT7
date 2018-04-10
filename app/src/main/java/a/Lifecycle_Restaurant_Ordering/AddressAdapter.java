@@ -52,6 +52,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             holder.LandMark.setText(RowData.getLandMark());
             holder.State.setText(RowData.getState());
             holder.District.setText(RowData.getDistrict());
+            holder.Pincode.setText(RowData.getPincode());
     }
 
     @Override
@@ -75,6 +76,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         TextView LandMark;
         TextView State;
         TextView District;
+        TextView Pincode;
         //public ShimmerFrameLayout shimmerFrameLayout;
 
         private ViewHolder(View itemView) {
@@ -84,6 +86,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             StreetName = itemView.findViewById( R.id.res_name);
             LandMark = itemView.findViewById( R.id.cuisines_list);
             State = itemView.findViewById( R.id.cuisines_list);
+            Pincode = itemView.findViewById( R.id.cuisines_list);
             District = itemView.findViewById(R.id.cuisines_list);
 
             itemView.setOnClickListener(new View.OnClickListener() {

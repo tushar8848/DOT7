@@ -12,6 +12,7 @@ public class User_Address {
     private String LandMark = null;
     private String State = null;
     private String District = null;
+    private String Pincode = null;
 
     public String getAddressID()
     {
@@ -41,6 +42,10 @@ public class User_Address {
     {
         return District;
     }
+    public String getPincode()
+    {
+        return Pincode;
+    }
 
 
 
@@ -68,6 +73,10 @@ public class User_Address {
     public void setState(String State)
     {
         this.State = State;
+    }
+    public void setPincode(String Pincode)
+    {
+        this.Pincode = Pincode;
     }
 
     public void setDistrict(String District)
