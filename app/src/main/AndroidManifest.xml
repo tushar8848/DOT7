@@ -86,7 +86,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Otp"
             android:screenOrientation="portrait"/>
-        <activity android:name=".myProfile"
+        <activity android:name=".YourAccount"
+            android:theme="@style/LoginTheme"
             android:screenOrientation="portrait"/>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View"
             android:screenOrientation="portrait">

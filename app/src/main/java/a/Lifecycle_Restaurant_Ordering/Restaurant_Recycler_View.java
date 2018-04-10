@@ -51,7 +51,7 @@ import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
 import a.dot7.ScreenSlideActivity;
-import a.dot7.myProfile;
+import a.dot7.YourAccount;
 import a.getter_setter.Restaurants;
 import android.os.Handler;
 
@@ -118,7 +118,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
                     case R.id.your_account:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,myProfile.class));
+                        startActivity(new Intent(Restaurant_Recycler_View.this,YourAccount.class));
                         mCurrentSelectedPosition = 1;
                         return true;
                     case R.id.logout:
