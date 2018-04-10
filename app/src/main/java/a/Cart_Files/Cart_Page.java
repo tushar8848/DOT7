@@ -50,6 +50,8 @@ public class Cart_Page extends AppCompatActivity {
         TotalBill.setText(String.valueOf(totalBill));
         Gst.setText(String.valueOf(GST));
         FinalBill.setText(String.valueOf(finalBill));
+        PlaceOrder order = new PlaceOrder(this,Restaurants);
+        String rorder = order.parseRestaurantToJSON();
 
     }
 
