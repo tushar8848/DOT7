@@ -5,17 +5,12 @@ package a.Lifecycle_Restaurant_Ordering;
  */
 
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -26,15 +21,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v7.widget.SearchView;
 
@@ -53,12 +44,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-//import a.dot7.activity_cart;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
-import a.common.OTP_Reader;
 import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
@@ -66,8 +54,6 @@ import a.dot7.ScreenSlideActivity;
 import a.dot7.myProfile;
 import a.getter_setter.Restaurants;
 import android.os.Handler;
-import android.support.v4.view.MenuItemCompat;
-import a.common.MyDialog;
 
 
 public class Restaurant_Recycler_View extends AppCompatActivity implements View.OnClickListener {
@@ -165,6 +151,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     case R.id.about:
                         startActivity(new Intent(Restaurant_Recycler_View.this,About_Us.class));
                         return true;
+                    case R.id.your_orders:
+                        startActivity(new Intent(Restaurant_Recycler_View.this,Your_Orders.class));
+                        return true;
+
                     default:
                         return true;
                 }

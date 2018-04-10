@@ -55,11 +55,11 @@ class Youroder_ViewHolder extends RecyclerView.ViewHolder {
     TextView OrderID;
     public Youroder_ViewHolder(View itemView) {
         super(itemView);
-        /*
-        RName = itemView.findViewById();
-        TotalPrice = itemView.findViewById();
-        OrderDate = itemView.findViewById();
-        OrderID = itemView.findViewById();
-        */
+
+        RName = itemView.findViewById(R.id.YourOrderRestaurant_Name);
+        TotalPrice = itemView.findViewById(R.id.OrderTotal_price);
+        OrderDate = itemView.findViewById(R.id.OrderDate);
+        OrderID = itemView.findViewById(R.id.order_id);
+
     }
 }

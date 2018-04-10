@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/Restaurant_Name"
+                android:id="@+id/YourOrderRestaurant_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -32,7 +32,7 @@
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/order"
+                android:id="@+id/YourorderID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/order_id"
@@ -43,13 +43,13 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/order_id"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Restaurant_Name"
-                android:layout_marginStart="229dp"
+                android:layout_below="@+id/YourOrderRestaurant_Name"
+                android:layout_marginStart="200dp"
                 android:layout_marginTop="6dp"
-                android:layout_toEndOf="@+id/order"
-                android:text="#123456"
+                android:layout_toEndOf="@+id/YourorderID"
+                android:text="#12345"
                 android:textSize="20sp" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -57,13 +57,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_below="@+id/order"
+                android:layout_below="@+id/YourorderID"
                 android:text="Total Price -"
                 android:textSize="25sp" />
 
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/Total_price"
+                android:id="@+id/OrderTotal_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -74,10 +74,10 @@
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/Time"
+                android:id="@+id/OrderDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/order"
+                android:layout_alignStart="@+id/YourorderID"
                 android:layout_below="@+id/price"
                 android:layout_marginTop="22dp"
                 android:text="April 8,2018"
