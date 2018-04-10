@@ -42,7 +42,7 @@ public class About_Us extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         DevDummyFragment devDummyFragment;
         devDummyFragment = new DevDummyFragment();
-        devDummyFragment.setFragmentArguments("Tushar Garg","BackEnd Developer",R.drawable.tushar_thumb);
+        devDummyFragment.setFragmentArguments("Tushar Garg","BackEnd Developer",R.drawable.harneet_thumbnail);
 
         adapter.addFrag(devDummyFragment);
         viewPager.setAdapter(adapter);
