@@ -27,7 +27,7 @@ public class ParseOrder {
         String dishes="[";
         for(int i=0;i<size;i++)
         {
-            dishes = dishes + "{\"" + "key\": " + "\"" +
+            dishes = dishes + "{\"" + "key1\": " + "\"" +
                     dishesDetails.get(i).getDishKey() + "\",\"quantity\": " + dishesDetails.get(i).getQuantity() + "}";
             if(i<size-1)
                 dishes = dishes + ",";

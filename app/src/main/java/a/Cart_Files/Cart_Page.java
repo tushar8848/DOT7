@@ -60,7 +60,7 @@ public class Cart_Page extends AppCompatActivity implements View.OnClickListener
         FinalBill = findViewById(R.id.FinalBill);
         totalBill = data.totalBill;
         GST = (totalBill*5)/100;
-        finalBill = totalBill + GST;
+        finalBill = totalBill + GST + 30;
         TotalBill.setText(String.valueOf(totalBill));
         Gst.setText(String.valueOf(GST));
         FinalBill.setText(String.valueOf(finalBill));

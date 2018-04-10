@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import a.Cart_Files.Cart_Page;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
@@ -71,7 +73,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private int mCurrentSelectedPosition;
-
     View view;
     ImageView Error_Image;
     TextView Error_Message, UserName_Nav, UserEmail_Nav;
@@ -252,17 +253,16 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     public boolean onOptionsItemSelected(MenuItem item) {
 
         Log.e("id of item selected: ",String.valueOf(item.getItemId()));
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.Search:
-                Log.e("","Search icon clicked");
+                Log.e("HAR","Search icon clicked");
                 return true;
             case R.id.Cart:
-                Log.e("","Cart pe click hua");
-              //  startActivity(new Intent(Restaurant_Recycler_View.this,activity_cart_page.class));
+                Log.e("HAR","Cart pe click hua");
+                startActivity(new Intent(Restaurant_Recycler_View.this,Cart_Page.class));
         }
         return super.onOptionsItemSelected(item);
     }
