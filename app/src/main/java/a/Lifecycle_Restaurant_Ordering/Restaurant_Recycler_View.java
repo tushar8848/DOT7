@@ -284,7 +284,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         intent.setData(Uri.parse("tel: 9711919938"));
         startActivity(intent);
 
-        Snackbar.make(view, "Call To Order ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+       // Snackbar.make(view, "Call To Order ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
 
