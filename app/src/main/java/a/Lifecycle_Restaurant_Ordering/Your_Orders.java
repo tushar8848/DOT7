@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import a.common.CheckConnection;
+import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.R;
 import a.getter_setter.RestaurantOrders;
@@ -104,7 +105,7 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
 
     private void callService() {
 
-        final String URL = " ";
+        final String URL = GlobalMethods.getURL() + "Products/GetOrders";
         JsonArrayRequest jsonArrayRequest = new
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
