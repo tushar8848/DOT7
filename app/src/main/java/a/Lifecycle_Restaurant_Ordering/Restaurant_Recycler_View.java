@@ -642,8 +642,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
             Error_Button.setVisibility(View.GONE);
             Error_Message.setVisibility(View.GONE);
             Restaurant_recycler_view.setVisibility(View.VISIBLE);
-            if(determineService == 1)
+            if(determineService == 1){
                 checkUserLogin();
+                activateNavBar();
+            }
+
             else
                 Json_Data_Web_Call();
         }

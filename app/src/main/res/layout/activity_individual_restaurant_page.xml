@@ -56,6 +56,7 @@
         android:id="@+id/Individual_InternetError"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:visibility="gone">
 
         <ImageView
@@ -65,7 +66,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginTop="260dp"
             app:srcCompat="@drawable/no_connection" />
 
 
@@ -73,13 +73,12 @@
             android:id="@+id/Individual_Restaurant_Error_Message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_below="@+id/Individual_Restaurant_View_Error"
-            android:layout_marginEnd="65dp"
+            android:layout_centerInParent="true"
             android:layout_marginTop="8dp"
-            android:paddingTop="30dp"
+            android:paddingTop="20dp"
             android:text="Hungry? Go Online"
-            android:textColor="@color/colorAccent" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <Button
             android:id="@+id/Individual_Restaurant_View_RetryButton"
@@ -87,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Individual_Restaurant_Error_Message"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
             android:layout_marginTop="11dp"
             android:text="Retry"
             android:textColor="@color/colorPrimary" />
