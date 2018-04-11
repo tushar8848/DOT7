@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/devPageTempToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title="About Team DOT 7" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/devPageTempToolbar">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+
+            <RelativeLayout
+                android:id="@+id/dev_nitish"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_border_teal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+                <ImageView
+                    android:id="@+id/dev_nitish_thumbnail"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="150dp"
+                    android:layout_centerInParent="true"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="15dp"
+                    app:srcCompat="@drawable/shadyns_thumbnail" />
+
+                <TextView
+                    android:id="@+id/dev_nitish_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/dev_nitish_thumbnail"
+                    android:gravity="center"
+                    android:text="Nitish Sihmar"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:textColor="@color/colorAccent"
+
+                    android:id="@+id/dev_nitish_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_nitish_name"
+                    android:gravity="center"
+                    android:text="UI/UX Developer" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dev_pooja"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/dev_nitish"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_border_teal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/dev_pooja_thumbnail"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/pooja_thumbnail" />
+
+                <TextView
+                    android:id="@+id/dev_pooja_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_pooja_thumbnail"
+                    android:gravity="center"
+                    android:text="Pooja Singhal"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/dev_pooja_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_pooja_name"
+                    android:gravity="center"
+                    android:text="UI/UX Developer"
+                    android:textColor="@color/colorAccent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dev_harneet"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/dev_pooja"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_border_teal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/dev_harneet_thumbnail"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/harneet_thumbnail" />
+
+                <TextView
+                    android:id="@+id/dev_harneet_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_harneet_thumbnail"
+                    android:gravity="center"
+                    android:text="Harneet Singh"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/dev_harneet_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_harneet_name"
+                    android:gravity="center"
+                    android:text="Backend Developer"
+                    android:textColor="@color/colorAccent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dev_tushar"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/dev_harneet"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_border_teal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/dev_tushar_thumbnail"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/tushar_thumb" />
+
+                <TextView
+                    android:id="@+id/dev_tushar_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_tushar_thumbnail"
+                    android:gravity="center"
+                    android:text="Tushar Garg"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/dev_tushar_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_tushar_name"
+                    android:gravity="center"
+                    android:text="Backend Developer"
+                    android:textColor="@color/colorAccent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dev_suman"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/dev_tushar"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_border_teal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/dev_suman_thumbnail"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/suman_thumbnail" />
+
+                <TextView
+                    android:id="@+id/dev_suman_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_suman_thumbnail"
+                    android:gravity="center"
+                    android:text="Suman Kumar"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/dev_suman_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_suman_name"
+                    android:gravity="center"
+                    android:text="Backend Developer"
+                    android:textColor="@color/colorAccent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dev_swastika"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/dev_suman"
+                android:layout_marginBottom="65dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_border_teal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/dev_swastika_thumbnail"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/swastika_thumbnail" />
+
+                <TextView
+                    android:id="@+id/dev_swastika_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_swastika_thumbnail"
+                    android:gravity="center"
+                    android:text="Swastika Rai"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/dev_swastika_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dev_swastika_name"
+                    android:gravity="center"
+                    android:text="Backend Developer"
+                    android:textColor="@color/colorAccent" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

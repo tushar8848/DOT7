@@ -59,6 +59,7 @@ import a.Cart_Files.Cart_Page;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
+import a.dot7.AboutUsTemp;
 import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
@@ -231,13 +232,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
                       return true;
 
-
-                  case R.id.about:
-                      startActivity(new Intent(Restaurant_Recycler_View.this,About_Us.class));
-                      return true;
-                  case R.id.your_orders:
-                      startActivity(new Intent(Restaurant_Recycler_View.this,Your_Orders.class));
-                      return true;
+                    case R.id.about:
+                        startActivity(new Intent(Restaurant_Recycler_View.this,AboutUsTemp.class));
+                        return true;
+                    case R.id.your_orders:
+                        startActivity(new Intent(Restaurant_Recycler_View.this,Your_Orders.class));
+                        return true;
 
                     case R.id.nav_share:
                         try {

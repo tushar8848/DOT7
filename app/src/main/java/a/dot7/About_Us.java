@@ -36,9 +36,9 @@ public class About_Us extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about__us);
+        setContentView(R.layout.activity_about_us_temp);
         //setContentView(R.layout.place_order);
-        Toolbar toolbar = findViewById(R.id.devPageToolbar);
+        Toolbar toolbar = findViewById(R.id.devPageTempToolbar);
         setSupportActionBar(toolbar);
         viewPager = (ViewPager) findViewById(R.id.devPager);
         Log.d("HAR","About us takk aaya details fill ho gyi");

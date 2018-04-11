@@ -68,7 +68,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:gravity="center"
-                    android:text="Pooja Singhal"
+                    android:text="Team DOT 7"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
@@ -80,7 +80,7 @@
                     android:layout_below="@+id/name"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="9873704102"
+                    android:text="1234567890"
                     android:textSize="18sp" />
 
 
@@ -92,7 +92,7 @@
                     android:layout_below="@+id/mobNo"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="abc@gmail.com"
+                    android:text="dot7team@gmail.com"
                     android:textSize="18sp" />
 
 
