@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <group
-        android:id="@+id/nab_bar_menu_group1"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/your_account"
             android:icon="@mipmap/ic_account_circle_black_24dp"
@@ -21,16 +19,17 @@
             android:icon="@drawable/logout"
             android:title="Logout" />
     </group>
-    <group
-        android:id="@+id/nab_bar_menu_group2"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Share" />
-        <item
-            android:id="@+id/nav_send"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Contact Us" />
-    </group>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Contact Us" />
+        </menu>
+    </item>
+
 </menu>
