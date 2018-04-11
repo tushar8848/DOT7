@@ -1,5 +1,6 @@
 package a.Lifecycle_Restaurant_Ordering;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +51,13 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
     String JsonStringOrder;
     String UserName;
     AlertDialog dialog;
+    private ProgressDialog Progress;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_order);
         setDetails();
+        Progress = new ProgressDialog(this);
         url = GlobalMethods.getURL() + "Restaurant_Main/InsertOrder";
         data = CartData_Singleton.getInstance(this).getData();
         order = new ParseOrder(this,data);
@@ -111,8 +115,11 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
         getDetails();
         if(eflat == 1 && esname == 1 && eLand == 1)
         {
-            if (CheckConnection.getInstance(this).getNetworkStatus())
+            if (CheckConnection.getInstance(this).getNetworkStatus()) {
+                Progress.setMessage("Placing Order, please wait.");
+                Progress.show();
                 callOrderService();
+            }
             else {
                 Snackbar.make(v,"No Internet Connection",Snackbar.LENGTH_LONG).show();
             }
@@ -120,13 +127,6 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
     }
     public void callOrderService()
     {
-        Log.d("HAR",Flatno);
-        Log.d("HAR",Street);
-        Log.d("HAR",Landmark);
-        Log.d("HAR",JsonStringOrder);
-        Log.d("HAR",UserName);
-
-
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                     Listener<String>() {
@@ -134,14 +134,23 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
                 @Override
                 public void onResponse(String s) {
                     Log.d("HAR",parameters.toString());
-                    // progressBar.setActivated(false);
-                    //progressBar.setVisibility(View.GONE);
+                    Progress.dismiss();
                     StatusCode = GlobalMethods.GetSubString(s);
                     Log.d("HAR", s);
                     // ********************************************************stop progress bar*************************
 
                     if (!StatusCode.contains("201")) {
-                        Log.d("HAR","Error");
+                        AlertDialog.Builder builder=new AlertDialog.Builder(Address_Recycler_View.this);
+                        builder.setMessage("Your Order is not placed. Please Retry after some time");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                                startActivity(new Intent(Address_Recycler_View.this, Restaurant_Recycler_View.class));
+                            }
+                        });
+                        dialog = builder.create();
+                        dialog.show();
 
                     } else {
                         AlertDialog.Builder builder=new AlertDialog.Builder(Address_Recycler_View.this);
@@ -161,6 +170,7 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
+                    Progress.dismiss();
                     //progressBar.setVisibility(View.GONE);
                     Toast.makeText(Address_Recycler_View.this, "Order Unsuccessful",2);
                 }
@@ -180,6 +190,7 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
 
 
         } catch (Exception ex) {
+            Progress.dismiss();
 
         }
     }

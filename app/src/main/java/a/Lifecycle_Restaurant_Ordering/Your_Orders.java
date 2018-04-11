@@ -1,9 +1,11 @@
 package a.Lifecycle_Restaurant_Ordering;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -52,17 +55,21 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
      private TextView Error_message;
      private Button Error_Button;
      private String UserID;
+    private ProgressDialog Progress;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        Progress = new ProgressDialog(this);
         Toolbar toolbar=findViewById(R.id.Cart_Toolbar);
         Error_Button = findViewById(R.id.OrderRetryButton);
         Error_Image = findViewById(R.id.OrderView_Error);
         Error_message = findViewById(R.id.OrderError_Message);
         Error_Button.setOnClickListener(this);
         setSupportActionBar(toolbar);
+        Progress.setMessage("Fetching your orders, please wait.");
         if(getSupportActionBar()!=null)
         {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -100,6 +107,8 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
             SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
                     Context.MODE_PRIVATE);
             UserID = sharedPreferences.getString("UserName",null);
+
+            Progress.show();
             callService();
         }
         else
@@ -114,56 +123,64 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
 
     private void callService() {
 
-        
+
         final String URL = GlobalMethods.getURL() + "Products/GetOrders?id="+UserID;
         JsonArrayRequest jsonArrayRequest = new
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONArray response1) {
-                JSONArray response = null;
-                JSONObject json;
-                //Json_Parse_Data(response);
-                Log.d("HAR", "Response aaya");
-                Log.d("HAR", response1.toString());
-                String str = response1.toString();
-
-                try {
-                    response = new JSONArray(str);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                RestaurantOrders RowData;
-                if (response != null) {
-
-                    int length = response.length();
-                    for (int i = 0; i < length; i++) {
-                        RowData = new RestaurantOrders();
+            public void onResponse(final JSONArray response1) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        Progress.dismiss();
+                        JSONArray response = null;
+                        JSONObject json;
+                        //Json_Parse_Data(response);
+                        Log.d("HAR", "Response aaya");
+                        Log.d("HAR", response1.toString());
+                        String str = response1.toString();
 
                         try {
-                            json = response.getJSONObject(i);
-                            RowData.setOrderDate(json.getString("date"));   //harneet fill ids
-                            RowData.setOrderId(json.getString("oid"));
-                            RowData.setRName(json.getString("res_Name"));
-                            RowData.setTotalPrice(json.getString("amount"));
-
-                            AllRowData.add(RowData);
-
-                        } catch (Exception e) {
-                            Log.e("Error: ", String.valueOf(e));
+                            response = new JSONArray(str);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
+                        RestaurantOrders RowData;
+                        if (response != null) {
 
+                            int length = response.length();
+                            for (int i = 0; i < length; i++) {
+                                RowData = new RestaurantOrders();
+
+                                try {
+                                    json = response.getJSONObject(i);
+                                    RowData.setOrderDate(json.getString("date"));
+                                    RowData.setOrderId(json.getString("oid"));
+                                    RowData.setRName(json.getString("res_Name"));
+                                    RowData.setTotalPrice(json.getString("amount"));
+
+                                    AllRowData.add(RowData);
+
+                                } catch (Exception e) {
+                                    Log.e("Error: ", String.valueOf(e));
+                                }
+
+                            }
+                        }
+                        adapter = new
+                                YourOrderAdapter(Your_Orders.this, AllRowData);
+                        orders_recyclerView.setAdapter(adapter);
                     }
-                }
-                    adapter = new
-                            YourOrderAdapter(Your_Orders.this, AllRowData);
-                    orders_recyclerView.setAdapter(adapter);
+                }, 3000);
+
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if(CheckConnection.getInstance(Your_Orders.this).getNetworkStatus())
                 {
-                    Log.e("VolleyError: ",error.toString());
+                    Progress.dismiss();
                 }
                 else {
                     orders_recyclerView.setVisibility(View.GONE);
@@ -187,6 +204,7 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
             Error_Button.setVisibility(View.GONE);
             Error_message.setVisibility(View.GONE);
             orders_recyclerView.setVisibility(View.VISIBLE);
+            Progress.show();
             callService();
         }
     }
