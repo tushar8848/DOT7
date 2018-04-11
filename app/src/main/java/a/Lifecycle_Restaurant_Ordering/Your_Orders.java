@@ -76,7 +76,7 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
         }
         set_RecyclerView_Details();
         fillData();
-        
+
 
     }
 
@@ -155,7 +155,7 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
                                 try {
                                     json = response.getJSONObject(i);
                                     RowData.setOrderDate(json.getString("date"));
-                                    RowData.setOrderId(json.getString("oid"));
+                                    RowData.setOrderId(String.valueOf(json.getString("oid").hashCode()));
                                     RowData.setRName(json.getString("res_Name"));
                                     RowData.setTotalPrice(json.getString("amount"));
 
