@@ -29,12 +29,14 @@
         app:layout_constraintTop_toBottomOf="@id/Pager" />
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/TextView_Ready_To_Order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
+        android:layout_marginTop="24dp"
+        android:alpha="0.7"
         android:text="@string/Welcome_Screen_Text"
+        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +50,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:background="#09a2b8"
+        android:background="@color/colorAccent"
         android:textColor="#FFF"
         android:onClick="GoRegister"
         android:text="@string/Sign_Up"
@@ -63,6 +65,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
+        android:textColor="@color/colorPrimary"
         style="?android:attr/borderlessButtonStyle"
         android:onClick="login"
         android:text="@string/Already_Have_An_Account"

@@ -180,7 +180,8 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/Or"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <com.shobhitpuri.custombuttons.GoogleSignInButton
                 android:layout_width="match_parent"
@@ -189,6 +190,7 @@
                 android:layout_marginStart="8dp"
                 android:padding="12dp"
                 android:text="@string/Google_Sign_Up"
+                android:visibility="gone"
                 app:isDarkTheme="false" />
 
             <android.support.v7.widget.AppCompatButton

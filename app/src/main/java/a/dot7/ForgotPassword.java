@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -38,7 +39,7 @@ import static a.dot7.Set_New_Password.Passing_Contact;
 
 public class ForgotPassword extends Activity implements View.OnClickListener{
 
-    LinearLayout forgot_password;
+    RelativeLayout forgot_password;
     EditText ContactText;
     String Contact;
     String StatusCode;

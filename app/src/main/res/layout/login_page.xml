@@ -98,11 +98,6 @@
         app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Password" />
 
 
-
-
-
-
-
     <com.google.android.gms.common.SignInButton
         android:id="@+id/Sign_In_Button"
         android:layout_width="117dp"
@@ -111,6 +106,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,12 +118,13 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:onClick="Call_Signup"
         android:text="@string/Signup_Link"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,17 +133,17 @@
 
         />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/Input_Layout_Name_Login_Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/Sign_In_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Input_Layout_Name_Forgot_Password">
@@ -154,6 +151,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/Login_Button"
@@ -164,10 +162,11 @@
             android:id="@+id/Login_Progress_Bar"
             android:layout_width="16dp"
             android:layout_height="18dp"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:indeterminate="true"
             android:visibility="gone" />
-    </LinearLayout>
+    </RelativeLayout>
 
 
 

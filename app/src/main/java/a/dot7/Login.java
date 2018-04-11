@@ -8,12 +8,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,7 +41,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     EditText PasswordText;
     String UserName;
     String Password;
-    LinearLayout LoginButton;
+    RelativeLayout LoginButton;
     String StatusCode;
     ProgressBar progressBar;
     int validContact=0,ePass=0,eContact;
@@ -56,11 +58,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         Toolbar toolbar=findViewById(R.id.Tbar1);
         toolbar.setTitle("Login");
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         progressBar = findViewById(R.id.Login_Progress_Bar);
         setDetails();
         LoginButton.setOnClickListener(this);
         focuschange();
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return true;
+        }
+    }
+
     private void focuschange()
     {
         UserNameText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
