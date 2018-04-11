@@ -1,5 +1,7 @@
 package a.Lifecycle_Restaurant_Ordering;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +33,7 @@ import a.common.MySingleton;
 import a.dot7.R;
 import a.getter_setter.RestaurantOrders;
 import a.getter_setter.Restaurants;
+import a.getter_setter.User_Address;
 
 /**
  * Created by Pooja on 09-04-2018.
@@ -45,9 +48,10 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
     ArrayList<RestaurantOrders> AllRowData;
     YourOrderAdapter adapter;
 
-    ImageView Error_Image;
-    TextView Error_message;
-    Button Error_Button;
+     private ImageView Error_Image;
+     private TextView Error_message;
+     private Button Error_Button;
+     private String UserID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
         }
         set_RecyclerView_Details();
         fillData();
+
 
     }
 
@@ -91,8 +96,12 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
     private void fillData()
     {
 
-        if(CheckConnection.getInstance(this).getNetworkStatus())
+        if(CheckConnection.getInstance(this).getNetworkStatus()) {
+            SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                    Context.MODE_PRIVATE);
+            UserID = sharedPreferences.getString("UserName",null);
             callService();
+        }
         else
         {
             orders_recyclerView.setVisibility(View.GONE);
@@ -105,7 +114,8 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
 
     private void callService() {
 
-        final String URL = GlobalMethods.getURL() + "Products/GetOrders";
+        
+        final String URL = GlobalMethods.getURL() + "Products/GetOrders?id="+UserID;
         JsonArrayRequest jsonArrayRequest = new
                 JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
@@ -131,10 +141,10 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
 
                         try {
                             json = response.getJSONObject(i);
-                            RowData.setOrderDate(json.getString(""));   //harneet fill ids
-                            RowData.setOrderId(json.getString(""));
-                            RowData.setRName(json.getString(""));
-                            RowData.setTotalPrice(json.getString(""));
+                            RowData.setOrderDate(json.getString("date"));   //harneet fill ids
+                            RowData.setOrderId(json.getString("oid"));
+                            RowData.setRName(json.getString("res_Name"));
+                            RowData.setTotalPrice(json.getString("amount"));
 
                             AllRowData.add(RowData);
 

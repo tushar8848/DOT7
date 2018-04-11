@@ -274,7 +274,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     }
 
 
-    @SuppressLint("RestrictedApi")
+    /*@SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.restaurant_toolbar_menu, menu);
@@ -393,7 +393,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         return super.onOptionsItemSelected(item);
     }
 
-
+*/
 
     private void getContact()
     {
@@ -505,12 +505,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     @Override
                     public void onItemClick(int position) {
 
-                        UserSelectedRestaurant.add(RestaurantKey.get(position).toString());
+                        UserSelectedRestaurant.add(RestaurantKey.get(position));
                        // Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
-                        intent.putExtra("RestaurantKey", RestaurantKey.get(position).toString());
-                        intent.putExtra("RestaurantName", RestaurantName.get(position).toString());
-                        intent.putExtra("RestaurantImage", RestaurantImage.get(position).toString());
+                        intent.putExtra("RestaurantKey", RestaurantKey.get(position));
+                        intent.putExtra("RestaurantName", RestaurantName.get(position));
+                        intent.putExtra("RestaurantImage", RestaurantImage.get(position));
                         startActivity(intent);
                     }
                 });

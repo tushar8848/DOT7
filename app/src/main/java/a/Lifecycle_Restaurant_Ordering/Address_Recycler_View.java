@@ -45,6 +45,7 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
     private int eflat = 0, esname=0, eLand = 0;
     ParseOrder order;
     ArrayList<IndividualRestaurantData> data;
+    Map<String, String> parameters = new HashMap<>();
     String JsonStringOrder;
     String UserName;
     AlertDialog dialog;
@@ -119,12 +120,20 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
     }
     public void callOrderService()
     {
+        Log.d("HAR",Flatno);
+        Log.d("HAR",Street);
+        Log.d("HAR",Landmark);
+        Log.d("HAR",JsonStringOrder);
+        Log.d("HAR",UserName);
+
+
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                     Listener<String>() {
 
                 @Override
                 public void onResponse(String s) {
+                    Log.d("HAR",parameters.toString());
                     // progressBar.setActivated(false);
                     //progressBar.setVisibility(View.GONE);
                     StatusCode = GlobalMethods.GetSubString(s);
@@ -136,7 +145,7 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
 
                     } else {
                         AlertDialog.Builder builder=new AlertDialog.Builder(Address_Recycler_View.this);
-                        builder.setMessage("Your order have been placed. Check in Your Orders for the order details");
+                        builder.setMessage("Your order have been placed. Check in \"Your Orders\" for the order details");
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -158,12 +167,12 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
             }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> parameters = new HashMap<>();
-                   parameters.put("LoginID",UserName);
-                   parameters.put("FlatNo",Flatno);
-                   parameters.put("StreetName",Street);
-                   parameters.put("Landmark",Landmark);
-                   parameters.put("JSONData",JsonStringOrder);
+
+                   parameters.put("FlatNo", Flatno);
+                   parameters.put("StreetName", Street);
+                   parameters.put("Landmark", Landmark);
+                   parameters.put("JSONData", JsonStringOrder);
+                    parameters.put("LoginID", UserName);
                     return parameters;
                 }
             };
