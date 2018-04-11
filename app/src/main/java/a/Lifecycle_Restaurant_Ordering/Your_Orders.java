@@ -164,7 +164,7 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
                                     try {
                                         json = response.getJSONObject(i);
                                         RowData.setOrderDate(json.getString("date"));
-                                        String orderid = json.getString("oid");
+                                        String orderid = "#" + json.getString("oid");
                                         int l = orderid.length();
                                         orderid = orderid.substring(l - 6);
                                         RowData.setOrderId(orderid);
