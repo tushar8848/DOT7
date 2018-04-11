@@ -383,7 +383,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Restaurant_recycler_view.setAdapter(Adapter);
 
     }
-
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -403,7 +403,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         return super.onOptionsItemSelected(item);
     }
 
-*/
+
 
     private void getContact()
     {

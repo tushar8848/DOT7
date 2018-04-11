@@ -149,29 +149,43 @@ public class Your_Orders extends AppCompatActivity implements View.OnClickListen
                         if (response != null) {
 
                             int length = response.length();
-                            for (int i = 0; i < length; i++) {
-                                RowData = new RestaurantOrders();
+                            if(length == 0)
+                            {
+                                orders_recyclerView.setVisibility(View.GONE);
+                                Error_message.setVisibility(View.VISIBLE);
+                                Error_Image.setVisibility(View.VISIBLE);
+                                String No_Order = "Hungry? Place an order";
+                                Error_message.setText(No_Order);
+                            }
+                            else {
+                                for (int i = 0; i < length; i++) {
+                                    RowData = new RestaurantOrders();
 
-                                try {
-                                    json = response.getJSONObject(i);
-                                    RowData.setOrderDate(json.getString("date"));
-                                    RowData.setOrderId(String.valueOf(json.getString("oid").hashCode()));
-                                    RowData.setRName(json.getString("res_Name"));
-                                    RowData.setTotalPrice(json.getString("amount"));
+                                    try {
+                                        json = response.getJSONObject(i);
+                                        RowData.setOrderDate(json.getString("date"));
+                                        String orderid = json.getString("oid");
+                                        int l = orderid.length();
+                                        orderid = orderid.substring(l - 6);
+                                        RowData.setOrderId(orderid);
+                                        RowData.setRName(json.getString("res_Name"));
+                                        RowData.setTotalPrice(json.getString("amount"));
 
-                                    AllRowData.add(RowData);
+                                        AllRowData.add(RowData);
 
-                                } catch (Exception e) {
-                                    Log.e("Error: ", String.valueOf(e));
+                                    } catch (Exception e) {
+                                        Log.e("Error: ", String.valueOf(e));
+                                    }
+
                                 }
 
-                            }
                         }
                         adapter = new
                                 YourOrderAdapter(Your_Orders.this, AllRowData);
                         orders_recyclerView.setAdapter(adapter);
+                        }
                     }
-                }, 3000);
+                }, 1500);
 
 
             }

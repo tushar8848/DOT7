@@ -39,7 +39,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="150dp"
             android:visibility="gone"
-            app:srcCompat="@drawable/loginpage" />
+            app:srcCompat="@drawable/no_connection" />
 
 
         <TextView
@@ -49,8 +49,8 @@
             android:layout_below="@id/Restaurant_View_Error"
             android:layout_centerInParent="true"
             android:paddingTop="30dp"
-            android:text="Oops! Are you connected to the Internet?"
-            android:textColor="@color/colorPrimary"
+            android:text="Hungry? Go Online"
+            android:textColor="@color/colorAccent"
             android:visibility="gone" />
 
         <Button
