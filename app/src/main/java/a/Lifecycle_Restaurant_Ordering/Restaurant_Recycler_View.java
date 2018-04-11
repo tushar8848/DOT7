@@ -179,16 +179,18 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                         return true;
 
                     case R.id.nav_share:
-                         Uri link=Uri.parse("https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2Fopen%3Fid%3D1NXRB6qLELnlua-KgoloWgKe0jvVg5Kyh&h=ATOdApSjytGmLQ8PMCiVVA26X9P7Q_qsYOZPfZERcacLv39jnRJI4XpnaWR4gN0JPg_2WeEUl44-dcAwgQmlWfx1pOFU2pKhKY5Z0Vdnq1zNCgUfBo5YKw");
-
-                         Intent sendintent=new Intent(Intent.ACTION_SEND);
-                         sendintent.setType("text/plain");
-                        sendintent.putExtra(Intent.EXTRA_TEXT,link);
-                        Intent chooser=Intent.createChooser(sendintent,title);
-                         if (sendintent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(chooser);
-                         }
-                         return true;
+                        try {
+                            Intent it = new Intent(Intent.ACTION_SEND);
+                            it.setType("text/plain");
+                            it.putExtra(Intent.EXTRA_SUBJECT, "DOT7");
+                            String sAux = "\nLet me recommend you this application\n\n";
+                            sAux = sAux + "https://www.google.com \n\n";
+                            it.putExtra(Intent.EXTRA_TEXT, sAux);
+                            startActivity(Intent.createChooser(it, "choose one"));
+                        } catch(Exception e) {
+                            //e.toString();
+                        }
+                        return true;
                     case R.id.nav_send:
                          Intent sendEmail = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
                          sendEmail.setType("text/plain");
