@@ -27,24 +27,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity
-            android:name="a.Lifecycle_Restaurant_Ordering.SearchableActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-            <meta-data android:name="android.app.searchable"
-                    android:resource="@xml/searchable" />
-
-        </activity>
-
 
         <activity
             android:name=".SplashActivity"
@@ -95,10 +77,12 @@
             android:theme="@style/LoginTheme"
             android:screenOrientation="portrait"/>
         <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
         </activity>
 
            <!-- android:theme="@style/AppTheme" />-->
+
 
         <service android:name="a.FirebasePushNotification.MyFirebaseMessagingService">
             <intent-filter>

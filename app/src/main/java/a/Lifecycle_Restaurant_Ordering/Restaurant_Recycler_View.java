@@ -97,6 +97,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     AlertDialog CustomDialog;
     int determineService = 1;
     SearchView searchView = null;
+    boolean SearchProcess = false;
+
    // FloatingActionButton fab = findViewById(R.id.fab);
 
     private boolean isFabOPEN=false;
@@ -272,12 +274,13 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     }
 
 
+    @SuppressLint("RestrictedApi")
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.restaurant_toolbar_menu, menu);
 
         SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);;
-        searchView = (SearchView)  menu.findItem(R.id.Search).getActionView();
+        searchView = (SearchView)  menu.getItem(R.id.Search);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         Log.e("","Searchmmanager create ho gya");
@@ -290,20 +293,24 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchAutoComplete.setDropDownBackgroundResource(R.color.gray);
         searchAutoComplete.setDropDownAnchor(R.id.Search);
-        searchAutoComplete.setThreshold(1);
+        searchAutoComplete.setThreshold(0);
 
-        ArrayAdapter<String> newsAdapter = new ArrayAdapter<String>(this,
+        populateSearchAdapaterData();
+        ArrayAdapter<String> Adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, Restaurants_name);
 
-        searchAutoComplete.setAdapter(newsAdapter);
+
+        searchAutoComplete.setAdapter(Adapter);
         searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int itemIndex, long id) {
                 String queryString=(String)adapterView.getItemAtPosition(itemIndex);
-                searchAutoComplete.setText("" + queryString);
+                searchAutoComplete.setText(queryString);
                 GlobalMethods.print(Restaurant_recycler_view.getContext(),
                         "you clicked " + queryString);
                 RestaurantNameselected(queryString);
+
+                SearchProcess = true;
             }
         });
 
@@ -313,8 +320,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 AlertDialog alertDialog = new AlertDialog.Builder(Restaurant_recycler_view.getContext()).create();
                 alertDialog.setMessage("Search keyword is " + query);
                 alertDialog.show();
-                MenuItem cart = menu.findItem(R.id.Cart);
-                cart.setVisible(true);
+
                 return false;
             }
 
@@ -332,6 +338,14 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
 
         return true;
+    }
+
+    private void populateSearchAdapaterData() {
+
+        for(int i = 0; i < RestaurantName.size(); i++)
+        {
+            Restaurants_name[i] = RestaurantName.get(i);
+        }
     }
 
     private void RestaurantNameselected(String queryString) {
@@ -412,6 +426,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
     private void set_RecyclerView_Details()
     {
+        Log.e("","recyclerview details");
         AllRowData = new ArrayList<>();
         Restaurant_recycler_view = findViewById(R.id.Recycler_View);
         Restaurant_recycler_view.setHasFixedSize(true);
@@ -466,11 +481,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                             RestaurantName.add(json.getString("restaurantName"));
                             RestaurantImage.add(json.getString("imageURL"));
 
-
-                            Restaurants_name[i] = RestaurantName.get(i);                             // for searching
-                            Log.e("Added Restaurant name: ",RowData.getRestaurantName());
+                            Log.e("Added Restaurant name: ", Restaurants_name[i]);
                             RowData.setShowShimmer(true);
-                            Log.d("HAR","Restaurant Name: "+ json.getString("restaurantName"));
 
                         }
                         catch (Exception e) {
@@ -618,9 +630,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         if(CheckConnection.getInstance(this).getNetworkStatus()) {
             Error_Image.setVisibility(View.GONE);
             Error_Button.setVisibility(View.GONE);
+            Error_Message.setVisibility(View.GONE);
             Restaurant_recycler_view.setVisibility(View.VISIBLE);
             if(determineService == 1)
-            checkUserLogin();
+                checkUserLogin();
             else
                 Json_Data_Web_Call();
         }
@@ -631,6 +644,13 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     public void onBackPressed() {
 
         Log.e("back button: ",String.valueOf(DoubleBackPressed[0]));
+
+        if(SearchProcess)
+        {
+            SearchProcess = false;
+            Adapter = new RestaurantsAdapter(Restaurant_recycler_view.getContext(),AllRowData);
+            Restaurant_recycler_view.setAdapter(Adapter);
+        }
 
         DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
