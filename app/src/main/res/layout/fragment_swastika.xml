@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/dev_name"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -29,7 +29,7 @@
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/devTitle"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/dev_name"
@@ -39,7 +39,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/dev_thumbnail"
+
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentTop="true"

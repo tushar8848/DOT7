@@ -41,13 +41,17 @@ public class ScreenSlideActivity extends FragmentActivity {
     private int dotsCount;
     MyFirebaseInstanceIDService f = new MyFirebaseInstanceIDService();
     private ImageView[] dots;
-
+    ScreenSlidePage_Fragment fragment1;
+    ScreenSlidePage_Fragment2 fragment2;
+    ScreenSlidePage_Fragment3 fragment3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
         mpager = findViewById(R.id.Pager);
+        addfrag();
         mpageradapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+
         mpager.setAdapter(mpageradapter);
         sliderDotsPanel = findViewById(R.id.SliderDots);
         dotsCount = Min_Pages;
@@ -87,7 +91,12 @@ public class ScreenSlideActivity extends FragmentActivity {
             }
         });
     }
-
+    public void addfrag()
+    {
+        fragment1 = new ScreenSlidePage_Fragment();
+        fragment2 = new ScreenSlidePage_Fragment2();
+        fragment3 = new ScreenSlidePage_Fragment3();
+    }
     public void login(View view)
 
     {
@@ -100,6 +109,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -109,13 +119,13 @@ public class ScreenSlideActivity extends FragmentActivity {
             int index = position % 3;
             switch (index) {
                 case 0:
-                    return new ScreenSlidePage_Fragment();
+                    return fragment1;
                 case 1:
-                    return new ScreenSlidePage_Fragment2();
+                    return fragment2;
                 case 2:
-                    return new ScreenSlidePage_Fragment3();
+                    return fragment3;
                 default:
-                    return new ScreenSlidePage_Fragment();
+                    return fragment1;
             }
         }
 
@@ -124,6 +134,8 @@ public class ScreenSlideActivity extends FragmentActivity {
         public int getCount() {
             return Min_Pages;
         }
+
+
     }
 
 

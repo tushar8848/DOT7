@@ -119,7 +119,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Error_Button.setOnClickListener(Restaurant_Recycler_View.this);
         setSupportActionBar(toolbar);
         setSharedPreference();
-        GetNavData();
+
         ActionBar actionbar = getSupportActionBar();
 
         if (actionbar != null) {
@@ -128,88 +128,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         }
 
         mNavigationView = findViewById(R.id.navigation_bar);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                String title="Share your App";
-
-                menuItem.setChecked(true);
-                switch (menuItem.getItemId()) {
-                    case R.id.your_account:
-                        Intent i = new Intent(Restaurant_Recycler_View.this,YourAccount.class);
-                        i.putExtra("Name",Name);
-                        i.putExtra("Email",Email);
-                        i.putExtra("Contact",Username);
-                        startActivity(i);
-                        mCurrentSelectedPosition = 1;
-                        return true;
-                    case R.id.logout:
-                        AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
-                        builder.setMessage("Are you sure you want to logout?");
-                        builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
-                                        Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("UserName", null);
-                                editor.putString("Password",null);
-                                editor.commit();
-                                startActivity(new Intent(Restaurant_Recycler_View.this, ScreenSlideActivity.class));
-                                dialogInterface.cancel();
-                            }
-                        });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                        CustomDialog=builder.create();
-                        CustomDialog.show();
-
-                        return true;
-
-
-                    case R.id.about:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,About_Us.class));
-                        return true;
-                    case R.id.your_orders:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,Your_Orders.class));
-                        return true;
-
-                    case R.id.nav_share:
-                        try {
-                            Intent it = new Intent(Intent.ACTION_SEND);
-                            it.setType("text/plain");
-                            it.putExtra(Intent.EXTRA_SUBJECT, "DOT7");
-                            String sAux = "\nLet me recommend you this application\n\n";
-                            sAux = sAux + "https://www.google.com \n\n";
-                            it.putExtra(Intent.EXTRA_TEXT, sAux);
-                            startActivity(Intent.createChooser(it, "choose one"));
-                        } catch(Exception e) {
-                            //e.toString();
-                        }
-                        return true;
-                    case R.id.nav_send:
-                         Intent sendEmail = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
-                         sendEmail.setType("text/plain");
-                         sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
-                        sendEmail.putExtra(Intent.EXTRA_TEXT, "Body of email");
-                         sendEmail.setData(Uri.parse("mailto:dot7team@gmail.com")); // or just "mailto:" for blank
-                       // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
-                         if (sendEmail.resolveActivity(getPackageManager()) != null) {
-                            startActivity(sendEmail);
-                        }
-                        //startActivity(sendEmail);
-                         return true;
-
-
-                    default:
-                        return true;
-                }
-            }
-        });
 
        /* FloatingActionButton fab = findViewById(R.id.fab);
         view = fab;
@@ -234,8 +152,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         addRowData();
         getContact();
         URL = GlobalMethods.getURL()+ "Restaurant_Main/" + Contact;
-        if(CheckConnection.getInstance(this).getNetworkStatus())
+        if(CheckConnection.getInstance(this).getNetworkStatus()) {
+            activateNavBar();
             checkUserLogin();
+
+        }
         else
         {
             Restaurant_recycler_view.setVisibility(View.GONE);
@@ -265,6 +186,93 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         fab_call.animate().translationY(0);
     }*/
 
+  private void activateNavBar()
+  {
+      GetNavData();
+      mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+          @Override
+          public boolean onNavigationItemSelected(MenuItem menuItem) {
+              String title="Share your App";
+
+              menuItem.setChecked(true);
+              switch (menuItem.getItemId()) {
+                  case R.id.your_account:
+                      Intent i = new Intent(Restaurant_Recycler_View.this,YourAccount.class);
+                      i.putExtra("Name",Name);
+                      i.putExtra("Email",Email);
+                      i.putExtra("Contact",Username);
+                      startActivity(i);
+                      mCurrentSelectedPosition = 1;
+                      return true;
+                  case R.id.logout:
+                      AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
+                      builder.setMessage("Are you sure you want to logout?");
+                      builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialogInterface, int i) {
+                              SharedPreferences sharedPreferences = getSharedPreferences("logDetails",
+                                      Context.MODE_PRIVATE);
+                              SharedPreferences.Editor editor = sharedPreferences.edit();
+                              editor.putString("UserName", null);
+                              editor.putString("Password",null);
+                              editor.commit();
+                              startActivity(new Intent(Restaurant_Recycler_View.this, ScreenSlideActivity.class));
+                              dialogInterface.cancel();
+                          }
+                      });
+                      builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialog, int which) {
+                              dialog.cancel();
+                          }
+                      });
+                      CustomDialog=builder.create();
+                      CustomDialog.show();
+
+                      return true;
+
+
+                  case R.id.about:
+                      startActivity(new Intent(Restaurant_Recycler_View.this,About_Us.class));
+                      return true;
+                  case R.id.your_orders:
+                      startActivity(new Intent(Restaurant_Recycler_View.this,Your_Orders.class));
+                      return true;
+
+                    case R.id.nav_share:
+                        try {
+                            Intent it = new Intent(Intent.ACTION_SEND);
+                            it.setType("text/plain");
+                            it.putExtra(Intent.EXTRA_SUBJECT, "DOT7");
+                            String sAux = "\nLet me recommend you this application\n\n";
+                            sAux = sAux + "https://www.google.com \n\n";
+                            it.putExtra(Intent.EXTRA_TEXT, sAux);
+                            startActivity(Intent.createChooser(it, "choose one"));
+                        } catch(Exception e) {
+                            //e.toString();
+                        }
+                        return true;
+                    case R.id.nav_send:
+                         Intent sendEmail = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+                         sendEmail.setType("text/plain");
+                         sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
+                        sendEmail.putExtra(Intent.EXTRA_TEXT, "Body of email");
+                         sendEmail.setData(Uri.parse("mailto:dot7team@gmail.com")); // or just "mailto:" for blank
+                       // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+                         if (sendEmail.resolveActivity(getPackageManager()) != null) {
+                            startActivity(sendEmail);
+                        }
+                        //startActivity(sendEmail);
+                         return true;
+
+
+                  default:
+                      return true;
+              }
+          }
+      });
+
+  }
     public void call_to_order(View view)
     {
         //Snackbar.make(view, "Call To Order ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
