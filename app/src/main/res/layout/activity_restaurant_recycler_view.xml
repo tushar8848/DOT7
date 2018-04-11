@@ -73,6 +73,84 @@
             android:layout_below="@id/Restaurant_Page_Toolbar"
             android:scrollbars="vertical" />
 
+        <RelativeLayout
+            android:id="@+id/SearchedView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:layout_below="@+id/Restaurant_Page_Toolbar"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/res_image"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_shape"
+                android:layout_marginTop="8dp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/res_name"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/res_image"
+                android:layout_marginStart="8dp"
+                android:paddingTop="6dp"
+                android:background="@drawable/rectangle_shape"
+                android:layout_toEndOf="@+id/res_image"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.DropDownItem" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/cuisines_list"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/res_name"
+                android:layout_below="@+id/res_name"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_shape"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/timing"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/res_name"
+                android:layout_below="@+id/cuisines_list"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_shape"
+                android:layout_marginTop="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/Rating"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/timing"
+                android:layout_below="@id/timing"
+                android:background="@drawable/rectangle_shape"
+                android:layout_marginTop="5dp"
+                android:textAppearance="@android:style/TextAppearance.Material.Widget.ActionMode.Subtitle" />
+
+            <ImageView
+                android:id="@+id/favourite"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/res_image"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_favorite_black_24dp"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/Call_to_Order"

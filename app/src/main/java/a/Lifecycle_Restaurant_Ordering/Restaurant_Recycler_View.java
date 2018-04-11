@@ -59,7 +59,6 @@ import a.Cart_Files.Cart_Page;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
-import a.dot7.AboutUsTemp;
 import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
@@ -78,12 +77,16 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     String Contact;
     final boolean[] DoubleBackPressed = {false};
     String[] Restaurants_name;
-
+    int AllRowDataSize = 0;
     private RecyclerView Restaurant_recycler_view;
+    private RecyclerView Searched_recycler_view;
     private List<Restaurants> AllRowData;
+    private List<Restaurants> Searched_rows = null;
     private List<String> RestaurantKey, RestaurantImage, RestaurantName, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
+    private RecyclerView.LayoutManager SLayout;
     private RestaurantsAdapter Adapter = null;
+    private RestaurantsAdapter SearchedAdapter = null;
     private String URL,Username, Email, Status, Name ;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -99,7 +102,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     int determineService = 1;
     SearchView searchView = null;
     boolean SearchProcess = false;
-
+    MenuItem cart ;
+    private SearchView.SearchAutoComplete searchAutoComplete;
    // FloatingActionButton fab = findViewById(R.id.fab);
 
     private boolean isFabOPEN=false;
@@ -284,64 +288,87 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     }
 
 
-    /*@SuppressLint("RestrictedApi")
+   //SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.restaurant_toolbar_menu, menu);
 
-        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);;
-        searchView = (SearchView)  menu.getItem(R.id.Search);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         Log.e("","Searchmmanager create ho gya");
+        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);;
+        searchView = (SearchView)  menu.findItem(R.id.Search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         if (searchView.isSubmitButtonEnabled())
         {
             Log.e("","Yes Enables");
         }
-        final SearchView.SearchAutoComplete searchAutoComplete =
+
+        searchAutoComplete =
                 searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchAutoComplete.setDropDownBackgroundResource(R.color.gray);
+
+
+        /****************************   Change UI **********************/
+
+        searchAutoComplete.setDropDownBackgroundResource(R.color.colorAccent);
+        searchAutoComplete.setLinkTextColor(getResources().getColor(R.color.individualRestaurantViewBg));
         searchAutoComplete.setDropDownAnchor(R.id.Search);
-        searchAutoComplete.setThreshold(0);
-
-        populateSearchAdapaterData();
-        ArrayAdapter<String> Adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, Restaurants_name);
 
 
-        searchAutoComplete.setAdapter(Adapter);
         searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int itemIndex, long id) {
                 String queryString=(String)adapterView.getItemAtPosition(itemIndex);
                 searchAutoComplete.setText(queryString);
-                GlobalMethods.print(Restaurant_recycler_view.getContext(),
-                        "you clicked " + queryString);
-                RestaurantNameselected(queryString);
-
+                GlobalMethods.print(Restaurant_recycler_view.getContext(), "you clicked " + queryString);
                 SearchProcess = true;
+                int size =  AllRowData.size();
+                for(int  i =0; i < size; i++)
+                {
+                    if (AllRowData.get(i).getRestaurantName().contentEquals(queryString))
+                    {
+                        Log.e("Added Restaurant name: ",AllRowData.get(i).getRestaurantName());
+                        try
+                        {
+                           Searched_rows.add(AllRowData.get(i));
+                        }
+                        catch (Exception e)
+                        {
+                            Log.e("",e.toString());
+                        }
+
+                    }
+                }
+                SearchedAdapter = new
+                            RestaurantsAdapter(Restaurant_Recycler_View.this,Searched_rows);
+                    Searched_recycler_view.setAdapter(SearchedAdapter);
             }
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Restaurant_recycler_view.getContext()).create();
-                alertDialog.setMessage("Search keyword is " + query);
-                alertDialog.show();
 
+                View v = findViewById(R.id.Call_to_Order);
+                if (Searched_rows != null)
+                {
+                    Restaurant_recycler_view.setVisibility(View.GONE);
+                    SearchedAdapter = new
+                            RestaurantsAdapter(Restaurant_Recycler_View.this,Searched_rows);
+                    Searched_recycler_view.setAdapter(SearchedAdapter);
+                }
+                else
+                {
+                    Snackbar.make(v, "Not Found Searched Restaurant",
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Retry", null).show();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                GlobalMethods.print(Restaurant_recycler_view.getContext(),newText);
-                MenuItem cart = menu.findItem(R.id.Cart);
-                if(cart.isVisible())
-                {
-                    cart.setVisible(false);
-                }
+                SearchProcess = true;
                 return false;
             }
         });
@@ -350,40 +377,6 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         return true;
     }
 
-    private void populateSearchAdapaterData() {
-
-        for(int i = 0; i < RestaurantName.size(); i++)
-        {
-            Restaurants_name[i] = RestaurantName.get(i);
-        }
-    }
-
-    private void RestaurantNameselected(String queryString) {
-
-        int size =  AllRowData.size();
-        List<Restaurants> Searched_rows = null;
-        for(int  i =0; i < size; i++)
-        {
-            Restaurants Rowdata = new Restaurants();
-            if (AllRowData.get(i).getRestaurantName().contentEquals(queryString))
-            {
-                Rowdata.setRestaurantName(AllRowData.get(i).getRestaurantName());
-                Rowdata.setRestaurantCuisine(AllRowData.get(i).getRestaurantCuisine());
-                Rowdata.setRestaurantFavflag(AllRowData.get(i).getRestaurantFavflag());
-                Rowdata.setRestaurantImage(AllRowData.get(i).getRestaurantImage());
-                Rowdata.setRestaurantRating(AllRowData.get(i).getRestaurantRating());
-                Rowdata.setRestaurantTiming(AllRowData.get(i).getRestaurantTiming());
-                Rowdata.setShowShimmer(false);
-                Searched_rows.add(Rowdata);
-                Log.e("Added Restaurant name: ",Rowdata.getRestaurantName());
-            }
-        }
-        Adapter = new
-                RestaurantsAdapter(Restaurant_Recycler_View.this,Searched_rows);
-        Restaurant_recycler_view.setAdapter(Adapter);
-
-    }
-*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -442,6 +435,12 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Restaurant_recycler_view.setHasFixedSize(true);
         Layout = new LinearLayoutManager(this);
         Restaurant_recycler_view.setLayoutManager(Layout);
+
+        Searched_recycler_view = findViewById(R.id.SearchRecycler_View);
+        Searched_recycler_view.setHasFixedSize(true);
+        SLayout = new LinearLayoutManager(this);
+        Searched_recycler_view.setLayoutManager(SLayout);
+
     }
 
     public void Json_Data_Web_Call()
@@ -505,7 +504,17 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     }
                 }
 
+                AllRowDataSize = AllRowData.size();
+                Restaurants_name = new String[AllRowDataSize];
 
+                for (int i = 0; i < AllRowDataSize; i++)
+                {
+                    Restaurants_name[i] = RestaurantName.get(i);
+                }
+
+                ArrayAdapter<String> SAdapter = new ArrayAdapter<String>(Restaurant_Recycler_View.this, android.R.layout.simple_list_item_1, Restaurants_name);
+
+                searchAutoComplete.setAdapter(SAdapter);
                 Adapter = new
                         RestaurantsAdapter(Restaurant_Recycler_View.this,AllRowData);
                 Restaurant_recycler_view.setAdapter(Adapter);
@@ -661,8 +670,14 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         if(SearchProcess)
         {
             SearchProcess = false;
-            Adapter = new RestaurantsAdapter(Restaurant_recycler_view.getContext(),AllRowData);
-            Restaurant_recycler_view.setAdapter(Adapter);
+            Searched_recycler_view.setVisibility(View.GONE);
+            Restaurant_recycler_view.setVisibility(View.VISIBLE);
+            cart.setVisible(true);
+        }
+
+        if (searchView.hasFocus())
+        {
+            searchView.clearFocus();
         }
 
         DrawerLayout drawer =  findViewById(R.id.Drawer_Layout);

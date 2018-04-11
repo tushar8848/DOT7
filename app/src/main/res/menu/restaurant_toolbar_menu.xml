@@ -10,7 +10,7 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:id="@+id/Search"
         android:icon="@drawable/ic_search_black_24dp"
-        app:showAsAction="always|collapseActionView">
+        app:showAsAction="ifRoom">
 
     </item>
     <item
