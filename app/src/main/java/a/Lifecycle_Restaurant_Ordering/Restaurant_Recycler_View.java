@@ -164,11 +164,25 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     case R.id.nav_share:
                          Uri link=Uri.parse("https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2Fopen%3Fid%3D1NXRB6qLELnlua-KgoloWgKe0jvVg5Kyh&h=ATOdApSjytGmLQ8PMCiVVA26X9P7Q_qsYOZPfZERcacLv39jnRJI4XpnaWR4gN0JPg_2WeEUl44-dcAwgQmlWfx1pOFU2pKhKY5Z0Vdnq1zNCgUfBo5YKw");
 
-                         Intent sendintent=new Intent(Intent.ACTION_SEND,link);
-                         Intent chooser=Intent.createChooser(sendintent,title);
+                         Intent sendintent=new Intent(Intent.ACTION_SEND);
+                         sendintent.setType("text/plain");
+                        sendintent.putExtra(Intent.EXTRA_TEXT,link);
+                        Intent chooser=Intent.createChooser(sendintent,title);
                          if (sendintent.resolveActivity(getPackageManager()) != null) {
                             startActivity(chooser);
                          }
+                         return true;
+                    case R.id.nav_send:
+                         Intent sendEmail = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+                         sendEmail.setType("text/plain");
+                         sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
+                        sendEmail.putExtra(Intent.EXTRA_TEXT, "Body of email");
+                         sendEmail.setData(Uri.parse("mailto:dot7team@gmail.com")); // or just "mailto:" for blank
+                       // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+                         if (sendEmail.resolveActivity(getPackageManager()) != null) {
+                            startActivity(sendEmail);
+                        }
+                        //startActivity(sendEmail);
                          return true;
 
 
