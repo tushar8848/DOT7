@@ -78,7 +78,7 @@
         <activity android:name=".YourAccount"
             android:theme="@style/LoginTheme"
             android:screenOrientation="portrait"/>
-        <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View"
+        <activity android:name="a.Lifecycle_Restaurant_Ordering.Restaurant_Main_Page"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:launchMode="singleTop" >

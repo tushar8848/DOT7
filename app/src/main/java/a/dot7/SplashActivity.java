@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.provider.Settings;
 
+import a.Lifecycle_Restaurant_Ordering.Restaurant_Main_Page;
 import a.common.GlobalMethods;
-import a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2000;
@@ -58,7 +58,7 @@ public class SplashActivity extends AppCompatActivity {
         Log.d("HAR","Username:"+UserName+" Password:"+Password);
         if(UserName != null && Password != null) {
             // Services.getInstance(context).Validate(UserName,Password);
-            startActivity(new Intent(SplashActivity.this, Restaurant_Recycler_View.class));
+            startActivity(new Intent(SplashActivity.this, Restaurant_Main_Page.class));
 
         }
         else
@@ -86,7 +86,7 @@ public class SplashActivity extends AppCompatActivity {
                         if (StatusCode.contains("302")) {
                            // GlobalMethods.print(SplashActivity.this, "Data Found");
                            // Intent intent = new Intent(SplashActivity.this, TempActivity.class);
-                            startActivity(new Intent(SplashActivity.this, Restaurant_Recycler_View.class));
+                            startActivity(new Intent(SplashActivity.this, Restaurant_Main_Page.class));
 
 
                         } else {

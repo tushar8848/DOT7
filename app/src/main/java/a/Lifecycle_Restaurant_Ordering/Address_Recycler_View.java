@@ -13,8 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -146,7 +144,7 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
-                                startActivity(new Intent(Address_Recycler_View.this, Restaurant_Recycler_View.class));
+                                startActivity(new Intent(Address_Recycler_View.this, Restaurant_Main_Page.class));
                             }
                         });
                         dialog = builder.create();
@@ -159,7 +157,7 @@ public class Address_Recycler_View extends AppCompatActivity implements View.OnC
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
-                                startActivity(new Intent(Address_Recycler_View.this, Restaurant_Recycler_View.class));
+                                startActivity(new Intent(Address_Recycler_View.this, Restaurant_Main_Page.class));
                             }
                         });
                        dialog = builder.create();

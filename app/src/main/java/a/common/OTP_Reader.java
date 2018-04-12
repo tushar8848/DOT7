@@ -19,9 +19,9 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import a.Lifecycle_Restaurant_Ordering.Restaurant_Main_Page;
 import a.dot7.R;
 import a.dot7.Set_New_Password;
-import a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View;
 
 /**
  * Created by TUSHAR on 28-03-18.
@@ -146,7 +146,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
                         editor.commit();
 
                         Log.d("HAR", "Local file created");
-                        startActivity(new Intent(OTP_Reader.this, Restaurant_Recycler_View.class));
+                        startActivity(new Intent(OTP_Reader.this, Restaurant_Main_Page.class));
                     }
                     else{
 

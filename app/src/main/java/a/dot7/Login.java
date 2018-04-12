@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -26,11 +25,11 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import a.Lifecycle_Restaurant_Ordering.Restaurant_Main_Page;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.common.MyDialog;
-import a.Lifecycle_Restaurant_Ordering.Restaurant_Recycler_View;
 
 /**
  * Created by TUSHAR on 11-03-18.
@@ -176,7 +175,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         editor.putString("UserName", UserName);
                         editor.putString("Password",Password);
                         editor.commit();
-                        startActivity(new Intent(Login.this, Restaurant_Recycler_View.class));
+                        startActivity(new Intent(Login.this, Restaurant_Main_Page.class));
                     }
                     else if(StatusCode.contains("404"))
                     {

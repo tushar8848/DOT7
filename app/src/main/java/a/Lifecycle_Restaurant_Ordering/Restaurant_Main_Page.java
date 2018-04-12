@@ -4,20 +4,14 @@ package a.Lifecycle_Restaurant_Ordering;
  * Created by TUSHAR on 02-04-18.
  */
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -28,7 +22,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,20 +53,15 @@ import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
 import a.dot7.AboutUsTemp;
-import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
 import a.dot7.ScreenSlideActivity;
 import a.dot7.YourAccount;
 import a.getter_setter.Restaurants;
 import android.os.Handler;
-import android.support.v4.view.MenuItemCompat;
-import android.widget.Toast;
-
-import a.common.MyDialog;
 
 
-public class Restaurant_Recycler_View extends AppCompatActivity implements View.OnClickListener {
+public class Restaurant_Main_Page extends AppCompatActivity implements View.OnClickListener {
 
     String Contact;
     final boolean[] DoubleBackPressed = {false};
@@ -123,7 +111,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Log.e("","SearchIcon mil gya");
         UserName_Nav = header.findViewById(R.id.UserName);
         UserEmail_Nav = header.findViewById(R.id.UserEmail);
-        Error_Button.setOnClickListener(Restaurant_Recycler_View.this);
+        Error_Button.setOnClickListener(Restaurant_Main_Page.this);
         setSupportActionBar(toolbar);
         setSharedPreference();
 
@@ -204,7 +192,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
               menuItem.setChecked(true);
               switch (menuItem.getItemId()) {
                   case R.id.your_account:
-                      Intent i = new Intent(Restaurant_Recycler_View.this,YourAccount.class);
+                      Intent i = new Intent(Restaurant_Main_Page.this,YourAccount.class);
                       i.putExtra("Name",Name);
                       i.putExtra("Email",Email);
                       i.putExtra("Contact",Username);
@@ -212,7 +200,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                       mCurrentSelectedPosition = 1;
                       return true;
                   case R.id.logout:
-                      AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
+                      AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Main_Page.this);
                       builder.setMessage("Are you sure you want to logout?");
                       builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
                           @Override
@@ -223,7 +211,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                               editor.putString("UserName", null);
                               editor.putString("Password",null);
                               editor.commit();
-                              startActivity(new Intent(Restaurant_Recycler_View.this, ScreenSlideActivity.class));
+                              startActivity(new Intent(Restaurant_Main_Page.this, ScreenSlideActivity.class));
                               dialogInterface.cancel();
                           }
                       });
@@ -239,10 +227,10 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                       return true;
 
                     case R.id.about:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,AboutUsTemp.class));
+                        startActivity(new Intent(Restaurant_Main_Page.this,AboutUsTemp.class));
                         return true;
                     case R.id.your_orders:
-                        startActivity(new Intent(Restaurant_Recycler_View.this,Your_Orders.class));
+                        startActivity(new Intent(Restaurant_Main_Page.this,Your_Orders.class));
                         return true;
 
                     case R.id.nav_share:
@@ -347,7 +335,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     }
                 }
                 SearchedAdapter = new
-                            RestaurantsAdapter(Restaurant_Recycler_View.this,Searched_rows);
+                            RestaurantsAdapter(Restaurant_Main_Page.this,Searched_rows);
                     Searched_recycler_view.setAdapter(SearchedAdapter);
                 SearchedAdapter.setOnItemClickListener(new RestaurantsAdapter.OnItemClickListener() {
                     @Override
@@ -365,7 +353,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                             }
 
                         }
-                        Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
+                        Intent intent = new Intent(Restaurant_Main_Page.this,Individual_Restaurant_Page.class);
                         intent.putExtra("RestaurantKey", RestaurantKey.get(position));
                         intent.putExtra("RestaurantName", RestaurantName.get(position));
                         intent.putExtra("RestaurantImage", RestaurantImage.get(position));
@@ -384,7 +372,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 {
                     Restaurant_recycler_view.setVisibility(View.GONE);
                     SearchedAdapter = new
-                            RestaurantsAdapter(Restaurant_Recycler_View.this,Searched_rows);
+                            RestaurantsAdapter(Restaurant_Main_Page.this,Searched_rows);
                     Searched_recycler_view.setAdapter(SearchedAdapter);
                 }
                 else
@@ -421,7 +409,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 return true;
             case R.id.Cart:
                 Log.e("HAR","Cart pe click hua");
-                startActivity(new Intent(Restaurant_Recycler_View.this,Cart_Page.class));
+                startActivity(new Intent(Restaurant_Main_Page.this,Cart_Page.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -452,7 +440,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
             AllRowData.add(RowData);
         }
         Adapter = new
-                RestaurantsAdapter(Restaurant_Recycler_View.this,AllRowData);
+                RestaurantsAdapter(Restaurant_Main_Page.this,AllRowData);
         Restaurant_recycler_view.setAdapter(Adapter);
     }
 
@@ -542,11 +530,11 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                     Restaurants_name[i] = RestaurantName.get(i);
                 }
 
-                ArrayAdapter<String> SAdapter = new ArrayAdapter<String>(Restaurant_Recycler_View.this, android.R.layout.simple_list_item_1, Restaurants_name);
+                ArrayAdapter<String> SAdapter = new ArrayAdapter<String>(Restaurant_Main_Page.this, android.R.layout.simple_list_item_1, Restaurants_name);
 
                 searchAutoComplete.setAdapter(SAdapter);
                 Adapter = new
-                        RestaurantsAdapter(Restaurant_Recycler_View.this,AllRowData);
+                        RestaurantsAdapter(Restaurant_Main_Page.this,AllRowData);
                 Restaurant_recycler_view.setAdapter(Adapter);
 
 
@@ -566,7 +554,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                             }
 
                         }
-                        Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
+                        Intent intent = new Intent(Restaurant_Main_Page.this,Individual_Restaurant_Page.class);
                         intent.putExtra("RestaurantKey", RestaurantKey.get(position));
                         intent.putExtra("RestaurantName", RestaurantName.get(position));
                         intent.putExtra("RestaurantImage", RestaurantImage.get(position));
@@ -587,7 +575,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if(CheckConnection.getInstance(Restaurant_Recycler_View.this).getNetworkStatus())
+                if(CheckConnection.getInstance(Restaurant_Main_Page.this).getNetworkStatus())
                 {
                     Log.e("VolleyError: ",error.toString());
                 }
@@ -633,13 +621,13 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
                    } else {
 
-                       AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Recycler_View.this);
+                       AlertDialog.Builder builder=new AlertDialog.Builder(Restaurant_Main_Page.this);
                        builder.setMessage("You have been logged out");
                        builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialogInterface, int i) {
                                dialogInterface.cancel();
-                               startActivity(new Intent(Restaurant_Recycler_View.this, Login.class));
+                               startActivity(new Intent(Restaurant_Main_Page.this, Login.class));
                            }
                        });
                        CustomDialog=builder.create();
@@ -651,7 +639,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
            }, new Response.ErrorListener() {
                @Override
                public void onErrorResponse(VolleyError volleyError) {
-                   if(!(CheckConnection.getInstance(Restaurant_Recycler_View.this).getNetworkStatus()))
+                   if(!(CheckConnection.getInstance(Restaurant_Main_Page.this).getNetworkStatus()))
 
                    {
                        Restaurant_recycler_view.setVisibility(View.GONE);
