@@ -17,7 +17,7 @@ import a.dot7.Register;
  */
 
 public class GlobalMethods {
-    static String URL = "http://dot7.somee.com/";
+    static String URL = "http://dot7.com";
     //static String URL = "http://192.168.43.137:3000/";
 
     public static String GetSubString(String res)
