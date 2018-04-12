@@ -67,6 +67,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                 .load(RowData.getRestaurantImage())
                 .centerCrop()
                 .into(holder.Restro_Image);
+        
     }
 
     @Override
@@ -77,7 +78,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClick(String rname);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -109,8 +110,9 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                 public void onClick(View view) {
                     if(mListener!=null){
                         int position = getAdapterPosition();
+                        String a = Restro_Name.getText().toString();
                         if(position != RecyclerView.NO_POSITION){
-                            mListener.onItemClick(position);
+                            mListener.onItemClick(a);
                         }
                     }
                 }

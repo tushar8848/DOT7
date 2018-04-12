@@ -59,6 +59,7 @@ import a.Cart_Files.Cart_Page;
 import a.common.CheckConnection;
 import a.common.GlobalMethods;
 import a.common.MySingleton;
+import a.dot7.AboutUsTemp;
 import a.dot7.About_Us;
 import a.dot7.Login;
 import a.dot7.R;
@@ -80,8 +81,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
     int AllRowDataSize = 0;
     private RecyclerView Restaurant_recycler_view;
     private RecyclerView Searched_recycler_view;
-    private List<Restaurants> AllRowData;
-    private List<Restaurants> Searched_rows = null;
+    private ArrayList<Restaurants> AllRowData;
+    private ArrayList<Restaurants> Searched_rows = null;
     private List<String> RestaurantKey, RestaurantImage, RestaurantName, UserSelectedRestaurant;
     private RecyclerView.LayoutManager  Layout;
     private RecyclerView.LayoutManager SLayout;
@@ -118,6 +119,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Error_Image = findViewById(R.id.Restaurant_View_Error);
         Error_Message = findViewById(R.id.Restaurant_Error_Message);
         Error_Button = findViewById(R.id.Restaurant_View_RetryButton);
+
         Log.e("","SearchIcon mil gya");
         UserName_Nav = header.findViewById(R.id.UserName);
         UserEmail_Nav = header.findViewById(R.id.UserEmail);
@@ -310,17 +312,22 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
         /****************************   Change UI **********************/
 
-        searchAutoComplete.setDropDownBackgroundResource(R.color.colorAccent);
+       // searchAutoComplete.setDropDownBackgroundResource(R.color.colorAccent);
         searchAutoComplete.setLinkTextColor(getResources().getColor(R.color.individualRestaurantViewBg));
         searchAutoComplete.setDropDownAnchor(R.id.Search);
+        searchAutoComplete.setDropDownVerticalOffset(10);
+        searchAutoComplete.setHint("Search Restaurants");
+        searchAutoComplete.setDropDownBackgroundDrawable(getDrawable(R.drawable.transparent1));
+
 
 
         searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int itemIndex, long id) {
                 String queryString=(String)adapterView.getItemAtPosition(itemIndex);
+                Searched_rows = new ArrayList<Restaurants>();
                 searchAutoComplete.setText(queryString);
-                GlobalMethods.print(Restaurant_recycler_view.getContext(), "you clicked " + queryString);
+               // GlobalMethods.print(Restaurant_recycler_view.getContext(), "you clicked " + queryString);
                 SearchProcess = true;
                 int size =  AllRowData.size();
                 for(int  i =0; i < size; i++)
@@ -342,6 +349,29 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
                 SearchedAdapter = new
                             RestaurantsAdapter(Restaurant_Recycler_View.this,Searched_rows);
                     Searched_recycler_view.setAdapter(SearchedAdapter);
+                SearchedAdapter.setOnItemClickListener(new RestaurantsAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(String name) {
+
+                        //UserSelectedRestaurant.add(RestaurantKey.get(position));
+                        // Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                        int position = 0;
+                        for(int i=0;i<RestaurantName.size();i++)
+                        {
+                            if(RestaurantName.get(i).contentEquals(name))
+                            {
+                                position = i;
+                                break;
+                            }
+
+                        }
+                        Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
+                        intent.putExtra("RestaurantKey", RestaurantKey.get(position));
+                        intent.putExtra("RestaurantName", RestaurantName.get(position));
+                        intent.putExtra("RestaurantImage", RestaurantImage.get(position));
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
@@ -436,7 +466,7 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
         Layout = new LinearLayoutManager(this);
         Restaurant_recycler_view.setLayoutManager(Layout);
 
-        Searched_recycler_view = findViewById(R.id.SearchRecycler_View);
+        Searched_recycler_view = findViewById(R.id.Recycler_View);
         Searched_recycler_view.setHasFixedSize(true);
         SLayout = new LinearLayoutManager(this);
         Searched_recycler_view.setLayoutManager(SLayout);
@@ -522,10 +552,20 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
 
                 Adapter.setOnItemClickListener(new RestaurantsAdapter.OnItemClickListener() {
                     @Override
-                    public void onItemClick(int position) {
+                    public void onItemClick(String name) {
 
-                        UserSelectedRestaurant.add(RestaurantKey.get(position));
+                        //UserSelectedRestaurant.add(RestaurantKey.get(position));
                        // Snackbar.make(view, "Card "+position+" clicked", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                        int position = 0;
+                        for(int i=0;i<RestaurantName.size();i++)
+                        {
+                            if(RestaurantName.get(i).contentEquals(name))
+                            {
+                                position = i;
+                                break;
+                            }
+
+                        }
                         Intent intent = new Intent(Restaurant_Recycler_View.this,Individual_Restaurant_Page.class);
                         intent.putExtra("RestaurantKey", RestaurantKey.get(position));
                         intent.putExtra("RestaurantName", RestaurantName.get(position));
@@ -672,7 +712,8 @@ public class Restaurant_Recycler_View extends AppCompatActivity implements View.
             SearchProcess = false;
             Searched_recycler_view.setVisibility(View.GONE);
             Restaurant_recycler_view.setVisibility(View.VISIBLE);
-            cart.setVisible(true);
+            Restaurant_recycler_view.setAdapter(Adapter);
+            //cart.setVisible(true);
         }
 
         if (searchView.hasFocus())

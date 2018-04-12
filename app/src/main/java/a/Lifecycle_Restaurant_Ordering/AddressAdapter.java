@@ -59,13 +59,13 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
     public int getItemCount() {
         return data.size();
     }
-    private RestaurantsAdapter.OnItemClickListener mListener;
+    private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(RestaurantsAdapter.OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener){
         mListener = listener;
     }
 
